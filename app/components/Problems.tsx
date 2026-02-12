@@ -26,7 +26,7 @@ const problems = [
 
 const Problems = () => {
   return (
-    <section className="py-20 lg:py-32 bg-[#FBFCFD] relative">
+    <section className="py-12 lg:py-20 bg-[#FBFCFD] relative">
 
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
         <div className="container mx-auto max-w-7xl">

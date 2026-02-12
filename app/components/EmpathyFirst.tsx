@@ -2,7 +2,7 @@ import { Heart, Brain, Plus } from "lucide-react";
 
 const EmpathyFirst = () => {
   return (
-    <section className="py-20 lg:py-32 bg-[#FFFFFF] relative">
+    <section className="py-12 lg:py-20 bg-[#FFFFFF] relative">
       <div 
         className="absolute inset-0 opacity-10" 
         style={{ background: 'linear-gradient(135deg, #3C83F6, #2A9D90)' }}
