@@ -1,4 +1,8 @@
+'use client';
 import { Heart, Brain, Plus } from "lucide-react";
+import { motion } from "framer-motion";
+import heart from "@/app/assets/heart.svg";
+import brain from "@/app/assets/brain.svg";
 
 const EmpathyFirst = () => {
   return (
@@ -13,10 +17,20 @@ const EmpathyFirst = () => {
           {/* Left - Visual */}
           <div className="flex items-center justify-center">
             <div className="flex items-center gap-4">
-                <div className="w-30 h-30 lg:w-36 lg:h-36 bg-[#0D5C94]/10 rounded-full flex items-center justify-center">
-              <div className="w-16 h-16 lg:w-24 lg:h-24 bg-[#0D5C94]/20 rounded-full flex items-center justify-center">
-                <Heart className="w-10 h-10 lg:w-12 lg:h-12 text-[#0D5C94]" />
-              </div>
+              <div className="w-16 h-16 lg:w-24 lg:h-24 flex items-center justify-center">
+                <motion.img 
+                  src={heart.src} 
+                  alt="Heart" 
+                  className="w-24 h-24 lg:w-32 lg:h-32"
+                  animate={{
+                    scale: [1, 1.15, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-8 h-px border-t-2 border-dashed border-muted-foreground" />
@@ -25,10 +39,21 @@ const EmpathyFirst = () => {
                 </div>
                 <div className="w-8 h-px border-t-2 border-dashed border-muted-foreground" />
               </div>
-                <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#0D9488]/10 rounded-full flex items-center justify-center">
-              <div className="w-12 h-12 lg:w-18 lg:h-18 bg-[#0D9488]/20 rounded-full flex items-center justify-center">
-                <Brain className="w-06 h-06 lg:w-08 lg:h-08 text-[#0D9488]" />
-              </div>
+                
+              <div className="w-12 h-12 lg:w-18 lg:h-18 flex items-center justify-center">
+                <motion.img 
+                  src={brain.src} 
+                  alt="Brain" 
+                  className="w-24 h-24 lg:w-32 lg:h-32"
+                  animate={{
+                    scale: [1, 0.85, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { Bot, Layers, Shield, Users, TrendingUp, Link2, Sparkles, Cpu, Database, ChartLine, GitPullRequest, GitMerge } from "lucide-react";
+import { Bot, Layers, Shield, Users, TrendingUp, Link2, Sparkles, Cpu, Database, ChartLine, GitPullRequest, GitMerge, Workflow } from "lucide-react";
 
 const features = [
   {
@@ -27,7 +27,7 @@ const features = [
     description: "Predictive models that surface insights before problems arise.",
   },
   {
-    icon: GitMerge,
+    icon: Workflow,
     title: "Integration Layer",
     description: "Seamless connectivity with existing EHR, billing, and communication systems.",
   },
