@@ -69,11 +69,11 @@ const Testimonials = () => {
               className={`absolute left-0 -translate-x-2 lg:-translate-x-3 w-12 h-12 rounded-full flex items-center justify-center transition-colors z-10 ${
                 currentIndex === 0
                   ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                  : 'bg-teal-100 hover:bg-teal-200'
+                  : 'bg-[#0D9488] hover:bg-[#0D9488]'
               }`}
               aria-label="Previous testimonial"
             >
-              <ArrowLeft className="w-6 h-6 text-accent" />
+              <ArrowLeft className="w-6 h-6 text-[#FFFFFF]" />
             </button>
 
             {/* Main Content */}
@@ -147,11 +147,11 @@ const Testimonials = () => {
               className={`absolute right-0 translate-x-2 lg:translate-x-3 w-12 h-12 rounded-full flex items-center justify-center transition-colors z-10 ${
                 currentIndex === testimonials.length - 1
                   ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                  : 'bg-accent hover:bg-accent/90'
+                  : 'bg-[#0D9488] hover:bg-[#0D9488]'
               }`}
               aria-label="Next testimonial"
             >
-              <ArrowRight className="w-6 h-6 text-accent-foreground" />
+              <ArrowRight className="w-6 h-6 text-[#FFFFFF]" />
             </button>
           </div>
 

@@ -121,7 +121,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, i, progress, range, 
   return (
     <div
       ref={container}
-      className="h-[40vh] flex items-center justify-center sticky top-0"
+      className="h-[40vh] flex items-center justify-center sticky top-40"
       style={{ zIndex: i }}
     >
       <motion.div

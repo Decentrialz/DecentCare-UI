@@ -58,8 +58,8 @@ const Results = () => {
             <ChartNoAxesColumnIncreasing className="w-4 h-4 text-accent" />
             <span className="text-sm font-medium text-[#818584]">Proven Business Results</span>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-4" style={{fontFamily: 'Plus Jakarta Sans, sans-serif'}}>
-            Real Impact, Real <span className="text-[#0D5C94]">Numbers</span>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0F1729] mb-4" style={{fontFamily: 'Plus Jakarta Sans, sans-serif'}}>
+            Real Impact, Real <span className="text-[#0D5C94]" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Numbers</span>
           </h2>
           <p className="text-lg text-[#818584] max-w-3xl mx-auto">
             We don't just run campaigns, we drive measurable business growth for healthcare providers.

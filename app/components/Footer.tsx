@@ -1,6 +1,7 @@
 import { Phone, Mail, MapPin, Twitter, Linkedin, Facebook, Instagram } from "lucide-react";
 import dcLogo from "@/app/assets/dcLogo.svg";
 import Image from "next/image";
+import vector from "@/app/assets/Vector.svg";
 
 
 const Footer = () => {
@@ -26,7 +27,7 @@ const Footer = () => {
                 href="#"
                 className="w-10 h-10 bg-primary-foreground/10 rounded-xl flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
               >
-                <Twitter className="w-4 h-4" />
+                <Image src={vector} alt="Twitter" width={16} height={16} />
               </a>
               <a
                 href="#"
