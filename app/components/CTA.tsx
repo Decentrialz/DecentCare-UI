@@ -8,6 +8,14 @@ import { Button } from "./ui/button";
 const CTA = () => {
   return (
     <section className="py-12 lg:py-20 bg-background relative">
+        <svg width="0" height="0" style={{ position: 'absolute' }}>
+          <defs>
+            <linearGradient id="icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style={{ stopColor: '#0D9488', stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: '#0D5C94', stopOpacity: 1 }} />
+            </linearGradient>
+          </defs>
+        </svg>
         <div className="absolute rounded-full" style={{ left: '0%', top: '10%', width: '600px', height: '600px', backgroundColor: 'rgba(60, 131, 246, 0.1)', opacity: '0.7', filter: 'blur(64px)' }} />
        <div className="absolute rounded-full" style={{ right: '2%', top: '18%', width: '600px', height: '600px', backgroundColor: 'rgba(42, 157, 144, 0.1)', opacity: '0.7', filter: 'blur(64px)' }} />
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
@@ -60,20 +68,20 @@ const CTA = () => {
             {/* Benefits */}
             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
-                  <Clock className="w-4 h-4 text-accent" />
+                <div className="w-8 h-8 rounded-full bg-[#2A9D90]/10 flex items-center justify-center">
+                  <Clock className="w-4 h-4" style={{ stroke: 'url(#icon-gradient)' }}/>
                 </div>
                 30-min strategy call
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
-                  <TrendingUp className="w-4 h-4 text-accent" />
+                <div className="w-8 h-8 rounded-full bg-[#2A9D90]/10 flex items-center justify-center">
+                  <TrendingUp className="w-4 h-4" style={{ stroke: 'url(#icon-gradient)' }}/>
                 </div>
                 Free growth audit
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-accent" />
+                <div className="w-8 h-8 rounded-full bg-[#2A9D90]/10 flex items-center justify-center">
+                  <Sparkles className="w-4 h-4" style={{ stroke: 'url(#icon-gradient)' }}/>
                 </div>
                 Custom roadmap
               </div>
