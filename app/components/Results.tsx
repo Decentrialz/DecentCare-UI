@@ -2,6 +2,9 @@ import { TrendingUp, IndianRupee, Target, Users, ChartNoAxesColumnIncreasing } f
 import lux from "@/app/assets/lux.svg";
 import vaidya from "@/app/assets/vaidya.svg";
 import gutCare from "@/app/assets/gut  care.svg";
+import dt from "@/app/assets/DT.png";
+import CHirag from "@/app/assets/CHirag.png";
+import Drgowds from "@/app/assets/Dr.Gowds.png";
 
 const stats = [
   {
@@ -42,6 +45,18 @@ const logos = [
   {
     name: "GutCare",
     img: gutCare,
+  },
+    {
+    name: "Dr.Gowds",
+    img: Drgowds,
+  },
+  {
+    name: "DT",
+    img: dt,
+  },
+  {
+    name: "CHirag",
+    img: CHirag,
   },
 ];
 
@@ -101,11 +116,12 @@ const Results = () => {
               color: 'transparent',
               alignItems: 'center',
               verticalAlign: 'middle',
+              paddingBottom: '20px',
             }}
           >
             Trusted by leading healthcare institutions
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-16 lg:gap-30">
+          <div className="grid grid-cols-3 gap-16 lg:gap-20 justify-items-center items-center" style={{ maxWidth: '1100px', margin: '0 auto' }}>
             {logos.map((logo, index) => (
               <div key={index} className="flex items-center justify-center">
                 <img src={logo.img.src} alt={logo.name} className="h-14 w-auto object-contain" />

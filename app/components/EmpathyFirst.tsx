@@ -62,7 +62,7 @@ const EmpathyFirst = () => {
           <div className="space-y-6 max-w-lg">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1F2020] mb-2">Empathy first.</h2>
-              <h3 className="text-3xl md:text-4xl font-bold text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Intelligence always.</h3>
+              <h3 className="text-3xl md:text-4xl font-bold text-accent leading-tight" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Intelligence always.</h3>
             </div>
 
             <p className="text-md text-muted-foreground">
