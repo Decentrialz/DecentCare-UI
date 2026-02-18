@@ -23,24 +23,41 @@ const Hero = () => {
   }, [heroImages.length]);
 
   return (
-    <section className="relative pt-24 lg:pt-32 pb-16 lg:pb-24 hero-gradient overflow-hidden">
+    <section className="relative pt-24 lg:pt-32 pb-16 lg:pb-24 hero-gradient overflow-hidden w-full">
     <div className="absolute rounded-full" style={{ right: '-5%', top: '40%', width: '500px', height: '500px', backgroundColor: 'rgba(60, 131, 246, 0.1)', opacity: '1', filter: 'blur(64px)' }} />
       <div className="absolute rounded-full" style={{ left: '-5%', top: '43%', width: '400px', height: '400px', backgroundColor: 'rgba(42, 157, 144, 0.1)', opacity: '1', filter: 'blur(64px)' }} />
-      <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="container mx-auto max-w-7xl">
+      <div className="w-full px-4 md:px-8 lg:px-16 xl:px-20 py-4">
+        <div className="w-full mx-auto lg:max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pb-32 lg:pb-40">
           {/* Left Content */}
-          <div className="space-y-8 max-w-lg">
+          <div className="space-y-8 max-w-lg mx-auto lg:mx-0">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#FFFFFF] rounded-full">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#FFFFFF] rounded-full mx-auto lg:mx-0">
               <Sparkles className="w-4 h-4 text-[#0D5C94]" />
               <span className="text-sm font-medium text-primary">AI-Powered Healthcare Marketing Platform</span>
             </div>
 
+            {/* Mobile Video - Show on mobile only */}
+            <div className="lg:hidden relative flex items-center justify-center">
+              <div className="relative z-10 w-full max-w-sm overflow-hidden rounded-full aspect-square mx-auto">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover scale-102"
+                  style={{ objectPosition: 'center center' }}
+                >
+                  <source src="/hero-gradient-circle-vid.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
             {/* Headline */}
-            <div className="space-y-4">
+            <div className="space-y-4 text-center lg:text-left">
               <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] leading-tight">
-                The AI-Powered Growth Engine for{" "}
+                The AI-Powered Growth<br className="lg:hidden" /> Engine for<br className="lg:hidden" />{" "}
                 <span className="text-[#0D5C94]">Hospitals & Clinics</span>
               </h1>
               <p className="text-md text-[#818584] max-w-xl">
@@ -49,7 +66,7 @@ const Hero = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
              <Button
   className="
     h-[45px]
@@ -71,7 +88,7 @@ const Hero = () => {
   variant="outline"
   className="
     h-[45px]
-    px-6 py-[10px]
+    px-16 lg:px-6 py-[10px]
     rounded-lg
     bg-white
     border
@@ -89,28 +106,28 @@ const Hero = () => {
             </div>
 
             {/* Stats Row */}
-            <div className="flex flex-wrap gap-16 pt-4">
-              <div>
+            <div className="flex flex-wrap gap-10 lg:gap-16 pt-4 justify-center lg:justify-start">
+              <div className="text-center lg:text-left max-w-[90px] lg:max-w-none">
                 <div className="text-3xl font-bold text-[#0D9488]">500+</div>
                 <div className="text-sm text-[#5E6160]">Healthcare Providers</div>
               </div>
-              <div>
+              <div className="text-center lg:text-left max-w-[90px] lg:max-w-none">
                 <div className="text-3xl font-bold text-[#0D5C94]">₹50Cr+</div>
                 <div className="text-sm text-[#5E6160]">Revenue Generated</div>
               </div>
-              <div>
+              <div className="text-center lg:text-left">
                 <div className="text-3xl font-bold text-[#0D9488]">3.2x</div>
                 <div className="text-sm text-[#5E6160]">Average ROI</div>
               </div>
             </div>
 
-            <p className="text-sm text-[#5E6160] mt-[-15px]">
+            <p className="text-sm text-[#5E6160] mt-[-15px] text-center lg:text-left">
               Trusted by leading healthcare providers across India
             </p>
           </div>
 
           {/* Right Content - Hero Video & Dashboard */}
-          <div className="relative flex items-center justify-center -ml-16 lg:-ml-24">
+          <div className="relative hidden lg:flex items-center justify-center -ml-16 lg:-ml-24">
             {/* Main Video */}
             <div className="relative z-10 w-full max-w-lg overflow-hidden rounded-full aspect-square">
               <video
@@ -130,9 +147,9 @@ const Hero = () => {
         </div>
 
         {/* Hero Images Carousel - Below content */}
-        <div className="relative -mt-06 lg:-mt-12">
-          <div className="container mx-auto max-w-7xl">
-            <div className="max-w-4xl mx-auto relative h-[400px] lg:h-[500px]">
+        <div className="relative -mt-24 lg:-mt-12">
+          <div className="w-full mx-auto lg:max-w-7xl">
+            <div className="max-w-4xl mx-auto relative h-[250px] lg:h-[500px]">
               {heroImages.map((image, index) => (
                 <div
                   key={index}
