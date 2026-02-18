@@ -44,7 +44,7 @@ const Testimonials = () => {
   return (
     <section className="py-12 lg:py-20 bg-background">
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="container mx-auto max-w-7xl">
+        <div className="w-full mx-auto lg:max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/50 backdrop-blur-xl rounded-full mb-6 border border-gray-200/50">
@@ -52,9 +52,9 @@ const Testimonials = () => {
             <span className="text-sm font-medium text-primary">Testimonials</span>
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
-            What They Say <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>About Us?</span>
+            What They Say <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>About<br className="lg:hidden" /> Us?</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-sm lg:text-lg text-muted-foreground">
             Real stories from real people.
           </p>
         </div>
@@ -66,21 +66,21 @@ const Testimonials = () => {
             <button
               onClick={prevTestimonial}
               disabled={currentIndex === 0}
-              className={`absolute left-0 -translate-x-2 lg:-translate-x-3 w-12 h-12 rounded-full flex items-center justify-center transition-colors z-10 ${
+              className={`absolute left-0 -translate-x-2 lg:-translate-x-3 w-8 h-8 lg:w-12 lg:h-12 rounded-full flex items-center justify-center transition-colors z-10 ${
                 currentIndex === 0
                   ? 'bg-gray-200 cursor-not-allowed opacity-50'
                   : 'bg-[#0D9488] hover:bg-[#0D9488]'
               }`}
               aria-label="Previous testimonial"
             >
-              <ArrowLeft className="w-6 h-6 text-[#FFFFFF]" />
+              <ArrowLeft className="w-4 h-4 lg:w-6 lg:h-6 text-[#FFFFFF]" />
             </button>
 
-            {/* Main Content */}
-            <div className="flex flex-col lg:flex-row items-stretch gap-0 w-full max-w-[620px] h-auto lg:h-[350px] mx-auto overflow-hidden shadow-lg">
+            {/* Main Content - Desktop */}
+            <div className="hidden lg:flex items-stretch gap-0 w-full max-w-[620px] h-auto lg:h-[350px] mx-auto overflow-hidden shadow-lg">
               {/* Section 1 - What They Say About Us */}
               <div 
-                className="flex-shrink-0 w-full lg:w-44 p-4 flex flex-col justify-between text-white"
+                className="flex-shrink-0 w-44 p-4 flex flex-col justify-between text-white"
                 style={{ background: '#0D5C94'}}
               >
                 <div style={{marginTop:"7%", marginLeft:"7%"}}>
@@ -102,7 +102,7 @@ const Testimonials = () => {
               </div>
 
               {/* Section 2 - GIF/Image */}
-              <div className="flex-shrink-0 w-full lg:w-60">
+              <div className="flex-shrink-0 w-60">
                 <Image
                   src={current.image}
                   alt={current.name}
@@ -140,18 +140,56 @@ const Testimonials = () => {
               </div>
             </div>
 
+            {/* Main Content - Mobile */}
+            <div className="flex lg:hidden flex-col w-full max-w-[280px] mx-auto overflow-hidden shadow-lg bg-white">
+              {/* GIF/Image */}
+              <div className="w-full">
+                <Image
+                  src={current.image}
+                  alt={current.name}
+                  width={280}
+                  height={350}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+
+              {/* Doctor Details */}
+              <div 
+                className="w-full p-4 text-white"
+                style={{ background: '#0D5C94'}}
+              >
+                <h4 className="font-bold text-base mb-1">{current.name}</h4>
+                <p className="text-sm opacity-90 mb-1">{current.credentials}</p>
+                <p className="text-sm font-normal">-{current.hospital}</p>
+              </div>
+
+              {/* Quote Content */}
+              <div className="p-6 flex flex-col items-center text-center">
+                <p className="text-[#64748B] leading-relaxed text-xs mb-4">
+                  {current.quote}
+                </p>
+                
+                {/* Star Rating */}
+                <div className="flex gap-1">
+                  {[...Array(current.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-[#F59E0B] text-[#F59E0B]" />
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {/* Next Button */}
             <button
               onClick={nextTestimonial}
               disabled={currentIndex === testimonials.length - 1}
-              className={`absolute right-0 translate-x-2 lg:translate-x-3 w-12 h-12 rounded-full flex items-center justify-center transition-colors z-10 ${
+              className={`absolute right-0 translate-x-2 lg:translate-x-3 w-8 h-8 lg:w-12 lg:h-12 rounded-full flex items-center justify-center transition-colors z-10 ${
                 currentIndex === testimonials.length - 1
                   ? 'bg-gray-200 cursor-not-allowed opacity-50'
                   : 'bg-[#0D9488] hover:bg-[#0D9488]'
               }`}
               aria-label="Next testimonial"
             >
-              <ArrowRight className="w-6 h-6 text-[#FFFFFF]" />
+              <ArrowRight className="w-4 h-4 lg:w-6 lg:h-6 text-[#FFFFFF]" />
             </button>
           </div>
 

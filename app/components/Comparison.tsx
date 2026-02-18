@@ -43,7 +43,7 @@ const Comparison = () => {
       <div className="absolute rounded-full" style={{ left: '0%', top: '27%', width: '500px', height: '500px', backgroundColor: 'rgba(60, 131, 246, 0.1)', opacity: '0.7', filter: 'blur(64px)' }} />
        <div className="absolute rounded-full" style={{ right: '2%', top: '38%', width: '500px', height: '500px', backgroundColor: 'rgba(42, 157, 144, 0.1)', opacity: '0.6', filter: 'blur(64px)' }} />
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="container mx-auto max-w-7xl">
+        <div className="w-full mx-auto lg:max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/50 backdrop-blur-xl rounded-full mb-6 border border-gray-200/50">
@@ -51,16 +51,16 @@ const Comparison = () => {
             <span className="text-sm font-medium text-primary">The DecentCare Difference</span>
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0F1729] mb-4">
-            Why <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>500+ Providers</span> Choose Us
+            Why <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>500+ Providers</span><br className="lg:hidden" /> Choose Us
           </h2>
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm lg:text-base text-muted-foreground max-w-2xl mx-auto">
             We're not another marketing agency. We're your technology-powered growth partner.
           </p>
         </div>
 
         {/* Comparison Table - Outer Box */}
         <div 
-          className="max-w-4xl mx-auto mb-16 bg-card rounded-2xl p-8 relative overflow-hidden"
+          className="max-w-4xl mx-auto mb-16 bg-card rounded-2xl p-4 md:p-8 relative overflow-hidden"
           style={{
             border: '1px solid rgba(255, 255, 255, 0.3)',
             boxShadow: '0 10px 40px 0 rgba(60, 131, 246, 0.08), 0 1px 3px 0 rgba(15, 23, 41, 0.05)',
@@ -70,18 +70,18 @@ const Comparison = () => {
           }}
         >
           {/* Heading inside the box */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-6 md:mb-8">
             <h3 className="text-xl font-bold text-[#1F2020]">DecentCare vs. Traditional Marketing</h3>
           </div>
 
           {/* Header */}
-          <div className="grid grid-cols-3 bg-[#FFFFFF] p-4 border-b border-border">
-            <div className="text-sm font-medium text-[#818584]">Capability</div>
+          <div className="grid grid-cols-3 bg-[#FFFFFF] p-2 md:p-4 border-b border-border">
+            <div className="text-xs md:text-sm font-medium text-[#818584]">Capability</div>
             <div className="text-center">
-              <span className="px-4 py-1 rounded-full text-sm font-semibold text-[#0D9488]" style={{ backgroundColor: 'rgba(42, 157, 144, 0.1)' }}>DecentCare</span>
+              <span className="px-2 md:px-4 py-1 rounded-full text-xs md:text-sm font-semibold text-[#0D9488]" style={{ backgroundColor: 'rgba(42, 157, 144, 0.1)' }}>DecentCare</span>
             </div>
             <div className="text-center">
-              <span className="text-sm font-medium text-[#818584]">Traditional Agencies</span>
+              <span className="text-xs md:text-sm font-medium text-[#818584]">Traditional<br className="md:hidden" /> Agencies</span>
             </div>
           </div>
 
@@ -89,30 +89,30 @@ const Comparison = () => {
           {comparisons.map((item, index) => (
             <div
               key={index}
-              className={`grid grid-cols-3 p-4 items-center ${
+              className={`grid grid-cols-3 p-2 md:p-4 items-center gap-2 ${
                 index !== comparisons.length - 1 ? "border-b border-border" : ""
               }`}
             >
-              <div className="text-sm text-[#1F2020]">{item.feature}</div>
+              <div className="text-xs md:text-sm text-[#1F2020]">{item.feature}</div>
               <div className="flex justify-center">
                 {item.decentcare ? (
-                  <div className="w-8 h-8 bg-[#0D9488] rounded-full flex items-center justify-center">
-                    <Check className="w-5 h-5 text-accent-foreground" />
+                  <div className="w-6 h-6 md:w-8 md:h-8 bg-[#0D9488] rounded-full flex items-center justify-center">
+                    <Check className="w-4 h-4 md:w-5 md:h-5 text-accent-foreground" />
                   </div>
                 ) : (
-                  <div className="w-8 h-8 bg-[#F1F5F9] rounded-full flex items-center justify-center">
-                    <X className="w-5 h-5 text-muted-foreground" />
+                  <div className="w-6 h-6 md:w-8 md:h-8 bg-[#F1F5F9] rounded-full flex items-center justify-center">
+                    <X className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
                   </div>
                 )}
               </div>
               <div className="flex justify-center">
                 {item.traditional ? (
-                  <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-                    <Check className="w-5 h-5 text-accent-foreground" />
+                  <div className="w-6 h-6 md:w-8 md:h-8 bg-accent rounded-full flex items-center justify-center">
+                    <Check className="w-4 h-4 md:w-5 md:h-5 text-accent-foreground" />
                   </div>
                 ) : (
-                  <div className="w-8 h-8 bg-[#F1F5F9] rounded-full flex items-center justify-center">
-                    <X className="w-5 h-5 text-muted-foreground" />
+                  <div className="w-6 h-6 md:w-8 md:h-8 bg-[#F1F5F9] rounded-full flex items-center justify-center">
+                    <X className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
                   </div>
                 )}
               </div>

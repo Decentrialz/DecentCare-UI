@@ -12,6 +12,7 @@ import Comparison from "@/app/components/Comparison";
 import Testimonials from "@/app/components/Testimonials";
 import CTA from "@/app/components/CTA";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 
 const Index = () => {
   return (
@@ -30,6 +31,7 @@ const Index = () => {
       <Testimonials />
       <CTA />
       <Footer />
+      <MobileStickyButtons />
     </div>
   );
 };
