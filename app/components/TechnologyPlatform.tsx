@@ -45,7 +45,7 @@ const TechnologyPlatform = () => {
     <section className="py-12 lg:py-20 relative" style={{ backgroundColor: 'rgba(241, 245, 249, 0.3)' }}>
 
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="container mx-auto max-w-7xl">
+        <div className="w-full mx-auto lg:max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/50 backdrop-blur-xl rounded-full mb-6 border border-gray-200/50">
@@ -53,10 +53,10 @@ const TechnologyPlatform = () => {
             <span className="text-sm font-medium text-primary">Technology</span>
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
-            Built like a healthcare platform.{" "}
+            Built like a healthcare platform.<br className="lg:hidden" />{" "}
             <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Not a marketing tool.</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-sm lg:text-lg text-muted-foreground max-w-3xl mx-auto">
             Enterprise-grade infrastructure designed from the ground up for healthcare compliance, security, and scale.
           </p>
         </div>
@@ -83,11 +83,11 @@ const TechnologyPlatform = () => {
         </div>
 
         {/* Layer Tags */}
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-3 px-4 md:px-0">
           {layers.map((layer, index) => (
             <span
               key={index}
-              className="inline-block px-4 py-4 rounded-xl text-sm font-medium text-center"
+              className="inline-block w-full md:w-auto max-w-xs md:max-w-none px-4 py-4 rounded-xl text-sm font-medium text-center"
               style={
                 index === 0 
                   ? { background: 'linear-gradient(135deg, rgba(60, 131, 246, 0.2) 0%, rgba(60, 131, 246, 0.05) 100%)', color: '#0D5C94' }

@@ -19,10 +19,10 @@ const CTA = () => {
         <div className="absolute rounded-full" style={{ left: '0%', top: '10%', width: '600px', height: '600px', backgroundColor: 'rgba(60, 131, 246, 0.1)', opacity: '0.7', filter: 'blur(64px)' }} />
        <div className="absolute rounded-full" style={{ right: '2%', top: '18%', width: '600px', height: '600px', backgroundColor: 'rgba(42, 157, 144, 0.1)', opacity: '0.7', filter: 'blur(64px)' }} />
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="container mx-auto max-w-7xl">
+        <div className="w-full mx-auto lg:max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Image */}
-          <div className="w-full max-w-[462px] h-[477px] mx-auto ml-[20%]">
+          <div className="w-full max-w-[462px] h-[385px] lg:h-[477px] mx-auto lg:ml-[20%]">
             <Image
               src={teamImage}
               alt="Healthcare team"
@@ -33,40 +33,40 @@ const CTA = () => {
           </div>
 
           {/* Right - Content */}
-          <div className="space-y-6">
+          <div className="space-y-6 flex flex-col items-center lg:items-start">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/50 backdrop-blur-xl rounded-full mb-6 border border-gray-200/50">
               <Zap className="w-4 h-4 text-[#0D5C94]" />
               <span className="text-sm font-medium text-primary">Ready to Scale?</span>
             </div>
 
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                Start Growing Your Practice{" "}
+            <div className="text-center lg:text-left">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">
+                Start Growing Your<br className="lg:hidden" /> Practice{" "}
                 <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Today</span>
               </h2>
-              <p className="text-base text-[#818584]">
+              <p className="text-sm lg:text-base text-[#818584]">
                 Join 500+ healthcare providers who've transformed their growth with DecentCare's AI-powered platform.
               </p>
             </div>
 
             {/* Stats */}
-            <div className="flex flex-wrap gap-8">
-              <div>
-                <div className="text-3xl font-bold text-primary" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>500+</div>
-                <div className="text-sm text-muted-foreground">Healthcare Providers</div>
+            <div className="flex flex-wrap gap-4 lg:gap-8 justify-center lg:justify-start">
+              <div className="text-center lg:text-left">
+                <div className="text-2xl lg:text-3xl font-bold text-primary" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>500+</div>
+                <div className="text-xs lg:text-sm text-muted-foreground">Healthcare Providers</div>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-accent" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>₹50Cr+</div>
-                <div className="text-sm text-muted-foreground">Revenue Generated</div>
+              <div className="text-center lg:text-left">
+                <div className="text-2xl lg:text-3xl font-bold text-accent" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>₹50Cr+</div>
+                <div className="text-xs lg:text-sm text-muted-foreground">Revenue Generated</div>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-accent" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>3.2x</div>
-                <div className="text-sm text-muted-foreground">Average ROI</div>
+              <div className="text-center lg:text-left">
+                <div className="text-2xl lg:text-3xl font-bold text-accent" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>3.2x</div>
+                <div className="text-xs lg:text-sm text-muted-foreground">Average ROI</div>
               </div>
             </div>
 
             {/* Benefits */}
-            <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+            <div className="flex flex-wrap gap-4 text-sm text-muted-foreground justify-center lg:justify-start">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full bg-[#2A9D90]/10 flex items-center justify-center">
                   <Clock className="w-4 h-4" style={{ stroke: 'url(#icon-gradient)' }}/>
@@ -88,23 +88,23 @@ const CTA = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
               <Button size="lg" className="gap-2 bg-[#0D5C94]">
                 Book Free Strategy Call
                 <ArrowRight className="w-5 h-5" />
               </Button>
-              <Button variant="outline" size="lg" className="gap-2 text-[#5E6160]">
+              <Button variant="outline" size="lg" className="gap-2 text-[#5E6160] px-18 lg:px-6">
                 <Play className="w-5 h-5" />
                 Talk to Sales
               </Button>
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground justify-center lg:justify-start">
               <CircleCheckBig className="w-4 h-4 text-accent" />
               24/7 Support
             </div>
 
-            <p className="text-sm text-[#5E6160]">
+            <p className="text-sm text-[#5E6160] text-center lg:text-left">
               No pressure. No obligation. Just a conversation about your growth goals.
             </p>
           </div>

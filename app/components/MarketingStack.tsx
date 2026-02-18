@@ -121,13 +121,13 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, i, progress, range, 
   return (
     <div
       ref={container}
-      className="h-[40vh] flex items-center justify-center sticky top-40"
+      className="mb-8 lg:mb-0 lg:h-[40vh] flex items-center justify-center lg:sticky lg:top-40"
       style={{ zIndex: i }}
     >
       <motion.div
         style={{
-          scale,
-          top: `calc(-5vh + ${i * 20}px)`,
+          scale: typeof window !== 'undefined' && window.innerWidth >= 1024 ? scale : 1,
+          top: typeof window !== 'undefined' && window.innerWidth >= 1024 ? `calc(-5vh + ${i * 20}px)` : 0,
         }}
         className="relative w-full max-w-6xl mx-auto origin-top"
       >
@@ -163,7 +163,56 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, i, progress, range, 
               </div>
             </div>
           )}
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
+          
+          {/* Mobile Layout */}
+          <div className="lg:hidden space-y-6">
+            {/* Header with number and icon */}
+            <div className="flex items-start gap-4">
+              <span className="text-5xl font-bold text-muted-foreground/20">
+                {feature.number}
+              </span>
+              <div 
+             className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                      feature.featured ? '' : 'bg-[#0D5C94]/10'
+                    }`}
+                    style={feature.featured ? { background: 'linear-gradient(135deg, #0D9488, #0D5C94)' } : undefined}
+              >
+                <feature.icon className={`w-6 h-6 ${feature.featured ? 'text-white' : 'text-[#0D5C94]'}`} />
+              </div>
+            </div>
+            
+            {/* Title and subtitle */}
+            <div>
+              <h3 className="text-xl font-bold mb-1 text-[#0F1729]">{feature.title}</h3>
+              <p className="text-[#0D9488] font-semibold text-base">{feature.subtitle}</p>
+            </div>
+            
+            {/* Description */}
+            <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+            
+            {/* Stat box */}
+            <div className="bg-[#E0F2F1] rounded-xl p-4">
+              <div className="flex items-baseline gap-2">
+                <span className="text-4xl font-bold text-[#0D9488]">{feature.stat}</span>
+                <span className="text-sm text-muted-foreground">{feature.statLabel}</span>
+              </div>
+            </div>
+            
+            {/* Highlights */}
+            <div className="space-y-3">
+              {feature.highlights.map((highlight, hIndex) => (
+                <div key={hIndex} className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D9488]/10">
+                    <ArrowRight className="w-4 h-4 text-[#0D9488]" />
+                  </div>
+                  <span className="text-muted-foreground text-sm flex-1">{highlight}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden lg:grid lg:grid-cols-2 gap-8 items-start">
             {/* Left */}
             <div className="space-y-4">
               <div className="flex items-center gap-30">
@@ -224,11 +273,11 @@ const MarketingStack = () => {
   });
 
   return (
-    <section ref={container} className="py-08 lg:py-16 bg-[#FFFFFF] relative">
-      <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="container mx-auto max-w-7xl">
+    <section ref={container} className="pt-16 pb-16 lg:py-20 bg-[#FFFFFF] relative">
+      <div className="px-4 md:px-8 lg:px-16 xl:px-20">
+        <div className="w-full mx-auto lg:max-w-7xl">
         {/* Section Header */}
-        <div className="text-center mb-16 max-w-4xl mx-auto">
+        <div className="text-center mb-12 lg:mb-16 max-w-4xl mx-auto relative z-50">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/50 backdrop-blur-xl rounded-full mb-6 border border-gray-200/50">
             <Rocket className="w-4 h-4 text-accent" />
             <span className="text-sm font-medium text-primary">Full-Stack Growth Engine</span>
@@ -237,13 +286,13 @@ const MarketingStack = () => {
             The Complete Healthcare<br />
             <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Marketing Stack</span>
           </h2>
-          <p className="text-md text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-sm lg:text-md text-muted-foreground max-w-3xl mx-auto">
             From first impression to lifelong patient, our integrated platform handles every step with AI precision and human empathy.
           </p>
         </div>
 
         {/* Features with Stacking Animation */}
-        <div>
+        <div className="lg:h-[600vh]">
           {features.map((feature, i) => {
             const targetScale = 1 - (features.length - i) * 0.05;
             return (
