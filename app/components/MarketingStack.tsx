@@ -292,7 +292,7 @@ const MarketingStack = () => {
         </div>
 
         {/* Features with Stacking Animation */}
-        <div className="lg:h-[600vh]">
+        <div className="lg:h-[300vh]">
           {features.map((feature, i) => {
             const targetScale = 1 - (features.length - i) * 0.05;
             return (
@@ -301,7 +301,7 @@ const MarketingStack = () => {
                 feature={feature}
                 i={i}
                 progress={scrollYProgress}
-                range={[i * 0.25, 1]}
+                range={[i * 0.16, 1]}
                 targetScale={targetScale}
               />
             );
