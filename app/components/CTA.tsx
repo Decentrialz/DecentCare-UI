@@ -40,11 +40,11 @@ const CTA = () => {
             </div>
 
             <div className="text-center lg:text-left">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">
+              <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">
                 Start Growing Your<br className="lg:hidden" /> Practice{" "}
                 <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Today</span>
               </h2>
-              <p className="text-sm lg:text-base text-[#818584]">
+              <p className="text-base lg:text-base text-[#818584]">
                 Join 500+ healthcare providers who've transformed their growth with DecentCare's AI-powered platform.
               </p>
             </div>
