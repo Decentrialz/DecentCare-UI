@@ -16,8 +16,8 @@ const EmpathyBot = () => {
               </div>
 
               <div>
-                <h2 className="text-2xl md:text-4xl font-bold text-[#1D2630]">Empathy Bot.</h2>
-                <h3 className="text-2xl md:text-4xl font-bold leading-normal" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', paddingBottom: '0.1em' }}>Your Digital Partner in Care.</h3>
+                <h2 className="text-3xl md:text-4xl font-bold text-[#1D2630]">Empathy Bot.</h2>
+                <h3 className="text-3xl md:text-4xl font-bold leading-normal" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', paddingBottom: '0.1em' }}>Your Digital Partner in Care.</h3>
               </div>
 
               <p className="text-sm lg:text-lg text-[#627384] mt-[-20px]">

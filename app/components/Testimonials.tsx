@@ -51,10 +51,10 @@ const Testimonials = () => {
             <ThumbsUp className="w-4 h-4 text-[#0D5C94]" />
             <span className="text-sm font-medium text-primary">Testimonials</span>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
+          <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
             What They Say <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>About<br className="lg:hidden" /> Us?</span>
           </h2>
-          <p className="text-sm lg:text-lg text-muted-foreground">
+          <p className="text-base lg:text-lg text-muted-foreground">
             Real stories from real people.
           </p>
         </div>

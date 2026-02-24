@@ -282,11 +282,11 @@ const MarketingStack = () => {
             <Rocket className="w-4 h-4 text-accent" />
             <span className="text-sm font-medium text-primary">Full-Stack Growth Engine</span>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
+          <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
             The Complete Healthcare<br />
             <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Marketing Stack</span>
           </h2>
-          <p className="text-sm lg:text-base text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base lg:text-base text-muted-foreground max-w-3xl mx-auto">
             From first impression to lifelong patient, our integrated platform handles every step with AI precision and human empathy.
           </p>
         </div>

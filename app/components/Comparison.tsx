@@ -50,10 +50,10 @@ const Comparison = () => {
             <Zap className="w-4 h-4 text-accent" />
             <span className="text-sm font-medium text-primary">The DecentCare Difference</span>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0F1729] mb-4">
+          <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold text-[#0F1729] mb-4">
             Why <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>500+ Providers</span><br className="lg:hidden" /> Choose Us
           </h2>
-          <p className="text-sm lg:text-base text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base lg:text-base text-muted-foreground max-w-2xl mx-auto">
             We're not another marketing agency. We're your technology-powered growth partner.
           </p>
         </div>
