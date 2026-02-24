@@ -75,12 +75,12 @@ const Comparison = () => {
           </div>
 
           {/* Header */}
-          <div className="grid grid-cols-3 bg-[#FFFFFF] p-2 md:p-4 border-b border-border">
-            <div className="text-xs md:text-sm font-medium text-[#818584]">Capability</div>
-            <div className="text-center">
+          <div className="grid grid-cols-3 bg-[#FFFFFF] p-2 md:p-4 border-b border-border items-center">
+            <div className="text-xs md:text-sm font-medium text-[#818584] text-left md:text-left pl-0 md:pl-0">Capability</div>
+            <div className="text-center flex justify-center">
               <span className="px-2 md:px-4 py-1 rounded-full text-xs md:text-sm font-semibold text-[#0D9488]" style={{ backgroundColor: 'rgba(42, 157, 144, 0.1)' }}>DecentCare</span>
             </div>
-            <div className="text-center">
+            <div className="text-center flex justify-center">
               <span className="text-xs md:text-sm font-medium text-[#818584]">Traditional<br className="md:hidden" /> Agencies</span>
             </div>
           </div>

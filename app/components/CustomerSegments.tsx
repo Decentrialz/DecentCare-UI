@@ -74,7 +74,7 @@ const CustomerSegments = () => {
             Designed for healthcare providers{" "}
             <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>who care</span>
           </h2>
-          <p className="text-sm lg:text-md text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-sm lg:text-base text-muted-foreground max-w-3xl mx-auto">
             From individual practitioners to large hospital networks, our platform scales with your growth.
           </p>
         </div>

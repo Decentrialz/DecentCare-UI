@@ -286,7 +286,7 @@ const MarketingStack = () => {
             The Complete Healthcare<br />
             <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Marketing Stack</span>
           </h2>
-          <p className="text-sm lg:text-md text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-sm lg:text-base text-muted-foreground max-w-3xl mx-auto">
             From first impression to lifelong patient, our integrated platform handles every step with AI precision and human empathy.
           </p>
         </div>

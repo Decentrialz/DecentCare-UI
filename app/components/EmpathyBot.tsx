@@ -38,7 +38,7 @@ const EmpathyBot = () => {
             </div>
 
             {/* Right Content - Chat Interface */}
-            <div className="relative overflow-hidden rounded-2xl" style={{ lineHeight: 0 }}>
+            <div className="relative overflow-hidden rounded-2xl -mx-6 lg:mx-0" style={{ lineHeight: 0 }}>
               <video
                 autoPlay
                 muted

@@ -17,7 +17,7 @@ const EmpathyFirst = () => {
           {/* Mobile Layout */}
           <div className="lg:hidden space-y-6">
             <div className="text-center">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#1F2020] mb-2">Empathy first.</h2>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#1F2020]">Empathy first.</h2>
               <h3 className="text-2xl md:text-4xl font-bold text-accent leading-tight" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Intelligence always.</h3>
             </div>
 
@@ -155,10 +155,10 @@ const EmpathyFirst = () => {
               </div>
 
               <div className="space-y-4">
-                <p className="text-lg text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                   Every patient interaction is emotional. Every healthcare decision is critical.
                 </p>
-                <p className="text-lg text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                   We believe technology should not replace care. It should support it, anticipate it, and extend it.
                 </p>
               </div>
