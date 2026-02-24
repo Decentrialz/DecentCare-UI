@@ -112,11 +112,11 @@ const DigitalTwin = () => {
             <Brain className="w-4 h-4 text-[#0D5C94]" />
             <span className="text-sm font-medium text-primary">Proprietary Technology</span>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
+          <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
             Every Patient Journey Has a{" "}
             <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Digital Twin</span>
           </h2>
-          <p className="text-sm lg:text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto">
             Our AI creates a real-time mirror of each patient journey, predicting behaviour, identifying risks, and optimising outcomes before they happen.
           </p>
 

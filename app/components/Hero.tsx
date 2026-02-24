@@ -32,14 +32,14 @@ const Hero = () => {
           {/* Left Content */}
           <div className="space-y-8 max-w-lg mx-auto lg:mx-0">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#FFFFFF] rounded-full mx-auto lg:mx-0">
+            <div className="flex items-center gap-2 px-4 py-2 bg-[#FFFFFF] rounded-full mx-auto lg:mx-0 w-fit">
               <Sparkles className="w-4 h-4 text-[#0D5C94]" />
-              <span className="text-sm font-medium text-primary">AI-Powered Healthcare Marketing Platform</span>
+              <span className="text-xs lg:text-sm font-medium text-primary">AI-Powered Healthcare Marketing Platform</span>
             </div>
 
             {/* Mobile Video - Show on mobile only */}
             <div className="lg:hidden relative flex items-center justify-center">
-              <div className="relative z-10 w-full max-w-sm overflow-hidden rounded-full aspect-square mx-auto">
+              <div className="relative z-10 w-full max-w-xs overflow-hidden rounded-full aspect-square mx-auto">
                 <video
                   autoPlay
                   muted

@@ -32,10 +32,10 @@ const Problems = () => {
         <div className="w-full mx-auto lg:max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
-            Healthcare is personal. <span style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Growth systems are not.</span>
+          <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
+            Healthcare is personal.<br className="lg:hidden" /> <span style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Growth systems are<br className="lg:hidden" /> not.</span>
           </h2>
-          <p className="text-sm lg:text-lg text-[#818584] max-w-2xl mx-auto">
+          <p className="text-base lg:text-lg text-[#818584] max-w-2xl mx-auto">
             What healthcare needs is not louder marketing. It needs intelligence with empathy.
           </p>
         </div>

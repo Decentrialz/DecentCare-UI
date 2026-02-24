@@ -70,11 +70,11 @@ const CustomerSegments = () => {
             <UsersRound className="w-4 h-4 text-[#0D5C94]" />
             <span className="text-sm font-medium text-primary">Who We Serve</span>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
+          <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold text-[#1F2020] mb-4">
             Designed for healthcare providers{" "}
             <span className="text-accent" style={{background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>who care</span>
           </h2>
-          <p className="text-sm lg:text-md text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base lg:text-base text-muted-foreground max-w-3xl mx-auto">
             From individual practitioners to large hospital networks, our platform scales with your growth.
           </p>
         </div>
