@@ -3,6 +3,7 @@ import { Button } from "@/app/components/ui/button";
 import { Menu, X, Send } from "lucide-react";
 import dcLogo from "@/app/assets/dcLogo.svg";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -10,7 +11,7 @@ const Navbar = () => {
 
   return (
     <>
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border w-full" style={{ maxWidth: '100vw' }}>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border w-full" style={{ maxWidth: '100vw' }}>
       <div className="w-full px-4 md:px-8 lg:px-16 xl:px-20 py-2">
         <div className="w-full mx-auto lg:max-w-7xl">
         
@@ -35,9 +36,9 @@ const Navbar = () => {
             <a href="#success-stories" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
               Success Stories
             </a>
-            <a href="#blog" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+            <Link href="/blog" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
               Blogs
-            </a>
+            </Link>
           </div>
 
           {/* CTA Button */}
@@ -109,9 +110,9 @@ const Navbar = () => {
             <a href="#success-stories" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
               Success Stories
             </a>
-            <a href="#blog" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
+            <Link href="/blog" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
               Blogs
-            </a>
+            </Link>
           </div>
 
           {/* Sidebar Footer */}
