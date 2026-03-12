@@ -1,6 +1,20 @@
+import type { StaticImageData } from "next/image";
+import blog1 from "@/app/assets/blog1.png";
+import blog2 from "@/app/assets/blog2.png";
+import blog3 from "@/app/assets/blog3.png";
+import blog4 from "@/app/assets/blog4.png";
+import blog5 from "@/app/assets/blog5.png";
+import blog6 from "@/app/assets/blog6.png";
+import blog7 from "@/app/assets/blog7.png";
+import blog8 from "@/app/assets/blog8.png";
+import blog9 from "@/app/assets/blog9.png";
+import blog10 from "@/app/assets/blog10.png";
+import blog11 from "@/app/assets/blog11.png";
+import blog12 from "@/app/assets/blog12.png";
+
 export interface BlogArticle {
   id: string;
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
   category: string;
   date: string;
   readTime: string;
@@ -10,10 +24,25 @@ export interface BlogArticle {
   href: string;
 }
 
+const BLOG_IMAGES: Record<string, StaticImageData> = {
+  "1": blog1,
+  "2": blog2,
+  "3": blog3,
+  "4": blog4,
+  "5": blog5,
+  "6": blog6,
+  "7": blog7,
+  "8": blog8,
+  "9": blog9,
+  "10": blog10,
+  "11": blog11,
+  "12": blog12,
+};
+
 export const MOCK_ARTICLES: BlogArticle[] = [
   {
     id: "1",
-    imageUrl: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["1"],
     category: "Growth",
     date: "12 March 2024",
     readTime: "7 min read",
@@ -24,7 +53,7 @@ export const MOCK_ARTICLES: BlogArticle[] = [
   },
   {
     id: "2",
-    imageUrl: "https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["2"],
     category: "Patient Care",
     date: "28 February 2024",
     readTime: "7 min read",
@@ -35,7 +64,7 @@ export const MOCK_ARTICLES: BlogArticle[] = [
   },
   {
     id: "3",
-    imageUrl: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["3"],
     category: "CRM & Automation",
     date: "5 April 2024",
     readTime: "7 min read",
@@ -46,7 +75,7 @@ export const MOCK_ARTICLES: BlogArticle[] = [
   },
   {
     id: "4",
-    imageUrl: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["4"],
     category: "Marketing",
     date: "19 March 2024",
     readTime: "7 min read",
@@ -57,7 +86,7 @@ export const MOCK_ARTICLES: BlogArticle[] = [
   },
   {
     id: "5",
-    imageUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["5"],
     category: "Digital Health",
     date: "7 January 2024",
     readTime: "7 min read",
@@ -68,7 +97,7 @@ export const MOCK_ARTICLES: BlogArticle[] = [
   },
   {
     id: "6",
-    imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["6"],
     category: "Operations",
     date: "22 February 2024",
     readTime: "7 min read",
@@ -79,7 +108,7 @@ export const MOCK_ARTICLES: BlogArticle[] = [
   },
   {
     id: "7",
-    imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["7"],
     category: "Web & Tech",
     date: "14 February 2024",
     readTime: "7 min read",
@@ -90,7 +119,7 @@ export const MOCK_ARTICLES: BlogArticle[] = [
   },
   {
     id: "8",
-    imageUrl: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["8"],
     category: "Insights",
     date: "3 April 2024",
     readTime: "7 min read",
@@ -101,7 +130,7 @@ export const MOCK_ARTICLES: BlogArticle[] = [
   },
   {
     id: "9",
-    imageUrl: "https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["9"],
     category: "Patient Journey",
     date: "18 March 2024",
     readTime: "7 min read",
@@ -112,7 +141,7 @@ export const MOCK_ARTICLES: BlogArticle[] = [
   },
   {
     id: "10",
-    imageUrl: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["10"],
     category: "CRM & Automation",
     date: "27 January 2024",
     readTime: "7 min read",
@@ -123,7 +152,7 @@ export const MOCK_ARTICLES: BlogArticle[] = [
   },
   {
     id: "11",
-    imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["11"],
     category: "Marketing",
     date: "9 February 2024",
     readTime: "7 min read",
@@ -134,7 +163,139 @@ export const MOCK_ARTICLES: BlogArticle[] = [
   },
   {
     id: "12",
-    imageUrl: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=240&fit=crop",
+    imageUrl: BLOG_IMAGES["12"],
+    category: "Operations",
+    date: "31 March 2024",
+    readTime: "7 min read",
+    title: "Managing Daily Healthcare Operations Without Increasing Administrative Burden",
+    description: "As clinics and hospitals grow, daily operational tasks can multiply quickly. Without structured systems, administrative burden falls...",
+    author: "Rohit Iyer",
+    href: "#",
+  },
+  {
+    id: "13",
+    imageUrl: BLOG_IMAGES["1"],
+    category: "Growth",
+    date: "12 March 2024",
+    readTime: "7 min read",
+    title: "Building Sustainable Healthcare Growth Without Overloading Clinical Teams",
+    description: "Healthcare growth often brings unintended operational pressure on doctors and care teams. As patient enquiries increase, clinics...",
+    author: "Anirudh Rao",
+    href: "#",
+  },
+  {
+    id: "14",
+    imageUrl: BLOG_IMAGES["2"],
+    category: "Patient Care",
+    date: "28 February 2024",
+    readTime: "7 min read",
+    title: "Why Mapping the Patient Journey Improves Care Coordination Outcomes",
+    description: "Patient journeys rarely follow a single linear path, especially across multi-department healthcare environments. Without clear visibility into...",
+    author: "Meera Nair",
+    href: "#",
+  },
+  {
+    id: "15",
+    imageUrl: BLOG_IMAGES["3"],
+    category: "CRM & Automation",
+    date: "5 April 2024",
+    readTime: "7 min read",
+    title: "How Healthcare CRM Automation Reduces Manual Follow-Ups Effectively",
+    description: "Manual follow-ups remain a major source of inefficiency for clinics and hospitals managing high patient volumes. Healthcare CRM automation...",
+    author: "Sandeep Verma",
+    href: "#",
+  },
+  {
+    id: "16",
+    imageUrl: BLOG_IMAGES["4"],
+    category: "Marketing",
+    date: "19 March 2024",
+    readTime: "7 min read",
+    title: "Turning Healthcare Marketing Enquiries Into Meaningful Patient Conversations",
+    description: "Generating patient enquiries through marketing is only the first step in healthcare growth. Without structured lead handling and timely communic...",
+    author: "Neha Kulkarni",
+    href: "#",
+  },
+  {
+    id: "17",
+    imageUrl: BLOG_IMAGES["5"],
+    category: "Digital Health",
+    date: "7 January 2024",
+    readTime: "7 min read",
+    title: "Digital Transformation Challenges Clinics Face During Healthcare Modernization",
+    description: "Digital transformation in healthcare often stalls not because of technology limitations, but due to workflow disruption and adoption resistance...",
+    author: "Priya Menon",
+    href: "#",
+  },
+  {
+    id: "18",
+    imageUrl: BLOG_IMAGES["6"],
+    category: "Operations",
+    date: "22 February 2024",
+    readTime: "7 min read",
+    title: "Improving Front Desk Operations for Better Patient Flow Management",
+    description: "Front desk teams play a critical role in shaping patient experience and operational efficiency. Without clear tools and visibility, appointment....",
+    author: "Rohit Iyer",
+    href: "#",
+  },
+  {
+    id: "19",
+    imageUrl: BLOG_IMAGES["7"],
+    category: "Web & Tech",
+    date: "14 February 2024",
+    readTime: "7 min read",
+    title: "Designing Healthcare Websites That Support Patient Decision Making",
+    description: "Healthcare websites are often the first interaction patients have with a clinic or hospital. Beyond visual appeal, effective websites guide...",
+    author: "Arjun Patel",
+    href: "#",
+  },
+  {
+    id: "20",
+    imageUrl: BLOG_IMAGES["8"],
+    category: "Insights",
+    date: "3 April 2024",
+    readTime: "7 min read",
+    title: "What Modern Healthcare Teams Expect From Digital Care Platforms",
+    description: "Healthcare teams today expect digital platforms to simplify work rather than add complexity. Doctors, administrators, and front desk staff need...",
+    author: "Kavita Srinivasan",
+    href: "#",
+  },
+  {
+    id: "21",
+    imageUrl: BLOG_IMAGES["9"],
+    category: "Patient Journey",
+    date: "18 March 2024",
+    readTime: "7 min read",
+    title: "Reducing Patient Drop-Offs Across Consultation and Follow-Up Stages",
+    description: "Patient drop-offs commonly occur between consultation, procedures, and follow-up care. Without clear ownership and communication...",
+    author: "Meera Nair",
+    href: "#",
+  },
+  {
+    id: "22",
+    imageUrl: BLOG_IMAGES["10"],
+    category: "CRM & Automation",
+    date: "27 January 2024",
+    readTime: "7 min read",
+    title: "Why Centralized Patient Records Matter for Healthcare Operations",
+    description: "Scattered patient information across spreadsheets, calls, and messages creates inefficiencies and risk. Centralized patient reco...",
+    author: "Sandeep Verma",
+    href: "#",
+  },
+  {
+    id: "23",
+    imageUrl: BLOG_IMAGES["11"],
+    category: "Marketing",
+    date: "9 February 2024",
+    readTime: "7 min read",
+    title: "Aligning Healthcare Marketing Campaigns With Real Clinic Capacity",
+    description: "Healthcare marketing often focuses on generating demand without considering operational readiness. When campaigns are aligned with...",
+    author: "Neha Kulkarni",
+    href: "#",
+  },
+  {
+    id: "24",
+    imageUrl: BLOG_IMAGES["12"],
     category: "Operations",
     date: "31 March 2024",
     readTime: "7 min read",

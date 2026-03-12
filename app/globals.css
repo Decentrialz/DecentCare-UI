@@ -46,9 +46,11 @@
   --color-primary-green: hsl(175 84% 31%);
   --color-secondary-green: hsl(175 84% 32%);
 
-  /* Gray (text & icon) */
+  /* Gray (text, icon, background & border) */
   --color-gray-text: hsl(180 2% 24%);
   --color-gray-icon: hsl(160 2% 37%);
+  --color-gray-background: hsl(180 10% 94%);
+  --color-gray-border: hsl(240 2% 92%);
 }
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
@@ -100,6 +102,8 @@ All colors MUST be HSL.
     /* Gray (HSL values for opacity modifiers) */
     --gray-text: 180 2% 24%;
     --gray-icon: 160 2% 37%;
+    --gray-background: 180 10% 94%;
+    --gray-border: 240 2% 92%;
 
     --radius: 0.75rem;
 

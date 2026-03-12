@@ -1,19 +1,64 @@
 "use client";
 
 import Image from "next/image";
-import { Search } from "lucide-react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Search, ListFilterPlus } from "lucide-react";
+import { useState, useEffect } from "react";
 import blogHeroImage from "@/app/assets/blog-hero.png";
 import { Button } from "@/app/components/ui/button";
 
 const SECTION_PADDING = "px-4 md:px-8 lg:px-16 xl:px-20";
 const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
 
-export default function BlogHero() {
-  const [searchQuery, setSearchQuery] = useState("");
+interface BlogHeroProps {
+  defaultQuery?: string;
+  showFilterButton?: boolean;
+}
+
+export default function BlogHero({ defaultQuery = "", showFilterButton = false }: BlogHeroProps) {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState(defaultQuery);
+  const [showFilter, setShowFilter] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  const CATEGORY_FILTERS = [
+    "Growth",
+    "Patient Journey",
+    "CRM",
+    "Marketing",
+    "Digital",
+    "Web",
+    "Operations",
+    "Insights",
+  ];
+
+  const handleFilter = () => {
+    setShowFilter(!showFilter);
+  };
+
+  const handleCategoryToggle = (category: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
+    );
+  };
+
+  const handleClearFilters = () => {
+    setSelectedCategories([]);
+  };
+
+  useEffect(() => {
+    setSearchQuery(defaultQuery);
+  }, [defaultQuery]);
+
+  const handleSearch = () => {
+    const query = searchQuery.trim();
+    const params = new URLSearchParams();
+    if (query) params.set("q", query);
+    router.push(`/blog/search${params.toString() ? `?${params.toString()}` : ""}`);
+  };
 
   return (
-    <section className="relative mt-16 md:mt-18 min-h-[28rem] md:min-h-[32rem] lg:min-h-[36rem] flex flex-col overflow-hidden">
+    <section className="relative mt-16 md:mt-18 min-h-[28rem] md:min-h-[32rem] lg:min-h-[36rem] flex flex-col overflow-visible">
       {/* Blurred background image - desk scene */}
       <div className="absolute inset-0" aria-hidden>
         <Image
@@ -49,9 +94,8 @@ export default function BlogHero() {
               Stay informed with the latest healthcare technology trends, best practices, and insights from industry experts.
             </p>
 
-            {/* Search bar - single unit: input (light border) + Search button (dark blue) */}
-            {/* Search bar */}
-            <div className="pt-4 sm:pt-6 w-full mx-auto">
+            {/* Search bar - redirects via Next.js router to /blog/search?q=... */}
+            <div className="pt-4 sm:pt-6 w-full mx-auto relative">
               <div
                 className="flex items-center w-full max-w-4xl mx-auto bg-background rounded-2xl overflow-hidden shadow-sm"
                 style={{
@@ -60,7 +104,6 @@ export default function BlogHero() {
                     "linear-gradient(hsl(var(--background)), hsl(var(--background))) padding-box, linear-gradient(99.82deg, var(--color-royal-blue) 19.08%, var(--color-deep-teal) 128.92%) border-box",
                 }}
               >
-                {/* Input */}
                 <div className="relative flex-1">
                   <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <input
@@ -68,16 +111,49 @@ export default function BlogHero() {
                     placeholder="Search Articles, topics, or keywords..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), handleSearch())}
                     className="w-full h-[60px] pl-12 pr-4 bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none"
                     aria-label="Search articles"
                   />
                 </div>
-
-                {/* Button */}
-                <Button className="mr-2">
-                  Search
-                </Button>
+                <div className="mr-2 flex items-center justify-center gap-2">
+                  {showFilterButton && (
+                    <Button type="button" variant={showFilter ? "outline" : "grayBackground"} onClick={handleFilter} className={`font-medium ${showFilter ? "text-primary-blue bg-white border-primary-blue" : ""}`}>
+                      <ListFilterPlus className="w-4 h-4" />
+                      Filter
+                    </Button>
+                  )}
+                  <Button type="button" onClick={handleSearch}>
+                    Search
+                  </Button>
+                </div>
               </div>
+
+              {/* Filter panel - absolute overlay so hero height stays fixed */}
+              {showFilterButton && showFilter && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-full max-w-4xl px-1 z-20">
+                  <div className="border-t border-border bg-background py-4 px-4 sm:px-5 text-left">
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-base font-medium text-gray-text">Filter By category</p>
+
+                      <Button variant="link" onClick={handleClearFilters} className="p-0 h-auto">
+                        Clear Filters
+                      </Button>
+
+                    </div>
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
+                      {CATEGORY_FILTERS.map((category) => {
+                        const isSelected = selectedCategories.includes(category);
+                        return (
+                          <Button key={category} variant={isSelected ? "default" : "grayBackground"} onClick={() => handleCategoryToggle(category)} className="rounded-md">
+                            {category}
+                          </Button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
