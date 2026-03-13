@@ -2,6 +2,7 @@ import { Phone, Mail, MapPin, Twitter, Linkedin, Facebook, Instagram } from "luc
 import dcLogo from "@/app/assets/dcLogo.svg";
 import Image from "next/image";
 import vector from "@/app/assets/Vector.svg";
+import Link from "next/link";
 
 
 const Footer = () => {
@@ -66,9 +67,15 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-3 text-sm text-[#FBFCFD]/60">
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Service</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Success Stories</a></li>
+              <li>
+                <Link href="/services" className="hover:text-primary-foreground transition-colors">Service</Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-primary-foreground transition-colors">About</Link>
+              </li>
+              <li>
+                <Link href="/success" className="hover:text-primary-foreground transition-colors">Success Stories</Link>
+              </li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Blog</a></li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Terms of Service</a></li>
