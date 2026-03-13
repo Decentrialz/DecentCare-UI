@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
+  
   --color-primary: hsl(191 78% 20%);
   --color-primary-foreground: hsl(0 0% 100%);
   --color-secondary: hsl(190 25% 96%);
@@ -182,6 +184,7 @@ All colors MUST be HSL.
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
   }
 }
 

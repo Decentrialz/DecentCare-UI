@@ -7,6 +7,7 @@ import HeroH2 from "@/app/assets/HeroH2.svg";
 import HeroH3 from "@/app/assets/HeroH3.svg";
 import HeroH4 from "@/app/assets/HeroH4.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 
 
@@ -67,6 +68,7 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              <Link href="/contact">
              <Button
   className="
     h-[45px]
@@ -79,10 +81,12 @@ const Hero = () => {
     hover:bg-[#0B4F7F]
     transition-all
   "
+  style={{cursor:'pointer'}}
 >
   Get Your Growth Strategy
   <ArrowRight className="w-5 h-5" />
 </Button>
+</Link>
 
            <Button
   variant="outline"

@@ -3,6 +3,7 @@ import { ArrowRight, Play, Calendar, FileCheck, Map, Clock, Zap, TrendingUp, Spa
 import Image from "next/image";
 import teamImage from "@/app/assets/CTAImage.png";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 
 const CTA = () => {
@@ -17,7 +18,7 @@ const CTA = () => {
           </defs>
         </svg>
         <div className="absolute rounded-full" style={{ left: '0%', top: '10%', width: '600px', height: '600px', backgroundColor: 'rgba(60, 131, 246, 0.1)', opacity: '0.7', filter: 'blur(64px)' }} />
-       <div className="absolute rounded-full" style={{ right: '2%', top: '18%', width: '600px', height: '600px', backgroundColor: 'rgba(42, 157, 144, 0.1)', opacity: '0.7', filter: 'blur(64px)' }} />
+       <div className="absolute rounded-full" style={{ right: '2%', top: '18%', width: '600px', height: '600px', backgroundColor: 'rgba(42, 157, 144, 0.1)', opacity: '0.7', filter: 'blur(64px)', pointerEvents:'none' }} />
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
         <div className="w-full mx-auto lg:max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -89,14 +90,18 @@ const CTA = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="gap-2 bg-[#0D5C94]">
-                Book Free Strategy Call
-                <ArrowRight className="w-5 h-5" />
-              </Button>
-              <Button variant="outline" size="lg" className="gap-2 text-[#5E6160] px-18 lg:px-6">
-                <Play className="w-5 h-5" />
-                Talk to Sales
-              </Button>
+              <Link href="/contact">
+                <Button size="lg" className="gap-2 bg-[#0D5C94]" style={{cursor:"pointer"}}>
+                  Book Free Strategy Call
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button variant="outline" size="lg" className="gap-2 text-[#5E6160] px-18 lg:px-6" style={{cursor:'pointer'}}>
+                  <Play className="w-5 h-5" />
+                  Talk to Sales
+                </Button>
+              </Link>
             </div>
 
             <div className="flex items-center gap-2 text-sm text-muted-foreground justify-center lg:justify-start">

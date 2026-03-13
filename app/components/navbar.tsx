@@ -3,6 +3,7 @@ import { Button } from "@/app/components/ui/button";
 import { Menu, X, Send } from "lucide-react";
 import dcLogo from "@/app/assets/dcLogo.svg";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -26,24 +27,26 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <div className="flex items-center gap-8">
-            <a href="#services" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+            <Link href="/services" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
               Services
-            </a>
-            <a href="#about" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-              About
-            </a>
-            <a href="#success-stories" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+            </Link>
+            <Link href="/about" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+              About Us
+            </Link>
+            <Link href="/success" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
               Success Stories
-            </a>
+            </Link>
             <a href="#blog" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
               Blogs
             </a>
           </div>
 
           {/* CTA Button */}
-          <Button className="h-[36px] px-4 rounded-[6px] bg-[#0D5C94] text-white flex items-center gap-2 shadow-[0_4px_20px_-2px_rgba(13,92,148,0.08)] hover:bg-[#0B4F7F] transition-colors">
-            Let's Connect
-          </Button>
+          <Link href="/contact">
+            <Button className="h-[36px] px-4 rounded-[6px] bg-[#0D5C94] text-white flex items-center gap-2 shadow-[0_4px_20px_-2px_rgba(13,92,148,0.08)] hover:bg-[#0B4F7F] transition-colors" style={{cursor: 'pointer'}}>
+              Let's Connect
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Layout */}
@@ -68,9 +71,11 @@ const Navbar = () => {
           </div>
 
           {/* Send Button */}
-          <Button className="h-[40px] w-[40px] p-0 rounded-full bg-[#0D5C94] text-white flex items-center justify-center shadow-[0_4px_20px_-2px_rgba(13,92,148,0.08)] hover:bg-[#0B4F7F] transition-colors">
-            <Send className="w-5 h-5" />
-          </Button>
+          <Link href="/contact">
+            <Button className="h-[40px] w-[40px] p-0 rounded-full bg-[#0D5C94] text-white flex items-center justify-center shadow-[0_4px_20px_-2px_rgba(13,92,148,0.08)] hover:bg-[#0B4F7F] transition-colors">
+              <Send className="w-5 h-5" />
+            </Button>
+          </Link>
         </div>
 
         </div>
@@ -100,12 +105,12 @@ const Navbar = () => {
             <a href="#home" className="block px-4 py-3 mb-2 text-sm font-medium text-primary bg-[#0D5C94]/10 rounded-lg" onClick={() => setIsSidebarOpen(false)}>
               Home
             </a>
-            <a href="#services" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
+            <Link href="/services" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
               Services
-            </a>
-            <a href="#about" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
-              About
-            </a>
+            </Link>
+            <Link href="/about" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
+              About Us
+            </Link>
             <a href="#success-stories" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
               Success Stories
             </a>
