@@ -1,0 +1,41 @@
+import Navbar from "@/app/components/navbar";
+import Footer from "@/app/components/Footer";
+import HeroBanner from "./HeroBanner";
+import OurStory from "./OurStory";
+import OurApproach from "./OurApproach";
+import WhatWeOffer from "./WhatWeOffer";
+import OurClients from "./OurClients";
+import FoundersStory from "./FoundersStory";
+import OurTeam from "./OurTeam";
+import CTASection from "./CTASection";
+import Hero from "../assets/Hero.svg";
+
+const About = () => {
+  console.log("Hero import:", Hero); // Debug log
+  
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <HeroBanner 
+        heroImage={Hero}
+        breadcrumbItems={[
+          { label: "Home", href: "/" },
+          { label: "About" }
+        ]}
+        title="About DecentCare"
+        description="DecentCare is an AI-powered healthcare technology platform built to help hospitals, clinics, and medical practitioners attract more patients, manage care journeys, and grow sustainably."
+        highlightedText="We combine AI-driven patient acquisition, Digital Twin technology, and intelligent care journey automation into a single, integrated platform, purpose-built for the unique demands of healthcare providers. From the first patient touchpoint to long-term retention, DecentCare supports every stage of the journey with precision, empathy, and measurable results."
+      />
+      <OurStory />
+      <OurApproach />
+      <WhatWeOffer />
+      <OurClients />
+      <FoundersStory />
+      <OurTeam />
+      <CTASection />
+      <Footer />
+    </div>
+  );
+};
+
+export default About;
