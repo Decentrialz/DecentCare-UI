@@ -6,6 +6,7 @@ import { Search, ListFilterPlus } from "lucide-react";
 import { useState, useEffect } from "react";
 import blogHeroImage from "@/app/assets/blog-hero.png";
 import { Button } from "@/app/components/ui/button";
+import Breadcrumb from "@/app/components/Breadcrumb";
 
 const SECTION_PADDING = "px-4 md:px-8 lg:px-16 xl:px-20";
 const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
@@ -13,9 +14,10 @@ const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
 interface BlogHeroProps {
   defaultQuery?: string;
   showFilterButton?: boolean;
+  breadcrumbItems?: { label: string; href?: string }[];
 }
 
-export default function BlogHero({ defaultQuery = "", showFilterButton = false }: BlogHeroProps) {
+export default function BlogHero({ defaultQuery = "", showFilterButton = false, breadcrumbItems = [] }: BlogHeroProps) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState(defaultQuery);
   const [showFilter, setShowFilter] = useState(false);
@@ -70,6 +72,10 @@ export default function BlogHero({ defaultQuery = "", showFilterButton = false }
           sizes="100vw"
         />
       </div>
+
+      <div className="absolute top-10 left-10 md:left-36 z-20">
+          <Breadcrumb items={breadcrumbItems} />
+        </div>
       {/* Gradient: darker overlay at top → transparent → solid white at bottom for content */}
       <div
         className="absolute inset-0 pointer-events-none"

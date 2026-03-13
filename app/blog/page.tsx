@@ -12,7 +12,10 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <BlogHero />
+      <BlogHero breadcrumbItems={[
+        { label: "Home", href: "/" },
+        { label: "Blogs Index", href: "/blog" }
+      ]} />
       <LatestBlogs />
       <AllArticles />
       <Footer />

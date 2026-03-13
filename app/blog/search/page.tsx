@@ -76,7 +76,10 @@ function BlogSearchContent() {
 
   return (
     <>
-      <BlogHero defaultQuery={q} showFilterButton />
+      <BlogHero defaultQuery={q} showFilterButton breadcrumbItems={[
+        { label: "Home", href: "/" },
+        { label: "Search Blogs" }
+      ]}/>
 
       {/* Search Results */}
       <section className="py-16 md:py-20 lg:py-25">

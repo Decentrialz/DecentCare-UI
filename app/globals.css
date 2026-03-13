@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
+  
   --color-primary: hsl(191 78% 20%);
   --color-primary-foreground: hsl(0 0% 100%);
   --color-secondary: hsl(190 25% 96%);
@@ -98,6 +100,12 @@ All colors MUST be HSL.
     /* Green palette (HSL values for opacity modifiers) */
     --primary-green: 175 84% 31%;
     --secondary-green: 175 84% 32%;
+
+    /* Full color values in :root (so gradients and custom utilities resolve) */
+    --color-primary-blue: hsl(var(--primary-blue));
+    --color-primary-blue-foreground: hsl(var(--primary-blue-foreground));
+    --color-secondary-green: hsl(var(--secondary-green));
+    --color-primary-green: hsl(var(--primary-green));
 
     /* Gray (HSL values for opacity modifiers) */
     --gray-text: 180 2% 24%;
@@ -207,6 +215,20 @@ All colors MUST be HSL.
 
 /* Custom utility classes */
 @layer utilities {
+  /* Ensure theme colors work when Tailwind theme layer doesn't apply */
+  .text-primary-blue {
+    color: hsl(var(--primary-blue));
+  }
+  .text-secondary-green {
+    color: hsl(var(--secondary-green));
+  }
+  .bg-primary-blue {
+    background-color: hsl(var(--primary-blue));
+  }
+  .bg-secondary-green {
+    background-color: hsl(var(--secondary-green));
+  }
+
   .text-gradient {
     background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
     -webkit-background-clip: text;
@@ -280,6 +302,7 @@ All colors MUST be HSL.
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
   }
 }
 
