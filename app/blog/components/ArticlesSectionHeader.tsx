@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/app/components/lib/utils";
+import SectionTitleWithCount from "./SectionTitleWithCount";
 
 interface ArticlesSectionHeaderProps {
   title: string;
@@ -59,23 +60,7 @@ export default function ArticlesSectionHeader({
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <div className="flex items-center gap-3">
-        <div
-          className="w-1.5 rounded-full shrink-0 self-stretch"
-          style={{
-            background:
-              "linear-gradient(0deg, var(--color-secondary-green) 0%, var(--color-primary-blue) 96.48%)",
-          }}
-        />
-        <div>
-          <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
-            {title}
-            <span className="text-base text-gray-icon font-normal">
-              ( {countLabel} )
-            </span>
-          </h2>
-        </div>
-      </div>
+      <SectionTitleWithCount title={title} countLabel={countLabel} />
       <div className="flex flex-wrap gap-3">
         {showCategoryFilter && (
           <div className="relative" ref={categoryRef}>

@@ -43,8 +43,8 @@
   --color-royal-blue: hsl(217 91% 60%);
 
   /* Green palette */
-  --color-primary-green: hsl(175 84% 31%);
-  --color-secondary-green: hsl(175 84% 32%);
+  --color-primary-green: hsl(175 84% 31%, 1);
+  --color-secondary-green: hsl(175 84% 32%,1);
 
   /* Gray (text, icon, background & border) */
   --color-gray-text: hsl(180 2% 24%);
@@ -109,6 +109,26 @@ All colors MUST be HSL.
 
     /* Heading gradient (h1) - teal to blue */
     --heading-gradient: linear-gradient(87.57deg, var(--color-primary-green) -1.41%, var(--color-primary-blue) 87.28%);
+
+    /* Heading gradient 1 / gradient 1 - secondary green to primary blue */
+    --gradient-1: linear-gradient(307.84deg, var(--color-secondary-green) -4.55%, var(--color-primary-blue) 100.49%);
+
+    /* Heading gradient 2 (tag / chips) - secondary green to primary blue */
+    --heading-gradient-2: linear-gradient(
+      297.89deg,
+      var(--color-secondary-green) 4.04%,
+      var(--color-primary-blue) 55.53%
+    );
+
+    /* Vertical gradient - secondary green to primary blue (section accent bar, etc.) */
+    --gradient-2: linear-gradient(0deg, var(--color-secondary-green) 0%, var(--color-primary-blue) 96.48%);
+
+    /* Diagonal gradient 4 (cards, chips) - secondary green to primary blue */
+    --gradient-4: linear-gradient(
+      133.76deg,
+      var(--color-secondary-green) 4.93%,
+      var(--color-primary-blue) 98.27%
+    );
 
     /* Custom tokens for DecentCare */
     --teal-50: 190 50% 97%;
@@ -200,6 +220,20 @@ All colors MUST be HSL.
     background-clip: text;
     color: transparent;
   }
+
+  .text-gradient-heading-1 {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .text-gradient-heading-2 {
+    background: var(--heading-gradient-2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
   
   .hero-gradient {
     background: var(--hero-gradient);
@@ -239,11 +273,16 @@ All colors MUST be HSL.
     border-color: hsl(var(--border));
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
   }
 }
+
 
 @media (max-width: 1023px) {
   html, body {
@@ -252,4 +291,28 @@ All colors MUST be HSL.
     overflow-x: hidden !important;
     position: relative;
   }
+}
+
+/* Move pagination below the cards */
+.recommended-blogs-swiper .swiper-pagination {
+  position: relative !important;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* pagination bullet */
+.recommended-blogs-bullet {
+  width: 22px;
+  height: 4px;
+  background: #d1d5db;
+  border-radius: 999px;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+/* active bullet */
+.recommended-blogs-bullet-active {
+  background: hsl(var(--primary-blue))
 }

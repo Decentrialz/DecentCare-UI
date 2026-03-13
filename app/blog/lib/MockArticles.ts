@@ -305,3 +305,111 @@ export const MOCK_ARTICLES: BlogArticle[] = [
     href: "#",
   },
 ];
+
+/** Get article by slug (id). Use for /blog/[slug] detail page. */
+export function getArticleBySlug(slug: string): BlogArticle | undefined {
+  return MOCK_ARTICLES.find((a) => a.id === slug);
+}
+
+/** Get recommended articles excluding the current one. */
+export function getRecommendedArticles(excludeId: string, limit = 3): BlogArticle[] {
+  return MOCK_ARTICLES.filter((a) => a.id !== excludeId)
+    .slice(0, limit + 10)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, limit);
+}
+
+export interface TocItem {
+  id: string;
+  label: string;
+}
+
+export interface BlogArticleDetail extends BlogArticle {
+  tag?: string;
+  toc: TocItem[];
+  bodySections: { id: string; heading?: string; content: string; isCallout?: boolean }[];
+}
+
+/** Default TOC and body for any article when no custom detail exists. */
+function getDefaultDetail(article: BlogArticle): BlogArticleDetail {
+  const toc: TocItem[] = [
+    { id: "section-1", label: `${article.title.split(" ").slice(0, 4).join(" ")}...` },
+    {
+      id: "callout-1",
+       label: "Recommendation"
+    },
+    { id: "section-2", label: "Key insights and takeaways" },
+    { id: "section-3", label: "Operational best practices" },
+    {
+      id: "callout-2",
+      label: "Success story"
+    },
+    { id: "section-4", label: "Examples & scenarios" },
+    { id: "section-5", label: "Summary & next steps" },
+  ];
+
+  const bodySections = [
+    {
+      id: "section-1",
+      heading: article.title.toUpperCase(),
+      content:
+        `${article.description} ` +
+        "In this article, we break the topic down into practical sections so care teams, operations leaders, and business owners can understand what to do next. " +
+        "The goal is not only to describe the challenge, but to make it clear how a modern care platform like DecentCare can support day‑to‑day work.",
+    },
+    {
+      id: "callout-1",
+      content:
+        "If you are reading this on a busy clinic day, focus on one or two actions from each section. Small, consistent improvements compound faster than one‑time, large initiatives.",
+      isCallout: true,
+    },
+    {
+      id: "section-2",
+      heading: "KEY INSIGHTS AND TAKEAWAYS",
+      content:
+        "Healthcare organizations that align strategy with operational capacity see better patient satisfaction and more predictable growth. " +
+        "Teams that invest in clear workflows, shared visibility on patient journeys, and simple automations are able to respond faster without burning out frontline staff. " +
+        "When data from marketing, enquiries, appointments, and follow‑ups lives in one place, leaders can spot bottlenecks, test changes, and measure the impact of every improvement.",
+    },
+    {
+      id: "section-3",
+      heading: "OPERATIONAL BEST PRACTICES",
+      content:
+        "Start by mapping the steps your patients or internal users actually take today. Capture where information is lost, where hand‑offs are unclear, and where work depends on a single person. " +
+        "Introduce lightweight checklists, templates, and alerts so that the system carries some of the responsibility instead of individuals needing to remember every detail. " +
+        "Finally, review these flows regularly with your team so they can suggest changes based on real‑world experience.",
+    },
+    {
+      id: "callout-2",
+      content:
+        "The most successful teams do not try to digitize everything at once. They pick one journey—such as enquiries to first appointment—and make it feel effortless before expanding to others.",
+      isCallout: true,
+    },
+    {
+      id: "section-4",
+      heading: "EXAMPLES & REAL‑WORLD SCENARIOS",
+      content:
+        "Consider a multi‑location hospital that receives hundreds of enquiries a week. Without a clear system, follow‑ups are manual, and many high‑intent patients never receive a response. " +
+        "By centralizing enquiries, assigning clear ownership, and using simple reminders, the team can respond faster and track conversion all the way to procedure or consultation. " +
+        "The same thinking applies to post‑procedure follow‑ups, chronic care programs, or marketing campaigns aimed at specific service lines.",
+    },
+    {
+      id: "section-5",
+      heading: "SUMMARY & NEXT STEPS",
+      content:
+        "In summary, focusing on both clinical quality and operational consistency helps build sustainable healthcare growth. " +
+        "Choose one journey, involve the people who run it every day, and implement a small set of improvements you can measure. " +
+        "As your team gains confidence, expand the same discipline to other journeys so that great care becomes the default experience for every patient.",
+      isCallout: true,
+    },
+  ];
+
+  return { ...article, tag: article.category, toc, bodySections };
+}
+
+/** Get full detail for the blog post (TOC, body, callouts). */
+export function getArticleDetailBySlug(slug: string): BlogArticleDetail | undefined {
+  const article = getArticleBySlug(slug);
+  if (!article) return undefined;
+  return getDefaultDetail(article);
+}

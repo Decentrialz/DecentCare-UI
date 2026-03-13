@@ -8,9 +8,11 @@ interface ArticleCardProps {
 }
 
 export default function ArticleCard({ article }: ArticleCardProps) {
+  const href = `/blog/${article.id}`;
   return (
+    <Link href={href} className="block h-full">
     <article
-      className="group rounded-xl overflow-hidden cursor-pointer border border-border bg-card shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-shadow flex flex-col"
+      className="group rounded-xl overflow-hidden cursor-pointer border border-border bg-card shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-shadow flex flex-col h-full"
     >
       <div className="relative aspect-[2/1] bg-muted overflow-hidden">
         <Image
@@ -56,14 +58,12 @@ export default function ArticleCard({ article }: ArticleCardProps) {
             </div>
             <span className="text-sm text-gray-text font-medium">{article.author}</span>
           </div>
-          <Link
-            href={article.href}
-            className="text-sm font-medium text-primary-blue shrink-0 flex items-center gap-1"
-          >
+          <span className="text-sm font-medium text-primary-blue shrink-0 flex items-center gap-1">
             Read more <ArrowUpRight className="w-4 h-4" />
-          </Link>
+          </span>
         </div>
       </div>
     </article>
+    </Link>
   );
 }
