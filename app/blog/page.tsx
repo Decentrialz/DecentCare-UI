@@ -14,7 +14,7 @@ export default function BlogPage() {
       <Navbar />
       <BlogHero breadcrumbItems={[
         { label: "Home", href: "/" },
-        { label: "Blogs Index", href: "/blog" }
+        { label: "Blogs Index" }
       ]} />
       <LatestBlogs />
       <AllArticles />

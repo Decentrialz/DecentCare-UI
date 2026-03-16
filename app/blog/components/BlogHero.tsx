@@ -75,7 +75,7 @@ export default function BlogHero({ defaultQuery = "", showFilterButton = false, 
 
       <div className="absolute top-10 left-10 md:left-36 z-20">
           <Breadcrumb items={breadcrumbItems} />
-        </div>
+      </div>
       {/* Gradient: darker overlay at top → transparent → solid white at bottom for content */}
       <div
         className="absolute inset-0 pointer-events-none"

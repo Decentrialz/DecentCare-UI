@@ -4,7 +4,7 @@ import type { BlogArticle } from "@/app/blog/lib/MockArticles";
 import ArticleCard from "./ArticleCard";
 import SectionTitleWithCount from "./SectionTitleWithCount";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Mousewheel } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -28,11 +28,18 @@ export default function RecommendedBlogsSection({
       </div>
 
       <Swiper
-        modules={[Pagination]}
+        modules={[Pagination, Mousewheel]}
         spaceBetween={24}
         slidesPerView={1}
         slidesPerGroup={1}
         loop={true}
+        mousewheel={{
+          forceToAxis: true,
+          sensitivity: 0.8,
+          thresholdDelta: 50,
+          thresholdTime: 500,
+          releaseOnEdges: true
+        }}
         breakpoints={{
           768: {
             slidesPerView: 2,

@@ -8,6 +8,7 @@ import {
 import BlogBody from "@/app/blog/components/BlogBody";
 import RecommendedBlogsSection from "@/app/blog/components/RecommendedBlogsSection";
 import { BlogDetailHero } from "../components";
+import Breadcrumb from "@/app/components/Breadcrumb";
 
 const SECTION_PADDING = "px-4 md:px-8 lg:px-16 xl:px-20";
 const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
@@ -28,7 +29,10 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
       <Navbar />
       <main className="pt-24 pb-16 md:pb-20">
         <div className={SECTION_PADDING}>
-          <div className={CONTENT_MAX}>
+          <div className={`${CONTENT_MAX}`}>
+            <div className="mb-6">
+              <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Blogs" }]} breadCrumbClass="bg-secondary-green/4"/>
+            </div>
             <BlogDetailHero article={article} />
             <div className="mt-10 md:mt-14">
               <BlogBody article={article} />

@@ -17,9 +17,9 @@ export default function SectionTitleWithCount({
         aria-hidden
       />
       <div>
-        <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold flex items-center gap-2">
           {title}
-          <span className="text-base text-gray-icon font-normal">
+          <span className="text-sm md:text-base text-gray-icon font-normal">
             ( {countLabel} )
           </span>
         </h2>
