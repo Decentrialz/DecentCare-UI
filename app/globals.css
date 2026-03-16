@@ -27,6 +27,32 @@
   --color-teal-700: hsl(191 78% 20%);
   --color-teal-800: hsl(191 80% 15%);
   --color-teal-900: hsl(191 85% 10%);
+
+  /* Blog page */
+  --color-blog-load-more-bg: hsl(190 45% 94%);
+  --color-blog-category-orange: hsl(25 95% 53%);
+  --color-blog-category-purple: hsl(270 60% 55%);
+
+  /* Search bar (Blog hero) */
+  --color-search-border: hsl(208 45% 89%);
+
+  /* Primary blue (general button color) */
+  --color-primary-blue: hsl(205 84% 32%);
+  --color-primary-blue-foreground: hsl(0 0% 100%);
+
+  /* Custom palette */
+  --color-deep-teal: hsl(173 58% 39%);
+  --color-royal-blue: hsl(217 91% 60%);
+
+  /* Green palette */
+  --color-primary-green: hsl(175 84% 31%, 1);
+  --color-secondary-green: hsl(175 84% 32%,1);
+
+  /* Gray (text, icon, background & border) */
+  --color-gray-text: hsl(180 2% 24%);
+  --color-gray-icon: hsl(160 2% 37%);
+  --color-gray-background: hsl(180 10% 94%);
+  --color-gray-border: hsl(240 2% 92%);
 }
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
@@ -63,7 +89,54 @@ All colors MUST be HSL.
     --input: 190 30% 90%;
     --ring: 191 78% 20%;
 
+    /* Primary blue (HSL values for opacity modifiers) */
+    --primary-blue: 205 84% 32%;
+    --primary-blue-foreground: 0 0% 100%;
+
+    /* Custom palette (HSL values for opacity modifiers) */
+    --deep-teal: 173 58% 39%;
+    --royal-blue: 217 91% 60%;
+
+    /* Green palette (HSL values for opacity modifiers) */
+    --primary-green: 175 84% 31%;
+    --secondary-green: 175 84% 32%;
+
+    /* Full color values in :root (so gradients and custom utilities resolve) */
+    --color-primary-blue: hsl(var(--primary-blue));
+    --color-primary-blue-foreground: hsl(var(--primary-blue-foreground));
+    --color-secondary-green: hsl(var(--secondary-green));
+    --color-primary-green: hsl(var(--primary-green));
+
+    /* Gray (HSL values for opacity modifiers) */
+    --gray-text: 180 2% 24%;
+    --gray-icon: 160 2% 37%;
+    --gray-background: 180 10% 94%;
+    --gray-border: 240 2% 92%;
+
     --radius: 0.75rem;
+
+    /* Heading gradient (h1) - teal to blue */
+    --heading-gradient: linear-gradient(87.57deg, var(--color-primary-green) -1.41%, var(--color-primary-blue) 87.28%);
+
+    /* Heading gradient 1 / gradient 1 - secondary green to primary blue */
+    --gradient-1: linear-gradient(307.84deg, var(--color-secondary-green) -4.55%, var(--color-primary-blue) 100.49%);
+
+    /* Heading gradient 2 (tag / chips) - secondary green to primary blue */
+    --heading-gradient-2: linear-gradient(
+      297.89deg,
+      var(--color-secondary-green) 4.04%,
+      var(--color-primary-blue) 55.53%
+    );
+
+    /* Vertical gradient - secondary green to primary blue (section accent bar, etc.) */
+    --gradient-2: linear-gradient(0deg, var(--color-secondary-green) 0%, var(--color-primary-blue) 96.48%);
+
+    /* Diagonal gradient 4 (cards, chips) - secondary green to primary blue */
+    --gradient-4: linear-gradient(
+      133.76deg,
+      var(--color-secondary-green) 4.93%,
+      var(--color-primary-blue) 98.27%
+    );
 
     /* Custom tokens for DecentCare */
     --teal-50: 190 50% 97%;
@@ -74,6 +147,12 @@ All colors MUST be HSL.
     --teal-700: 191 78% 20%;
     --teal-800: 191 80% 15%;
     --teal-900: 191 85% 10%;
+
+    /* Blog page */
+    --blog-hero-overlay: 191 78% 20% / 0.75;
+    --blog-load-more-bg: 190 45% 94%;
+    --blog-category-orange: 25 95% 53%;
+    --blog-category-purple: 270 60% 55%;
     
     --cyan-400: 174 62% 55%;
     --cyan-500: 174 62% 47%;
@@ -136,8 +215,43 @@ All colors MUST be HSL.
 
 /* Custom utility classes */
 @layer utilities {
+  /* Ensure theme colors work when Tailwind theme layer doesn't apply */
+  .text-primary-blue {
+    color: hsl(var(--primary-blue));
+  }
+  .text-secondary-green {
+    color: hsl(var(--secondary-green));
+  }
+  .bg-primary-blue {
+    background-color: hsl(var(--primary-blue));
+  }
+  .bg-secondary-green {
+    background-color: hsl(var(--secondary-green));
+  }
+
   .text-gradient {
     background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-heading {
+    background: var(--heading-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-heading-1 {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .text-gradient-heading-2 {
+    background: var(--heading-gradient-2);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -181,12 +295,17 @@ All colors MUST be HSL.
     border-color: hsl(var(--border));
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     font-family: var(--font-plus-jakarta-sans), sans-serif;
   }
 }
+
 
 @media (max-width: 1023px) {
   html, body {
@@ -195,4 +314,28 @@ All colors MUST be HSL.
     overflow-x: hidden !important;
     position: relative;
   }
+}
+
+/* Move pagination below the cards */
+.recommended-blogs-swiper .swiper-pagination {
+  position: relative !important;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* pagination bullet */
+.recommended-blogs-bullet {
+  width: 22px;
+  height: 4px;
+  background: #d1d5db;
+  border-radius: 999px;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+/* active bullet */
+.recommended-blogs-bullet-active {
+  background: hsl(var(--primary-blue))
 }
