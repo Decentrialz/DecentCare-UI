@@ -7,6 +7,74 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/app/components/ui/checkbox";
 import { Mail, Phone, MapPin, Send, Clock } from "lucide-react";
 
+// Reusable form fields component
+export const ContactFormFields = ({ heading, subheading }: { heading?: string; subheading?: string }) => (
+  <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+    {(heading || subheading) && (
+      <div className="mb-4 text-center">
+        {heading && <h2 className="text-lg font-bold text-[#168191] mb-1">{heading}</h2>}
+        {subheading && <p className="text-xs text-[#737B8C]">{subheading}</p>}
+      </div>
+    )}
+    <div className="grid sm:grid-cols-2 gap-4">
+      <div className="space-y-2">
+        <Label className="text-xs text-[#141516]">Full name<span className="text-red-500">*</span></Label>
+        <Input placeholder="Enter your first name" required />
+      </div>
+      <div className="space-y-2">
+        <Label className="text-xs text-[#141516]">Email<span className="text-red-500">*</span></Label>
+        <Input type="email" placeholder="your@test.com" required />
+      </div>
+    </div>
+    <div className="grid sm:grid-cols-2 gap-4">
+      <div className="space-y-2">
+        <Label className="text-xs text-[#141516]">Phone<span className="text-red-500">*</span></Label>
+        <Input type="tel" placeholder="+1 000 000 0000" required />
+      </div>
+      <div className="space-y-2">
+        <Label className="text-xs text-[#141516]">Organisation<span className="text-red-500">*</span></Label>
+        <Input placeholder="Your organisation" />
+      </div>
+    </div>
+    <div className="grid sm:grid-cols-2 gap-4">
+      <div className="space-y-2">
+        <Label className="text-xs text-[#141516]">Your role</Label>
+        <Input placeholder="Enter your role/designation" />
+      </div>
+      <div className="space-y-2">
+        <Label className="text-xs text-[#141516]">Organisation Type</Label>
+        <Select>
+          <SelectTrigger>
+            <SelectValue placeholder="Select" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="demo">Hospital</SelectItem>
+            <SelectItem value="general">Clinic</SelectItem>
+            <SelectItem value="support">Doctor</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+    <div className="space-y-2">
+      <Label className="text-xs" >Anything you'd like us to know?</Label>
+      <Textarea placeholder="Tell us more..." rows={4} />
+    </div>
+    <div className="flex items-start gap-2">
+      <Checkbox id="consent" className="mt-1" />
+      <label htmlFor="consent" className="text-xs text-[#141516] leading-relaxed">
+        I agree to receive SMS messages from DecentCare related to sales inquiries, demo scheduling, follow-ups, and product information. Message frequency may vary. Message and data rates may apply. Reply STOP to Cancel or HELP for assistance. I also agree to the <span className="text-[#0D9488] cursor-pointer">Terms of Service</span> and <span className="text-[#0D9488] cursor-pointer">Privacy Policy</span>.
+      </label>
+    </div>
+    <Button className="w-full gap-2 bg-[#0D5C94]" size="lg" style={{ boxShadow: '0 4px 20px -2px rgba(13,92,148,0.08)' }}>
+      <Send className="w-4 h-4" />
+      Send Message
+    </Button>
+    <p className="text-xs text-[#989BA0] text-center">
+      We typically respond within 1-2 business days.
+    </p>
+  </form>
+);
+
 const ContactForm = () => (
   <section className="py-20">
     <div className="container mx-auto px-4 lg:px-8">
@@ -22,64 +90,7 @@ const ContactForm = () => (
             boxShadow: '0 4px 20px 0 rgba(13,92,148,0.1)'
           }}
         >
-          <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs text-[#141516]">Full name<span className="text-red-500">*</span></Label>
-                <Input placeholder="Enter your first name" required />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-xs text-[#141516]">Work Email<span className="text-red-500">*</span></Label>
-                <Input type="email" placeholder="your@test.com" required />
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs text-[#141516]">Phone Number<span className="text-red-500">*</span></Label>
-                <Input type="tel" placeholder="+1 000 000 0000" required />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-xs text-[#141516]">Organization / Clinic / Hospital Name</Label>
-                <Input placeholder="Your organization" />
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs text-[#141516]">Role / Designation</Label>
-                <Input placeholder="Enter your role/designation" />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-xs text-[#141516]">How can we help you?<span className="text-red-500">*</span></Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="demo">Request a Demo</SelectItem>
-                    <SelectItem value="general">General Question</SelectItem>
-                    <SelectItem value="support">Software Support</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Label className="text-xs" >Message</Label>
-              <Textarea placeholder="Tell us more..." rows={4} />
-            </div>
-            <div className="flex items-start gap-2">
-              <Checkbox id="consent" className="mt-1" />
-              <label htmlFor="consent" className="text-xs text-[#141516] leading-relaxed">
-                I agree to receive SMS messages from DecentCare related to sales inquiries, demo scheduling, follow-ups, and product information. Message frequency may vary. Message and data rates may apply. Reply STOP to Cancel or HELP for assistance. I also agree to the Terms of Service and Privacy Policy.
-              </label>
-            </div>
-            <Button className="w-full gap-2 bg-[#0D5C94]" size="lg" style={{ boxShadow: '0 4px 20px -2px rgba(13,92,148,0.08)' }}>
-              <Send className="w-4 h-4" />
-              Send Message
-            </Button>
-            <p className="text-xs text-[#989BA0] text-center">
-              We typically respond within 1 business day.
-            </p>
-          </form>
+          <ContactFormFields />
         </div>
         {/* Contact Info */}
         <div className="space-y-6">

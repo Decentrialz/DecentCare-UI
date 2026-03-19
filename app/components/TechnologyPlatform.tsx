@@ -42,7 +42,7 @@ const layers = [
 
 const TechnologyPlatform = () => {
   return (
-    <section className="py-12 lg:py-20 relative" style={{ backgroundColor: 'rgba(241, 245, 249, 0.3)' }}>
+    <section id="technology-stack" className="py-12 lg:py-20 relative" style={{ backgroundColor: 'rgba(241, 245, 249, 0.3)' }}>
 
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
         <div className="w-full mx-auto lg:max-w-7xl">

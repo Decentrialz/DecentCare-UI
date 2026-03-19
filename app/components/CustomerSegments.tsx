@@ -61,7 +61,7 @@ const CustomerSegments = () => {
   };
 
   return (
-    <section className="py-12 lg:py-22 bg-[#FBFCFD]">
+    <section id="who-we-serve" className="py-12 lg:py-22 bg-[#FBFCFD]">
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
         <div className="w-full mx-auto lg:max-w-7xl">
         {/* Section Header */}
