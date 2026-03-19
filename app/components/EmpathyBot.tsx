@@ -2,7 +2,7 @@ import { Bot, Sparkles, Send, BotIcon } from "lucide-react";
 
 const EmpathyBot = () => {
   return (
-    <section className="py-08 lg:py-12 bg-[#FFFFFF] relative">
+    <section id="empathy-bot" className="py-08 lg:py-12 bg-[#FFFFFF] relative">
       
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
         <div className="w-full mx-auto lg:max-w-7xl">

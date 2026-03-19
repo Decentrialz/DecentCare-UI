@@ -1,6 +1,5 @@
 
 import Navbar from "@/app/components/navbar";
-import Breadcrumb from "@/app/components/Breadcrumb";
 import Footer from "@/app/components/Footer";
 import HeroSuccessSection from "./HeroSuccessSection";
 import VideoTestimonialsSection from "./VideoTestimonialsSection";
@@ -57,40 +56,40 @@ const videoTestimonials = [
 
 const caseStudies = [
   {
-    name: "Dr. Meera Patel",
-    role: "Chief Medical Officer",
-    org: "Sunrise Multi-Specialty Hospital",
-    type: "200+ Bed Hospital",
-    quote: '"DecentCare transformed how we manage patient care. It\'s not just software—it\'s a new way of working."',
-    challenge: "Fragmented patient data across departments led to missed follow-ups and poor care coordination. Staff relied on manual registers and WhatsApp, causing delays and confusion.",
-    solution: "Implemented DecentCare's care journey tracking across all departments with unified communication channels and automated task assignments for the care team.",
-    outcome: "Complete visibility into patient journeys from admission to discharge. Care coordinators now proactively manage follow-ups, reducing patient drop-offs significantly.",
-    stat: "65%",
-    statLabel: "Reduction in missed follow-ups",
+    name: "Dr. Yuvrajsingh Gehlot",
+    role: "Laparoscopic Surgeon, General Surgeon & Proctologist",
+    org: "GutCare Clinics, Bangalore, Karnataka",
+    type: "Clinic",
+    quote: '"The post-op follow-up module changed how our clinical team works. Day-one discharge tasks are triggered automatically. We stopped missing calls we didn\'t know we needed to make."',
+    challenge: "Despite clinical excellence, GutCare's specialised procedures were invisible in search. Patients found generalist hospitals first, driving low-quality inquiries and heavy referral dependency.",
+    solution: "Built a procedure-intent SEO architecture with condition-specific landing pages, local search optimisation across Bangalore, and a content calendar targeting surgical queries at every decision stage.",
+    outcome: "Organic sessions for procedure pages grew 340% in six months. Inbound inquiries became more qualified, reducing consultation time. Paid referral dependence dropped by over 40%.",
+    stat: "340%",
+    statLabel: "Growth in procedure-intent organic sessions",
   },
   {
-    name: "Dr. Arjun Reddy",
-    role: "Founder & Lead Surgeon",
-    org: "Excel Orthopedic Center",
-    type: "Surgical Center",
-    quote: '"DecentCare transformed how we manage patient care. It\'s not just software—it\'s a new way of working."',
-    challenge: "Complex pre-op and post-op workflows were managed manually. Surgery scheduling conflicts and inconsistent patient preparation were affecting outcomes.",
-    solution: "Deployed structured care stages for surgical workflows with task-driven coordination for pre-op assessments and post-op tracking.",
-    outcome: "Streamlined surgical journey with clear accountability. Post-operative follow-up completion rate increased dramatically, improving patient satisfaction.",
-    stat: "40%",
-    statLabel: "Faster surgery scheduling",
+    name: "Prof. Dr. Snigdha Gowd",
+    role: "Chairperson & CEO",
+    org: "Dr. Gowds Dental Hospital, Hyderabad, Telangana",
+    type: "Dental Hospital",
+    quote: '"Managing patient journeys across multiple dental specialties used to be chaotic. With Care Journey CRM, every appointment, follow-up, and care step is tracked automatically. Nothing falls through the cracks anymore."',
+    challenge: "Advanced specialties including implants, orthodontics, and smile design had no targeted digital strategy. Paid campaigns were running without a coordinated content foundation to support them.",
+    solution: "Designed specialty-mapped social content — procedure reels, patient education posts, and outcome stories — paired with high-intent paid campaigns and retargeting sequences per specialty.",
+    outcome: "Inquiries for implants and cosmetic dentistry grew 4x in Q1. Cost-per-lead dropped 38% with higher lead quality. Social following crossed 45,000 within six months of launch.",
+    stat: "4x",
+    statLabel: "Increase in high-value procedure inquiries",
   },
   {
-    name: "Dr. Kavitha Iyer",
-    role: "Practice Owner",
-    org: "Iyer Dental & Wellness",
-    type: "Single-Doctor Clinic",
-    quote: '"DecentCare transformed how we manage patient care. It\'s not just software—it\'s a new way of working."',
-    challenge: "As a solo practitioner, managing appointments, patient communications, and follow-ups consumed valuable clinical time. Many patients were lost due to inconsistent reminders.",
-    solution: "Adopted DecentCare's streamlined patient management with automated appointment reminders and a clear daily workflow dashboard.",
-    outcome: "Reclaimed 2+ hours daily previously spent on administrative tasks. Patient retention improved and the practice saw steady growth in new consultations.",
+    name: "Dr. Rajashekar M R",
+    role: "MBBS, MS, Founder & Chief Proctologist",
+    org: "Chirag Global Hospital, Bangalore, Karnataka",
+    type: "Hospital",
+    quote: '"Running a surgical hospital means managing complex care journeys for every patient. Care Journey CRM brought everything into one place. Our teams now coordinate faster and patients never fall through the cracks."',
+    challenge: "Managing post-surgical care across multiple teams was time-consuming and error-prone. Follow-ups were inconsistent, and coordination gaps were impacting patient recovery experience.",
+    solution: "Deployed AI-Enabled Care Journey CRM to unify care coordination across surgical and recovery teams, with automated follow-up triggers and real-time patient status visibility.",
+    outcome: "Care coordination turnaround improved 3x. Post-surgical follow-ups became consistent and timely, significantly reducing gaps between discharge and recovery check-ins.",
     stat: "3×",
-    statLabel: "Increase in patient retention",
+    statLabel: "Improvement in care coordination turnaround",
   },
 ];
 

@@ -42,7 +42,7 @@ const CaseStudiesSection = ({ caseStudies }: Props) => (
             <div className="grid lg:grid-cols-[350px_1fr] gap-0">
               <div className="text-primary-foreground p-6 flex flex-col justify-between" style={{ background: 'linear-gradient(135deg, #0D5C94 0%, #0D9488 100%)' }}>
                 <div className="flex items-center gap-3 mb-4">
-                  <Image
+                  {/* <Image
                     src={
                       cs.name.includes("Meera") ? meeraPatel :
                       cs.name.includes("Arjun") ? arjunReddy :
@@ -53,7 +53,7 @@ const CaseStudiesSection = ({ caseStudies }: Props) => (
                     width={48}
                     height={48}
                     className="w-12 h-12 rounded-full object-cover"
-                  />
+                  /> */}
                   <div>
                     <h4 className="font-semibold">{cs.name}</h4>
                     <p className="text-xs text-[#FFFFFF]/80">{cs.role}</p>
