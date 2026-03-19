@@ -19,10 +19,19 @@ const Navbar = () => {
         <div className="hidden md:flex items-center justify-between h-12 lg:h-14">
           {/* Logo */}
           <div className="flex flex-col items-center gap-1">
-            <div className="flex items-center">
-              <Image src={dcLogo} alt="DecentCare Logo" width={60} height={40} />
-            </div>
-            <span className="text-xs font-semibold text-primary">DecentCare</span>
+            <Link href="/"
+              className="flex flex-col items-center gap-1 cursor-pointer"
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+            >
+              <div className="flex items-center">
+                <Image src={dcLogo} alt="DecentCare Logo" width={60} height={40} />
+              </div>
+              <span className="text-xs font-semibold text-primary">DecentCare</span>
+            </Link>
           </div>
 
           {/* Navigation Links */}
@@ -111,9 +120,9 @@ const Navbar = () => {
             <Link href="/about" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
               About Us
             </Link>
-            <a href="#success-stories" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
+            <Link href="/success" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
               Success Stories
-            </a>
+            </Link>
             <Link href="/blog" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
               Blogs
             </Link>

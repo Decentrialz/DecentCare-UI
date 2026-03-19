@@ -3,6 +3,9 @@ import Image from "next/image";
 import lux from "@/app/assets/lux.svg";
 import vaidya from "@/app/assets/vaidya.svg";
 import gutCare from "@/app/assets/gut  care.svg";
+import gowda from "@/app/assets/Dr.Gowds.png";
+import decentrializ from "@/app/assets/DT.png";
+import chirag from "@/app/assets/CHirag.png";
 
 const WhyTrustUsSection = () => (
   <section className="py-20 bg-background">
@@ -41,11 +44,14 @@ const WhyTrustUsSection = () => (
         </div>
         <div className="bg-[#EDF0F2]/50 rounded-2xl p-8">
           <h3 className="text-center font-semibold text-[#737B8C] mb-8 mt-4">Trusted by Healthcare Leaders</h3>
-          <div className="space-y-8 flex flex-col items-center gap-8">
+          <div className="grid grid-cols-2 gap-8 items-center justify-items-center">
             {[
               { name: "LUX HOSPITALS", image: lux },
               { name: "Praana Vaidya", image: vaidya },
               { name: "GutCare", image: gutCare },
+              { name: "Dr. Gowda", image: gowda },
+              { name: "Decentraliz", image: decentrializ },
+              { name: "Dr. Chirag", image: chirag },
             ].map((item, i) => (
               <div key={i} className="flex items-center justify-center">
                 <Image

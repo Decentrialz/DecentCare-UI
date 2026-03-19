@@ -1,5 +1,6 @@
 'use client';
 import { Button } from "@/app/components/ui/button";
+import { ContactFormFields } from "@/app/contact/ContactForm";
 import { ArrowRight, Play, Users, TrendingUp, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import HeroH1 from "@/app/assets/HeroH1.svg";
@@ -12,6 +13,18 @@ import Link from "next/link";
 
 
 const Hero = () => {
+  const [showModal, setShowModal] = useState(false);
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showModal]);
   const heroImages = [HeroH1, HeroH2, HeroH3, HeroH4];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -68,27 +81,16 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-              <Link href="/contact">
-             <Button
-  className="
-    h-[45px]
-    px-6 py-[10px]
-    rounded-lg
-    bg-[#0D5C94]
-    text-white
-    flex items-center gap-[10px]
-    shadow-[0_4px_20px_-2px_rgba(60,131,246,0.08)]
-    hover:bg-[#0B4F7F]
-    transition-all
-  "
-  style={{cursor:'pointer'}}
->
-  Get Your Growth Strategy
-  <ArrowRight className="w-5 h-5" />
-</Button>
-</Link>
+              <Button
+                className="h-[45px] px-6 py-[10px] rounded-lg bg-[#0D5C94] text-white flex items-center gap-[10px] shadow-[0_4px_20px_-2px_rgba(60,131,246,0.08)] hover:bg-[#0B4F7F] transition-all"
+                style={{ cursor: 'pointer' }}
+                onClick={() => setShowModal(true)}
+              >
+                Get Your Growth Strategy
+                <ArrowRight className="w-5 h-5" />
+              </Button>
 
-           <Button
+           {/* <Button
   variant="outline"
   className="
     h-[45px]
@@ -105,7 +107,7 @@ const Hero = () => {
 >
   <Play className="w-5 h-5" />
   Watch Demo
-</Button>
+</Button> */}
 
             </div>
 
@@ -145,12 +147,29 @@ const Hero = () => {
                 <source src="/hero-gradient-circle-vid.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-              
             </div>
           </div>
+              {/* Modal for ContactFormFields */}
+          </div>
         </div>
-
-        {/* Hero Images Carousel - Below content */}
+        {/* Modal for ContactFormFields */}
+        {showModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+            <div className="bg-white rounded-2xl shadow-xl p-6 max-w-lg w-full relative">
+              <button
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-xl font-bold"
+                onClick={() => setShowModal(false)}
+                aria-label="Close"
+              >
+                ×
+              </button>
+              <ContactFormFields 
+                heading="Book a Free Demo"
+                subheading="Submit your details and a member of the DecentCare team will be in touch."
+              />
+            </div>
+          </div>
+        )}
         <div className="relative -mt-24 lg:-mt-12">
           <div className="w-full mx-auto lg:max-w-7xl">
             <div className="max-w-4xl mx-auto relative h-[250px] lg:h-[500px]">
@@ -175,7 +194,6 @@ const Hero = () => {
             </div>
           </div>
         </div>
-      </div>
       </div>
     </section>
   );

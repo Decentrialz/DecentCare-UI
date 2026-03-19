@@ -52,29 +52,38 @@ const Service = () => {
         <div className="container mx-auto px-4 lg:px-8">
           {/* Services Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="bg-card rounded-2xl p-8 card-elevated flex flex-col border border-[#E5E7EB]"
-              >
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)' }}>
-                  <service.icon className="w-7 h-7 text-primary-foreground" />
+            {services.map((service, index) => {
+              // Make Social Media Marketing card clickable
+              const isSMM = service.title.startsWith("Social Media Marketing");
+              const cardProps = isSMM
+                ? {
+                    onClick: () => window.location.href = "/smm",
+                    className: "bg-card rounded-2xl p-8 card-elevated flex flex-col border border-[#E5E7EB] cursor-pointer hover:shadow-xl transition-shadow"
+                  }
+                : {
+                    className: "bg-card rounded-2xl p-8 card-elevated flex flex-col border border-[#E5E7EB]"
+                  };
+              return (
+                <div key={index} {...cardProps}>
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)' }}>
+                    <service.icon className="w-7 h-7 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#1F2020] mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-[#4A5565] text-sm leading-relaxed mb-6 flex-1">
+                    {service.description}
+                  </p>
+                  <a
+                    href={isSMM ? "/smm" : "#"}
+                    className="inline-flex items-center gap-2 text-sm font-bold text-[#0D5C94] hover:text-accent transition-colors"
+                  >
+                    {service.cta}
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
                 </div>
-                <h3 className="text-xl font-bold text-[#1F2020] mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-[#4A5565] text-sm leading-relaxed mb-6 flex-1">
-                  {service.description}
-                </p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-[#0D5C94] hover:text-accent transition-colors"
-                >
-                  {service.cta}
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

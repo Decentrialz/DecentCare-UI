@@ -1,3 +1,4 @@
+"use client"
 import { Phone, Mail, MapPin, Twitter, Linkedin, Facebook, Instagram } from "lucide-react";
 import dcLogo from "@/app/assets/dcLogo.svg";
 import Image from "next/image";
@@ -8,19 +9,26 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="bg-[#0F1729] text-primary-foreground pb-24 md:pb-0">
-      <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
+      <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-12">
         <div className="w-full mx-auto lg:max-w-7xl">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Brand */}
-          <div className="space-y-4 lg:min-w-[300px]">
-            <div className="flex flex-col gap-1">
-            <div className="flex items-center">
-              <Image src={dcLogo} alt="DecentCare Logo" width={60} height={40} />
-            </div>
-            <span className="text-xs font-semibold text-[#FFFFFF]">Decent<span className="text-accent">Care</span></span>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 lg:gap-6 xl:gap-8 mb-12">
+            {/* Brand */}
+            <div className="space-y-4 md:col-span-2 lg:col-span-2 xl:col-span-1 max-w-md lg:max-w-none">
+            <Link href="/"
+              className="flex flex-col gap-1 cursor-pointer"
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+            >
+              <div className="flex items-center">
+                <Image src={dcLogo} alt="DecentCare Logo" width={60} height={40} />
+              </div>
+              <span className="text-xs font-semibold text-[#FFFFFF]">Decent<span className="text-accent">Care</span></span>
+            </Link>
             <p className="text-sm text-[#FBFCFD]/60 ">
-              DecentCare is an AI-enabled Care Journey CRM designed to help healthcare teams streamline patient journeys, appointments, and operational coordination with greater clarity and efficiency.
+             DecentCare is an AI-powered healthcare growth company. We combine our Care Journey CRM with full-stack digital services, helping clinics, hospitals, and doctors grow smarter, together.
             </p>
             {/* Social Links */}
             <div className="flex gap-4 mt-[10%]">
@@ -51,15 +59,28 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Explore */}
+          <div>
+            <h4 className="font-semibold mb-4">Explore</h4>
+            <ul className="space-y-3 text-sm text-[#FBFCFD]/60">
+              <li><Link href="/#empathy-bot" className="hover:text-primary-foreground transition-colors">Empathy Bot</Link></li>
+              <li><Link href="/#healthcare-marketing" className="hover:text-primary-foreground transition-colors">Healthcare Marketing</Link></li>
+              <li><Link href="/#digital-twin" className="hover:text-primary-foreground transition-colors">Digital Twin</Link></li>
+              <li><Link href="/#who-we-serve" className="hover:text-primary-foreground transition-colors">Who We Serve</Link></li>
+              <li><Link href="/#technology-stack" className="hover:text-primary-foreground transition-colors">Technology Stack</Link></li>
+            </ul>
+          </div>
+
           {/* Solutions */}
           <div>
             <h4 className="font-semibold mb-4">Solutions</h4>
             <ul className="space-y-3 text-sm text-[#FBFCFD]/60">
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Patient Journey Management</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Appointment & Scheduling</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Care Team Coordination</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Reports & Insights</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Digital Marketing & Growth</a></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI SEO</a></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI Social Media</a></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI Paid Advertising</a></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI-Enabled Care Journey CRM</a></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI Growth Consulting</a></li>
+              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI Web Development</a></li>
             </ul>
           </div>
 
