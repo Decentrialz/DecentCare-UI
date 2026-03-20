@@ -1,10 +1,11 @@
-
+import Link from "next/link";
 import { Activity, BarChart3, BarChart, Cpu, Sparkles, Globe, ArrowRight, ChartLine, ChartColumn, Workflow } from "lucide-react";
 
 const services = [
   {
     icon: Activity,
     title: "SEO with AI Search Intelligence",
+    href: "#",
     description:
       "Boost organic visibility and attract patients with a future-ready search strategy that blends AI-enhanced SEO with AIO (AI-driven optimisation), GEO (visibility in generative AI responses), and AEO (positioning your content as direct AI answers).",
     cta: "Boost Visibility",
@@ -12,6 +13,7 @@ const services = [
   {
     icon: ChartLine,
     title: "Social Media Marketing with AI Insights & Automation",
+    href: "#",
     description:
       "Drive engagement and loyalty with social campaigns enhanced by AI-driven audience segmentation, sentiment insight, and predictive creative optimisation, enabling personalised messaging that resonates on the platforms patients prefer.",
     cta: "Grow Engagement",
@@ -19,6 +21,7 @@ const services = [
   {
     icon: ChartColumn,
     title: "Paid Advertising with AI-Driven Optimization",
+    href: "#",
     description:
       "Maximise ROI through AI-powered bidding, conversion propensity models, and real-time budget reallocation that continuously refine campaign performance across channels based on what is most likely to convert high-value patient enquiries.",
     cta: "Drive Leads",
@@ -26,6 +29,7 @@ const services = [
   {
     icon: Workflow,
     title: "AI-Enabled Care Journey CRM",
+    href: "/services/care-journey-crm",
     description:
       "Use intelligent automation and predictive patient scoring to streamline outreach, from auto sequencing follow-ups to adjusting communication timing based on predicted appointment adherence and reducing no-shows.",
     cta: "Automate Your Workflow",
@@ -33,6 +37,7 @@ const services = [
   {
     icon: Sparkles,
     title: "Business Strategy & Growth Consulting with AI-Driven Forecasting",
+    href: "#",
     description:
       "Enhance strategic planning with AI insights that model future scenarios, from market trend forecasting and competitive mapping to operational simulations that reveal the impact of key investment decisions.",
     cta: "Book a Consultation",
@@ -40,6 +45,7 @@ const services = [
   {
     icon: Globe,
     title: "Web Development with AI-Powered Personalisation",
+    href: "#",
     description:
       "Build adaptive websites leveraging AI personalisation, conversational AI assistants, and behaviour-based journeys, tailoring content and navigation to individual patient needs, reducing friction, and accelerating appointment conversions with on-site support and symptom-guided pathways.",
     cta: "Build Your Platform",
@@ -66,13 +72,13 @@ const Service = () => {
                 <p className="text-[#4A5565] text-sm leading-relaxed mb-6 flex-1">
                   {service.description}
                 </p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-[#0D5C94] hover:text-accent transition-colors"
+                <Link
+                  href={service.href ?? "#"}
+                  className="inline-flex items-center gap-2 text-sm font-bold text-primary-blue hover:text-accent transition-colors"
                 >
                   {service.cta}
                   <ArrowRight className="w-4 h-4" />
-                </a>
+                </Link>
               </div>
             ))}
           </div>
