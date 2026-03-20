@@ -30,7 +30,17 @@ const SocialMediaMarketing = () => {
       <HowWeWorkSection />
       <ReportingSection />
       <FAQSection />
-      <CTASection />
+      <CTASection
+        heading="Get a Social Media Strategy Call"
+        description="A focused session to align your goals, channels, content direction, and enquiry flow. Then we recommend the right monthly plan."
+        buttonText="Schedule a Strategy Call"
+        cards={[
+          "What to prioritise across platforms for your services",
+          "The content formats and series to run based on patient intent",
+          "How to structure enquiries from social DMs, booking actions, front desk routing",
+          "A clear 30-60 day execution direction",
+        ]}
+      />
       <Footer />
     </div>
   );
