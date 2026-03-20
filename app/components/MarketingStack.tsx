@@ -274,7 +274,7 @@ const MarketingStack = () => {
   });
 
   return (
-    <section ref={container} className="pt-24 pb-16 lg:pt-32 lg:py-20 bg-[#FFFFFF] relative">
+    <section id="healthcare-marketing" ref={container} className="pt-24 pb-16 lg:pt-32 lg:py-20 bg-[#FFFFFF] relative">
       <div className="px-4 md:px-8 lg:px-16 xl:px-20">
         <div className="w-full mx-auto lg:max-w-7xl">
         {/* Section Header */}

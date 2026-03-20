@@ -1,6 +1,7 @@
 'use client';
 import { Button } from "@/app/components/ui/button";
 import { ArrowRight, Play, Users, TrendingUp, Sparkles } from "lucide-react";
+import { ContactFormFields } from "@/app/contact/ContactForm";
 import { useState, useEffect } from "react";
 import HeroH1 from "@/app/assets/HeroH1.svg";
 import HeroH2 from "@/app/assets/HeroH2.svg";
@@ -14,6 +15,18 @@ import Breadcrumb from "../components/Breadcrumb";
 
 
 const Hero = () => {
+    const [showModal, setShowModal] = useState(false);
+    // Prevent background scroll when modal is open
+    useEffect(() => {
+        if (showModal) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [showModal]);
     const heroImages = [HeroH1, HeroH2, HeroH3, HeroH4];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -25,6 +38,13 @@ const Hero = () => {
         return () => clearInterval(interval);
     }, [heroImages.length]);
 
+    // Scroll to VideoTestimonialsSection
+    const handleScrollToVideoTestimonials = () => {
+        const section = document.getElementById('video-testimonials');
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
     return (
         <section
             className="relative pt-36 lg:pt-48 overflow-hidden w-full"
@@ -78,43 +98,39 @@ const Hero = () => {
 
                             {/* CTA Buttons */}
                             <div className="flex flex-wrap gap-6 justify-center lg:justify-start mb-16">
-                                <Link href="/contact">
                                     <Button
-                                        className="
-    h-[45px]
-    px-6 py-[10px]
-    rounded-lg
-    bg-[#0D5C94]
-    text-white
-    flex items-center gap-[10px]
-    shadow-[0_4px_20px_-2px_rgba(60,131,246,0.08)]
-    hover:bg-[#0B4F7F]
-    transition-all
-  "
+                                        className="h-[45px] px-6 py-[10px] flex items-center gap-[10px] shadow-[0_4px_20px_-2px_rgba(60,131,246,0.08)] hover:bg-[#0B4F7F] transition-all"
                                         style={{ cursor: 'pointer' }}
+                                        onClick={() => setShowModal(true)}
                                     >
-                                       Let's Connect
+                                        Let's Connect
                                         <ArrowRight className="w-5 h-5" />
                                     </Button>
-                                </Link>
-
+                                                            {/* Modal for ContactFormFields */}
+                                                            {showModal && (
+                                                                <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+                                                                    <div className="bg-white rounded-2xl shadow-xl p-6 max-w-lg w-full relative">
+                                                                        <button
+                                                                            className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-xl font-bold"
+                                                                            onClick={() => setShowModal(false)}
+                                                                            aria-label="Close"
+                                                                        >
+                                                                            ×
+                                            </button>
+                                            <ContactFormFields
+                                                heading="Book a Free Demo"
+                                                subheading="Submit your details and a member of the DecentCare team will be in touch."
+                                            />
+                                        </div>
+                                                                </div>
+                                                            )}
                                 <Button
                                     variant="outline"
-                                    className="
-    h-[45px]
-    px-16 lg:px-6 py-[10px]
-    rounded-lg
-    bg-white
-    border
-    border-[rgba(60,131,246,0.10)]
-    flex items-center gap-[10px]
-    shadow-[0_4px_20px_-2px_rgba(60,131,246,0.08)]
-    hover:bg-[#F5FAFF]
-    transition-all
-  "
+                                    className="h-[45px] px-16 lg:px-6 py-[10px] rounded-lg bg-white border border-[rgba(60,131,246,0.10)] flex items-center gap-[10px] shadow-[0_4px_20px_-2px_rgba(60,131,246,0.08)] hover:bg-[#F5FAFF] transition-all"
+                                    onClick={handleScrollToVideoTestimonials}
                                 >
                                     <Play className="w-5 h-5" />
-                                    Watcch Success Stories
+                                    Watch Success Stories
                                 </Button>
 
                             </div>

@@ -99,6 +99,7 @@ const DigitalTwin = () => {
 
   return (
     <section 
+    id="digital-twin"
       className="py-12 lg:py-20 relative"
       style={{ background: 'linear-gradient(180deg, rgba(241, 245, 249, 0.3) 0%, rgba(251, 252, 253, 1) 100%)' }}
     >
