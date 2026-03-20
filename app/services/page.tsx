@@ -22,7 +22,7 @@ const Services = () => {
         variant="centered"
       />
       <Service />
-      <CTASection />
+      <CTASection heading="Learn More About DecentCare" description="If you are exploring ways to improve patient acquisition, care journey management, or the operational effectiveness of your healthcare practice, we would welcome the opportunity to connect." subDescription="Designed for clinics, hospitals, and healthcare teams managing real-world care workflows."/>
       <Footer />
     </div>
   );
