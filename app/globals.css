@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
-  
+
   --color-primary: hsl(191 78% 20%);
   --color-primary-foreground: hsl(0 0% 100%);
   --color-secondary: hsl(190 25% 96%);
@@ -37,7 +37,7 @@
   --color-search-border: hsl(208 45% 89%);
 
   /* Primary blue (general button color) */
-  --color-primary-blue: hsl(205 84% 32%);
+  --color-primary-blue: hsl(var(--primary-blue));
   --color-primary-blue-foreground: hsl(0 0% 100%);
 
   /* Custom palette */
@@ -46,13 +46,25 @@
 
   /* Green palette */
   --color-primary-green: hsl(175 84% 31%, 1);
-  --color-secondary-green: hsl(175 84% 32%,1);
+  --color-secondary-green: hsl(var(--secondary-green));
 
   /* Gray (text, icon, background & border) */
   --color-gray-text: hsl(180 2% 24%);
   --color-gray-icon: hsl(160 2% 37%);
   --color-gray-background: hsl(180 10% 94%);
   --color-gray-border: hsl(240 2% 92%);
+
+  /* Journey stages section background */
+  --color-journey-bg: hsl(210 20% 98%);
+
+  /* Light blue wash — #F0F7FF-ish; alt is #F1F5F9-ish (slate) so diagonal gradients read clearly */
+  --color-blue-wash: hsl(var(--blue-wash));
+  --color-blue-wash-alt: hsl(var(--blue-wash-alt));
+
+  /* Soft blue surface — e.g. timeline nodes (hsla(199, 76%, 90%, 1)) */
+  --color-soft-blue: hsl(var(--soft-blue));
+
+  --color-destructive-foreground: hsl(210 40% 98%);
 }
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
@@ -83,7 +95,7 @@ All colors MUST be HSL.
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 210 40% 98%;
 
     --border: 190 30% 90%;
     --input: 190 30% 90%;
@@ -113,6 +125,12 @@ All colors MUST be HSL.
     --gray-background: 180 10% 94%;
     --gray-border: 240 2% 92%;
 
+    /* Blue wash (full values — same as @theme; ensures var() in gradients resolves on :root) */
+    --blue-wash: hsl(214 100% 97%);
+    --blue-wash-alt: hsl(210 40% 96%);
+
+    --color-soft-blue: hsl(199 76% 90%);
+
     --radius: 0.75rem;
 
     /* Heading gradient (h1) - teal to blue */
@@ -136,6 +154,26 @@ All colors MUST be HSL.
       133.76deg,
       var(--color-secondary-green) 4.93%,
       var(--color-primary-blue) 98.27%
+    );
+
+    /* Vertical gradient - light blue wash (50%) to white */
+    --gradient-blue-wash-vertical: linear-gradient(180deg, var(--blue-wash) 50%, #FFFFFF 100%);
+
+    /* Innovation partners / testimonials — diagonal blue wash (F0F7FF → F1F5F9 via theme tokens) */
+    --gradient-innovation-partners-bg: linear-gradient(
+      134.15deg,
+      var(--blue-wash) 0%,
+      var(--blue-wash-alt) 100%
+    );
+
+    /*
+     * Soft vertical wash — secondary-green → primary-blue with alpha
+     * (equivalent spirit to: rgba(teal, 0.4) → rgba(blue, 0.15), 180deg)
+     */
+    --gradient-secondary-primary-soft-vertical: linear-gradient(
+      180deg,
+      hsl(var(--secondary-green) / 0.4) 0%,
+      hsl(var(--primary-blue) / 0.15) 100%
     );
 
     /* Custom tokens for DecentCare */
@@ -229,6 +267,11 @@ All colors MUST be HSL.
     background-color: hsl(var(--secondary-green));
   }
 
+  /* DM Serif Display (loaded in layout.tsx via next/font) */
+  .font-dm-serif-display {
+    font-family: var(--font-dm-serif-display), ui-serif, Georgia, serif;
+  }
+
   .text-gradient {
     background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
     -webkit-background-clip: text;
@@ -259,6 +302,15 @@ All colors MUST be HSL.
   
   .hero-gradient {
     background: var(--hero-gradient);
+  }
+
+  /* Avoid `bg-gradient-*` prefix — Tailwind v4 may treat it as a theme gradient utility */
+  .innovation-partners-section-bg {
+    background: var(--gradient-innovation-partners-bg);
+  }
+
+  .secondary-primary-soft-vertical-bg {
+    background: var(--gradient-secondary-primary-soft-vertical);
   }
   
   .border-dashed-teal {

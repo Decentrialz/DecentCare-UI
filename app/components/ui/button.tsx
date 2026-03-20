@@ -18,6 +18,7 @@ const buttonVariants = cva(
         accent: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-md hover:shadow-lg",
         secondaryGreen: "bg-secondary-green text-foreground hover:bg-secondary-green/90 shadow-md hover:shadow-lg",
         grayBackground: "bg-gray-background text-gray-icon border-gray-background",
+        whiteBackground: "bg-white text-gray-icon hover:bg-white/90 shadow-md hover:shadow-lg",
       },
       size: {
         default: "h-10 px-5 py-2",
