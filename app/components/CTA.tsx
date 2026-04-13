@@ -72,7 +72,7 @@ const CTA = () => {
                 <div className="text-xs lg:text-sm text-muted-foreground">Healthcare Providers</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-2xl lg:text-3xl font-bold text-accent" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>₹50Cr+</div>
+                <div className="text-2xl lg:text-3xl font-bold text-accent" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>₹100Cr+</div>
                 <div className="text-xs lg:text-sm text-muted-foreground">Revenue Generated</div>
               </div>
               <div className="text-center lg:text-left">
