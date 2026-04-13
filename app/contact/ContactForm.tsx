@@ -29,7 +29,19 @@ export const ContactFormFields = ({ heading, subheading }: { heading?: string; s
     <div className="grid sm:grid-cols-2 gap-4">
       <div className="space-y-2">
         <Label className="text-xs text-[#141516]">Phone<span className="text-red-500">*</span></Label>
-        <Input type="tel" placeholder="+1 000 000 0000" required />
+        <div className="relative">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none">
+            <svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="5.33" fill="#FF9933"/>
+              <rect y="5.33" width="24" height="5.34" fill="#FFFFFF"/>
+              <rect y="10.67" width="24" height="5.33" fill="#138808"/>
+              <circle cx="12" cy="8" r="2" fill="none" stroke="#000080" strokeWidth="0.3"/>
+              <circle cx="12" cy="8" r="2.5" fill="none" stroke="#000080" strokeWidth="0.2"/>
+            </svg>
+            <span className="text-sm text-[#141516]">+91</span>
+          </div>
+          <Input type="tel" placeholder="000 000 0000" required className="pl-20" />
+        </div>
       </div>
       <div className="space-y-2">
         <Label className="text-xs text-[#141516]">Organisation<span className="text-red-500">*</span></Label>

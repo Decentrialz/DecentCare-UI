@@ -43,7 +43,7 @@ const Comparison = () => {
       <div className="absolute rounded-full" style={{ left: '0%', top: '27%', width: '500px', height: '500px', backgroundColor: 'rgba(60, 131, 246, 0.1)', opacity: '0.7', filter: 'blur(64px)' }} />
        <div className="absolute rounded-full" style={{ right: '2%', top: '38%', width: '500px', height: '500px', backgroundColor: 'rgba(42, 157, 144, 0.1)', opacity: '0.6', filter: 'blur(64px)' }} />
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="w-full mx-auto lg:max-w-7xl">
+        <div className="w-full mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/50 backdrop-blur-xl rounded-full mb-6 border border-gray-200/50">
