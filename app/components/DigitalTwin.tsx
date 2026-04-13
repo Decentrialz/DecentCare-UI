@@ -106,7 +106,7 @@ const DigitalTwin = () => {
 
 
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="w-full mx-auto lg:max-w-7xl">
+        <div className="w-full mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/50 backdrop-blur-xl rounded-full mb-6 border border-gray-200/50">

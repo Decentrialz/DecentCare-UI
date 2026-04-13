@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#0F1729] text-primary-foreground pb-24 md:pb-0">
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-12">
-        <div className="w-full mx-auto lg:max-w-7xl">
+        <div className="w-full mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 lg:gap-6 xl:gap-8 mb-12">
             {/* Brand */}
             <div className="space-y-4 md:col-span-2 lg:col-span-2 xl:col-span-1 max-w-md lg:max-w-none">

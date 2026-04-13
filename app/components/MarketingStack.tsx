@@ -130,7 +130,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, i, progress, range, 
           scale: typeof window !== 'undefined' && window.innerWidth >= 1024 ? scale : 1,
           top: typeof window !== 'undefined' && window.innerWidth >= 1024 ? `calc(-5vh + ${i * 20}px)` : 0,
         }}
-        className="relative w-full max-w-6xl mx-auto origin-top"
+        className="relative w-full mx-auto origin-top"
       >
         <div
           className="rounded-2xl p-6 lg:p-8 relative bg-white"
@@ -276,7 +276,7 @@ const MarketingStack = () => {
   return (
     <section id="healthcare-marketing" ref={container} className="pt-24 pb-16 lg:pt-32 lg:py-20 bg-[#FFFFFF] relative">
       <div className="px-4 md:px-8 lg:px-16 xl:px-20">
-        <div className="w-full mx-auto lg:max-w-7xl">
+        <div className="w-full mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16 max-w-4xl mx-auto relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/50 backdrop-blur-xl rounded-full mb-6 border border-gray-200/50">

@@ -12,7 +12,7 @@ const EmpathyFirst = () => {
         style={{ background: 'linear-gradient(135deg, #3C83F6, #2A9D90)' }}
       />
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4 relative">
-        <div className="w-full mx-auto lg:max-w-7xl">
+        <div className="w-full mx-auto">
         <div className="max-w-4xl mx-auto">
           {/* Mobile Layout */}
           <div className="lg:hidden space-y-6">

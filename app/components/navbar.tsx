@@ -13,7 +13,7 @@ const Navbar = () => {
     <>
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border w-full" style={{ maxWidth: '100vw' }}>
       <div className="w-full px-4 md:px-8 lg:px-16 xl:px-20 py-2">
-        <div className="w-full mx-auto lg:max-w-7xl">
+        <div className="w-full mx-auto">
         
         {/* Desktop Layout */}
         <div className="hidden md:flex items-center justify-between h-12 lg:h-14">
