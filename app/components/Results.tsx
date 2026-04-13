@@ -15,7 +15,7 @@ const stats = [
   },
   {
     icon: IndianRupee,
-    value: "50Cr+",
+    value: "100Cr+",
     label: "Revenue Generated",
     sublabel: "For our healthcare partners",
   },
