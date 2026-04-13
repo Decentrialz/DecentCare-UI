@@ -5,7 +5,7 @@ const EmpathyBot = () => {
     <section id="empathy-bot" className="py-08 lg:py-12 bg-[#FFFFFF] relative">
       
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="w-full mx-auto lg:max-w-7xl">
+        <div className="w-full mx-auto">
         <div className="bg-card rounded-3xl p-8 lg:p-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}

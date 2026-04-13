@@ -35,7 +35,7 @@ const CTA = () => {
         <div className="absolute rounded-full" style={{ left: '0%', top: '10%', width: '600px', height: '600px', backgroundColor: 'rgba(60, 131, 246, 0.1)', opacity: '0.7', filter: 'blur(64px)' }} />
        <div className="absolute rounded-full" style={{ right: '2%', top: '18%', width: '600px', height: '600px', backgroundColor: 'rgba(42, 157, 144, 0.1)', opacity: '0.7', filter: 'blur(64px)', pointerEvents:'none' }} />
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="w-full mx-auto lg:max-w-7xl">
+        <div className="w-full mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Image */}
           <div className="w-full max-w-[462px] h-[385px] lg:h-[477px] mx-auto xl:ml-[20%]">

@@ -66,7 +66,7 @@ const Results = () => {
        <div className="absolute rounded-full" style={{ left: '25%', top: '10%', width: '384px', height: '384px', backgroundColor: 'rgba(42, 157, 144, 0.1)', opacity: '0.8', filter: 'blur(64px)' }} />
        <div className="absolute rounded-full" style={{ right: '25%', top: '50%', width: '384px', height: '384px', backgroundColor: 'rgba(60, 131, 246, 0.1)', opacity: '0.6', filter: 'blur(64px)' }} />
       <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="w-full mx-auto lg:max-w-7xl">
+        <div className="w-full mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/50 backdrop-blur-xl rounded-full mb-6 border border-gray-200/50">
@@ -82,7 +82,7 @@ const Results = () => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-20 max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-20 mx-auto">
           {stats.map((stat, index) => (
             <div
               key={index}

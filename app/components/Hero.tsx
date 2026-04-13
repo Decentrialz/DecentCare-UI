@@ -41,7 +41,7 @@ const Hero = () => {
     <div className="absolute rounded-full" style={{ right: '-5%', top: '40%', width: '500px', height: '500px', backgroundColor: 'rgba(60, 131, 246, 0.1)', opacity: '1', filter: 'blur(64px)' }} />
       <div className="absolute rounded-full" style={{ left: '-5%', top: '43%', width: '400px', height: '400px', backgroundColor: 'rgba(42, 157, 144, 0.1)', opacity: '1', filter: 'blur(64px)' }} />
       <div className="w-full px-4 md:px-8 lg:px-16 xl:px-20 py-4">
-        <div className="w-full mx-auto lg:max-w-7xl">
+        <div className="w-full mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pb-32 lg:pb-40">
           {/* Left Content */}
           <div className="space-y-8 max-w-lg mx-auto lg:mx-0">
@@ -118,7 +118,7 @@ const Hero = () => {
                 <div className="text-sm text-[#5E6160]">Healthcare Providers</div>
               </div>
               <div className="text-center lg:text-left max-w-[90px] lg:max-w-none">
-                <div className="text-3xl font-bold text-[#0D5C94]">₹50Cr+</div>
+                <div className="text-3xl font-bold text-[#0D5C94]">₹100Cr+</div>
                 <div className="text-sm text-[#5E6160]">Revenue Generated</div>
               </div>
               <div className="text-center lg:text-left">
@@ -171,7 +171,7 @@ const Hero = () => {
           </div>
         )}
         <div className="relative -mt-24 lg:-mt-12">
-          <div className="w-full mx-auto lg:max-w-7xl">
+          <div className="w-full mx-auto">
             <div className="max-w-4xl mx-auto relative h-[250px] lg:h-[500px]">
               {heroImages.map((image, index) => (
                 <div
