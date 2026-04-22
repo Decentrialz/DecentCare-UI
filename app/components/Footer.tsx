@@ -89,10 +89,7 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-3 text-sm text-[#FBFCFD]/60">
               <li>
-                <Link href="/services" className="hover:text-primary-foreground transition-colors">Service</Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-primary-foreground transition-colors">About</Link>
+                <Link href="/about" className="hover:text-primary-foreground transition-colors">About Us</Link>
               </li>
               <li>
                 <Link href="/success" className="hover:text-primary-foreground transition-colors">Success Stories</Link>
@@ -100,6 +97,7 @@ const Footer = () => {
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Blog</a></li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Terms of Service</a></li>
+              <li><a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a></li>
             </ul>
           </div>
 
@@ -109,11 +107,11 @@ const Footer = () => {
             <ul className="space-y-4 text-sm text-[#FBFCFD]/60">
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 mt-0.5 text-[#FBFCFD]/60" />
-                <span>+1 877 705 1914</span>
+                <span>Phone: +91 8065916085</span>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 mt-0.5 text-[#FBFCFD]/60" />
-                <span>support@decentcariz.com</span>
+                <span>Email: support@decentcare.ai</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-8 h-8 mt-0.5 text-[#FBFCFD]/60" />

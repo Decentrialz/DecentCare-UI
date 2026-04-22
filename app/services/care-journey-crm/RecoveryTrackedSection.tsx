@@ -80,7 +80,7 @@ function TimelineIcon({ status }: { status: TimelineStatus }) {
   if (status === "completed") {
     return (
       <div
-        className={`${nodeClass} border-2 border-secondary-green bg-soft-blue`}
+        className={`${nodeClass} border-2 border-secondary-green bg-[#DCFCE7]`}
       >
         <Check className="w-3 h-3 text-gray-icon" strokeWidth={2.5} aria-hidden />
       </div>
