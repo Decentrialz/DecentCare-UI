@@ -28,7 +28,7 @@ const AccordionTrigger = React.forwardRef<
       {...props}
     >
       {children}
-      <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all group-data-[state=closed]:bg-[#E0F2FE] group-data-[state=open]:bg-gradient-to-br group-data-[state=open]:from-[#0D9488] group-data-[state=open]:to-[#0D5C94]">
+      <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all group-data-[state=closed]:bg-[#0D5C94]/10 group-data-[state=open]:bg-gradient-to-br group-data-[state=open]:from-[#0D9488] group-data-[state=open]:to-[#0D5C94]">
         <Plus className="h-4 w-4 transition-all group-data-[state=closed]:block group-data-[state=open]:hidden group-data-[state=closed]:text-[#0D5C94]" />
         <Minus className="h-4 w-4 transition-all group-data-[state=closed]:hidden group-data-[state=open]:block text-white" />
       </div>

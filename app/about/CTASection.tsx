@@ -56,7 +56,20 @@ const CTASection = ({
           </div>
         ) : null}
 
-        <div className="flex flex-wrap gap-4 justify-center mb-6">
+        {subDescription && (
+          <div className="flex flex-wrap items-center justify-center gap-6 mb-6 text-white/90 text-sm md:text-base">
+            {subDescription.split('|').map((item, index, array) => (
+              <span key={index} className="flex items-center gap-6">
+                {item.trim()}
+                {index < array.length - 1 && (
+                  <span className="text-white/50">|</span>
+                )}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className="flex flex-wrap gap-4 justify-center">
           <Button
             variant="outline"
             className="border-primary-foreground/30 text-[#1F2020] bg-[#ffffff] hover:bg-primary-foreground/10 gap-2"
@@ -66,9 +79,6 @@ const CTASection = ({
             {buttonText ?? "Request a Demo"} <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
-        <p className="text-sm text-[#FFFFFF] mb-2">
-          {subDescription}
-        </p>
       </div>
       {/* Modal for ContactFormFields */}
       {showModal && (

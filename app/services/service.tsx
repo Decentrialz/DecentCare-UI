@@ -5,7 +5,7 @@ const services = [
   {
     icon: Activity,
     title: "SEO with AI Search Intelligence",
-    href: "#",
+    href: "/services/seo-ai-search",
     description:
       "Boost organic visibility and attract patients with a future-ready search strategy that blends AI-enhanced SEO with AIO (AI-driven optimisation), GEO (visibility in generative AI responses), and AEO (positioning your content as direct AI answers).",
     cta: "Boost Visibility",
@@ -13,7 +13,7 @@ const services = [
   {
     icon: ChartLine,
     title: "Social Media Marketing with AI Insights & Automation",
-    href: "#",
+    href: "/services/smm",
     description:
       "Drive engagement and loyalty with social campaigns enhanced by AI-driven audience segmentation, sentiment insight, and predictive creative optimisation, enabling personalised messaging that resonates on the platforms patients prefer.",
     cta: "Grow Engagement",
@@ -21,7 +21,7 @@ const services = [
   {
     icon: ChartColumn,
     title: "Paid Advertising with AI-Driven Optimization",
-    href: "#",
+    href: "/services/paid-marketing",
     description:
       "Maximise ROI through AI-powered bidding, conversion propensity models, and real-time budget reallocation that continuously refine campaign performance across channels based on what is most likely to convert high-value patient enquiries.",
     cta: "Drive Leads",
@@ -37,7 +37,7 @@ const services = [
   {
     icon: Sparkles,
     title: "Business Strategy & Growth Consulting with AI-Driven Forecasting",
-    href: "#",
+    href: "/services/business-strategy",
     description:
       "Enhance strategic planning with AI insights that model future scenarios, from market trend forecasting and competitive mapping to operational simulations that reveal the impact of key investment decisions.",
     cta: "Book a Consultation",
@@ -45,7 +45,7 @@ const services = [
   {
     icon: Globe,
     title: "Web Development with AI-Powered Personalisation",
-    href: "#",
+    href: "/services/web-development",
     description:
       "Build adaptive websites leveraging AI personalisation, conversational AI assistants, and behaviour-based journeys, tailoring content and navigation to individual patient needs, reducing friction, and accelerating appointment conversions with on-site support and symptom-guided pathways.",
     cta: "Build Your Platform",
@@ -59,18 +59,10 @@ const Service = () => {
           {/* Services Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => {
-              // Make Social Media Marketing card clickable
-              const isSMM = service.title.startsWith("Social Media Marketing");
-              const cardProps = isSMM
-                ? {
-                    onClick: () => window.location.href = "/smm",
-                    className: "bg-card rounded-2xl p-8 card-elevated flex flex-col border border-[#E5E7EB] cursor-pointer hover:shadow-xl transition-shadow"
-                  }
-                : {
-                    className: "bg-card rounded-2xl p-8 card-elevated flex flex-col border border-[#E5E7EB]"
-                  };
-              return (
-                <div key={index} {...cardProps}>
+              const hasValidHref = service.href && service.href !== "#";
+              
+              const cardContent = (
+                <>
                   <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)' }}>
                     <service.icon className="w-7 h-7 text-primary-foreground" />
                   </div>
@@ -80,13 +72,27 @@ const Service = () => {
                   <p className="text-[#4A5565] text-sm leading-relaxed mb-6 flex-1">
                     {service.description}
                   </p>
-                  <a
-                    href={isSMM ? "/smm" : service.href ?? "#"}
-                    className="inline-flex items-center gap-2 text-sm font-bold text-[#0D5C94] hover:text-accent transition-colors"
-                  >
+                  <span className="inline-flex items-center gap-2 text-sm font-bold text-[#0D5C94] hover:text-accent transition-colors">
                     {service.cta}
                     <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </span>
+                </>
+              );
+
+              return hasValidHref ? (
+                <Link 
+                  key={index} 
+                  href={service.href}
+                  className="bg-card rounded-2xl p-8 card-elevated flex flex-col border border-[#E5E7EB] cursor-pointer hover:shadow-xl transition-shadow"
+                >
+                  {cardContent}
+                </Link>
+              ) : (
+                <div 
+                  key={index}
+                  className="bg-card rounded-2xl p-8 card-elevated flex flex-col border border-[#E5E7EB]"
+                >
+                  {cardContent}
                 </div>
               );
             })}
