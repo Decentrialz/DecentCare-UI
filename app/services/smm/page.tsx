@@ -10,8 +10,16 @@ import AIDeliverySection from "./AIDeliverySection";
 import FormatsSection from "./FormatsSection";
 import HowWeWorkSection from "./HowWeWorkSection";
 import ReportingSection from "./ReportingSection";
-import FAQSection from "./FAQSection";
-import CTASection from "../about/CTASection";
+import FAQSection from "../FAQSection";
+import CTASection from "../../about/CTASection";
+
+const smmFaqs = [
+  { question: "Do you handle everything end-to-end?", answer: "Yes. Strategy, content production, publishing, community, and monthly optimisation." },
+  { question: "Do doctors need to be on camera?", answer: "Not mandatory. Voiceovers, explainers, and hybrid formats are supported." },
+  { question: "Do you support all major platforms?", answer: "Yes. Platform mix is aligned to your audience, specialty, and services." },
+  { question: "How do you keep content healthcare-safe?", answer: "Structured review workflows and responsible language standards are followed." },
+  { question: "How soon can we start?", answer: "Start with an audit, then move into monthly production and execution." },
+];
 
 
 
@@ -29,7 +37,7 @@ const SocialMediaMarketing = () => {
       <FormatsSection />
       <HowWeWorkSection />
       <ReportingSection />
-      <FAQSection />
+      <FAQSection faqs={smmFaqs} variant="gradient-border" backgroundColor="#FFFFFF" />
       <CTASection
         heading="Get a Social Media Strategy Call"
         description="A focused session to align your goals, channels, content direction, and enquiry flow. Then we recommend the right monthly plan."

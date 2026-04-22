@@ -1,6 +1,6 @@
 'use client';
 import { Button } from "@/app/components/ui/button";
-import { Menu, X, Send } from "lucide-react";
+import { Menu, X, Send, Phone } from "lucide-react";
 import dcLogo from "@/app/assets/dcLogo.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -48,14 +48,18 @@ const Navbar = () => {
             <Link href="/blog" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
               Blogs
             </Link>
+            <Link href="/contact" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+              Contact Us
+            </Link>
           </div>
 
           {/* CTA Button */}
-          <Link href="/contact">
+          <a href="tel:+918065916085">
             <Button className="h-[36px] px-4 rounded-[6px] bg-[#0D5C94] text-white flex items-center gap-2 shadow-[0_4px_20px_-2px_rgba(13,92,148,0.08)] hover:bg-[#0B4F7F] transition-colors" style={{cursor: 'pointer'}}>
-              Let's Connect
+              <Phone className="w-5 h-5" />
+              +91 8065916085
             </Button>
-          </Link>
+          </a>
         </div>
 
         {/* Mobile Layout */}
@@ -79,12 +83,13 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Send Button */}
-          <Link href="/contact">
-            <Button className="h-[40px] w-[40px] p-0 rounded-full bg-[#0D5C94] text-white flex items-center justify-center shadow-[0_4px_20px_-2px_rgba(13,92,148,0.08)] hover:bg-[#0B4F7F] transition-colors">
-              <Send className="w-5 h-5" />
+          {/* Call Button */}
+          <a href="tel:+918065916085">
+            <Button className="h-[40px] px-4 rounded-full bg-[#0D5C94] text-white flex items-center justify-center gap-2 shadow-[0_4px_20px_-2px_rgba(13,92,148,0.08)] hover:bg-[#0B4F7F] transition-colors">
+              <Phone className="w-5 h-5" />
+              <span className="font-medium">Call</span>
             </Button>
-          </Link>
+          </a>
         </div>
 
         </div>
@@ -123,8 +128,8 @@ const Navbar = () => {
             <Link href="/success" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
               Success Stories
             </Link>
-            <Link href="/blog" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
-              Blogs
+            <Link href="/contact" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
+              Contact Us
             </Link>
           </div>
 

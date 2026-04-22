@@ -19,7 +19,7 @@ const HeroSection = () => (
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-6 relative">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary leading-tight" style={{
-                background: "linear-gradient(135deg, #0D9488, #0D5C94)",
+                background: "linear-gradient(135deg, #0D5C94, #0D9488)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
