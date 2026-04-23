@@ -42,7 +42,7 @@ const WhyDecentCareSection = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h2
-              className="text-xl md:text-2xl lg:text-3xl font-bold mb-4"
+              className="text-2xl lg:text-3xl font-bold mb-4"
               style={{ color: "#0D9488" }}
             >
               Why DecentCare?
@@ -58,19 +58,19 @@ const WhyDecentCareSection = () => {
           {/* Comparison Table */}
           <div className="bg-[#F8FAFC] rounded-2xl overflow-hidden border border-[#E2E8F0] max-w-6xl mx-auto">
             {/* Table Header */}
-            <div className="grid grid-cols-[140px_1.5fr_1.5fr] md:grid-cols-[200px_1.8fr_1.8fr]">
-              <div className="bg-[#F1F5F9] p-4 font-bold text-sm text-[#4D5567]">
+            <div className="grid grid-cols-[80px_1fr_1fr] md:grid-cols-[200px_1.8fr_1.8fr]">
+              <div className="bg-[#F1F5F9] p-2 md:p-4 font-bold text-[10px] md:text-sm text-[#4D5567]">
                 Area
               </div>
               <div
-                className="p-4 font-bold text-sm text-white"
+                className="p-2 md:p-4 font-bold text-[10px] md:text-sm text-white"
                 style={{
                   background: "#0D5C94",
                 }}
               >
                 DecentCare
               </div>
-              <div className="bg-[#F1F5F9] p-4 font-bold text-sm text-[#083050]">
+              <div className="bg-[#F1F5F9] p-2 md:p-4 font-bold text-[10px] md:text-sm text-[#083050]">
                 Others
               </div>
             </div>
@@ -79,18 +79,18 @@ const WhyDecentCareSection = () => {
             {comparisonData.map((row, index) => (
               <div
                 key={index}
-                className="grid grid-cols-[140px_1.5fr_1.5fr] md:grid-cols-[200px_1.8fr_1.8fr]"
+                className="grid grid-cols-[80px_1fr_1fr] md:grid-cols-[200px_1.8fr_1.8fr]"
               >
                 {/* Area Column */}
                 <div
-                  className="p-4 font-bold text-xs text-[#083050] bg-[#F1F5F9] flex items-center"
+                  className="p-2 md:p-4 font-bold text-[9px] md:text-xs text-[#083050] bg-[#F1F5F9] flex items-center break-words"
                 >
                   {row.area}
                 </div>
 
                 {/* DecentCare Column */}
                 <div
-                  className={`p-4 text-sm text-[#083050] border-[#E2E8F0] ${
+                  className={`p-2 md:p-4 text-[10px] md:text-sm text-[#083050] border-[#E2E8F0] leading-relaxed break-words ${
                     index !== comparisonData.length - 1 ? "border-b" : ""
                   }`}
                 >
@@ -99,7 +99,7 @@ const WhyDecentCareSection = () => {
 
                 {/* Others Column */}
                 <div
-                  className={`p-4 text-sm text-[#083050] bg-white ${
+                  className={`p-2 md:p-4 text-[10px] md:text-sm text-[#083050] bg-white leading-relaxed break-words ${
                     index !== comparisonData.length - 1
                       ? "border-b border-[#E2E8F0]"
                       : ""

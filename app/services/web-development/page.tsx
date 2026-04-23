@@ -1,5 +1,6 @@
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import HeroSection from "./HeroSection";
 import SystemThinkingSection from "./SystemThinkingSection";
 import WhatWeFocusOnSection from "./WhatWeFocusOnSection";
@@ -41,6 +42,7 @@ const WebDevelopmentPage = () => {
       <HowDeliveryWorks />
       <WebsiteAuditCTA />
       <FAQSection faqs={webDevelopmentFaqs} />
+      <MobileStickyButtons />
       <Footer />
     </div>
   );

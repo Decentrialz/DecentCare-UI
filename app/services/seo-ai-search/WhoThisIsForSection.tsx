@@ -25,7 +25,7 @@ const targetAudiences = [
 
 const WhoThisIsForSection = () => {
   return (
-    <section className="py-20 lg:py-28 bg-white">
+    <section className="py-14 lg:py-28 bg-white">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header */}

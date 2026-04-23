@@ -28,11 +28,11 @@ export default function RecommendationToORSection() {
   return (
     <section className={`${SECTION_PADDING} py-16 md:py-20 bg-white`}>
       <div className={CONTENT_MAX}>
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-secondary-green leading-tight">
-            From recommendation to OR — one workflow
+        <div className="max-w-3xl mx-auto mb-10 md:mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-secondary-green leading-tight text-center lg:text-left">
+            From recommendation to OT, one workflow
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-gray-icon leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-gray-icon leading-relaxed text-center lg:text-left">
             Counsellors, doctors, and coordinators work within one system instead of shifting between tools.
           </p>
         </div>

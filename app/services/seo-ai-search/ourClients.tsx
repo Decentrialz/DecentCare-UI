@@ -26,7 +26,7 @@ const OurClientsSection = () => {
           Our Clients
         </h2>
         
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 justify-items-center items-center max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 justify-items-center items-center max-w-6xl mx-auto">
           {logos.map((logo, index) => (
             <div key={index} className="flex items-center justify-center">
               <img 

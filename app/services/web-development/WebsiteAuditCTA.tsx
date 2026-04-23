@@ -8,10 +8,10 @@ const WebsiteAuditCTA = () => {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             {/* Left Content */}
             <div className="text-white max-w-2xl">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center lg:text-left">
                 Request a Website Audit
               </h2>
-              <p className="text-sm md:text-base text-white/80 leading-relaxed max-w-xl">
+              <p className="text-sm md:text-base text-white/80 leading-relaxed max-w-xl text-center lg:text-left mx-auto lg:mx-0">
                 A structured review of site structure, page consistency, and enquiry journeys, with a clear build plan.
               </p>
             </div>

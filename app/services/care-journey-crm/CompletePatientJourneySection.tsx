@@ -93,35 +93,60 @@ export default function CompletePatientJourneySection() {
           </p>
         </header>
 
-        {/* Horizontal timeline: scroll on small screens, full width on lg+ */}
-        <div className="mt-10 md:mt-12 overflow-x-auto lg:overflow-visible scrollbar-hide -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0">
-          <div className="min-w-[920px] lg:min-w-0">
-            <div
-              className="relative px-1"
-              style={{ "--journey-step-node-size": JOURNEY_STEP_NODE_SIZE } as React.CSSProperties}
-            >
-              {/* Connector: primary blue, 2px — vertically centered on nodes via --journey-step-node-size */}
+        {/* Timeline: vertical on mobile, horizontal on desktop */}
+        <div className="mt-10 md:mt-12">
+          {/* Mobile vertical layout - no connecting line */}
+          <div className="lg:hidden">
+            <ol className="flex flex-col items-center gap-8 list-none m-0 p-0 max-w-sm mx-auto">
+              {JOURNEY_STEPS.map((step) => (
+                <li key={step.number} className="text-center w-full">
+                  <div
+                    className="mx-auto box-border rounded-full bg-soft-blue border-3 border-white flex items-center justify-center shadow-[0px_2px_6px_0px_rgb(0_0_0_/_0.06),0px_4px_16px_0px_hsl(var(--primary-blue)_/_0.12)]"
+                    style={{ width: JOURNEY_STEP_NODE_SIZE, height: JOURNEY_STEP_NODE_SIZE }}
+                  >
+                    <StepNumber value={step.number} />
+                  </div>
+                  <p className="mt-3 text-sm md:text-base font-bold text-foreground leading-snug">
+                    {step.title}
+                  </p>
+                  <p className="mt-1 text-xs md:text-sm text-gray-icon leading-relaxed">
+                    {step.subtitle}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          {/* Desktop horizontal layout with connecting line */}
+          <div className="hidden lg:block overflow-x-auto scrollbar-hide -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0">
+            <div className="min-w-[920px] lg:min-w-0">
               <div
-                className="pointer-events-none absolute left-[6%] right-[6%] top-[calc(var(--journey-step-node-size)/2)] h-[2px] -translate-y-1/2 bg-primary-blue z-0"
-                aria-hidden
-              />
-              <ol className="grid grid-cols-7 gap-1 sm:gap-2 xl:gap-3 list-none m-0 p-0">
-                {JOURNEY_STEPS.map((step) => (
-                  <li key={step.number} className="text-center min-w-0">
-                    <div
-                      className="mx-auto box-border rounded-full bg-soft-blue border-3 border-white flex items-center justify-center relative z-[1] shadow-[0px_2px_6px_0px_rgb(0_0_0_/_0.06),0px_4px_16px_0px_hsl(var(--primary-blue)_/_0.12)] w-[var(--journey-step-node-size)] h-[var(--journey-step-node-size)]"
-                    >
-                      <StepNumber value={step.number} />
-                    </div>
-                    <p className="mt-3 text-[10px] sm:text-[11px] xl:text-xs font-bold text-foreground leading-snug px-0.5">
-                      {step.title}
-                    </p>
-                    <p className="mt-1 text-[9px] sm:text-[10px] xl:text-[11px] text-gray-icon leading-relaxed px-0.5">
-                      {step.subtitle}
-                    </p>
-                  </li>
-                ))}
-              </ol>
+                className="relative px-1"
+                style={{ "--journey-step-node-size": JOURNEY_STEP_NODE_SIZE } as React.CSSProperties}
+              >
+                {/* Connector: primary blue, 2px — vertically centered on nodes via --journey-step-node-size */}
+                <div
+                  className="pointer-events-none absolute left-[6%] right-[6%] top-[calc(var(--journey-step-node-size)/2)] h-[2px] -translate-y-1/2 bg-primary-blue z-0"
+                  aria-hidden
+                />
+                <ol className="grid grid-cols-7 gap-1 sm:gap-2 xl:gap-3 list-none m-0 p-0">
+                  {JOURNEY_STEPS.map((step) => (
+                    <li key={step.number} className="text-center min-w-0">
+                      <div
+                        className="mx-auto box-border rounded-full bg-soft-blue border-3 border-white flex items-center justify-center relative z-[1] shadow-[0px_2px_6px_0px_rgb(0_0_0_/_0.06),0px_4px_16px_0px_hsl(var(--primary-blue)_/_0.12)] w-[var(--journey-step-node-size)] h-[var(--journey-step-node-size)]"
+                      >
+                        <StepNumber value={step.number} />
+                      </div>
+                      <p className="mt-3 text-[10px] sm:text-[11px] xl:text-xs font-bold text-foreground leading-snug px-0.5">
+                        {step.title}
+                      </p>
+                      <p className="mt-1 text-[9px] sm:text-[10px] xl:text-[11px] text-gray-icon leading-relaxed px-0.5">
+                        {step.subtitle}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
           </div>
         </div>

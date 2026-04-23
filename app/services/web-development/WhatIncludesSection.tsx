@@ -45,7 +45,7 @@ const WhatIncludesSection = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h2
-              className="text-xl md:text-2xl lg:text-3xl font-bold"
+              className="text-2xl lg:text-3xl font-bold"
               style={{ color: "#0D9488" }}
             >
               What healthcare web development includes

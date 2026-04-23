@@ -22,7 +22,7 @@ const ReportingSection = () => (
     <div className="container mx-auto px-4 lg:px-8">
       <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
         <div>
-          <h2 className="text-xl md:text-2xl font-bold text-primary mb-4" style={{
+          <h2 className="text-2xl font-bold text-primary mb-4 text-center lg:text-left" style={{
                 background: "linear-gradient(135deg, #0D9488, #0D5C94)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -32,7 +32,7 @@ const ReportingSection = () => (
               }}>
             Comprehensive Reporting & Analytics
           </h2>
-          <p className="text-[#1F2020] mb-6">
+          <p className="text-[#1F2020] mb-6 text-center lg:text-left">
             Track your social media performance with detailed insights and actionable recommendations delivered weekly.
           </p>
           <div className="grid grid-cols-2 gap-3">

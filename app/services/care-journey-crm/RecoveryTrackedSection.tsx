@@ -132,13 +132,13 @@ export default function RecoveryTrackedSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
           {/* Left column */}
           <div className="max-w-xl lg:max-w-none">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-secondary-green leading-tight">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-secondary-green leading-tight text-center lg:text-left">
               Recovery tracked.
             </h2>
-            <h2 className="mt-1 text-xl sm:text-2xl md:text-3xl font-bold text-secondary-green leading-tight">
+            <h2 className="mt-1 text-xl sm:text-2xl md:text-3xl font-bold text-secondary-green leading-tight text-center lg:text-left">
               Nothing missed.
             </h2>
-            <p className="mt-4 text-sm sm:text-base text-gray-icon leading-relaxed">
+            <p className="mt-4 text-sm sm:text-base text-gray-icon leading-relaxed text-center lg:text-left">
               Structured follow-ups mean Day-1, Week-1, and Month-1 tasks stay visible to everyone
               responsible — not buried in chats or forgotten after discharge.
             </p>

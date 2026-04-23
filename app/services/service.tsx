@@ -54,7 +54,7 @@ const services = [
 
 const Service = () => {
   return (
-      <section className="pb-20 lg:pb- maz-w-6xl mx-auto px-24 lg:px-28">
+      <section className="pb-20 lg:pb- maz-w-6xl mx-auto lg:px-28">
         <div className="container mx-auto px-4 lg:px-8">
           {/* Services Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -38,11 +38,11 @@ const HeroSection = () => {
           ]}
         />
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center mt-16">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-12 items-center mt-16">
           {/* Left Content */}
-          <div>
+          <div className="w-full">
             <h1
-              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6 leading-tight text-center lg:text-left"
               style={{
                 background: "linear-gradient(135deg, #0D5C94, #0D9488)",
                  WebkitBackgroundClip: "text",
@@ -53,24 +53,27 @@ const HeroSection = () => {
               Web Development for Hospitals and Clinics
             </h1>
 
-            <p className="text-md md:text-base text-[#818584] mb-8 leading-relaxed max-w-xl">
+            <p className="text-md md:text-base text-[#818584] mb-0 lg:mb-8 leading-relaxed max-w-xl text-center lg:text-left lg:mx-0 mx-auto">
               End-to-end builds, delivered with an AI-assisted workflow.
             </p>
 
-            <Button
-              size="lg"
-              className="gap-2 font-normal text-sm"
-              style={{
-                background: "#0D5C94",
-                color: "white",
-              }}
-            >
-              Request a Website Audit
-            </Button>
+            {/* Button - Desktop only */}
+            <div className="hidden lg:block">
+              <Button
+                size="lg"
+                className="gap-2 font-normal text-sm"
+                style={{
+                  background: "#0D5C94",
+                  color: "white",
+                }}
+              >
+                Request a Website Audit
+              </Button>
+            </div>
           </div>
 
           {/* Right Animated Images */}
-          <div className="relative h-[400px] lg:h-[500px]">
+          <div className="relative h-[300px] lg:h-[500px] w-full">
             <AnimatePresence>
               <motion.div
                 key={currentIndex}
@@ -89,6 +92,20 @@ const HeroSection = () => {
                 />
               </motion.div>
             </AnimatePresence>
+          </div>
+
+          {/* Button - Mobile only (centered, after images) */}
+          <div className="lg:hidden flex justify-center w-full">
+            <Button
+              size="lg"
+              className="gap-2 font-normal text-sm"
+              style={{
+                background: "#0D5C94",
+                color: "white",
+              }}
+            >
+              Request a Website Audit
+            </Button>
           </div>
         </div>
       </div>

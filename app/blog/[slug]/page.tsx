@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import {
   getArticleDetailBySlug,
   getRecommendedArticles,
@@ -41,6 +42,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           </div>
         </div>
       </main>
+      <MobileStickyButtons />
       <Footer />
     </div>
   );

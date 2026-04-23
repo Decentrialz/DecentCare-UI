@@ -53,7 +53,7 @@ export default function InnovationPartnersTestimonialsSection() {
   return (
     <section className={`${SECTION_PADDING} py-16 md:py-20 innovation-partners-section-bg`}>
       <div className={CONTENT_MAX}>
-        <h2 className="text-center font-bold text-secondary-green text-xl sm:text-2xl md:text-3xl mb-10 md:mb-12 leading-tight max-w-4xl mx-auto">
+        <h2 className="text-center font-bold text-secondary-green text-2xl md:text-3xl mb-10 md:mb-12 leading-tight max-w-4xl mx-auto">
           Trusted by our innovation partners
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mx-auto">

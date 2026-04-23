@@ -47,7 +47,7 @@ export default function EveryRoleNoGapsSection() {
     <section className={`${SECTION_PADDING} py-16 md:py-20 bg-white`}>
       <div className={CONTENT_MAX}>
         <header className="text-center max-w-4xl mx-auto mb-10 md:mb-12">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-secondary-green leading-relaxed">
+          <h2 className="text-2xl md:text-3xl font-bold text-secondary-green leading-relaxed">
             Every task. Every role. No gaps.
           </h2>
           <p className="mt-3 text-sm sm:text-base text-gray-icon leading-relaxed">
@@ -56,7 +56,7 @@ export default function EveryRoleNoGapsSection() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-5">
           {ROLE_CARDS.map((role) => (
             <RoleTaskCard
               key={role.title}
