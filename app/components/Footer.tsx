@@ -75,12 +75,12 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Solutions</h4>
             <ul className="space-y-3 text-sm text-[#FBFCFD]/60">
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI SEO</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI Social Media</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI Paid Advertising</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI-Enabled Care Journey CRM</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI Growth Consulting</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">AI Web Development</a></li>
+              <li><Link href="/services/seo-ai-search" className="hover:text-primary-foreground transition-colors">AI SEO</Link></li>
+              <li><Link href="/services/smm" className="hover:text-primary-foreground transition-colors">AI Social Media</Link></li>
+              <li><Link href="/services/paid-marketing" className="hover:text-primary-foreground transition-colors">AI Paid Advertising</Link></li>
+              <li><Link href="/services/care-journey-crm" className="hover:text-primary-foreground transition-colors">AI-Enabled Care Journey CRM</Link></li>
+              <li><Link href="/services/business-strategy" className="hover:text-primary-foreground transition-colors">AI Growth Consulting</Link></li>
+              <li><Link href="/services/web-development" className="hover:text-primary-foreground transition-colors">AI Web Development</Link></li>
             </ul>
           </div>
 
