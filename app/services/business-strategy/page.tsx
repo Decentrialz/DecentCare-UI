@@ -1,5 +1,6 @@
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import HeroSection from "./HeroSection";
 import ProblemSection from "./ProblemSection";
 import ServicesSection from "./ServicesSection";
@@ -28,6 +29,7 @@ const BusinessStrategyPage = () => {
         buttonText="Book Your Free Strategy Call"
       />
 
+      <MobileStickyButtons />
       <Footer />
     </div>
   );

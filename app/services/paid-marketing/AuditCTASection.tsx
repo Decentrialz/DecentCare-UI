@@ -36,10 +36,10 @@ const AuditCTASection = () => {
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               {/* Left Side - Text & CTA */}
               <div>
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight text-center lg:text-left">
                   Start With A Paid Marketing Audit
                 </h2>
-                <p className="text-base text-white/60 mb-6 lg:mb-8 max-w-lg">
+                <p className=" text-sm md:text-base text-white/60 mb-6 lg:mb-8 max-w-lg text-center lg:text-left mx-auto lg:mx-0">
                   An audit is the fastest way to identify opportunity gaps and
                   practical next steps.
                 </p>

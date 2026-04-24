@@ -58,7 +58,7 @@ const OurTeam = () => {
             id="team-carousel"
           >
             {team.map((member, i) => (
-              <div key={i} className="relative rounded-xl overflow-hidden group flex-shrink-0 snap-center" style={{ width: 'calc((100% - 4.5rem) / 4)' }}>
+              <div key={i} className="relative rounded-xl overflow-hidden group flex-shrink-0 snap-center w-[calc((100%-1.5rem)/2)] md:w-[calc((100%-4.5rem)/4)]">
                 <Image
                   src={member.image}
                   alt={member.name}

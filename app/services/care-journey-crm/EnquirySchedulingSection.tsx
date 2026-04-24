@@ -29,13 +29,13 @@ const DEFAULT_FEATURES: FeatureItem[] = [
 export default function EnquirySchedulingSection() {
   return (
     <section className={"bg-background"}>
-      <div className={`${CONTENT_MAX} ${SECTION_PADDING} py-20`}>
+      <div className={`${CONTENT_MAX} ${SECTION_PADDING} py-10 md:py-20`}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div className="max-w-xl">
-            <h2 className="text-xl sm:text-2xl font-bold text-secondary-green leading-tight">
+            <h2 className="text-xl sm:text-2xl font-bold text-secondary-green leading-tight text-center lg:text-left">
               From first contact to checked in
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-gray-icon leading-relaxed">
+            <p className="mt-3 text-sm sm:text-base text-gray-icon leading-relaxed text-center lg:text-left">
               Capture enquiries from calls, walk-ins, WhatsApp, and digital campaigns — all routed into one system without manual re-entry.
             </p>
 

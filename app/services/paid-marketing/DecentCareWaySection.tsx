@@ -56,7 +56,7 @@ const DecentCareWaySection = () => {
               <div
                 key={index}
                 className={`bg-white p-6 flex flex-col items-center text-center flex-1 ${
-                  index < steps.length - 1 ? 'border-r border-[#E5E7EB]' : ''
+                  index < steps.length - 1 ? 'border-b md:border-b-0 md:border-r border-[#E5E7EB]' : ''
                 }`}
               >
                 {/* Icon */}

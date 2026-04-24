@@ -19,7 +19,7 @@ const helpOptions = [
 ];
 
 const HelpOptions = () => (
-  <section className="pt-16 pb-16 lg:pt-24 bg-[#FBFCFD]">
+  <section className="pt-04 pb-16 lg:pt-24 bg-[#FBFCFD]">
     <div className="container mx-auto px-4 lg:px-8 text-center">
       <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary mb-12" style={{background: 'linear-gradient(135deg, #0D5C94, #076C63)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
         How can we help you?

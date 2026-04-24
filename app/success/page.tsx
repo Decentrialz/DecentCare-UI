@@ -1,6 +1,7 @@
 
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import HeroSuccessSection from "./HeroSuccessSection";
 import VideoTestimonialsSection from "./VideoTestimonialsSection";
 import CaseStudiesSection from "./CaseStudiesSection";
@@ -110,8 +111,7 @@ const SuccessStories = () => {
       <CaseStudiesSection caseStudies={caseStudies} />
       <MeasurableImpactSection stats={stats} />
       <WhyTrustUsSection />
-      <SuccessCTASection />
-      <Footer />
+      <SuccessCTASection />      <MobileStickyButtons />      <Footer />
     </div>
   );
 };

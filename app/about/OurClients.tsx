@@ -31,7 +31,7 @@ const OurClients = () => {
           DecentCare is trusted by healthcare providers who require reliable, intelligent systems for patient acquisition, journey management, and operational coordination. Our platform currently supports
         </p>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-items-center items-center" style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 justify-items-center items-center" style={{ maxWidth: '1100px', margin: '0 auto' }}>
             {logos.map((logo, index) => (
               <div key={index} className="flex items-center justify-center">
                 <img src={logo.img.src} alt={logo.name} className="h-10 lg:h-14 w-auto object-contain" />

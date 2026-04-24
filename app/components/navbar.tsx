@@ -75,12 +75,19 @@ const Navbar = () => {
             </button>
 
             {/* Logo */}
-            <div className="flex flex-col items-center gap-0.5">
+            <Link href="/"
+              className="flex flex-col items-center gap-0.5 cursor-pointer"
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+            >
               <div className="flex items-center">
                 <Image src={dcLogo} alt="DecentCare Logo" width={50} height={33} />
               </div>
               <span className="text-[10px] font-semibold text-primary whitespace-nowrap">DecentCare</span>
-            </div>
+            </Link>
           </div>
 
           {/* Call Button */}
@@ -127,6 +134,9 @@ const Navbar = () => {
             </Link>
             <Link href="/success" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
               Success Stories
+            </Link>
+               <Link href="/blog" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
+              Blogs
             </Link>
             <Link href="/contact" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
               Contact Us

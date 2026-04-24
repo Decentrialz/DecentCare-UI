@@ -43,7 +43,7 @@ const HeroSection = () => {
             {/* Left Content */}
             <div>
               <h1
-                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-center lg:text-left"
                 style={{
                   background: "linear-gradient(135deg, #0D5C94, #0D9488)",
                   WebkitBackgroundClip: "text",
@@ -54,22 +54,24 @@ const HeroSection = () => {
                 DecentCare<br />Strategy & Consultation
               </h1>
 
-              <p className="text-sm md:text-base text-[#818584] mb-8 leading-relaxed max-w-xl">
+              <p className="text-sm md:text-base text-[#818584] mb-8 leading-relaxed max-w-xl text-center lg:text-left">
                 DecentCare provides focused consulting across these three areas,
                 helping healthcare organisations define the problem clearly and
                 work toward structured resolution.
               </p>
 
-              <Button
-                size="lg"
-                className="gap-2 font-normal text-sm"
-                style={{
-                  background: "#0D5C94",
-                  color: "white",
-                }}
-              >
-                Book Free Strategy Call
-              </Button>
+              <div className="flex justify-center lg:justify-start">
+                <Button
+                  size="lg"
+                  className="gap-2 font-normal text-sm"
+                  style={{
+                    background: "#0D5C94",
+                    color: "white",
+                  }}
+                >
+                  Book Free Strategy Call
+                </Button>
+              </div>
             </div>
 
             {/* Right Image */}

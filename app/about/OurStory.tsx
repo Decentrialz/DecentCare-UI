@@ -8,11 +8,11 @@ const OurStory = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
           {/* Our Story Image */}
           <div className="flex justify-center">
-            <Image src={ourSrtory} alt="Our Story" className="w-110 h-110 md:w-124 md:h-124 object-contain" />
+            <Image src={ourSrtory} alt="Our Story" className="w-70 h-70 md:w-124 md:h-124 object-contain" />
           </div>
 
           {/* Story text */}
-          <div className="space-y-5 max-w-xl mx-auto lg:mx-0">
+          <div className="space-y-5 max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
             <h2
               className="text-4xl md:text-5xl font-bold text-accent leading-tight md:leading-[1.15]"
               style={{

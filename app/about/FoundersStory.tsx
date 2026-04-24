@@ -23,10 +23,7 @@ const FoundersStory = () => {
   </h2>
 
   {/* Content */}
-  <p className="mt-6 text-center text-base md:text-lg text-[#45556C] max-w-3xl mx-auto leading-relaxed">
-    DecentCare was founded by Swaroop ESD and 
- Karthik K, bringing together complementary experience across healthcare technology, operations, and execution.
-  </p>
+ 
 </div>
 
 
@@ -34,7 +31,7 @@ const FoundersStory = () => {
         <div className="max-w-6xl mx-auto px-6">
           {/* Swaroop */}
           <div className="grid lg:grid-cols-2 gap-16 items-center mt-20">
-            <div>
+            <div className="-mx-4 md:mx-0">
               <Image
                 src={swaroop}
                 alt="Swaroop ESD"
@@ -55,7 +52,17 @@ const FoundersStory = () => {
 
           {/* Karthik */}
           <div className="grid lg:grid-cols-2 gap-16 items-center mt-24 mb-20">
-            <div>
+            {/* Image - placed first for mobile, second for desktop */}
+            <div className="order-1 lg:order-2 -mx-4 md:mx-0">
+              <Image
+                src={karthik}
+                alt="Karthik Reddy K"
+                className="w-full h-72 object-cover object-top rounded-2xl shadow-md"
+              />
+            </div>
+
+            {/* Content - placed second for mobile, first for desktop */}
+            <div className="order-2 lg:order-1">
               <h3 className="text-3xl font-bold text-black mb-2">
                 Karthik Reddy K
               </h3>
@@ -65,14 +72,6 @@ const FoundersStory = () => {
               <p className="text-[#45556C] leading-relaxed">
                 Karthik brings over 14 years of experience in operations and large-scale platform execution. An IIT alumnus, he has spent his career building technology that delivers real-world impact at scale. As COO at AI Thinkers, he developed a deep understanding of what it takes to make complex systems perform consistently, and at DecentCare, he brings that same standard to healthcare.
               </p>
-            </div>
-
-            <div>
-              <Image
-                src={karthik}
-                alt="Karthik Reddy K"
-                className="w-full h-72 object-cover object-top rounded-2xl shadow-md"
-              />
             </div>
           </div>
         </div>

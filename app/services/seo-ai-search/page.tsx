@@ -1,5 +1,6 @@
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import HeroSection from "./HeroSection";
 import ProvenResultsSection from "./ProvenResultsSection";
 import OurClientsSection from "./ourClients";
@@ -65,6 +66,7 @@ const SEOAISearchPage = () => {
         buttonText="Book a Free Healthcare SEO Consultation"
       />
 
+      <MobileStickyButtons />
       <Footer />
     </div>
   );

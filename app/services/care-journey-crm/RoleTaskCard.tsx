@@ -24,7 +24,7 @@ export default function RoleTaskCard({ icon: Icon, title, description }: RoleTas
           strokeWidth={3}
           aria-hidden
         />
-        <p className="text-sm text-gray-icon leading-tight">{description}</p>
+        <p className="text-[11px] md:text-sm text-gray-icon leading-tight">{description}</p>
       </div>
     </article>
   );
