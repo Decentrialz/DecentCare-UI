@@ -1,6 +1,7 @@
 "use client";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import HeroBanner from "../about/HeroBanner";
 import HeroContact from "../assets/HeroContact.svg";
 import HelpOptions from "./HelpOptions";
@@ -23,6 +24,7 @@ const ContactPage = () => {
       />
       <HelpOptions />
       <ContactForm />
+      <MobileStickyButtons />
       <Footer />
     </div>
   );

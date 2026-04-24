@@ -82,13 +82,10 @@ const HowWeWorkSection = () => {
         {/* Mobile View - Vertical */}
         <div className="lg:hidden max-w-md mx-auto">
           <div className="relative">
-            {/* Connecting Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#0D5C94] via-[#0D9488] to-[#0D9488]"></div>
-            
             {/* Steps */}
             <div className="space-y-8 relative">
               {steps.map((step, index) => (
-                <div key={index} className="flex items-start gap-4">
+                <div key={index} className="flex flex-col items-center text-center">
                   {/* Circle */}
                   <div 
                     className={`w-16 h-16 rounded-full flex items-center justify-center shrink-0 relative z-10 ${
@@ -106,7 +103,7 @@ const HowWeWorkSection = () => {
                   </div>
                   
                   {/* Title */}
-                  <p className="text-sm text-[#1E293B] leading-relaxed pt-4">
+                  <p className="text-sm text-[#1E293B] leading-relaxed pt-4 max-w-[280px]">
                     {step.title}
                   </p>
                 </div>

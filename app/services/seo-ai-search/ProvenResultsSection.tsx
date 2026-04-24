@@ -36,7 +36,7 @@ const ProvenResultsSection = () => {
     <section className="py-20 lg:py-28 bg-[#FFFFFF]">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-14">
-          <h2 className="text-lg md:text-xl lg:text-2xl font-bold mb-4" style={{
+          <h2 className="text-xl md:text-xl lg:text-2xl font-bold mb-4" style={{
             color: "#0D9488",
             paddingBottom: "0.15em",
             lineHeight: 1.15,

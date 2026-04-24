@@ -1,5 +1,6 @@
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import { BlogHero, LatestBlogs, AllArticles } from "@/app/blog/components";
 
 export const metadata = {
@@ -18,6 +19,7 @@ export default function BlogPage() {
       ]} />
       <LatestBlogs />
       <AllArticles />
+      <MobileStickyButtons />
       <Footer />
     </div>
   );

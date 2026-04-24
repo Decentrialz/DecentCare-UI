@@ -24,8 +24,8 @@ export default function SurgeryToDischargeSection() {
     <section className={`${SECTION_PADDING} py-16 md:py-20 bg-white`}>
       <div className={CONTENT_MAX}>
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-secondary-green leading-tight">
-            Surgery to discharge — one connected record
+          <h2 className="text-2xl md:text-3xl font-bold text-secondary-green leading-tight">
+            Surgery to discharge, one connected record
           </h2>
           <p className="mt-3 text-sm sm:text-base text-gray-icon leading-relaxed">
             Clinical documentation, recovery monitoring, and discharge summaries stay tied to the

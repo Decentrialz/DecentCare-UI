@@ -88,7 +88,7 @@ export const ContactFormFields = ({ heading, subheading }: { heading?: string; s
 );
 
 const ContactForm = () => (
-  <section className="py-20">
+  <section className="py-6 md:py-20">
     <div className="container mx-auto px-4 lg:px-8">
       <h2 className="text-3xl md:text-4xl font-bold text-primary text-center mb-12" style={{background: 'linear-gradient(135deg, #0D5C94, #076C63)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
         Get in Touch

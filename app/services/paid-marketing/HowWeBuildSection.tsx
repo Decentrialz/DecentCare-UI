@@ -54,7 +54,7 @@ const HowWeBuildSection = () => {
           {/* Header */}
           <div className="mb-12">
             <h2
-              className="text-2xl md:text-3xl font-bold mb-4"
+              className="text-2xl md:text-3xl font-bold mb-4 text-center lg:text-left"
               style={{
                 color: "#0D9488",
                 paddingBottom: "0.15em",
@@ -63,7 +63,7 @@ const HowWeBuildSection = () => {
             >
               How We Build High-Performing Healthcare Paid Marketing
             </h2>
-            <p className="text-base text-[#4B5563] max-w-2xl">
+            <p className="text-base text-[#4B5563] max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
               Whether you're scaling an established hospital system or launching a new facility,
               our paid marketing framework adapts to your growth stage.
             </p>

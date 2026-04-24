@@ -21,8 +21,8 @@ const HeroSection = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-28 pb-12 lg:pt-36 lg:pb-16" style={{ background: "linear-gradient(to bottom, #EFF6FF 1%, #FFFFFF 100%)" }}>
-        <div className="container mx-auto px-4 lg:px-8" style={{ maxWidth: "84rem" }}>
+      <section className="pt-28 pb-12 lg:pt-36 lg:pb-16 overflow-x-hidden" style={{ background: "linear-gradient(to bottom, #EFF6FF 1%, #FFFFFF 100%)" }}>
+        <div className="w-full mx-auto px-4 lg:px-8 lg:max-w-[84rem]">
           <Breadcrumb
             items={[
               { label: "Home", href: "/" },
@@ -32,40 +32,54 @@ const HeroSection = () => {
             breadCrumbClass="mb-10"
           />
           
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Left Content */}
-            <div className="space-y-6">
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight" style={{
+            <div className="space-y-6 w-full max-w-full">
+              <h1 className="text-[28px] md:text-3xl lg:text-4xl font-extrabold leading-tight text-center lg:text-left break-words overflow-wrap-anywhere" style={{
                 background: "linear-gradient(135deg, #0D5C94, #0D9488)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
                 paddingBottom: "0.15em",
                 lineHeight: 1.15,
+                wordBreak: "break-word",
+                overflowWrap: "break-word",
               }}>
                 Future-Proof Healthcare SEO: Dominate Google & AI Search
               </h1>
+
+              {/* Mobile Image - Show only on mobile */}
+              <div className="lg:hidden flex justify-center items-start w-full max-w-full">
+                <Image
+                  src={seoHeroImage}
+                  alt="SEO Performance Overview"
+                  className="rounded-2xl w-full h-auto max-w-full"
+                  priority
+                />
+              </div>
               
-              <p className="text-sm text-[#475569] leading-relaxed">
+              <p className="text-sm text-[#475569] leading-relaxed text-center lg:text-left break-words">
                 Capture high-intent patient searches across Google, AI answer engines, and healthcare discovery platforms
               </p>
               
-              <p className="text-sm text-[#475569] leading-relaxed">
+              <p className="text-sm text-[#475569] leading-relaxed text-center lg:text-left break-words">
                 DecentCare provides healthcare SEO as a growth system for hospitals, clinics, and healthcare brands where trust, accuracy, and outcomes matter. We combine modern SEO with AI-era optimisation so your services remain visible as search evolves.
               </p>
               
-              <a href="/contact">
-                <Button variant="default" size="lg" className="gap-2 mt-4 text-sm">
-                  <Calendar className="w-5 h-5" />
-                  Request a Free SEO Strategy Consultation
-                </Button>
-              </a>
+              <div className="flex justify-center lg:justify-start w-full">
+                <a href="/contact" className="w-auto">
+                  <Button variant="default" size="lg" className="gap-2 mt-4 text-[11px] md:text-sm w-auto whitespace-nowrap">
+                    <Calendar className="w-4 h-4 md:w-5 md:h-5" />
+                    Request a Free SEO Strategy Consultation
+                  </Button>
+                </a>
+              </div>
               
               {/* Hero Features */}
-              <div className="flex flex-wrap gap-6 pt-8">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-6 pt-8">
                 {heroFeatures.map((feature, index) => (
                   <div key={index} className="flex items-center gap-2">
-                    <div className="w-5 h-5  flex items-center justify-center">
+                    <div className="w-5 h-5 flex items-center justify-center">
                       <feature.icon className="w-5 h-5 text-[#0D9488]" />
                     </div>
                     <span className="text-xs text-[#4D5567]">{feature.text}</span>
@@ -74,12 +88,12 @@ const HeroSection = () => {
               </div>
             </div>
             
-            {/* Right Image */}
-            <div className="flex justify-center items-start -mt-12">
+            {/* Right Image - Show only on desktop */}
+            <div className="hidden lg:flex justify-center items-start lg:-mt-12 w-full max-w-full">
               <Image
                 src={seoHeroImage}
                 alt="SEO Performance Overview"
-                className="rounded-2xl w-full h-auto"
+                className="rounded-2xl w-full h-auto max-w-full"
                 priority
               />
             </div>
@@ -88,16 +102,16 @@ const HeroSection = () => {
       </section>
       
       {/* Trust Features Section */}
-      <section className="py-7 bg-[#0D5C94]">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto divide-x divide-white/20">
+      <section className="py-7 bg-[#0D5C94] overflow-x-hidden">
+        <div className="w-full mx-auto px-4 lg:px-8 lg:max-w-7xl">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 lg:divide-x lg:divide-white/20">
             {trustFeatures.map((feature, index) => (
-              <div key={index} className="flex items-start gap-4 px-6 first:pl-0 last:pr-0">
+              <div key={index} className="flex flex-col items-center text-center gap-3 px-2 lg:flex-row lg:items-start lg:text-left lg:gap-4 lg:px-6 lg:first:pl-0 lg:last:pr-0">
                 <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
                   <feature.icon className="w-5 h-5 text-white" />
                 </div>
-                <div>
-                  <p className="text-xs text-white leading-relaxed">{feature.title}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-white leading-relaxed break-words">{feature.title}</p>
                 </div>
               </div>
             ))}

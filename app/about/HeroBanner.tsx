@@ -38,11 +38,18 @@ const HeroBanner = ({
     <section className="relative pt-12 lg:pt-18">
       {/* Hero Image with Content Overlay */}
       <div className="relative min-h-[600px] md:min-h-[650px] overflow-hidden">
-        <Image src={imageToUse} alt="DecentCare" className="w-full h-full object-cover absolute inset-0" />
+        <Image 
+          src={imageToUse} 
+          alt="DecentCare" 
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
         <div className="absolute inset-0 bg-white/10" />
         
         {/* Breadcrumb */}
-        <div className="absolute top-10 left-36 z-20">
+        <div className="absolute top-10 left-4 md:left-36 z-20">
           <Breadcrumb items={breadcrumbItems} />
         </div>
 

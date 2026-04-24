@@ -95,51 +95,35 @@ const HowDeliveryWorks = () => {
             </div>
 
             {/* Mobile View */}
-            <div className="md:hidden space-y-8">
+            <div className="md:hidden space-y-12 max-w-md mx-auto">
               {phases.map((phase, index) => (
-                <div key={index} className="relative">
-                  {/* Connecting Line for Mobile */}
-                  {index < phases.length - 1 && (
-                    <div 
-                      className="absolute top-[82px] left-[42px] w-[3px] h-[calc(100%+2rem)]"
-                      style={{ 
-                        background: `linear-gradient(to bottom, ${phase.color}, ${phases[index + 1].color})`,
-                        zIndex: 0
-                      }}
-                    />
-                  )}
+                <div key={index} className="relative text-center">
+                  {/* Phase Number */}
+                  <div className="text-xs font-semibold text-[#94A3B8] mb-4 tracking-wide">
+                    PHASE {phase.number}
+                  </div>
                   
-                  {/* Phase Content */}
-                  <div className="relative z-10">
-                    {/* Phase Number */}
-                    <div className="text-xs font-semibold text-[#94A3B8] mb-4 tracking-wide">
-                      PHASE {phase.number}
-                    </div>
-                    
-                    <div className="flex gap-4">
-                      {/* Circle with Letter */}
-                      <div className="flex-shrink-0 w-[84px] h-[84px] rounded-full bg-[#E8F3FB] flex items-center justify-center">
-                        <div 
-                          className="w-[60px] h-[60px] rounded-full flex items-center justify-center text-white font-bold text-2xl"
-                          style={{ backgroundColor: phase.color }}
-                        >
-                          {phase.letter}
-                        </div>
-                      </div>
-                      
-                      <div className="flex-1 pt-1">
-                        {/* Title */}
-                        <h3 className="text-xl font-bold text-[#1F2937] mb-2">
-                          {phase.title}
-                        </h3>
-                        
-                        {/* Description */}
-                        <p className="text-sm text-[#6B7280] leading-relaxed">
-                          {phase.description}
-                        </p>
+                  {/* Circle with Letter */}
+                  <div className="mb-4 flex justify-center">
+                    <div className="w-[84px] h-[84px] rounded-full bg-[#E8F3FB] flex items-center justify-center">
+                      <div 
+                        className="w-[60px] h-[60px] rounded-full flex items-center justify-center text-white font-bold text-2xl"
+                        style={{ backgroundColor: phase.color }}
+                      >
+                        {phase.letter}
                       </div>
                     </div>
                   </div>
+                  
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-[#1F2937] mb-3">
+                    {phase.title}
+                  </h3>
+                  
+                  {/* Description */}
+                  <p className="text-sm text-[#6B7280] leading-relaxed">
+                    {phase.description}
+                  </p>
                 </div>
               ))}
             </div>

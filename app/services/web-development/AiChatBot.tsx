@@ -12,10 +12,10 @@ const AiChatBot = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div>
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4" style={{ color: "#0D9488" }}>
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 text-center lg:text-left" style={{ color: "#0D9488" }}>
                 AI bot chat integration
               </h2>
-              <p className="text-base text-[#4B5563] leading-relaxed mb-6 max-w-lg">
+              <p className="text-base text-[#4B5563] leading-relaxed mb-6 max-w-lg text-center lg:text-left mx-auto lg:mx-0">
                 Chat is added when it improves enquiry handling and supports faster routing.
               </p>
               
@@ -37,7 +37,7 @@ const AiChatBot = () => {
             </div>
 
             {/* Right Video Placeholder */}
-             <div className="relative overflow-hidden rounded-2xl -mx-6 lg:mx-0" style={{ lineHeight: 0 }}>
+             <div className="relative overflow-hidden rounded-2xl lg:mx-0" style={{ lineHeight: 0 }}>
               <video
                 autoPlay
                 muted

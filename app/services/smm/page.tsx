@@ -1,5 +1,6 @@
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import HeroSection from "./HeroSection";
 import GrowthStatsSection from "./GrowthStatsSection";
 import TrustedBySection from "./TrustedBySection";
@@ -49,6 +50,7 @@ const SocialMediaMarketing = () => {
           "A clear 30-60 day execution direction",
         ]}
       />
+      <MobileStickyButtons />
       <Footer />
     </div>
   );

@@ -18,13 +18,13 @@ const SuccessCTASection = () => {
     };
   }, [showModal]);
   return (
-    <section className="py-20 bg-[#FFFFFF]/30">
+    <section className="py-8 md:py-20 bg-[#FFFFFF]/30">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-7xl mx-auto border border-[#E5E7EB] rounded-3xl overflow-hidden shadow-sm">
           <div className="grid md:grid-cols-2 gap-0">
             {/* Left Card - Ready to Transform */}
             <div className="bg-white p-10">
-              <h3 className="text-4xl font-bold text-[#0D5C94] mb-6">
+              <h3 className="text-2xl md:text-4xl font-bold text-[#0D5C94] mb-6 text-center md:text-left">
                 Ready to Transform Your Patient Care Journey?
               </h3>
               <p className="text-[#737B8C] text-base leading-relaxed">

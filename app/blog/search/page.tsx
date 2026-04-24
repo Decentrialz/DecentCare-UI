@@ -5,6 +5,7 @@ import { Suspense, useState, useMemo } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import { Button } from "@/app/components/ui/button";
 import { PaginationControl } from "@/app/components/ui/pagination";
 import { ArticlesSectionHeader, BlogHero, NoArticlesFound } from "@/app/blog/components";
@@ -35,6 +36,7 @@ export default function BlogSearchPage() {
       <Suspense fallback={<SearchFallback />}>
         <BlogSearchContent />
       </Suspense>
+      <MobileStickyButtons />
       <Footer />
     </div>
   );

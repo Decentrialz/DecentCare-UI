@@ -10,9 +10,9 @@ const whatWeDeliver = [
 ];
 
 const WhatWeDeliverSection = () => (
-  <section className="py-20 lg:py-28 bg-[#FFFFFF]">
+  <section className="py-14 lg:py-28 bg-[#FFFFFF]">
     <div className="container mx-auto px-4 lg:px-8">
-      <h2 className="text-lg md:text-xl lg:text-2xl font-extrabold text-primary text-center mb-14" style={{
+      <h2 className="text-2xl font-extrabold text-primary text-center mb-14" style={{
                 background: "linear-gradient(135deg, #0D9488, #0D5C94)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",

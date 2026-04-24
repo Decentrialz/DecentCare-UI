@@ -105,43 +105,30 @@ const HowWeWorkSection = () => {
           </div>
 
           {/* Mobile/Tablet Timeline */}
-          <div className="lg:hidden space-y-8">
-            {phases.map((phase, index) => (
-              <div key={phase.number} className="flex gap-6">
-                {/* Circle with Line */}
-                <div className="flex flex-col items-center">
-                  <div
-                    className="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0"
+          <div className="lg:hidden space-y-12 max-w-md mx-auto">
+            {phases.map((phase) => (
+              <div key={phase.number} className="flex flex-col items-center text-center">
+                {/* Circle */}
+                <div
+                  className="w-14 h-14 rounded-full bg-white flex items-center justify-center mb-4"
+                  style={{
+                    border: "3px solid",
+                    borderColor: phase.number === 5 ? "#0D9488" : "#0D5C94",
+                  }}
+                >
+                  <span
+                    className="text-xl font-bold"
                     style={{
-                      border: "3px solid",
-                      borderColor:
-                        phase.number === 5 ? "#0D9488" : "#0D5C94",
+                      color: phase.number === 5 ? "#0D9488" : "#0D5C94",
                     }}
                   >
-                    <span
-                      className="text-xl font-bold"
-                      style={{
-                        color: phase.number === 5 ? "#0D9488" : "#0D5C94",
-                      }}
-                    >
-                      {phase.number}
-                    </span>
-                  </div>
-                  {index !== phases.length - 1 && (
-                    <div
-                      className="w-0.5 flex-1 mt-4"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, #0D5C94 0%, #0D9488 100%)",
-                        minHeight: "60px",
-                      }}
-                    />
-                  )}
+                    {phase.number}
+                  </span>
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 pb-8">
-                  <h3 className="text-lg font-bold text-[#0F172A] mb-2">
+                <div>
+                  <h3 className="text-base font-bold text-[#0F172A] mb-3">
                     {phase.title}
                   </h3>
                   <p className="text-sm text-[#64748B] leading-relaxed">

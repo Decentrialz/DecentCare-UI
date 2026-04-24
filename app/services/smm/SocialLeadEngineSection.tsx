@@ -14,7 +14,7 @@ const trackedMetrics = [
 ];
 
 const SocialLeadEngineSection = () => (
-  <section className="py-08 lg:py-14 bg-background">
+  <section className="py-12 lg:py-14 bg-background">
     <div className="container mx-auto px-4 lg:px-8">
       <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
         <Image
@@ -25,7 +25,7 @@ const SocialLeadEngineSection = () => (
           priority
         />
         <div className="space-y-6">
-          <h2 className="text-xl md:text-2xl font-extrabold text-primary" style={{
+          <h2 className="text-2xl font-extrabold text-primary text-center lg:text-left" style={{
                 background: "linear-gradient(135deg, #0D9488, #0D5C94)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -33,7 +33,7 @@ const SocialLeadEngineSection = () => (
                 paddingBottom: "0.15em",
                 lineHeight: 1.15,
               }}>Social Lead Engine</h2>
-          <p className="text-[#818584] text-sm mt-[-15px]">Built to convert patient interest into booked appointments.</p>
+          <p className="text-[#818584] text-sm mt-[-15px] text-center lg:text-left">Built to convert patient interest into booked appointments.</p>
           <div className="space-y-4">
             {leadEngineFeatures.map((f, i) => (
               <div key={i} className="flex items-center gap-4 bg-[#FFFFFF] rounded-xl p-4" style={{ border: '1px solid #E5E7EB'}}>
@@ -56,11 +56,11 @@ const SocialLeadEngineSection = () => (
                 paddingBottom: "0.15em",
                 lineHeight: 1.15,
               }}>Tracked</h4>
-        <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
+        <div className="flex flex-wrap justify-center gap-2 lg:gap-4 text-xs lg:text-sm text-muted-foreground">
           {trackedMetrics.map((m, i) => (
-            <span key={i} className="flex items-center gap-8 text-[#5E6160]">
+            <span key={i} className="flex items-center gap-2 lg:gap-4 text-[#5E6160]">
               {m}
-              {i < trackedMetrics.length - 1 && <span className="w-1.5 h-1.5 rounded-full" style={{ background: "linear-gradient(135deg, #0D9488, #0D5C94)" }} />}
+              {i < trackedMetrics.length - 1 && <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "linear-gradient(135deg, #0D9488, #0D5C94)" }} />}
             </span>
           ))}
         </div>

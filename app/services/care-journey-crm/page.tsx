@@ -1,8 +1,8 @@
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import Breadcrumb from "@/app/components/Breadcrumb";
 import CareJourneyHero from "./CareJourneyHero";
-import PatientOverviewCard from "./PatientOverviewCard";
 import CompletePatientJourneySection from "./CompletePatientJourneySection";
 import EnquirySchedulingSection from "./EnquirySchedulingSection";
 import JourneyStagesSection from "./JourneyStagesSection";
@@ -23,7 +23,7 @@ export default function CareJourneyCRMPage() {
       <Navbar />
 
       <section
-        className={`${SECTION_PADDING} mt-16 sm:mt-18 pt-10 pb-[120px]`}
+        className={`${SECTION_PADDING} mt-16 sm:mt-18 pt-10 pb-[60px] md:pb-[120px]`}
         style={{ background: "var(--gradient-blue-wash-vertical)" }}
       >
         <div className={CONTENT_MAX}>
@@ -38,12 +38,7 @@ export default function CareJourneyCRMPage() {
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <CareJourneyHero />
-            <div className="lg:pl-4">
-              <PatientOverviewCard />
-            </div>
-          </div>
+          <CareJourneyHero />
         </div>
       </section>
 
@@ -61,6 +56,7 @@ export default function CareJourneyCRMPage() {
         heading="Stop managing patients across disconnected systems."
         description="AI-Enabled Care Journey CRM connects enquiry, scheduling, clinical workflows, surgery coordination, and recovery management into one structured system."
       />
+      <MobileStickyButtons />
       <Footer />
     </div>
   );

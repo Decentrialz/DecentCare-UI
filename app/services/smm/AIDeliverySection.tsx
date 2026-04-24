@@ -13,10 +13,10 @@ const resultItems = [
 ];
 
 const AIDeliverySection = () => (
-  <section className=" relative py-08 lg:py-14 bg-[#FFFFFF]">
+  <section className=" relative py-10 lg:py-14 bg-[#FFFFFF]">
      <div className="absolute rounded-full" style={{ left: '85px', top: '310px', width: '1242.95px', height: '280.53px', background: 'linear-gradient(135deg, #0D5C94, #0B887D)', opacity: '0.12', filter: 'blur(64px)', transform: 'rotate(-8.36deg)', borderRadius: '8677.69px' }} />
     <div className="container mx-auto px-4 lg:px-8 text-center">
-      <h2 className="text-md md:text-xl lg:text-2xl font-extrabold text-primary mb-3" style={{
+      <h2 className="text-2xl font-extrabold text-primary mb-3" style={{
                 background: "linear-gradient(135deg, #0D9488, #0D5C94)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -51,11 +51,11 @@ const AIDeliverySection = () => (
                 paddingBottom: "0.15em",
                 lineHeight: 1.15,
               }}>Result</h4>
-        <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
+        <div className="flex flex-wrap justify-center gap-2 lg:gap-4 text-xs lg:text-sm text-muted-foreground">
           {resultItems.map((r, i) => (
-            <span key={i} className="flex items-center gap-2">
+            <span key={i} className="flex items-center gap-2 lg:gap-3 text-[#5E6160]">
               {r}
-              {i < resultItems.length - 1 && <span className="w-1.5 h-1.5 rounded-full" style={{ background: "linear-gradient(135deg, #0D9488, #0D5C94)" }} />}
+              {i < resultItems.length - 1 && <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "linear-gradient(135deg, #0D9488, #0D5C94)" }} />}
             </span>
           ))}
         </div>

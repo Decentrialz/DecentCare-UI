@@ -12,15 +12,17 @@ const WhyTrustUsSection = () => (
     <div className="container mx-auto px-4 lg:px-8">
       <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
         <div>
-          <div className="inline-flex items-center px-4 py-2 bg-accent/10 rounded-full mb-6" style={{ background: 'rgba(13, 148, 136, 0.10)' }}>
-            <span className="text-sm font-medium text-[#0D9488]">Why Healthcare Providers Trust Us</span>
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center px-4 py-2 bg-accent/10 rounded-full mb-6 mx-auto lg:mx-0" style={{ background: 'rgba(13, 148, 136, 0.10)' }}>
+              <span className="text-sm font-medium text-[#0D9488]">Why Healthcare Providers Trust Us</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#0D5C94] mb-6">
+              Purpose-Built for Healthcare Excellence
+            </h2>
+            <p className="text-[#737B8C] mb-8">
+              Built around how hospitals actually function, aligning teams, simplifying workflows, and creating clarity across every stage of growth and patient engagement.
+            </p>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0D5C94] mb-6">
-            Purpose-Built for Healthcare Excellence
-          </h2>
-          <p className="text-[#737B8C] mb-8">
-            Built around how hospitals actually function, aligning teams, simplifying workflows, and creating clarity across every stage of growth and patient engagement.
-          </p>
           <div className="space-y-6">
             {[
               { title: "Healthcare-First Design", desc: "Built specifically for healthcare with systems that reflect real clinical coordination, enquiry handling and operational workflows.", icon: Shield },
@@ -44,7 +46,7 @@ const WhyTrustUsSection = () => (
         </div>
         <div className="bg-[#EDF0F2]/50 rounded-2xl p-8">
           <h3 className="text-center font-semibold text-[#737B8C] mb-8 mt-4">Trusted by Healthcare Leaders</h3>
-          <div className="grid grid-cols-2 gap-8 items-center justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-items-center">
             {[
               { name: "LUX HOSPITALS", image: lux },
               { name: "Praana Vaidya", image: vaidya },
@@ -64,7 +66,7 @@ const WhyTrustUsSection = () => (
               </div>
             ))}
           </div>
-          <div className="flex justify-center gap-4 mt-8 pt-8" style={{ borderTop: '1px solid rgba(0, 0, 0, 0.08)' }}>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-8 pt-8" style={{ borderTop: '1px solid rgba(0, 0, 0, 0.08)' }}>
             <div className="flex items-center gap-2 text-sm px-4 py-2 rounded-full font-semibold" style={{ background: '#F9FAFB', color: '#1B2232', border: '1px solid', borderColor:'#DAE0E7' }}>
               <Shield className="w-4 h-4 text-[#1F938A]" /> Data Secure
             </div>

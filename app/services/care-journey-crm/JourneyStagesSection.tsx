@@ -38,7 +38,7 @@ export default function JourneyStagesSection() {
     >
       <div className={CONTENT_MAX}>
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-12">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-secondary-green leading-tight">
+          <h2 className="text-2xl md:text-3xl font-bold text-secondary-green leading-tight">
             Two paths from every consultation — both tracked
           </h2>
           <p className="mt-3 text-sm sm:text-base text-gray-icon leading-relaxed">

@@ -1,5 +1,6 @@
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
+import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import HeroSection from "./HeroSection";
 import DecentCareWaySection from "./DecentCareWaySection";
 import WhoThisServiceIsForSection from "./WhoThisServiceIsForSection";
@@ -51,6 +52,7 @@ const PaidMarketingPage = () => {
       <WhatYouGetSection />
       <AuditCTASection />
       <FAQSection faqs={paidMarketingFaqs} />
+      <MobileStickyButtons />
       <Footer />
     </div>
   );
