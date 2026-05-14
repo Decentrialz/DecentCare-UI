@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState, useMemo } from "react";
+import { Suspense, useState, useMemo, useEffect } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
@@ -10,24 +10,13 @@ import { Button } from "@/app/components/ui/button";
 import { PaginationControl } from "@/app/components/ui/pagination";
 import { ArticlesSectionHeader, BlogHero, NoArticlesFound } from "@/app/blog/components";
 import ArticleCard from "@/app/blog/components/ArticleCard";
-import { MOCK_ARTICLES } from "@/app/blog/lib/MockArticles";
+import { searchPosts } from "@/app/blog/lib/sanity-api";
+import type { BlogArticle } from "@/sanity/types/blog";
 
 const SECTION_PADDING = "px-4 md:px-8 lg:px-16 xl:px-20";
 const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
 const ITEMS_PER_PAGE = 12;
 const INITIAL_VISIBLE_PER_PAGE = 6;
-
-function filterArticles(query: string) {
-  if (!query.trim()) return MOCK_ARTICLES;
-  const lower = query.trim().toLowerCase();
-  return MOCK_ARTICLES.filter(
-    (a) =>
-      a.title.toLowerCase().includes(lower) ||
-      a.description.toLowerCase().includes(lower) ||
-      a.category.toLowerCase().includes(lower) ||
-      a.author.toLowerCase().includes(lower),
-  );
-}
 
 export default function BlogSearchPage() {
   return (
@@ -59,8 +48,20 @@ function BlogSearchContent() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedOnCurrentPage, setExpandedOnCurrentPage] = useState(false);
+  const [filteredArticles, setFilteredArticles] = useState<BlogArticle[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredArticles = useMemo(() => filterArticles(q), [q]);
+  // Fetch search results
+  useEffect(() => {
+    async function fetchResults() {
+      setLoading(true);
+      const results = await searchPosts(q);
+      setFilteredArticles(results);
+      setLoading(false);
+    }
+    fetchResults();
+  }, [q]);
+
   const totalResults = filteredArticles.length;
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const pageArticles = filteredArticles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
@@ -70,11 +71,20 @@ function BlogSearchContent() {
   const canLoadMore = !expandedOnCurrentPage && pageArticles.length > INITIAL_VISIBLE_PER_PAGE;
   const canShowFewer = expandedOnCurrentPage;
 
-
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     setExpandedOnCurrentPage(false);
   };
+
+  if (loading) {
+    return (
+      <main className="pt-24 pb-16 px-4 md:px-8 lg:px-16 xl:px-20">
+        <div className="w-full max-w-4xl mx-auto">
+          <p className="text-muted-foreground">Loading search results...</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <>

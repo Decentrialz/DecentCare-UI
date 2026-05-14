@@ -4,24 +4,19 @@ import { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/app/components/lib/utils";
 import SectionTitleWithCount from "./SectionTitleWithCount";
+import type { SanityCategory } from "@/sanity/types/blog";
 
 interface ArticlesSectionHeaderProps {
   title: string;
   countLabel: string;
   showCategoryFilter?: boolean;
   showSortFilter?: boolean;
+  categories?: SanityCategory[];
+  selectedCategory?: string;
+  selectedSort?: string;
+  onCategoryChange?: (category: string) => void;
+  onSortChange?: (sort: string) => void;
 }
-
-const CATEGORY_OPTIONS = [
-  "Growth",
-  "Patient Journey",
-  "CRM & Automation",
-  "Marketing",
-  "Digital Health",
-  "Web & Tech",
-  "Operations",
-  "Insights",
-];
 
 const SORT_OPTIONS = ["Latest", "Most Relevant", "Most Read", "Oldest"];
 
@@ -39,11 +34,14 @@ export default function ArticlesSectionHeader({
   countLabel,
   showCategoryFilter = false,
   showSortFilter = true,
+  categories = [],
+  selectedCategory = "",
+  selectedSort = "",
+  onCategoryChange,
+  onSortChange,
 }: ArticlesSectionHeaderProps) {
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedSort, setSelectedSort] = useState("");
   const categoryRef = useRef<HTMLDivElement>(null);
   const sortRef = useRef<HTMLDivElement>(null);
 
@@ -57,6 +55,18 @@ export default function ArticlesSectionHeader({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleCategorySelect = (category: string) => {
+    // Toggle category - if same category clicked, clear it
+    const newCategory = selectedCategory === category ? "" : category;
+    onCategoryChange?.(newCategory);
+    setCategoryOpen(false);
+  };
+
+  const handleSortSelect = (sort: string) => {
+    onSortChange?.(sort);
+    setSortOpen(false);
+  };
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -82,19 +92,16 @@ export default function ArticlesSectionHeader({
             </button>
             {categoryOpen && (
               <div className={dropdownPanelClassName} role="listbox">
-                {CATEGORY_OPTIONS.map((opt) => (
+                {categories.map((cat) => (
                   <button
-                    key={opt}
+                    key={cat._id}
                     type="button"
                     role="option"
-                    aria-selected={selectedCategory === opt}
-                    onClick={() => {
-                      setSelectedCategory(opt);
-                      setCategoryOpen(false);
-                    }}
+                    aria-selected={selectedCategory === cat.name}
+                    onClick={() => handleCategorySelect(cat.name)}
                     className={dropdownItemClassName}
                   >
-                    {opt}
+                    {cat.name}
                   </button>
                 ))}
               </div>
@@ -127,10 +134,7 @@ export default function ArticlesSectionHeader({
                     type="button"
                     role="option"
                     aria-selected={selectedSort === opt}
-                    onClick={() => {
-                      setSelectedSort(opt);
-                      setSortOpen(false);
-                    }}
+                    onClick={() => handleSortSelect(opt)}
                     className={dropdownItemClassName}
                   >
                     {opt}

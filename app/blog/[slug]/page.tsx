@@ -2,14 +2,11 @@ import { notFound } from "next/navigation";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
-import {
-  getArticleDetailBySlug,
-  getRecommendedArticles,
-} from "@/app/blog/lib/MockArticles";
-import BlogBody from "@/app/blog/components/BlogBody";
+import { getPostBySlug, getRecommendedPosts, getAllPostSlugs } from "@/app/blog/lib/sanity-api";
 import RecommendedBlogsSection from "@/app/blog/components/RecommendedBlogsSection";
 import { BlogDetailHero } from "../components";
 import Breadcrumb from "@/app/components/Breadcrumb";
+import BlogBodyWithToc from "@/app/blog/components/BlogBodyWithToc";
 
 const SECTION_PADDING = "px-4 md:px-8 lg:px-16 xl:px-20";
 const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
@@ -18,12 +15,39 @@ interface BlogDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  const slugs = await getAllPostSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({ params }: BlogDetailPageProps) {
+  const { slug } = await params;
+  const article = await getPostBySlug(slug);
+
+  if (!article) {
+    return {
+      title: "Blog Post Not Found - DecentCare",
+    };
+  }
+
+  return {
+    title: article.seoTitle || `${article.title} - DecentCare Blog`,
+    description: article.seoDescription || article.description,
+  };
+}
+
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { slug } = await params;
-  const article = getArticleDetailBySlug(slug);
-  if (!article) notFound();
+  const article = await getPostBySlug(slug);
+  
+  if (!article) {
+    notFound();
+  }
 
-  const recommended = getRecommendedArticles(article.id, 9);
+  // Fetch recommended articles
+  const recommended = await getRecommendedPosts(article.id, 9);
 
   return (
     <div className="min-h-screen bg-background">
@@ -35,9 +59,16 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
               <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Blogs" }]} breadCrumbClass="bg-secondary-green/4"/>
             </div>
             <BlogDetailHero article={article} />
+            
+            {/* Article Body with TOC and Share */}
             <div className="mt-10 md:mt-14">
-              <BlogBody article={article} />
+              <BlogBodyWithToc 
+                body={article.body}
+                imageUrl={article.imageUrl}
+                title={article.title}
+              />
             </div>
+            
             <RecommendedBlogsSection articles={recommended} className="mt-16 md:mt-20" />
           </div>
         </div>

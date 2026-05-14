@@ -6,64 +6,36 @@ import { Button } from "@/app/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-import latestBlogsImage from "@/app/assets/latest-blogs1.png";
-import latestBlogsImage2 from "@/app/assets/latest-blogs-2.png";
-import latestBlogsImage3 from "@/app/assets/latest-blogs-3.png";
+import type { BlogArticle } from "@/sanity/types/blog";
 
 const SECTION_PADDING = "px-4 md:px-8 lg:px-16 xl:px-20";
 const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
 
 const FEATURED_TAG = "Top 3 Latest Blogs";
 
-const LATEST_BLOGS = [
-  {
-    title: "How SEO Helps Hospitals Attract High-Intent Patients In India",
-    description:
-      "Patients rarely walk into a hospital without searching first. Search engines play a central role in healthcare decisions.",
-    author: "Ananya Rao",
-    imageUrl: latestBlogsImage,
-    imageAlt: "Healthcare professionals collaborating at a clinic",
-    href: "#",
-  },
-  {
-    title:
-      "Using Social Media to Build Patient Trust Without Over-Promoting Services",
-    description:
-      "Social media has become an important touchpoint for healthcare brands, but patients are increasingly sensitive to overt marketing.",
-    author: "Rohit Iyer",
-    imageUrl:
-      latestBlogsImage2,
-    imageAlt: "Healthcare professionals discussing with smartphone",
-    href: "#",
-  },
-  {
-    title:
-      "Paid Marketing for Healthcare: Turning Ad Spend Into Real Patient Enquiries",
-    description:
-      "Paid marketing can generate immediate visibility for healthcare providers, but without the right structure it can drain budgets.",
-    author: "Neha Kulkarni",
-    imageUrl:
-      latestBlogsImage3,
-    imageAlt: "Healthcare professional with megaphone",
-    href: "#",
-  },
- 
-];
+interface LatestBlogsProps {
+  featuredPosts: BlogArticle[];
+}
 
-export default function LatestBlogs() {
+export default function LatestBlogs({ featuredPosts }: LatestBlogsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const current = LATEST_BLOGS[currentIndex];
+  
+  // Use provided featured posts or show empty state
+  if (!featuredPosts || featuredPosts.length === 0) {
+    return null;
+  }
+  
+  const current = featuredPosts[currentIndex];
 
   const goPrev = () => {
     setCurrentIndex((prev) =>
-      prev === 0 ? LATEST_BLOGS.length - 1 : prev - 1
+      prev === 0 ? featuredPosts.length - 1 : prev - 1
     );
   };
 
   const goNext = () => {
     setCurrentIndex((prev) =>
-      prev === LATEST_BLOGS.length - 1 ? 0 : prev + 1
+      prev === featuredPosts.length - 1 ? 0 : prev + 1
     );
   };
 
@@ -180,7 +152,7 @@ export default function LatestBlogs() {
 
                   <Image
                     src={current.imageUrl}
-                    alt={current.imageAlt}
+                    alt={current.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 42vw"
                     className="object-cover"

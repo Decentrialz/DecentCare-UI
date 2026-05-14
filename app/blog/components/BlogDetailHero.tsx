@@ -1,12 +1,12 @@
 import { Calendar, Clock, Eye } from "lucide-react";
-import type { BlogArticleDetail } from "@/app/blog/lib/MockArticles";
+import type { BlogArticleDetail } from "@/sanity/types/blog";
 
 interface BlogDetailHeroProps {
   article: BlogArticleDetail;
 }
 
 export default function BlogDetailHero({ article }: BlogDetailHeroProps) {
-  const tag = article.tag ?? article.category;
+  const tag = article.category;
   const readTimeNum = article.readTime.replace(/\D/g, "") || "5";
 
   return (
