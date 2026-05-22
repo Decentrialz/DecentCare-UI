@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Calendar, Clock, UserRound } from "lucide-react";
-import type { BlogArticle } from "@/app/blog/lib/MockArticles";
+import type { BlogArticle } from "@/sanity/types/blog";
 
 interface ArticleCardProps {
   article: BlogArticle;
 }
 
 export default function ArticleCard({ article }: ArticleCardProps) {
-  const href = `/blog/${article.id}`;
+  const href = `/blog/${article.slug}`;
   return (
     <Link href={href} className="block h-full">
     <article
@@ -53,9 +53,21 @@ export default function ArticleCard({ article }: ArticleCardProps) {
 
         <div className="flex items-center justify-between mt-auto border-t border-border pt-4">
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center">
-              <UserRound className="w-5 h-5 text-gray-icon" />
-            </div>
+            {article.authorImage ? (
+              <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-200">
+                <Image
+                  src={article.authorImage}
+                  alt={article.author}
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ) : (
+              <div className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center">
+                <UserRound className="w-5 h-5 text-gray-icon" />
+              </div>
+            )}
             <span className="text-sm text-gray-text font-medium">{article.author}</span>
           </div>
           <span className="text-sm font-medium text-primary-blue shrink-0 flex items-center gap-1">

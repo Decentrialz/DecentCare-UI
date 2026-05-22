@@ -1,6 +1,6 @@
 "use client";
 
-import type { BlogArticle } from "@/app/blog/lib/MockArticles";
+import type { BlogArticle } from "@/sanity/types/blog";
 import ArticleCard from "./ArticleCard";
 import SectionTitleWithCount from "./SectionTitleWithCount";
 import { Swiper, SwiperSlide } from "swiper/react";

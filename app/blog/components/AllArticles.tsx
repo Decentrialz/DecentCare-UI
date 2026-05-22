@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { PaginationControl } from "@/app/components/ui/pagination";
-import { MOCK_ARTICLES } from "@/app/blog/lib/MockArticles";
+import type { BlogArticle, SanityCategory } from "@/sanity/types/blog";
 import ArticleCard from "./ArticleCard";
 import ArticlesSectionHeader from "./ArticlesSectionHeader";
 
@@ -14,12 +14,28 @@ const INITIAL_VISIBLE_PER_PAGE = 6;
 const SECTION_PADDING = "px-4 md:px-8 lg:px-16 xl:px-20";
 const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
 
-export default function AllArticles() {
+interface AllArticlesProps {
+  articles: BlogArticle[];
+  categories?: SanityCategory[];
+  selectedCategory?: string;
+  selectedSort?: string;
+  onCategoryChange?: (category: string) => void;
+  onSortChange?: (sort: string) => void;
+}
+
+export default function AllArticles({ 
+  articles,
+  categories,
+  selectedCategory,
+  selectedSort,
+  onCategoryChange,
+  onSortChange
+}: AllArticlesProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedOnCurrentPage, setExpandedOnCurrentPage] = useState(false);
-  const totalBlogs = MOCK_ARTICLES.length;
+  const totalBlogs = articles.length;
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const pageArticles = MOCK_ARTICLES.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const pageArticles = articles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   const visibleCount = expandedOnCurrentPage ? ITEMS_PER_PAGE : INITIAL_VISIBLE_PER_PAGE;
   const displayedArticles = pageArticles.slice(0, visibleCount);
 
@@ -44,6 +60,11 @@ export default function AllArticles() {
             title="All Articles"
             countLabel={`${totalBlogs} blogs available`}
             showCategoryFilter
+            categories={categories}
+            selectedCategory={selectedCategory}
+            selectedSort={selectedSort}
+            onCategoryChange={onCategoryChange}
+            onSortChange={onSortChange}
           />
 
           {/* Blog grid */}
