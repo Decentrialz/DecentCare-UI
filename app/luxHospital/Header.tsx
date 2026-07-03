@@ -4,10 +4,15 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Menu, X, Phone } from 'lucide-react';
-import { trackPhoneClick } from '@/lib/tracking';
+import { trackPhoneClick, useVirtualNumber } from '@/lib/tracking';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { telHref, displayNumber, virtualNumber } = useVirtualNumber();
+
+  const callHref = telHref || 'tel:07969084448';
+  const callLabel = displayNumber || '07969084448';
+  const dialedNumber = virtualNumber || displayNumber || '07969084448';
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -18,7 +23,7 @@ export default function Header() {
   ];
 
   const handlePhoneClick = (location: string) => {
-    trackPhoneClick('07969084448', location);
+    trackPhoneClick(dialedNumber, location);
   };
 
   return (
@@ -75,12 +80,12 @@ export default function Header() {
           {/* Phone Number Button */}
           <div className="hidden lg:flex">
             <a
-              href="tel:07969084448"
+              href={callHref}
               onClick={() => handlePhoneClick('header_desktop')}
               className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-full flex items-center gap-2 transition-colors shadow-lg"
             >
               <Phone className="w-5 h-5" />
-              07969084448
+              {callLabel}
             </a>
           </div>
 
@@ -120,12 +125,12 @@ export default function Header() {
               </a>
             ))}
             <a
-              href="tel:07969084448"
+              href={callHref}
               onClick={() => handlePhoneClick('header_mobile')}
               className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-full flex items-center justify-center gap-2 transition-colors shadow-lg mt-2"
             >
               <Phone className="w-5 h-5" />
-              07969084448
+              {callLabel}
             </a>
           </nav>
         </div>

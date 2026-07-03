@@ -50,7 +50,7 @@ export function trackPhoneClick(phoneNumber: string, location: string, additiona
     if (currentPhoneSession && currentPhoneSession.leftPageAt === null) {
       // User didn't leave the page - might have cancelled or copied number
       tracker.track('phone_call_cancelled', {
-        phone_number: phoneNumber,
+        dialed_number: phoneNumber,
         location: location,
         reason: 'no_page_leave',
         time_since_click: Date.now() - clickTime
@@ -71,7 +71,7 @@ function setupVisibilityTracking() {
       const timeToLeave = currentPhoneSession.leftPageAt - currentPhoneSession.clickedAt;
       
       tracker.track('phone_dialer_opened', {
-        phone_number: currentPhoneSession.phone,
+        dialed_number: currentPhoneSession.phone,
         location: currentPhoneSession.location,
         time_to_leave: timeToLeave
       });
@@ -87,7 +87,7 @@ function setupVisibilityTracking() {
       const callStatus = inferCallStatus(timeAway);
       
       tracker.track('phone_session_completed', {
-        phone_number: currentPhoneSession.phone,
+        dialed_number: currentPhoneSession.phone,
         location: currentPhoneSession.location,
         time_away_ms: timeAway,
         time_away_seconds: Math.round(timeAway / 1000),

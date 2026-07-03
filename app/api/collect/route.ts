@@ -5,7 +5,6 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { transformToBackendFormat } from '@/lib/tracking/backendTransformer';
 
 // In-memory store for dashboard
 let events: any[] = [];
@@ -110,27 +109,21 @@ function calculateTimestamp(event: any): string {
 
 /**
  * Forward events to backend API (bypasses CORS since this runs server-side)
- * Transforms from Segment format to backend format
+ * Forward payload unchanged; backend normalizes Segment/flat payloads.
  */
 async function forwardToBackend(eventData: any): Promise<void> {
   try {
-    // Transform to backend format
-    const events = Array.isArray(eventData) ? eventData : [eventData];
-    const backendEvents = events.map(event => transformToBackendFormat(event));
-    const payload = backendEvents.length === 1 ? backendEvents[0] : backendEvents;
-    
     const response = await fetch(BACKEND_API, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${COGNITO_TOKEN}`,
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(eventData),
     });
 
     if (response.ok) {
-      console.log('[Tracking API] ✅ Forwarded to backend:', response.status, 
-        backendEvents.map(e => e.event_type).join(', '));
+      console.log('[Tracking API] ✅ Forwarded to backend:', response.status);
     } else {
       const text = await response.text();
       console.error('[Tracking API] ❌ Backend rejected:', response.status, text);
