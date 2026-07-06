@@ -105,7 +105,16 @@ function sendEvent(event: Event): boolean {
                     event.type;
   console.log('[Tracker] Sending event:', event.type, eventName, event);
   
-  // Use fetch with keepalive (ensures delivery even on page unload)
+  // Use sendBeacon first so unload-time events are not dropped.
+  if (typeof navigator !== 'undefined' && typeof navigator.sendBeacon === 'function') {
+    const beaconBody = new Blob([payload], { type: 'application/json' });
+    const accepted = navigator.sendBeacon(API_ENDPOINT, beaconBody);
+    if (accepted) {
+      return true;
+    }
+  }
+
+  // Fallback: fetch keepalive for browsers where beacon is unavailable/rejected.
   fetch(API_ENDPOINT, {
     method: 'POST',
     headers: {

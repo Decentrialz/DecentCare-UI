@@ -9,7 +9,7 @@ function QRScanner() {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
   const { anonymousId, sessionId } = useTracker();
-  
+
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -87,7 +87,7 @@ function QRScanner() {
               <p className="text-gray-600 mb-6">
                 Your device is now securely connected. We have securely synced your history with your profile to provide a better experience.
               </p>
-              <a href="/" className="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors shadow-md">
+              <a href="/luxHospital" className="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors shadow-md">
                 Go to Home Page
               </a>
             </div>
