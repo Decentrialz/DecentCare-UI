@@ -8,11 +8,17 @@ import { trackPhoneClick, useVirtualNumber } from '@/lib/tracking';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { telHref, displayNumber, virtualNumber } = useVirtualNumber();
+  const { telHref, displayNumber, virtualNumber, loading, error } = useVirtualNumber();
 
-  const callHref = telHref || 'tel:07969084448';
-  const callLabel = displayNumber || '07969084448';
-  const dialedNumber = virtualNumber || displayNumber || '07969084448';
+  const isNumberReady = Boolean(telHref && displayNumber);
+  const showStaticFallback = Boolean(error) && !isNumberReady;
+  const isNumberLoading = loading && !isNumberReady && !showStaticFallback;
+  const callHref = isNumberReady ? telHref! : (showStaticFallback ? 'tel:07969084448' : undefined);
+  const callLabel = isNumberReady ? displayNumber! : (showStaticFallback ? '07969084448' : 'Loading...');
+  const dialedNumber = isNumberReady ? (virtualNumber || displayNumber || '') : (showStaticFallback ? '07969084448' : '');
+  const callLabelNode = isNumberLoading
+    ? <span className="inline-block h-4 w-24 rounded bg-white/35 animate-pulse" aria-label="Loading call number" />
+    : callLabel;
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -23,6 +29,7 @@ export default function Header() {
   ];
 
   const handlePhoneClick = (location: string) => {
+    if (!dialedNumber) return;
     trackPhoneClick(dialedNumber, location);
   };
 
@@ -82,10 +89,11 @@ export default function Header() {
             <a
               href={callHref}
               onClick={() => handlePhoneClick('header_desktop')}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-full flex items-center gap-2 transition-colors shadow-lg"
+              aria-disabled={!callHref}
+              className={`bg-purple-600 text-white font-semibold px-6 py-3 rounded-full flex items-center gap-2 transition-colors shadow-lg ${callHref ? 'hover:bg-purple-700' : 'opacity-80 cursor-not-allowed'}`}
             >
               <Phone className="w-5 h-5" />
-              {callLabel}
+              {callLabelNode}
             </a>
           </div>
 
@@ -127,10 +135,11 @@ export default function Header() {
             <a
               href={callHref}
               onClick={() => handlePhoneClick('header_mobile')}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-full flex items-center justify-center gap-2 transition-colors shadow-lg mt-2"
+              aria-disabled={!callHref}
+              className={`bg-purple-600 text-white font-semibold px-6 py-3 rounded-full flex items-center justify-center gap-2 transition-colors shadow-lg mt-2 ${callHref ? 'hover:bg-purple-700' : 'opacity-80 cursor-not-allowed'}`}
             >
               <Phone className="w-5 h-5" />
-              {callLabel}
+              {callLabelNode}
             </a>
           </nav>
         </div>
