@@ -5,13 +5,20 @@ import Image from 'next/image';
 import { trackPhoneClick, useVirtualNumber } from '@/lib/tracking';
 
 export default function LocationSection() {
-  const { telHref, displayNumber, virtualNumber } = useVirtualNumber();
+  const { telHref, displayNumber, virtualNumber, loading, error } = useVirtualNumber();
 
-  const callHref = telHref || 'tel:07969084448';
-  const callLabel = displayNumber || '07969084448';
-  const dialedNumber = virtualNumber || displayNumber || '07969084448';
+  const isNumberReady = Boolean(telHref && displayNumber);
+  const showStaticFallback = Boolean(error) && !isNumberReady;
+  const isNumberLoading = loading && !isNumberReady && !showStaticFallback;
+  const callHref = isNumberReady ? telHref! : (showStaticFallback ? 'tel:07969084448' : undefined);
+  const callLabel = isNumberReady ? displayNumber! : (showStaticFallback ? '07969084448' : 'Loading...');
+  const dialedNumber = isNumberReady ? (virtualNumber || displayNumber || '') : (showStaticFallback ? '07969084448' : '');
+  const callLabelNode = isNumberLoading
+    ? <span className="inline-block h-5 w-28 rounded bg-purple-200 animate-pulse" aria-label="Loading call number" />
+    : callLabel;
 
   const handlePhoneClick = () => {
+    if (!dialedNumber) return;
     trackPhoneClick(dialedNumber, 'location_section');
   };
 
@@ -115,9 +122,10 @@ export default function LocationSection() {
                 <a 
                   href={callHref}
                   onClick={handlePhoneClick}
-                  className="text-xl font-semibold text-purple-900 hover:text-purple-700"
+                  aria-disabled={!callHref}
+                  className={`text-xl font-semibold ${callHref ? 'text-purple-900 hover:text-purple-700' : 'text-purple-600 cursor-not-allowed'}`}
                 >
-                  {callLabel}
+                  {callLabelNode}
                 </a>
               </div>
               <p className="text-gray-600">

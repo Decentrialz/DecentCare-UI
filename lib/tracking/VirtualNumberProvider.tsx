@@ -47,7 +47,8 @@ async function getGeoData(): Promise<{ lat: number; lng: number; accuracy_m: num
 
 export function VirtualNumberProvider({ children }: { children: React.ReactNode }) {
   const [assignment, setAssignment] = useState<VirtualNumberData | null>(null);
-  const [loading, setLoading] = useState(false);
+  // Start in loading state so UI does not flash static fallback before assign resolves.
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const assignmentRef = useRef<VirtualNumberData | null>(null);
