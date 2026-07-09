@@ -26,9 +26,9 @@ function resolveAllowedOrigin(request: NextRequest): string | null {
     return TRACKER_ALLOWED_ORIGINS[0] || '*';
   }
 
-  // If allowlist is empty, default to wildcard for easier dev/staging rollout.
+  // If allowlist is empty, allow the calling browser origin.
   if (TRACKER_ALLOWED_ORIGINS.length === 0 || TRACKER_ALLOWED_ORIGINS.includes('*')) {
-    return '*';
+    return requestOrigin;
   }
 
   if (TRACKER_ALLOWED_ORIGINS.includes(requestOrigin)) {
@@ -42,6 +42,11 @@ function withCors(request: NextRequest, response: NextResponse): NextResponse {
   const allowedOrigin = resolveAllowedOrigin(request);
   if (allowedOrigin) {
     response.headers.set('Access-Control-Allow-Origin', allowedOrigin);
+
+    // Browsers reject credentialed requests when origin is '*'.
+    if (allowedOrigin !== '*') {
+      response.headers.set('Access-Control-Allow-Credentials', 'true');
+    }
   }
 
   response.headers.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
