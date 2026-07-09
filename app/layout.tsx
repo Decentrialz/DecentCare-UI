@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
-import GoogleTagManager from "@/app/components/GoogleTagManager";
+import { GoogleTagManagerHead, GoogleTagManagerBody } from "@/app/components/GoogleTagManager";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -28,11 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <GoogleTagManager />
+        <GoogleTagManagerHead />
       </head>
       <body
         className={`${plusJakartaSans.className} ${dmSerifDisplay.variable} antialiased`}
       >
+        <GoogleTagManagerBody />
         {children}
       </body>
     </html>
