@@ -15,7 +15,7 @@ const MobileStickyButtons = () => {
         {/* Call Now Button */}
         <Button variant="outline" className="h-[48px] rounded-[40px] border-2 border-[#0D5C94] text-[#0D5C94] flex items-center justify-center gap-2 hover:bg-[#0D5C94]/5 transition-colors">
           <Phone className="w-5 h-5" />
-          <span className="font-medium">+91 8065916085</span>
+          <span className="font-medium">08065916085</span>
         </Button>
       </div>
     </div>
