@@ -5,6 +5,7 @@
   var collectUrl = config.collectUrl || '/api/collect';
   var autoPageView = config.autoPageView !== false;
   var autoClicks = config.autoClicks !== false;
+  var trackAllClicks = Boolean(config.trackAllClicks);
   var debug = Boolean(config.debug);
   var site = config.site || 'unknown_site';
 
@@ -174,15 +175,64 @@
     return props;
   }
 
+  function shouldIgnoreGenericClick(element) {
+    if (!element || !element.tagName) return true;
+    var tag = element.tagName.toLowerCase();
+    if (tag === 'html' || tag === 'body' || tag === 'svg' || tag === 'path') return true;
+    if (tag === 'script' || tag === 'style' || tag === 'meta' || tag === 'link') return true;
+    return false;
+  }
+
+  function getElementText(element) {
+    var text = (element.innerText || element.textContent || '').trim();
+    if (!text) return undefined;
+    return text.substring(0, 120);
+  }
+
+  function buildGenericClickProps(element) {
+    var tagName = element.tagName ? element.tagName.toLowerCase() : 'unknown';
+    var href = element.getAttribute && element.getAttribute('href');
+    var name = element.getAttribute && element.getAttribute('name');
+    var role = element.getAttribute && element.getAttribute('role');
+    var ariaLabel = element.getAttribute && element.getAttribute('aria-label');
+
+    return {
+      location: 'auto_generic',
+      element_type: tagName,
+      element_id: element.id || undefined,
+      element_class: element.className || undefined,
+      element_name: name || undefined,
+      element_role: role || undefined,
+      element_aria_label: ariaLabel || undefined,
+      element_href: href || undefined,
+      element_text: getElementText(element)
+    };
+  }
+
+  function shouldTrackElement(element) {
+    if (!element || !element.closest) return false;
+    if (element.closest('[data-track-ignore="true"]')) return false;
+    return true;
+  }
+
   function installAutoClicks() {
     if (!autoClicks) return;
 
     document.addEventListener('click', function (event) {
       var target = event.target;
       if (!target || !target.closest) return;
+      if (!shouldTrackElement(target)) return;
 
       var trackElement = target.closest('[data-track]');
-      if (!trackElement) return;
+      if (!trackElement) {
+        if (!trackAllClicks) return;
+
+        var genericElement = target.closest('a,button,input,select,textarea,[role="button"],[onclick],label,summary') || target;
+        if (shouldIgnoreGenericClick(genericElement)) return;
+
+        track('element_clicked', buildGenericClickProps(genericElement));
+        return;
+      }
 
       var eventName = trackElement.getAttribute('data-track') || 'element_clicked';
       var props = collectDataTrackProps(trackElement);
@@ -212,6 +262,7 @@
     collectUrl: collectUrl,
     autoPageView: autoPageView,
     autoClicks: autoClicks,
+    trackAllClicks: trackAllClicks,
     site: site
   });
 })();
