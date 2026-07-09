@@ -13,7 +13,68 @@ let events: any[] = [];
 const BACKEND_API = process.env.BACKEND_TRACKING_API || 'https://omnilens.dev.decentcare.ai/api/v1/collect';
 const COGNITO_TOKEN = process.env.BACKEND_COGNITO_TOKEN || 'dev';
 
+const TRACKER_ALLOWED_ORIGINS = (process.env.TRACKER_ALLOWED_ORIGINS || '')
+  .split(',')
+  .map(origin => origin.trim())
+  .filter(Boolean);
+
+function resolveAllowedOrigin(request: NextRequest): string | null {
+  const requestOrigin = request.headers.get('origin');
+
+  // Non-browser calls may omit Origin.
+  if (!requestOrigin) {
+    return TRACKER_ALLOWED_ORIGINS[0] || '*';
+  }
+
+  // If allowlist is empty, default to wildcard for easier dev/staging rollout.
+  if (TRACKER_ALLOWED_ORIGINS.length === 0 || TRACKER_ALLOWED_ORIGINS.includes('*')) {
+    return '*';
+  }
+
+  if (TRACKER_ALLOWED_ORIGINS.includes(requestOrigin)) {
+    return requestOrigin;
+  }
+
+  return null;
+}
+
+function withCors(request: NextRequest, response: NextResponse): NextResponse {
+  const allowedOrigin = resolveAllowedOrigin(request);
+  if (allowedOrigin) {
+    response.headers.set('Access-Control-Allow-Origin', allowedOrigin);
+  }
+
+  response.headers.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  response.headers.set('Access-Control-Max-Age', '86400');
+  response.headers.set('Vary', 'Origin');
+
+  return response;
+}
+
+function corsDenied(request: NextRequest): NextResponse {
+  return withCors(
+    request,
+    NextResponse.json(
+      { success: false, error: 'Origin not allowed' },
+      { status: 403 }
+    )
+  );
+}
+
+export async function OPTIONS(request: NextRequest) {
+  if (!resolveAllowedOrigin(request)) {
+    return corsDenied(request);
+  }
+
+  return withCors(request, new NextResponse(null, { status: 204 }));
+}
+
 export async function POST(request: NextRequest) {
+  if (!resolveAllowedOrigin(request)) {
+    return corsDenied(request);
+  }
+
   try {
     const body = await request.json();
     
@@ -46,21 +107,37 @@ export async function POST(request: NextRequest) {
       console.error('[Tracking API] Backend forward failed:', err.message);
     });
     
-    return NextResponse.json({ 
-      success: true,
-      received: enrichedEvents.length 
-    }, { status: 202 });
+    return withCors(
+      request,
+      NextResponse.json(
+        {
+          success: true,
+          received: enrichedEvents.length,
+        },
+        { status: 202 }
+      )
+    );
     
   } catch (error) {
     console.error('[Tracking API] Error:', error);
-    return NextResponse.json({ 
-      success: false, 
-      error: 'Failed to process events' 
-    }, { status: 400 });
+    return withCors(
+      request,
+      NextResponse.json(
+        {
+          success: false,
+          error: 'Failed to process events',
+        },
+        { status: 400 }
+      )
+    );
   }
 }
 
 export async function GET(request: NextRequest) {
+  if (!resolveAllowedOrigin(request)) {
+    return corsDenied(request);
+  }
+
   // Get recent events for debugging/dashboard
   const url = new URL(request.url);
   const limit = parseInt(url.searchParams.get('limit') || '100');
@@ -80,15 +157,18 @@ export async function GET(request: NextRequest) {
   // Return most recent events first
   const recentEvents = filteredEvents.slice(-limit).reverse();
   
-  return NextResponse.json({
-    total: filteredEvents.length,
-    events: recentEvents,
-    stats: {
-      totalEvents: events.length,
-      uniqueVisitors: new Set(events.map(e => e.anonymousId)).size,
-      uniqueSessions: new Set(events.map(e => e.sessionId)).size,
-    }
-  });
+  return withCors(
+    request,
+    NextResponse.json({
+      total: filteredEvents.length,
+      events: recentEvents,
+      stats: {
+        totalEvents: events.length,
+        uniqueVisitors: new Set(events.map(e => e.anonymousId)).size,
+        uniqueSessions: new Set(events.map(e => e.sessionId)).size,
+      },
+    })
+  );
 }
 
 function calculateTimestamp(event: any): string {
