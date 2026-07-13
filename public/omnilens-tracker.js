@@ -11,8 +11,19 @@
   var site = config.site || 'unknown_site';
   var enableFingerprint = config.enableFingerprint !== false;
   var fingerprintJsUrl = config.fingerprintJsUrl || '';
+  var virtualNumbersConfig = config.virtualNumbers || {};
+  var enableVirtualNumbers = Boolean(virtualNumbersConfig.enabled);
+  var virtualAssignUrl = virtualNumbersConfig.assignUrl || config.virtualAssignUrl || '/api/virtual-numbers/assign';
+  var virtualHeartbeatUrl = virtualNumbersConfig.heartbeatUrl || config.virtualHeartbeatUrl || '/api/virtual-numbers/heartbeat';
+  var virtualPhoneTextSelector = virtualNumbersConfig.phoneTextSelector || '[data-omnilens-phone-text]';
+  var virtualTelLinkSelector = virtualNumbersConfig.telLinkSelector || '[data-omnilens-phone-link],a[href^="tel:"]';
+  var virtualHeartbeatSecOverride = Number(virtualNumbersConfig.heartbeatSec || 0);
+  var virtualGeolocationTimeoutMs = Number(virtualNumbersConfig.geolocationTimeoutMs || 5000);
+  var virtualHashAnonymousId = virtualNumbersConfig.hashAnonymousId !== false;
   var compiledRules = compileRules(config.eventRules || []);
   var fingerprintInitPromise = null;
+  var virtualAssignment = null;
+  var virtualHeartbeatTimer = null;
 
   var VERB_TOKENS = {
     login: 1,
@@ -72,6 +83,269 @@
       var r = Math.random() * 16 | 0;
       var v = c === 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
+    });
+  }
+
+  function anonToShort(value) {
+    if (!value) return value;
+
+    var uuidValue = String(value).replace(/^anon_/, '');
+    var hex = uuidValue.replace(/-/g, '').toLowerCase();
+    if (!/^[0-9a-f]{32}$/.test(hex)) {
+      return value;
+    }
+
+    var pairs = hex.match(/.{2}/g);
+    if (!pairs) return value;
+
+    var bytes = new Uint8Array(pairs.map(function (b) { return parseInt(b, 16); }));
+    var binary = '';
+    for (var i = 0; i < bytes.length; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    return btoa(binary)
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/, '');
+  }
+
+  function sanitizePhoneForTel(phone) {
+    if (!phone) return '';
+    var raw = String(phone).trim();
+    var keepPlus = raw.charAt(0) === '+';
+    var digits = raw.replace(/[^0-9]/g, '');
+    return keepPlus ? ('+' + digits) : digits;
+  }
+
+  function toTelHref(phone) {
+    var sanitized = sanitizePhoneForTel(phone);
+    if (!sanitized) return null;
+    return 'tel:' + sanitized;
+  }
+
+  function safeParseJson(text) {
+    if (!text) return null;
+    try {
+      return JSON.parse(text);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function getGeoData() {
+    if (!navigator.geolocation) {
+      return Promise.resolve(null);
+    }
+
+    return new Promise(function (resolve) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          resolve({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            accuracy_m: Math.round(position.coords.accuracy)
+          });
+        },
+        function () {
+          resolve(null);
+        },
+        { enableHighAccuracy: false, timeout: virtualGeolocationTimeoutMs, maximumAge: 60000 }
+      );
+    });
+  }
+
+  function readVirtualAssignmentPayload(responsePayload) {
+    if (!responsePayload) return null;
+    if (responsePayload.data && typeof responsePayload.data === 'object') return responsePayload.data;
+    return responsePayload;
+  }
+
+  function stopVirtualHeartbeat() {
+    if (virtualHeartbeatTimer) {
+      clearInterval(virtualHeartbeatTimer);
+      virtualHeartbeatTimer = null;
+    }
+  }
+
+  function sendVirtualHeartbeat() {
+    if (!enableVirtualNumbers || !virtualAssignment || !virtualAssignment.assignment_token) return;
+    if (document.hidden) return;
+
+    var ids = getOrCreateIdentity();
+    var payload = {
+      assignment_token: virtualAssignment.assignment_token,
+      session_id: ids.sessionId,
+      page_url: window.location.pathname
+    };
+
+    fetch(virtualHeartbeatUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(function (err) {
+      log('virtual heartbeat failed', err);
+    });
+  }
+
+  function startVirtualHeartbeat() {
+    stopVirtualHeartbeat();
+
+    if (!virtualAssignment || !virtualAssignment.assignment_token) return;
+    if (virtualAssignment.distribution_mode && virtualAssignment.distribution_mode !== 'unique') return;
+
+    var heartbeatSec = virtualHeartbeatSecOverride || Number(virtualAssignment.heartbeat_interval_sec || 30);
+    if (!heartbeatSec || heartbeatSec < 5) heartbeatSec = 30;
+
+    virtualHeartbeatTimer = setInterval(function () {
+      sendVirtualHeartbeat();
+    }, heartbeatSec * 1000);
+  }
+
+  function applyVirtualNumberToDom(assignment) {
+    if (!assignment) return;
+
+    var displayNumber = assignment.display_number || assignment.virtual_number;
+    var telHref = toTelHref(assignment.virtual_number || assignment.display_number);
+
+    if (displayNumber && virtualPhoneTextSelector) {
+      var textNodes = document.querySelectorAll(virtualPhoneTextSelector);
+      for (var i = 0; i < textNodes.length; i++) {
+        textNodes[i].textContent = displayNumber;
+        textNodes[i].setAttribute('data-omnilens-virtual-number', assignment.virtual_number || '');
+      }
+    }
+
+    if (telHref && virtualTelLinkSelector) {
+      var linkNodes = document.querySelectorAll(virtualTelLinkSelector);
+      for (var j = 0; j < linkNodes.length; j++) {
+        var link = linkNodes[j];
+        if (!link.getAttribute('data-omnilens-original-href')) {
+          link.setAttribute('data-omnilens-original-href', link.getAttribute('href') || '');
+        }
+        link.setAttribute('href', telHref);
+        link.setAttribute('data-omnilens-virtual-number', assignment.virtual_number || '');
+      }
+    }
+  }
+
+  function installVirtualPhoneClickTracking() {
+    if (!virtualTelLinkSelector) return;
+
+    document.addEventListener('click', function (event) {
+      if (!virtualAssignment) return;
+
+      var rawTarget = event.target;
+      var target = rawTarget;
+      if (target && target.nodeType === 3) {
+        target = target.parentElement;
+      }
+
+      if (!target || typeof target.closest !== 'function') return;
+      var telElement = target.closest(virtualTelLinkSelector);
+      if (!telElement) return;
+
+      var href = telElement.getAttribute('href') || '';
+      if (href.indexOf('tel:') !== 0) return;
+
+      track('phone_clicked', {
+        location: 'virtual_number_script',
+        phone_number: virtualAssignment.virtual_number || undefined,
+        dialed_number: sanitizePhoneForTel(href.replace(/^tel:/, '')) || undefined,
+        assignment_id: virtualAssignment.assignment_id || undefined,
+        distribution_mode: virtualAssignment.distribution_mode || undefined,
+        source: 'omnilens-tracker-js'
+      });
+    });
+  }
+
+  function assignVirtualNumber() {
+    if (!enableVirtualNumbers) {
+      return Promise.resolve(null);
+    }
+
+    var ids = getOrCreateIdentity();
+    var searchParams = new URLSearchParams(window.location.search);
+    var anonymousIdForAssign = virtualHashAnonymousId ? anonToShort(ids.anonymousId) : ids.anonymousId;
+
+    return getGeoData().then(function (geo) {
+      var payload = {
+        anonymous_id: anonymousIdForAssign,
+        session_id: ids.sessionId,
+        page_url: window.location.pathname,
+        referrer: document.referrer || undefined,
+        utm_source: searchParams.get('utm_source') || undefined,
+        utm_medium: searchParams.get('utm_medium') || undefined,
+        utm_campaign: searchParams.get('utm_campaign') || undefined,
+        site: site
+      };
+
+      if (geo) {
+        payload.lat = geo.lat;
+        payload.lng = geo.lng;
+        payload.accuracy_m = geo.accuracy_m;
+      }
+
+      return fetch(virtualAssignUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (response) {
+        return response.text().then(function (raw) {
+          var parsed = safeParseJson(raw);
+          if (!response.ok) {
+            var detail = parsed && (parsed.detail || parsed.error) ? (parsed.detail || parsed.error) : raw;
+            throw new Error(detail || ('Assign failed (' + response.status + ')'));
+          }
+
+          var data = readVirtualAssignmentPayload(parsed);
+          if (!data || !data.virtual_number || !data.display_number) {
+            throw new Error('Assign returned invalid payload');
+          }
+
+          virtualAssignment = data;
+          applyVirtualNumberToDom(data);
+          startVirtualHeartbeat();
+
+          track('virtual_number_assigned', {
+            assignment_id: data.assignment_id || undefined,
+            distribution_mode: data.distribution_mode || undefined,
+            source: 'omnilens-tracker-js'
+          });
+
+          return data;
+        });
+      });
+    }).catch(function (err) {
+      track('virtual_number_assign_failed', {
+        reason: err && err.message ? err.message : 'unknown_error',
+        source: 'omnilens-tracker-js'
+      });
+      log('virtual number assign failed', err);
+      return null;
+    });
+  }
+
+  function installVirtualNumberIntegration() {
+    if (!enableVirtualNumbers) return;
+
+    installVirtualPhoneClickTracking();
+    assignVirtualNumber();
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        stopVirtualHeartbeat();
+        return;
+      }
+
+      startVirtualHeartbeat();
+      sendVirtualHeartbeat();
+    });
+
+    window.addEventListener('beforeunload', function () {
+      sendVirtualHeartbeat();
+      stopVirtualHeartbeat();
     });
   }
 
@@ -620,10 +894,13 @@
 
   window.OmnilensTracker = {
     track: track,
-    getIdentity: getOrCreateIdentity
+    getIdentity: getOrCreateIdentity,
+    getVirtualNumber: function () { return virtualAssignment; },
+    refreshVirtualNumber: function () { return assignVirtualNumber(); }
   };
 
   initializeFingerprint();
+  installVirtualNumberIntegration();
 
   installAutoClicks();
 
@@ -640,6 +917,7 @@
     trackAllClicks: trackAllClicks,
     replaceEventWithDerived: replaceEventWithDerived,
     enableFingerprint: enableFingerprint,
+    enableVirtualNumbers: enableVirtualNumbers,
     ruleCount: compiledRules.length,
     site: site
   });
