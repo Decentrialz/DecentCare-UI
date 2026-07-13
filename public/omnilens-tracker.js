@@ -93,6 +93,14 @@
     }
   }
 
+  function getStoredFingerprint() {
+    try {
+      return localStorage.getItem('fingerprint');
+    } catch (e) {
+      return null;
+    }
+  }
+
   function loadFingerprintJsLibrary() {
     return new Promise(function (resolve, reject) {
       if (window.FingerprintJS) {
@@ -419,6 +427,11 @@
   }
 
   function buildContext(identity) {
+    var contextFingerprint = undefined;
+    if (enableFingerprint) {
+      contextFingerprint = (identity && identity.fingerprint) || getStoredFingerprint() || 'fp_loading';
+    }
+
     return {
       page: {
         path: window.location.pathname,
@@ -442,7 +455,7 @@
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       locale: navigator.language,
       userAgent: navigator.userAgent,
-      fingerprint: identity && identity.fingerprint ? identity.fingerprint : undefined,
+      fingerprint: contextFingerprint,
       site: site
     };
   }
@@ -626,6 +639,7 @@
     autoClicks: autoClicks,
     trackAllClicks: trackAllClicks,
     replaceEventWithDerived: replaceEventWithDerived,
+    enableFingerprint: enableFingerprint,
     ruleCount: compiledRules.length,
     site: site
   });
