@@ -15,11 +15,15 @@
   var enableVirtualNumbers = Boolean(virtualNumbersConfig.enabled);
   var virtualAssignUrl = virtualNumbersConfig.assignUrl || config.virtualAssignUrl || '/api/virtual-numbers/assign';
   var virtualHeartbeatUrl = virtualNumbersConfig.heartbeatUrl || config.virtualHeartbeatUrl || '/api/virtual-numbers/heartbeat';
-  var virtualPhoneTextSelector = virtualNumbersConfig.phoneTextSelector || '[data-omnilens-phone-text]';
+  var virtualPhoneTextSelector = virtualNumbersConfig.phoneTextSelector || '[data-omnilens-phone-text],[data-phone],.phone,.phone-number';
   var virtualTelLinkSelector = virtualNumbersConfig.telLinkSelector || '[data-omnilens-phone-link],a[href^="tel:"]';
   var virtualHeartbeatSecOverride = Number(virtualNumbersConfig.heartbeatSec || 0);
   var virtualGeolocationTimeoutMs = Number(virtualNumbersConfig.geolocationTimeoutMs || 5000);
   var virtualHashAnonymousId = virtualNumbersConfig.hashAnonymousId !== false;
+  var virtualPersistKey = virtualNumbersConfig.persistKey || 'omnilens_virtual_assignment';
+  var virtualMutationObserver = null;
+  var virtualRoutePatched = false;
+  var virtualDebounceTimer = null;
   var compiledRules = compileRules(config.eventRules || []);
   var fingerprintInitPromise = null;
   var virtualAssignment = null;
@@ -203,6 +207,73 @@
     }, heartbeatSec * 1000);
   }
 
+  function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function replacePhoneInTextNode(node, findPattern, replaceValue) {
+    if (!node || !node.nodeValue) return false;
+    if (!findPattern.test(node.nodeValue)) return false;
+    node.nodeValue = node.nodeValue.replace(findPattern, replaceValue);
+    return true;
+  }
+
+  function buildPhoneSearchPattern(assignment) {
+    var candidates = [];
+    if (assignment.display_number) candidates.push(String(assignment.display_number));
+    if (assignment.virtual_number) candidates.push(String(assignment.virtual_number));
+
+    var originalPhone = assignment.original_phone || assignment.original_number || assignment.base_phone;
+    if (originalPhone) candidates.push(String(originalPhone));
+
+    var patterns = [];
+    for (var i = 0; i < candidates.length; i++) {
+      var compact = candidates[i].replace(/\s+/g, ' ').trim();
+      if (!compact) continue;
+      patterns.push(escapeRegExp(compact));
+      var digits = compact.replace(/[^0-9]/g, '');
+      if (digits.length >= 7) {
+        patterns.push(escapeRegExp(digits));
+      }
+    }
+
+    if (patterns.length === 0) return null;
+    return new RegExp(patterns.join('|'), 'g');
+  }
+
+  function persistVirtualAssignment(assignment) {
+    if (!assignment) return;
+    try {
+      sessionStorage.setItem(virtualPersistKey, JSON.stringify(assignment));
+    } catch (e) {
+      log('failed to persist virtual assignment', e);
+    }
+  }
+
+  function restoreVirtualAssignment() {
+    try {
+      var raw = sessionStorage.getItem(virtualPersistKey);
+      if (!raw) return null;
+      var parsed = safeParseJson(raw);
+      if (!parsed || !parsed.virtual_number || !parsed.display_number) return null;
+      return parsed;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function scheduleVirtualDomApply() {
+    if (!enableVirtualNumbers || !virtualAssignment) return;
+    if (virtualDebounceTimer) {
+      clearTimeout(virtualDebounceTimer);
+      virtualDebounceTimer = null;
+    }
+    virtualDebounceTimer = setTimeout(function () {
+      virtualDebounceTimer = null;
+      applyVirtualNumberToDom(virtualAssignment);
+    }, 60);
+  }
+
   function applyVirtualNumberToDom(assignment) {
     if (!assignment) return;
 
@@ -217,6 +288,23 @@
       }
     }
 
+    // Best-effort fallback replacement for plain text phone numbers in common UI nodes.
+    var phonePattern = buildPhoneSearchPattern(assignment);
+    if (displayNumber && phonePattern) {
+      var fallbackNodes = document.querySelectorAll('p,span,div,strong,small,li,td,h1,h2,h3,h4,h5,h6');
+      for (var k = 0; k < fallbackNodes.length; k++) {
+        var host = fallbackNodes[k];
+        if (!host || !host.childNodes) continue;
+
+        for (var n = 0; n < host.childNodes.length; n++) {
+          var child = host.childNodes[n];
+          if (child && child.nodeType === 3) {
+            replacePhoneInTextNode(child, phonePattern, displayNumber);
+          }
+        }
+      }
+    }
+
     if (telHref && virtualTelLinkSelector) {
       var linkNodes = document.querySelectorAll(virtualTelLinkSelector);
       for (var j = 0; j < linkNodes.length; j++) {
@@ -228,6 +316,65 @@
         link.setAttribute('data-omnilens-virtual-number', assignment.virtual_number || '');
       }
     }
+
+    // Force all tel links to virtual number when enabled.
+    if (telHref) {
+      var allTelLinks = document.querySelectorAll('a[href^="tel:"]');
+      for (var m = 0; m < allTelLinks.length; m++) {
+        var telLink = allTelLinks[m];
+        if (!telLink.getAttribute('data-omnilens-original-href')) {
+          telLink.setAttribute('data-omnilens-original-href', telLink.getAttribute('href') || '');
+        }
+        telLink.setAttribute('href', telHref);
+        telLink.setAttribute('data-omnilens-virtual-number', assignment.virtual_number || '');
+      }
+    }
+
+    persistVirtualAssignment(assignment);
+  }
+
+  function installVirtualDomObservers() {
+    if (!enableVirtualNumbers) return;
+
+    if (virtualMutationObserver) {
+      virtualMutationObserver.disconnect();
+      virtualMutationObserver = null;
+    }
+
+    virtualMutationObserver = new MutationObserver(function () {
+      scheduleVirtualDomApply();
+    });
+
+    virtualMutationObserver.observe(document.documentElement || document.body, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['href']
+    });
+
+    // SPA navigation hooks
+    if (!virtualRoutePatched) {
+      virtualRoutePatched = true;
+
+      var originalPushState = history.pushState;
+      history.pushState = function () {
+        var result = originalPushState.apply(this, arguments);
+        scheduleVirtualDomApply();
+        return result;
+      };
+
+      var originalReplaceState = history.replaceState;
+      history.replaceState = function () {
+        var result = originalReplaceState.apply(this, arguments);
+        scheduleVirtualDomApply();
+        return result;
+      };
+    }
+
+    window.addEventListener('popstate', scheduleVirtualDomApply);
+    window.addEventListener('hashchange', scheduleVirtualDomApply);
+    window.addEventListener('pageshow', scheduleVirtualDomApply);
   }
 
   function installVirtualPhoneClickTracking() {
@@ -331,6 +478,24 @@
     if (!enableVirtualNumbers) return;
 
     installVirtualPhoneClickTracking();
+    installVirtualDomObservers();
+
+    var restoredAssignment = restoreVirtualAssignment();
+    if (restoredAssignment) {
+      virtualAssignment = restoredAssignment;
+      applyVirtualNumberToDom(restoredAssignment);
+      startVirtualHeartbeat();
+    }
+
+    scheduleVirtualDomApply();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', scheduleVirtualDomApply);
+    } else {
+      setTimeout(scheduleVirtualDomApply, 0);
+    }
+    setTimeout(scheduleVirtualDomApply, 400);
+    setTimeout(scheduleVirtualDomApply, 1200);
+
     assignVirtualNumber();
 
     document.addEventListener('visibilitychange', function () {
