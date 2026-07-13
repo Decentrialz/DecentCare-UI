@@ -9,7 +9,10 @@
   var replaceEventWithDerived = Boolean(config.replaceEventWithDerived);
   var debug = Boolean(config.debug);
   var site = config.site || 'unknown_site';
+  var enableFingerprint = config.enableFingerprint !== false;
+  var fingerprintJsUrl = config.fingerprintJsUrl || '';
   var compiledRules = compileRules(config.eventRules || []);
+  var fingerprintInitPromise = null;
 
   var VERB_TOKENS = {
     login: 1,
@@ -70,6 +73,90 @@
       var v = c === 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
+  }
+
+  function getOrCreateFallbackFingerprint() {
+    var fallback = localStorage.getItem('fingerprint_fallback_id');
+    if (!fallback) {
+      fallback = 'fp_fallback_' + uuid();
+      localStorage.setItem('fingerprint_fallback_id', fallback);
+    }
+    return fallback;
+  }
+
+  function setFingerprint(value) {
+    if (!value) return;
+    try {
+      localStorage.setItem('fingerprint', value);
+    } catch (e) {
+      log('failed to persist fingerprint', e);
+    }
+  }
+
+  function loadFingerprintJsLibrary() {
+    return new Promise(function (resolve, reject) {
+      if (window.FingerprintJS) {
+        resolve();
+        return;
+      }
+
+      if (!fingerprintJsUrl) {
+        reject(new Error('FingerprintJS not available and fingerprintJsUrl not configured'));
+        return;
+      }
+
+      var existing = document.querySelector('script[data-omnilens-fpjs="true"]');
+      if (existing) {
+        existing.addEventListener('load', function () { resolve(); }, { once: true });
+        existing.addEventListener('error', function () { reject(new Error('Failed to load FingerprintJS script')); }, { once: true });
+        return;
+      }
+
+      var script = document.createElement('script');
+      script.src = fingerprintJsUrl;
+      script.async = true;
+      script.defer = true;
+      script.setAttribute('data-omnilens-fpjs', 'true');
+      script.onload = function () { resolve(); };
+      script.onerror = function () { reject(new Error('Failed to load FingerprintJS script')); };
+      document.head.appendChild(script);
+    });
+  }
+
+  function initializeFingerprint() {
+    if (!enableFingerprint) return;
+    if (fingerprintInitPromise) return;
+
+    fingerprintInitPromise = (function () {
+      var current = localStorage.getItem('fingerprint');
+      if (current && current !== 'fp_loading') {
+        return Promise.resolve(current);
+      }
+
+      setFingerprint('fp_loading');
+
+      return loadFingerprintJsLibrary()
+        .then(function () {
+          if (!window.FingerprintJS || typeof window.FingerprintJS.load !== 'function') {
+            throw new Error('FingerprintJS global is unavailable');
+          }
+          return window.FingerprintJS.load();
+        })
+        .then(function (fpAgent) {
+          return fpAgent.get();
+        })
+        .then(function (result) {
+          var value = result && result.visitorId ? result.visitorId : getOrCreateFallbackFingerprint();
+          setFingerprint(value);
+          return value;
+        })
+        .catch(function (err) {
+          log('Fingerprint initialization failed, using fallback', err);
+          var fallback = getOrCreateFallbackFingerprint();
+          setFingerprint(fallback);
+          return fallback;
+        });
+    })();
   }
 
   function compileRules(rules) {
@@ -280,10 +367,22 @@
     }
 
     var patientId = localStorage.getItem('patient_id');
+    var fingerprint = null;
+
+    if (enableFingerprint) {
+      fingerprint = localStorage.getItem('fingerprint');
+      if (!fingerprint) {
+        setFingerprint('fp_loading');
+        fingerprint = 'fp_loading';
+      }
+      initializeFingerprint();
+    }
+
     return {
       anonymousId: anonymousId,
       sessionId: sessionId,
-      patientId: patientId || null
+      patientId: patientId || null,
+      fingerprint: fingerprint || null
     };
   }
 
@@ -319,7 +418,7 @@
     return 'desktop';
   }
 
-  function buildContext() {
+  function buildContext(identity) {
     return {
       page: {
         path: window.location.pathname,
@@ -343,6 +442,7 @@
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       locale: navigator.language,
       userAgent: navigator.userAgent,
+      fingerprint: identity && identity.fingerprint ? identity.fingerprint : undefined,
       site: site
     };
   }
@@ -386,7 +486,7 @@
       patientId: ids.patientId,
       originalTimestamp: now,
       sentAt: now,
-      context: buildContext(),
+      context: buildContext(ids),
       properties: properties || {}
     };
 
@@ -509,6 +609,8 @@
     track: track,
     getIdentity: getOrCreateIdentity
   };
+
+  initializeFingerprint();
 
   installAutoClicks();
 
