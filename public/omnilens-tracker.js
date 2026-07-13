@@ -218,6 +218,29 @@
     return true;
   }
 
+  function replacePhoneTextInLink(link, replacementValue) {
+    if (!link || !replacementValue) return;
+
+    var replaced = false;
+    var phoneLikePattern = /(\+?\d[\d\s\-()]{6,}\d)/g;
+
+    for (var i = 0; i < link.childNodes.length; i++) {
+      var child = link.childNodes[i];
+      if (!child || child.nodeType !== 3 || !child.nodeValue) continue;
+      if (!/[0-9]/.test(child.nodeValue)) continue;
+
+      child.nodeValue = child.nodeValue.replace(phoneLikePattern, replacementValue);
+      replaced = true;
+    }
+
+    if (!replaced) {
+      var text = (link.textContent || '').trim();
+      if (/[0-9][0-9\s\-()+]{5,}/.test(text)) {
+        link.textContent = replacementValue;
+      }
+    }
+  }
+
   function buildPhoneSearchPattern(assignment) {
     var candidates = [];
     if (assignment.display_number) candidates.push(String(assignment.display_number));
@@ -291,7 +314,7 @@
     // Best-effort fallback replacement for plain text phone numbers in common UI nodes.
     var phonePattern = buildPhoneSearchPattern(assignment);
     if (displayNumber && phonePattern) {
-      var fallbackNodes = document.querySelectorAll('p,span,div,strong,small,li,td,h1,h2,h3,h4,h5,h6');
+      var fallbackNodes = document.querySelectorAll('a,p,span,div,strong,small,li,td,h1,h2,h3,h4,h5,h6');
       for (var k = 0; k < fallbackNodes.length; k++) {
         var host = fallbackNodes[k];
         if (!host || !host.childNodes) continue;
@@ -309,11 +332,13 @@
       var linkNodes = document.querySelectorAll(virtualTelLinkSelector);
       for (var j = 0; j < linkNodes.length; j++) {
         var link = linkNodes[j];
+        var currentHref = link.getAttribute('href') || '';
         if (!link.getAttribute('data-omnilens-original-href')) {
-          link.setAttribute('data-omnilens-original-href', link.getAttribute('href') || '');
+          link.setAttribute('data-omnilens-original-href', currentHref);
         }
         link.setAttribute('href', telHref);
         link.setAttribute('data-omnilens-virtual-number', assignment.virtual_number || '');
+        replacePhoneTextInLink(link, displayNumber);
       }
     }
 
@@ -327,6 +352,7 @@
         }
         telLink.setAttribute('href', telHref);
         telLink.setAttribute('data-omnilens-virtual-number', assignment.virtual_number || '');
+        replacePhoneTextInLink(telLink, displayNumber);
       }
     }
 
