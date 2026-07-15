@@ -9,6 +9,17 @@
   var replaceEventWithDerived = Boolean(config.replaceEventWithDerived);
   var debug = Boolean(config.debug);
   var site = config.site || 'unknown_site';
+  var whatsappConfig = config.whatsapp || {};
+  var enableWhatsAppTrackingLink = Boolean(whatsappConfig.enabled);
+  var whatsappSelector = whatsappConfig.selector || 'a[href*="wa.me"],a[href*="api.whatsapp.com/send"]';
+  var whatsappMessage = whatsappConfig.message || 'Hi, I need help booking an appointment.';
+  var whatsappLandingUrl = whatsappConfig.landingUrl || '';
+  var whatsappLinkTemplate = whatsappConfig.linkTemplate || '';
+  var whatsappIdParam = whatsappConfig.idParam || 'id';
+  var whatsappTrackClicks = whatsappConfig.trackClicks !== false;
+  var whatsappMutationObserver = null;
+  var whatsappDebounceTimer = null;
+  var whatsappRoutePatched = false;
   var enableFingerprint = config.enableFingerprint !== false;
   var fingerprintJsUrl = config.fingerprintJsUrl || '';
   var virtualNumbersConfig = config.virtualNumbers || {};
@@ -205,6 +216,159 @@
     virtualHeartbeatTimer = setInterval(function () {
       sendVirtualHeartbeat();
     }, heartbeatSec * 1000);
+  }
+
+  function getHashedAnonymousId() {
+    var ids = getOrCreateIdentity();
+    return anonToShort(ids.anonymousId);
+  }
+
+  function normalizeUrlForMessage(urlValue) {
+    var input = String(urlValue || '').trim();
+    if (!input) return '';
+    if (/^https?:\/\//i.test(input)) return input;
+    return 'https://' + input.replace(/^\/+/, '');
+  }
+
+  function buildWhatsAppTrackingLink(hashedId) {
+    if (whatsappLinkTemplate) {
+      return whatsappLinkTemplate.replace('{id}', hashedId);
+    }
+
+    var baseUrl = normalizeUrlForMessage(whatsappLandingUrl) || (window.location.origin + window.location.pathname);
+    var separator = baseUrl.indexOf('?') >= 0 ? '&' : '?';
+    return baseUrl + separator + encodeURIComponent(whatsappIdParam) + '=' + encodeURIComponent(hashedId);
+  }
+
+  function buildWhatsAppMessage(existingMessage, hashedId) {
+    var baseMessage = whatsappMessage || existingMessage || 'Hi, I need help booking an appointment.';
+    var trackingLink = buildWhatsAppTrackingLink(hashedId);
+    return baseMessage + '\n' + trackingLink;
+  }
+
+  function scheduleWhatsAppApply() {
+    if (!enableWhatsAppTrackingLink) return;
+
+    if (whatsappDebounceTimer) {
+      clearTimeout(whatsappDebounceTimer);
+      whatsappDebounceTimer = null;
+    }
+
+    whatsappDebounceTimer = setTimeout(function () {
+      whatsappDebounceTimer = null;
+      applyWhatsAppLinks();
+    }, 60);
+  }
+
+  function applyWhatsAppLinks() {
+    if (!enableWhatsAppTrackingLink) return;
+
+    var hashedId = getHashedAnonymousId();
+    var links = document.querySelectorAll(whatsappSelector);
+
+    for (var i = 0; i < links.length; i++) {
+      var link = links[i];
+      if (!link || !link.getAttribute) continue;
+
+      var currentHref = link.getAttribute('href') || '';
+      if (!currentHref) continue;
+
+      if (!link.getAttribute('data-omnilens-wa-original-href')) {
+        link.setAttribute('data-omnilens-wa-original-href', currentHref);
+      }
+
+      var originalHref = link.getAttribute('data-omnilens-wa-original-href') || currentHref;
+      var url;
+      try {
+        url = new URL(originalHref, window.location.origin);
+      } catch (e) {
+        continue;
+      }
+
+      var existingText = url.searchParams.get('text') || '';
+      var existingFirstLine = existingText.split(/\r?\n/)[0] || '';
+      var finalMessage = buildWhatsAppMessage(existingFirstLine, hashedId);
+      url.searchParams.set('text', finalMessage);
+
+      var finalHref = url.toString();
+      link.setAttribute('href', finalHref);
+      link.setAttribute('data-omnilens-wa-id', hashedId);
+      link.setAttribute('data-omnilens-wa-applied', 'true');
+    }
+  }
+
+  function installWhatsAppIntegration() {
+    if (!enableWhatsAppTrackingLink) return;
+
+    applyWhatsAppLinks();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', scheduleWhatsAppApply);
+    } else {
+      setTimeout(scheduleWhatsAppApply, 0);
+    }
+
+    setTimeout(scheduleWhatsAppApply, 400);
+    setTimeout(scheduleWhatsAppApply, 1200);
+
+    if (whatsappMutationObserver) {
+      whatsappMutationObserver.disconnect();
+      whatsappMutationObserver = null;
+    }
+
+    whatsappMutationObserver = new MutationObserver(function () {
+      scheduleWhatsAppApply();
+    });
+
+    whatsappMutationObserver.observe(document.documentElement || document.body, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['href']
+    });
+
+    if (!whatsappRoutePatched) {
+      whatsappRoutePatched = true;
+
+      var originalPushState = history.pushState;
+      history.pushState = function () {
+        var result = originalPushState.apply(this, arguments);
+        scheduleWhatsAppApply();
+        return result;
+      };
+
+      var originalReplaceState = history.replaceState;
+      history.replaceState = function () {
+        var result = originalReplaceState.apply(this, arguments);
+        scheduleWhatsAppApply();
+        return result;
+      };
+    }
+
+    window.addEventListener('popstate', scheduleWhatsAppApply);
+    window.addEventListener('hashchange', scheduleWhatsAppApply);
+    window.addEventListener('pageshow', scheduleWhatsAppApply);
+
+    if (whatsappTrackClicks) {
+      document.addEventListener('click', function (event) {
+        var rawTarget = event.target;
+        var target = rawTarget;
+        if (target && target.nodeType === 3) {
+          target = target.parentElement;
+        }
+        if (!target || typeof target.closest !== 'function') return;
+
+        var link = target.closest(whatsappSelector);
+        if (!link) return;
+
+        track('whatsapp_clicked', {
+          location: 'whatsapp_script',
+          whatsapp_href: link.getAttribute('href') || undefined,
+          hashed_anonymous_id: link.getAttribute('data-omnilens-wa-id') || getHashedAnonymousId(),
+          source: 'omnilens-tracker-js'
+        });
+      });
+    }
   }
 
   function escapeRegExp(value) {
@@ -1087,10 +1251,12 @@
     track: track,
     getIdentity: getOrCreateIdentity,
     getVirtualNumber: function () { return virtualAssignment; },
-    refreshVirtualNumber: function () { return assignVirtualNumber(); }
+    refreshVirtualNumber: function () { return assignVirtualNumber(); },
+    refreshWhatsAppLinks: function () { return applyWhatsAppLinks(); }
   };
 
   initializeFingerprint();
+  installWhatsAppIntegration();
   installVirtualNumberIntegration();
 
   installAutoClicks();
@@ -1107,6 +1273,7 @@
     autoClicks: autoClicks,
     trackAllClicks: trackAllClicks,
     replaceEventWithDerived: replaceEventWithDerived,
+    enableWhatsAppTrackingLink: enableWhatsAppTrackingLink,
     enableFingerprint: enableFingerprint,
     enableVirtualNumbers: enableVirtualNumbers,
     ruleCount: compiledRules.length,
