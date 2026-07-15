@@ -242,8 +242,11 @@
 
   function buildWhatsAppMessage(existingMessage, hashedId) {
     var baseMessage = whatsappMessage || existingMessage || 'Hi, I need help booking an appointment.';
-    var trackingLink = buildWhatsAppTrackingLink(hashedId);
-    return baseMessage + '\n' + trackingLink;
+    var cleanMessage = String(baseMessage).replace(/\s*\(Ref:\s*[^)]+\)\s*$/i, '').trim();
+    if (!cleanMessage) {
+      cleanMessage = 'Hi, I need help booking an appointment.';
+    }
+    return cleanMessage + ' (Ref: ' + hashedId + ')';
   }
 
   function scheduleWhatsAppApply() {
