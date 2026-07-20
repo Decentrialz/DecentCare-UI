@@ -9,6 +9,7 @@
   var replaceEventWithDerived = Boolean(config.replaceEventWithDerived);
   var debug = Boolean(config.debug);
   var site = config.site || 'unknown_site';
+  var tenantId = config.tenantId || config.tenant_id || '';
   var whatsappConfig = config.whatsapp || {};
   var enableWhatsAppTrackingLink = Boolean(whatsappConfig.enabled);
   var whatsappSelector = whatsappConfig.selector || 'a[href*="wa.me"],a[href*="api.whatsapp.com/send"]';
@@ -139,6 +140,19 @@
     return 'tel:' + sanitized;
   }
 
+  function getAbsolutePageUrl() {
+    if (!window.location || !window.location.origin) return '';
+    return window.location.origin + window.location.pathname + window.location.search;
+  }
+
+  function buildApiHeaders() {
+    var headers = { 'Content-Type': 'application/json' };
+    if (tenantId) {
+      headers['x-tenant-id'] = tenantId;
+    }
+    return headers;
+  }
+
   function safeParseJson(text) {
     if (!text) return null;
     try {
@@ -191,12 +205,12 @@
     var payload = {
       assignment_token: virtualAssignment.assignment_token,
       session_id: ids.sessionId,
-      page_url: window.location.pathname
+      page_url: getAbsolutePageUrl()
     };
 
     fetch(virtualHeartbeatUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: buildApiHeaders(),
       body: JSON.stringify(payload),
       keepalive: true
     }).catch(function (err) {
@@ -613,7 +627,7 @@
       var payload = {
         anonymous_id: anonymousIdForAssign,
         session_id: ids.sessionId,
-        page_url: window.location.pathname,
+        page_url: getAbsolutePageUrl(),
         referrer: document.referrer || undefined,
         utm_source: searchParams.get('utm_source') || undefined,
         utm_medium: searchParams.get('utm_medium') || undefined,
@@ -629,7 +643,7 @@
 
       return fetch(virtualAssignUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: buildApiHeaders(),
         body: JSON.stringify(payload)
       }).then(function (response) {
         return response.text().then(function (raw) {
@@ -1096,7 +1110,8 @@
     var body = JSON.stringify(eventPayload);
 
     try {
-      if (navigator.sendBeacon) {
+      // sendBeacon does not support custom headers, so skip when tenant header is required.
+      if (!tenantId && navigator.sendBeacon) {
         var blob = new Blob([body], { type: 'application/json' });
         if (navigator.sendBeacon(collectUrl, blob)) {
           return;
@@ -1108,9 +1123,7 @@
 
     fetch(collectUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: buildApiHeaders(),
       body: body,
       keepalive: true
     }).catch(function (err) {
@@ -1279,6 +1292,7 @@
     enableWhatsAppTrackingLink: enableWhatsAppTrackingLink,
     enableFingerprint: enableFingerprint,
     enableVirtualNumbers: enableVirtualNumbers,
+    tenantId: tenantId || null,
     ruleCount: compiledRules.length,
     site: site
   });
