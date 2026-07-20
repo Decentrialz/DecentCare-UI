@@ -38,7 +38,7 @@ function withCors(request: NextRequest, response: NextResponse): NextResponse {
   }
 
   response.headers.set('Access-Control-Allow-Methods', 'POST,OPTIONS');
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-tenant-id');
   response.headers.set('Access-Control-Max-Age', '86400');
   response.headers.set('Vary', 'Origin');
 
@@ -79,11 +79,17 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
+    const tenantIdHeader = request.headers.get('x-tenant-id');
+    const forwardHeaders: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+    if (tenantIdHeader) {
+      forwardHeaders['x-tenant-id'] = tenantIdHeader;
+    }
+
     const response = await fetch(`${getApiBase()}/virtual-numbers/heartbeat`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: forwardHeaders,
       body: JSON.stringify(body),
     });
 

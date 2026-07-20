@@ -50,7 +50,7 @@ function withCors(request: NextRequest, response: NextResponse): NextResponse {
   }
 
   response.headers.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-tenant-id');
   response.headers.set('Access-Control-Max-Age', '86400');
   response.headers.set('Vary', 'Origin');
 
@@ -82,6 +82,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
+    const tenantIdHeader = request.headers.get('x-tenant-id') || undefined;
     
     // Handle both single event and batch
     const incomingEvents = Array.isArray(body) ? body : [body];
@@ -108,7 +109,7 @@ export async function POST(request: NextRequest) {
     );
     
     // Forward to backend API (fire and forget, don't block response)
-    forwardToBackend(body).catch(err => {
+    forwardToBackend(body, tenantIdHeader).catch(err => {
       console.error('[Tracking API] Backend forward failed:', err.message);
     });
     
@@ -196,14 +197,20 @@ function calculateTimestamp(event: any): string {
  * Forward events to backend API (bypasses CORS since this runs server-side)
  * Forward payload unchanged; backend normalizes Segment/flat payloads.
  */
-async function forwardToBackend(eventData: any): Promise<void> {
+async function forwardToBackend(eventData: any, tenantId?: string): Promise<void> {
   try {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${COGNITO_TOKEN}`,
+    };
+
+    if (tenantId) {
+      headers['x-tenant-id'] = tenantId;
+    }
+
     const response = await fetch(BACKEND_API, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${COGNITO_TOKEN}`,
-      },
+      headers,
       body: JSON.stringify(eventData),
     });
 

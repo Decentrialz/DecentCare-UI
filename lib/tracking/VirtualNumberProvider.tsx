@@ -45,6 +45,14 @@ async function getGeoData(): Promise<{ lat: number; lng: number; accuracy_m: num
   });
 }
 
+function getAbsolutePageUrl(): string {
+  if (typeof window === 'undefined') {
+    return '';
+  }
+
+  return `${window.location.origin}${window.location.pathname}${window.location.search}`;
+}
+
 export function VirtualNumberProvider({ children }: { children: React.ReactNode }) {
   const [assignment, setAssignment] = useState<VirtualNumberData | null>(null);
   // Start in loading state so UI does not flash static fallback before assign resolves.
@@ -112,7 +120,7 @@ export function VirtualNumberProvider({ children }: { children: React.ReactNode 
       const payload: Record<string, unknown> = {
         anonymous_id: identity.anonymous_id,
         session_id: identity.session_id,
-        page_url: window.location.pathname,
+        page_url: getAbsolutePageUrl(),
         referrer: document.referrer || undefined,
         utm_source: searchParams.get('utm_source') || undefined,
         utm_medium: searchParams.get('utm_medium') || undefined,
