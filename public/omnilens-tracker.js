@@ -145,6 +145,20 @@
     return window.location.origin + window.location.pathname + window.location.search;
   }
 
+  function applyTenantId(nextTenantId) {
+    var normalizedTenant = String(nextTenantId || '').trim();
+    if (!normalizedTenant) return;
+    if (tenantId === normalizedTenant) return;
+
+    tenantId = normalizedTenant;
+    log('tenant updated from runtime payload', tenantId);
+  }
+
+  function extractTenantIdFromPayload(payload) {
+    if (!payload || typeof payload !== 'object') return '';
+    return payload.tenant_id || payload.tenantId || '';
+  }
+
   function buildApiHeaders() {
     var headers = { 'Content-Type': 'application/json' };
     if (tenantId) {
@@ -460,6 +474,7 @@
       if (!raw) return null;
       var parsed = safeParseJson(raw);
       if (!parsed || !parsed.virtual_number || !parsed.display_number) return null;
+      applyTenantId(extractTenantIdFromPayload(parsed));
       return parsed;
     } catch (e) {
       return null;
@@ -657,6 +672,8 @@
           if (!data || !data.virtual_number || !data.display_number) {
             throw new Error('Assign returned invalid payload');
           }
+
+          applyTenantId(extractTenantIdFromPayload(data));
 
           virtualAssignment = data;
           applyVirtualNumberToDom(data);
