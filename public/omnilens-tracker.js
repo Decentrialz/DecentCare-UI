@@ -30,12 +30,15 @@
   var virtualPhoneTextSelector = virtualNumbersConfig.phoneTextSelector || '[data-omnilens-phone-text],[data-phone],.phone,.phone-number';
   var virtualTelLinkSelector = virtualNumbersConfig.telLinkSelector || '[data-omnilens-phone-link],a[href^="tel:"]';
   var virtualHeartbeatSecOverride = Number(virtualNumbersConfig.heartbeatSec || 0);
+  var virtualAssignWaitMs = Number(virtualNumbersConfig.assignWaitMs || config.assignWaitMs || 3000);
   var virtualGeolocationTimeoutMs = Number(virtualNumbersConfig.geolocationTimeoutMs || 5000);
   var virtualHashAnonymousId = virtualNumbersConfig.hashAnonymousId !== false;
   var virtualPersistKey = virtualNumbersConfig.persistKey || 'omnilens_virtual_assignment';
   var virtualMutationObserver = null;
   var virtualRoutePatched = false;
   var virtualDebounceTimer = null;
+  var trackingReady = !enableVirtualNumbers;
+  var queuedEventPayloads = [];
   var compiledRules = compileRules(config.eventRules || []);
   var fingerprintInitPromise = null;
   var virtualAssignment = null;
@@ -159,12 +162,26 @@
     return payload.tenant_id || payload.tenantId || '';
   }
 
-  function buildApiHeaders() {
+  function buildApiHeaders(includeTenant) {
+    var shouldIncludeTenant = includeTenant !== false;
     var headers = { 'Content-Type': 'application/json' };
-    if (tenantId) {
+    if (shouldIncludeTenant && tenantId) {
       headers['x-tenant-id'] = tenantId;
     }
     return headers;
+  }
+
+  function markTrackingReady() {
+    if (trackingReady) return;
+    trackingReady = true;
+
+    if (queuedEventPayloads.length === 0) return;
+
+    var pending = queuedEventPayloads.slice();
+    queuedEventPayloads = [];
+    for (var i = 0; i < pending.length; i++) {
+      sendNow(pending[i]);
+    }
   }
 
   function safeParseJson(text) {
@@ -658,7 +675,7 @@
 
       return fetch(virtualAssignUrl, {
         method: 'POST',
-        headers: buildApiHeaders(),
+        headers: buildApiHeaders(false),
         body: JSON.stringify(payload)
       }).then(function (response) {
         return response.text().then(function (raw) {
@@ -699,7 +716,7 @@
   }
 
   function installVirtualNumberIntegration() {
-    if (!enableVirtualNumbers) return;
+    if (!enableVirtualNumbers) return Promise.resolve(null);
 
     installVirtualPhoneClickTracking();
     installVirtualDomObservers();
@@ -720,7 +737,7 @@
     setTimeout(scheduleVirtualDomApply, 400);
     setTimeout(scheduleVirtualDomApply, 1200);
 
-    assignVirtualNumber();
+    var assignPromise = assignVirtualNumber();
 
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
@@ -736,6 +753,8 @@
       sendVirtualHeartbeat();
       stopVirtualHeartbeat();
     });
+
+    return assignPromise;
   }
 
   function getOrCreateFallbackFingerprint() {
@@ -1123,7 +1142,7 @@
     };
   }
 
-  function send(eventPayload) {
+  function sendNow(eventPayload) {
     var body = JSON.stringify(eventPayload);
 
     try {
@@ -1146,6 +1165,15 @@
     }).catch(function (err) {
       log('Event send failed', err);
     });
+  }
+
+  function send(eventPayload) {
+    if (!trackingReady) {
+      queuedEventPayloads.push(eventPayload);
+      return;
+    }
+
+    sendNow(eventPayload);
   }
 
   function track(eventName, properties) {
@@ -1290,14 +1318,46 @@
 
   initializeFingerprint();
   installWhatsAppIntegration();
-  installVirtualNumberIntegration();
 
-  installAutoClicks();
+  function installEngagementTracking() {
+    installAutoClicks();
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', installAutoPageView);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', installAutoPageView);
+    } else {
+      installAutoPageView();
+    }
+  }
+
+  function startTrackingAfterAssignReady(reason) {
+    markTrackingReady();
+    installEngagementTracking();
+    log('tracking_started', { reason: reason });
+  }
+
+  if (enableVirtualNumbers) {
+    var startedAfterAssign = false;
+    var normalizedWaitMs = virtualAssignWaitMs;
+    if (!normalizedWaitMs || normalizedWaitMs < 0) normalizedWaitMs = 3000;
+
+    var maybeStart = function (reason) {
+      if (startedAfterAssign) return;
+      startedAfterAssign = true;
+      startTrackingAfterAssignReady(reason);
+    };
+
+    var assignReadyPromise = installVirtualNumberIntegration();
+    assignReadyPromise.then(function () {
+      maybeStart('assign_response');
+    }).catch(function () {
+      maybeStart('assign_error');
+    });
+
+    setTimeout(function () {
+      maybeStart('assign_wait_timeout');
+    }, normalizedWaitMs);
   } else {
-    installAutoPageView();
+    startTrackingAfterAssignReady('virtual_numbers_disabled');
   }
 
   log('initialized', {
@@ -1309,6 +1369,7 @@
     enableWhatsAppTrackingLink: enableWhatsAppTrackingLink,
     enableFingerprint: enableFingerprint,
     enableVirtualNumbers: enableVirtualNumbers,
+    virtualAssignWaitMs: virtualAssignWaitMs,
     tenantId: tenantId || null,
     ruleCount: compiledRules.length,
     site: site
