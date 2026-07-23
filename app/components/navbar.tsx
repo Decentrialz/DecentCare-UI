@@ -54,10 +54,10 @@ const Navbar = () => {
           </div>
 
           {/* CTA Button */}
-          <a href="tel:+918065916085">
+          <a href="tel:08065916085">
             <Button className="h-[36px] px-4 rounded-[6px] bg-[#0D5C94] text-white flex items-center gap-2 shadow-[0_4px_20px_-2px_rgba(13,92,148,0.08)] hover:bg-[#0B4F7F] transition-colors" style={{cursor: 'pointer'}}>
               <Phone className="w-5 h-5" />
-              +91 8065916085
+              08065916085
             </Button>
           </a>
         </div>
@@ -91,7 +91,7 @@ const Navbar = () => {
           </div>
 
           {/* Call Button */}
-          <a href="tel:+918065916085">
+          <a href="tel:08065916085">
             <Button className="h-[40px] px-4 rounded-full bg-[#0D5C94] text-white flex items-center justify-center gap-2 shadow-[0_4px_20px_-2px_rgba(13,92,148,0.08)] hover:bg-[#0B4F7F] transition-colors">
               <Phone className="w-5 h-5" />
               <span className="font-medium">Call</span>
