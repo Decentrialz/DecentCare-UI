@@ -10,22 +10,24 @@ export async function GET() {
   const baseUrl = `${protocol}://${host}`
   
   // Get latest blog post date
-  let latestBlogDate = new Date().toISOString()
-  try {
-    const latestPost = await client.fetch(`*[_type == "post"] | order(publishedAt desc)[0] {
-      publishedAt
-    }`)
-    if (latestPost && latestPost.publishedAt) {
-      latestBlogDate = new Date(latestPost.publishedAt).toISOString()
-    }
-  } catch (error) {
-    console.error('Error fetching latest blog date:', error)
-  }
+  // Commented out - blog sitemap not required for now
+  // let latestBlogDate = new Date().toISOString()
+  // try {
+  //   const latestPost = await client.fetch(`*[_type == "post"] | order(publishedAt desc)[0] {
+  //     publishedAt
+  //   }`)
+  //   if (latestPost && latestPost.publishedAt) {
+  //     latestBlogDate = new Date(latestPost.publishedAt).toISOString()
+  //   }
+  // } catch (error) {
+  //   console.error('Error fetching latest blog date:', error)
+  // }
   
   const sitemaps = [
-    { loc: `${baseUrl}/sitemap-main.xml`, lastmod: new Date().toISOString() },
-    { loc: `${baseUrl}/sitemap-blog.xml`, lastmod: latestBlogDate },
-    { loc: `${baseUrl}/sitemap-services.xml`, lastmod: new Date().toISOString() },
+    { loc: `${baseUrl}/sitemap-main.xml`, lastmod: new Date('2026-07-09').toISOString() },
+    // Blog sitemap commented out - not required for now
+    // { loc: `${baseUrl}/sitemap-blog.xml`, lastmod: latestBlogDate },
+    { loc: `${baseUrl}/sitemap-services.xml`,  lastmod: new Date('2026-07-09').toISOString() },
   ]
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
