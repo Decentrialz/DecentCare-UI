@@ -1,0 +1,33 @@
+# DecentCare
+
+> DecentCare is the unified personalized-patient care platform for Indian hospitals, clinics, and individual practitioners. It brings hospital management, the Care Journey CRM, and AI intelligence together in one system — capturing every patient signal across web, calls, WhatsApp, and visits, resolving them into one live patient profile, reading what each patient is about to decide, and running the whole journey from discovery to post-op. It integrates with the systems a provider already uses, so nothing has to be ripped out and replaced.
+
+DecentCare unifies what most providers run as three disconnected tools: a HIMS that only records what happened, a CRM built to chase sales deals, and marketing tools that never connect spend to real patients. In their place it gives one platform with a single full-funnel view, from the first ad click to the procedure billed. Core hospital-management capabilities and the Care Journey CRM are unified with AI intelligence layers — OmniLens (SEE: captures every behavioral signal), OmniJourney (UNDERSTAND: scores intent, predicts drop-off, segments readiness), and OmniCare, the Care Journey CRM (ACT: leads, appointments, follow-ups, retention) — closed by a learning loop that sharpens every prediction. Two proprietary capabilities set it apart: Behavioral Intelligence (knowing who is ready to proceed before they say so) and Attribution Intelligence (tracing every patient and every rupee from ad click to procedure billed, via a patient identity graph that resolves scattered signals into one profile). A built-in growth suite (SEO, AEO, GEO, paid ads, social & Web Development) brings new patients in with spend tracked to real bookings. DecentCare is offered in editions tailored to individual practitioners, clinics, and hospital networks, and integrates with existing HIMS and clinical systems.
+
+## Platform
+
+- [The DecentCare platform](https://decentcare.ai/): One unified system spanning hospital management, the Care Journey CRM, and AI intelligence, with integration for existing systems.
+- [Care Journey CRM (OmniCare)](https://decentcare.ai/services/care-journey-crm): End-to-end patient-journey management — lead management, appointments, care coordination, follow-up automation, retention, and referrals, driven by intent rather than manual notes.
+- [Behavioral Intelligence (OmniLens + OmniJourney)](https://decentcare.ai/): Captures every patient signal and reads intent, journey stage, drop-off risk, and readiness in real time.
+- [Attribution Intelligence](https://decentcare.ai/): Closed-loop tracking from ad click to procedure billed — patient identity resolution, revenue per channel, true cost per booked patient, and multilingual call transcripts.
+
+## Services
+
+- [Services overview](https://decentcare.ai/services): The included growth suite plus optional done-for-you services.
+- [AI-Driven Healthcare SEO](https://decentcare.ai/services/seo-ai-search): Predictive search across SEO, AEO, and GEO — visibility in Google and in ChatGPT, Gemini, and Perplexity answers.
+- [AI-Powered Social Media Marketing](https://decentcare.ai/services/smm): Behavioral audience segmentation, clinical authority positioning, and reputation management.
+- [AI-Optimised Paid Advertising](https://decentcare.ai/services/paid-marketing): Google, Meta, and YouTube campaigns optimised for booked patients rather than clicks, with real-time budget reallocation.
+- [AI-Enabled Care Journey CRM](https://decentcare.ai/services/care-journey-crm): OmniCare — end-to-end journey tracking, identity resolution, and automated follow-up and reactivation.
+- [AI-Led Strategy & Growth Consulting](https://decentcare.ai/services/business-strategy): Service-line expansion modeling and predictive healthcare growth forecasting.
+- [AI-Enabled Healthcare Web Development](https://decentcare.ai/services/web-development): Conversion-focused hospital sites and treatment landing pages (optional add-on).
+
+## Company
+
+- [About Us](https://decentcare.ai/about): Company background, mission, and founders.
+- [Success Stories](https://decentcare.ai/success): Case studies — Lux Hospitals, Gowds Dental Hospital, Pranavaidya, and Chirag Global Hospitals.
+- [Blog](https://decentcare.ai/blog): Articles on healthcare growth and marketing.
+- [Contact Us](https://decentcare.ai/contact): Book a 30-minute demo.
+
+## Optional
+
+- [Homepage](https://decentcare.ai/): Platform overview, how it works, differentiators, and results.
