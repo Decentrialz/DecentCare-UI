@@ -7,9 +7,9 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
   const hostname = headersList.get('host') || 'localhost'
   
   // Check if it's the production domain
-  const isProduction = hostname === 'decentcare.com' || hostname === 'www.decentcare.com'
+  const isProduction = hostname === 'decentcare.ai' || hostname === 'www.decentcare.ai'
   
-  const baseUrl = isProduction ? `https://${hostname}` : process.env.NEXT_PUBLIC_SITE_URL || 'https://decentcare.com'
+  const baseUrl = isProduction ? `https://${hostname}` : process.env.NEXT_PUBLIC_SITE_URL || 'https://decentcare.ai'
   
   // Only allow crawling in production
   if (!isProduction) {
