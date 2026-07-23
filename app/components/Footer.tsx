@@ -94,7 +94,7 @@ const Footer = () => {
               <li>
                 <Link href="/success" className="hover:text-primary-foreground transition-colors">Success Stories</Link>
               </li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Blog</a></li>
+              {/* <li><a href="#" className="hover:text-primary-foreground transition-colors">Blog</a></li> */}
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-primary-foreground transition-colors">Terms of Service</a></li>
               <li><a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a></li>
