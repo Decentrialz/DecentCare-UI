@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { headers } from 'next/headers'
-import { client } from '@/sanity/lib/client'
+// import { client } from '@/sanity/lib/client'
 
 export async function GET() {
   // Get the base URL from the request hostname

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { headers } from 'next/headers'
-import { client } from '@/sanity/lib/client'
+// import { client } from '@/sanity/lib/client'
 
 export async function GET() {
   // Get the base URL from the request hostname
@@ -10,17 +10,17 @@ export async function GET() {
   const baseUrl = `${protocol}://${host}`
   
   // Get latest blog post date
-  let latestBlogDate = new Date().toISOString()
-  try {
-    const latestPost = await client.fetch(`*[_type == "post"] | order(publishedAt desc)[0] {
-      publishedAt
-    }`)
-    if (latestPost && latestPost.publishedAt) {
-      latestBlogDate = new Date(latestPost.publishedAt).toISOString()
-    }
-  } catch (error) {
-    console.error('Error fetching latest blog date:', error)
-  }
+  // let latestBlogDate = new Date().toISOString()
+  // try {
+  //   const latestPost = await client.fetch(`*[_type == "post"] | order(publishedAt desc)[0] {
+  //     publishedAt
+  //   }`)
+  //   if (latestPost && latestPost.publishedAt) {
+  //     latestBlogDate = new Date(latestPost.publishedAt).toISOString()
+  //   }
+  // } catch (error) {
+  //   console.error('Error fetching latest blog date:', error)
+  // }
   
   const staticPages = [
     { url: baseUrl, lastmod: new Date('2026-07-09').toISOString() },
@@ -28,7 +28,7 @@ export async function GET() {
     { url: `${baseUrl}/success`, lastmod: new Date('2026-07-09').toISOString() },
     { url: `${baseUrl}/contact`, lastmod: new Date('2026-07-09').toISOString() },
     { url: `${baseUrl}/luxHospital`, lastmod: new Date('2026-07-09').toISOString() },
-    { url: `${baseUrl}/blog`, lastmod: latestBlogDate },
+    // { url: `${baseUrl}/blog`, lastmod: latestBlogDate },
     { url: `${baseUrl}/services`, lastmod: new Date('2026-07-09').toISOString() },
   ]
 
