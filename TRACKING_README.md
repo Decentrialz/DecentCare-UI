@@ -190,6 +190,38 @@ identifyPatient('MRN-00456', {
 });
 ```
 
+## 🌐 Site-wide Script Injection (`omnilens-tracker.js`)
+
+Alongside the React `TrackingProvider` above, this app injects the standalone
+tracker (`public/omnilens-tracker.js`) site-wide from the root layout via
+`app/components/OmnilensTracker.tsx`. This is the same script other sites load
+cross-origin (e.g. Dr. Gowds), except here it is served from this origin — so
+the script, `/api/collect` and the virtual-number endpoints are all same-origin
+and no separate tracking service or host app is needed.
+
+Configure it with these env vars (all optional — the defaults work as-is):
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `NEXT_PUBLIC_OMNILENS_ENABLED` | `true` | Set to `false` to remove the tracker from the page entirely |
+| `NEXT_PUBLIC_OMNILENS_TENANT_ID` | `decentcare` | Tenant the events are attributed to |
+| `NEXT_PUBLIC_OMNILENS_SITE` | `DecentCare` | Site label sent with each event |
+| `NEXT_PUBLIC_OMNILENS_TRACKER_VERSION` | `1` | Cache-buster — bump when `public/omnilens-tracker.js` changes |
+| `NEXT_PUBLIC_OMNILENS_DEBUG` | `false` | Verbose tracker logging in the console |
+| `NEXT_PUBLIC_OMNILENS_FINGERPRINT` | `true` | Load FingerprintJS for device identity |
+| `NEXT_PUBLIC_OMNILENS_VIRTUAL_NUMBERS` | `false` | Swap phone numbers in the live DOM — **off by default** |
+| `NEXT_PUBLIC_OMNILENS_WHATSAPP` | `false` | Rewrite WhatsApp links in the live DOM — **off by default** |
+| `NEXT_PUBLIC_OMNILENS_ORIGIN` | _(empty)_ | Leave empty to keep all tracker URLs relative; set only to load the tracker/endpoints from another deployment |
+
+The two DOM-mutating features default to off so the site renders and behaves
+exactly as it did before the tracker was added. Enable them per deployment once
+the virtual-number pool is provisioned for the tenant.
+
+> **Deployment note:** if `TRACKER_ALLOWED_ORIGINS` is set on an environment, it
+> must include this app's own origin. Browsers send an `Origin` header on the
+> tracker's same-origin `POST`s, so an allowlist that only names other sites
+> rejects this app's own events with a 403.
+
 ## 🔧 API Endpoints
 
 ### POST `/api/collect`

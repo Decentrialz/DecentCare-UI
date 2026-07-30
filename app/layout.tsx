@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
 import { GoogleTagManagerHead, GoogleTagManagerBody } from "@/app/components/GoogleTagManager";
+import { OmnilensTracker } from "@/app/components/OmnilensTracker";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -28,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <OmnilensTracker />
         <GoogleTagManagerHead />
       </head>
       <body
