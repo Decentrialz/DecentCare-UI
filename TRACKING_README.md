@@ -232,6 +232,51 @@ That loader is generated from this repo. It carries the tenant's configuration
 config change or a version roll reaches the tenant on the next publish, with no
 deploy on their side. Deliberately, no tenant ever hand-copies a config blob.
 
+### Tenant identity — read this before adding a client
+
+Two independent things, easy to conflate:
+
+| | What it is | Where it lives |
+| --- | --- | --- |
+| **slug** | The public filename, e.g. `lux-hospitals` in `/t/lux-hospitals.js` | The tenant JSON's filename |
+| **tenantId** | The backend's tenant UUID | `"tenantId"` inside the tenant JSON |
+
+**Never use a slug as a tenant id.** The backend accepts any string as
+`x-tenant-id` and returns an empty result for one it does not recognise instead of
+erroring, so a slug produces tracking that looks completely healthy and attributes
+to a tenant that does not exist. This had already happened: the loader sent
+`x-tenant-id: gowd-dental`, whose number pool is empty, while the real Gowds
+tenant is `06a4270a-…` with an actual provisioned pool. That was the cause of the
+virtual number never being assigned. The generator now rejects a non-UUID
+`tenantId` rather than publishing it.
+
+`tenantId` is optional, and the two modes are:
+
+- **set** — sent as `x-tenant-id`. Attribution does not depend on which hostname
+  serves the page, so it survives staging domains, previews and localhost.
+- **omitted** — the header is not sent and the backend resolves the tenant from
+  the page hostname. Fewer moving parts, but it only works on hostnames that are
+  registered, and it silently attributes nothing anywhere else.
+
+#### Virtual numbers additionally need the hostname registered
+
+`/virtual-numbers/assign` takes **no tenant parameter at all**. It resolves the
+tenant from the hostname of `page_url`, via the backend's `tenant-hostnames`
+registry — so setting `tenantId` does **not** make number assignment work:
+
+```
+POST /api/v1/virtual-numbers/assign   page_url=http://localhost:3100/
+  404  {"detail":"No tenant registered for hostname: localhost"}
+```
+
+So enabling `virtualNumbers` for a tenant needs, backend-side:
+
+1. A number pool provisioned for that tenant UUID.
+2. Every hostname the client serves from registered via
+   `POST /api/v1/tenant-hostnames` — production, and any `www.` variant. Only
+   `decentcare.drgowdsdental.com` is currently registered, so `www.drgowds.com`
+   would not resolve either.
+
 ### Onboarding
 
 ```bash

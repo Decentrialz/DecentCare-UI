@@ -1,0 +1,10 @@
+{
+  "tenantId": "06a3a49e-b06b-7aad-8000-e5e9a452a5b7",
+  "site": "Lux Hospitals",
+  "virtualNumbers": {
+    "enabled": false
+  },
+  "whatsapp": {
+    "enabled": false
+  }
+}

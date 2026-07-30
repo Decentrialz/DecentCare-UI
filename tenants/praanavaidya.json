@@ -1,0 +1,10 @@
+{
+  "tenantId": "06a3e7b4-c823-7bca-8000-2e17ef7570ae",
+  "site": "Praanavaidya Ayurvedic Hospitals",
+  "virtualNumbers": {
+    "enabled": false
+  },
+  "whatsapp": {
+    "enabled": false
+  }
+}
