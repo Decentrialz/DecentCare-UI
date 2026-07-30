@@ -18,8 +18,9 @@ const ORIGIN = (process.env.NEXT_PUBLIC_OMNILENS_ORIGIN || "").replace(/\/$/, ""
 const ENABLED = process.env.NEXT_PUBLIC_OMNILENS_ENABLED !== "false";
 const TENANT_ID = process.env.NEXT_PUBLIC_OMNILENS_TENANT_ID || "decentcare";
 const SITE = process.env.NEXT_PUBLIC_OMNILENS_SITE || "DecentCare";
-// Bump when public/omnilens-tracker.js changes so CDNs re-fetch it.
-const VERSION = process.env.NEXT_PUBLIC_OMNILENS_TRACKER_VERSION || "1";
+// Matches the ?v= that other consumers (e.g. Dr. Gowds) pin, so every site
+// references the same version of the same file. Bump on tracker changes.
+const VERSION = process.env.NEXT_PUBLIC_OMNILENS_TRACKER_VERSION || "77";
 
 const DEBUG = process.env.NEXT_PUBLIC_OMNILENS_DEBUG === "true";
 // Fingerprinting is read-only; on by default.

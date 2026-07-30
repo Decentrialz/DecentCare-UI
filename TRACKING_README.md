@@ -206,7 +206,7 @@ Configure it with these env vars (all optional — the defaults work as-is):
 | `NEXT_PUBLIC_OMNILENS_ENABLED` | `true` | Set to `false` to remove the tracker from the page entirely |
 | `NEXT_PUBLIC_OMNILENS_TENANT_ID` | `decentcare` | Tenant the events are attributed to |
 | `NEXT_PUBLIC_OMNILENS_SITE` | `DecentCare` | Site label sent with each event |
-| `NEXT_PUBLIC_OMNILENS_TRACKER_VERSION` | `1` | Cache-buster — bump when `public/omnilens-tracker.js` changes |
+| `NEXT_PUBLIC_OMNILENS_TRACKER_VERSION` | `77` | Cache-buster, matched to what other consumers pin — bump when `public/omnilens-tracker.js` changes |
 | `NEXT_PUBLIC_OMNILENS_DEBUG` | `false` | Verbose tracker logging in the console |
 | `NEXT_PUBLIC_OMNILENS_FINGERPRINT` | `true` | Load FingerprintJS for device identity |
 | `NEXT_PUBLIC_OMNILENS_VIRTUAL_NUMBERS` | `false` | Swap phone numbers in the live DOM — **off by default** |
@@ -217,10 +217,18 @@ The two DOM-mutating features default to off so the site renders and behaves
 exactly as it did before the tracker was added. Enable them per deployment once
 the virtual-number pool is provisioned for the tenant.
 
-> **Deployment note:** if `TRACKER_ALLOWED_ORIGINS` is set on an environment, it
-> must include this app's own origin. Browsers send an `Origin` header on the
-> tracker's same-origin `POST`s, so an allowlist that only names other sites
-> rejects this app's own events with a 403.
+### Shared hosting note
+
+This Amplify deployment is also the tracker host for other sites — Dr. Gowds
+loads `/omnilens-tracker.js` and posts to `/api/collect` here cross-origin.
+Injecting the tracker into this app is purely additive: no route, response or
+asset that those sites depend on changes.
+
+`TRACKER_ALLOWED_ORIGINS` is currently unset, so `/api/collect` echoes back
+whichever `Origin` calls it and self-tracking needs no configuration. If you do
+set an allowlist later, it must name **both** this app's own origin and every
+consuming site's origin — browsers send `Origin` even on same-origin `POST`s, so
+omitting this app's own origin makes it reject its own events with a 403.
 
 ## 🔧 API Endpoints
 
