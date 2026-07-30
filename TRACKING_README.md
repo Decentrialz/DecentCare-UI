@@ -324,6 +324,52 @@ The `/api/*` routes in this app are **no longer on any tenant's critical path** 
 tenants now reach the backend through the CDN (see above). They still serve this
 app's own first-party tracking, which is same-origin and needs no CORS.
 
+## 📡 Monitoring
+
+A Lambda probes delivery and ingest from outside every 5 minutes, publishing
+`Omnilens/HealthCheckFailures` to CloudWatch.
+
+| Resource | Value |
+| --- | --- |
+| Function | `decentcare-dev-omnilens-healthcheck` (`ap-south-1`, python3.12) |
+| Source | `scripts/healthcheck/lambda_function.py` |
+| Schedule | EventBridge rule `decentcare-dev-omnilens-healthcheck`, `rate(5 minutes)` |
+| Alarms | `decentcare-dev-omnilens-healthcheck-failures`, `…-stalled` |
+| Notifies | `arn:aws:sns:ap-south-1:401838845163:decentcare-dev-alerts` |
+
+What it checks:
+
+1. Every tenant loader is served and actually sets `OmnilensConfig`.
+2. Every absolute asset a loader references resolves — this catches a loader
+   published against a tracker version that was never uploaded.
+3. CORS preflight is answered at the edge for a tenant origin.
+4. Ingest reaches the backend and the backend is processing. It sends a
+   deliberately invalid payload and expects a validation rejection, so the probe
+   proves the path is alive **without** writing synthetic events into the
+   warehouse.
+
+Tenants are discovered by listing the bucket, so onboarding a tenant needs no
+change here. Run it by hand with:
+
+```bash
+./scripts/healthcheck/run-local.sh
+```
+
+The second alarm (`…-stalled`) fires when the check stops publishing at all.
+Without it, a broken health check looks exactly like a healthy system.
+
+### What this does not catch
+
+These probes see the system from the outside, so they catch server-side
+breakage. They would **not** have caught the failure that motivated them — a
+tenant's virtual-number assignment silently never completing client-side, which
+looked fine from every server's point of view.
+
+Closing that needs two things: the tracker emitting an event on its own failure
+paths (it currently swallows them — `assign` failures hit a bare `catch`), and an
+alert on the ratio of `virtual_number_assigned` to failures per tenant. The
+second half needs warehouse access, so it belongs with the backend.
+
 ### ⚠️ The tracking API is unauthenticated
 
 `app/api/collect/route.ts` attaches `Authorization: Bearer
