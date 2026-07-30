@@ -45,16 +45,23 @@ function buildRuntimeConfig(tenantId, defn) {
     throw new Error(`${tenantId}: apiOrigin is required`);
   }
 
-  const { trackerVersion, apiOrigin: _apiOrigin, _comment, ...rest } = defn;
+  // Paths are config, not convention — moving ingest to a different host or URL
+  // shape stays a change to tenants/_defaults.json rather than a code change here.
+  const paths = defn.apiPaths || {};
+  for (const key of ["collect", "assign", "heartbeat"]) {
+    if (!paths[key]) throw new Error(`${tenantId}: apiPaths.${key} is required`);
+  }
+
+  const { trackerVersion, apiOrigin: _o, apiPaths: _p, _comment, ...rest } = defn;
 
   return {
     ...rest,
     tenantId,
-    collectUrl: `${apiOrigin}/api/collect`,
+    collectUrl: `${apiOrigin}${paths.collect}`,
     virtualNumbers: {
       ...rest.virtualNumbers,
-      assignUrl: `${apiOrigin}/api/virtual-numbers/assign`,
-      heartbeatUrl: `${apiOrigin}/api/virtual-numbers/heartbeat`,
+      assignUrl: `${apiOrigin}${paths.assign}`,
+      heartbeatUrl: `${apiOrigin}${paths.heartbeat}`,
     },
   };
 }

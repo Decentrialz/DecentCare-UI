@@ -255,12 +255,37 @@ once a minute, so changes — and rollbacks — land quickly.
 | Route53 zone | `Z01662272HN14OCWQL3N7` (`dev.decentcare.ai`) |
 | AWS profile | `decentcare-dev` (account `401838845163`) |
 
-Two layers, cached very differently on purpose:
+Paths, cached very differently on purpose:
 
-| Path | Cache | Why |
-| --- | --- | --- |
-| `/t/<tenantId>.js` | `max-age=60, stale-while-revalidate=300` | Control plane — config changes and rollbacks must land fast |
-| `/tracker/v<N>/omnilens-tracker.js` | `max-age=31536000, immutable` | A version a tenant runs must never change under them |
+| Path | Origin | Cache | Why |
+| --- | --- | --- | --- |
+| `/t/<tenantId>.js` | S3 | `max-age=60, swr=300` | Control plane — config changes and rollbacks must land fast |
+| `/tracker/v<N>/omnilens-tracker.js` | S3 | `max-age=31536000, immutable` | A version a tenant runs must never change under them |
+| `/vendor/<lib>/<version>/…` | S3 | `max-age=31536000, immutable` | Vendored third-party code — see `tenants/VENDOR.md` |
+| `/api/v1/*` | `omnilens.dev.decentcare.ai` | `CachingDisabled` | Tracking ingest, forwarded straight to the backend |
+
+### Why ingest goes through the CDN
+
+Tenants send events to `cdn.dev.decentcare.ai/api/v1/*`, which CloudFront
+forwards to the backend. The marketing app is deliberately **not** in the data
+path: a deploy here must not be able to stop ingest across every tenant site.
+
+Two pieces make that work without any backend change:
+
+- **`omnilens-cors-preflight`** (CloudFront Function, viewer-request) answers
+  `OPTIONS` at the edge with `204`. Needed because the tracker sends
+  `Content-Type: application/json` and `x-tenant-id` — both non-simple, so every
+  call is preflighted — while the backend's CORS allowlist rejects tenant origins
+  outright (verified: `400` for a tenant origin, `200` for ours).
+- **`omnilens-api-cors`** (response headers policy, `OriginOverride: true`) adds
+  `Access-Control-Allow-Origin` to real responses. The override matters: the
+  backend sets its own header for some origins, and two `Allow-Origin` headers
+  make browsers reject the response outright.
+
+No credential is injected at the edge, because there is nothing to inject —
+the backend does not verify `Authorization` at all. A `POST` with no bearer and
+one with a garbage bearer both return the same validation error. See the security
+note below.
 
 ### Shipping a tracker change
 
@@ -295,21 +320,34 @@ set an allowlist later, it must name **both** this app's own origin and every
 consuming site's origin — browsers send `Origin` even on same-origin `POST`s, so
 omitting this app's own origin makes it reject its own events with a 403.
 
-**The `/api/*` proxy routes are load-bearing — do not "simplify" them away.**
-They look like pure pass-throughs (`virtual-numbers/assign` and `heartbeat` add
-no auth and no transformation at all), but the backend's own CORS allowlist
-trusts *this app's* origin and rejects tenant origins outright:
+The `/api/*` routes in this app are **no longer on any tenant's critical path** —
+tenants now reach the backend through the CDN (see above). They still serve this
+app's own first-party tracking, which is same-origin and needs no CORS.
 
-| Backend preflight | `Origin: <this app>` | `Origin: <tenant site>` |
-| --- | --- | --- |
-| `/api/v1/collect` | 200 | 400 |
-| `/api/v1/virtual-numbers/assign` | 200 | 400 |
+### ⚠️ The tracking API is unauthenticated
 
-So these routes are the CORS bridge that makes tenant tracking work at all.
-Pointing a tenant straight at `omnilens.dev.decentcare.ai` requires adding that
-tenant's origin to the **backend's** allowlist first. `/api/collect`
-additionally injects `Authorization: Bearer $BACKEND_COGNITO_TOKEN`, so it also
-needs the backend to accept a public write credential before it can be bypassed.
+`app/api/collect/route.ts` attaches `Authorization: Bearer
+$BACKEND_COGNITO_TOKEN` when forwarding, which reads as though ingest is
+authenticated. It is not. The backend does not check it:
+
+```
+POST /api/v1/collect  (no Authorization)                -> 400 validation error
+POST /api/v1/collect  (Authorization: Bearer garbage)   -> 400 validation error
+```
+
+Identical responses, so the token is decorative. `BACKEND_COGNITO_TOKEN` also
+defaults to the literal string `dev`.
+
+Anyone can therefore post arbitrary events for any tenant. Tenant IDs are not
+secret either — they are visible in every tenant's public loader. The exposure is
+data integrity rather than data theft: forged pageviews, clicks, and conversions
+land in the warehouse indistinguishable from real ones, so attribution and
+reporting can be skewed by anyone who looks at a tenant's page source.
+
+Worth fixing backend-side with a per-tenant public write key plus rate limiting.
+`virtual-numbers/assign` deserves particular attention — it allocates from a
+finite number pool, so unauthenticated access there can exhaust the pool or run
+up telephony cost.
 
 ## 🔧 API Endpoints
 

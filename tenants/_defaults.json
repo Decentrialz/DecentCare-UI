@@ -2,7 +2,14 @@
   "_comment": "Shared defaults for every tenant loader. Individual tenants override these in tenants/<tenantId>.json. Change a value here and it reaches every tenant on the next publish — no tenant deploy.",
 
   "trackerVersion": "77",
-  "apiOrigin": "https://dev.d33jpv0fb06po0.amplifyapp.com",
+
+  "_apiComment": "Tenants reach the tracking API through our own CDN, which forwards to the backend directly. The marketing app is deliberately not in the data path — a deploy there must not be able to stop ingest across every tenant.",
+  "apiOrigin": "https://cdn.dev.decentcare.ai",
+  "apiPaths": {
+    "collect": "/api/v1/collect",
+    "assign": "/api/v1/virtual-numbers/assign",
+    "heartbeat": "/api/v1/virtual-numbers/heartbeat"
+  },
 
   "autoPageView": true,
   "autoClicks": true,
@@ -10,8 +17,9 @@
   "replaceEventWithDerived": true,
   "debug": false,
 
+  "_fingerprintComment": "Served from our CDN rather than jsdelivr: this executes on every tenant's site, so a third party in that position is both an availability risk (blocked networks) and a supply-chain one. Pinned to an exact version, sha256 recorded in tenants/VENDOR.md.",
   "enableFingerprint": true,
-  "fingerprintJsUrl": "https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js",
+  "fingerprintJsUrl": "https://cdn.dev.decentcare.ai/vendor/fingerprintjs/3.4.2/fp.min.js",
 
   "virtualNumbers": {
     "enabled": false,
