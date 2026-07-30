@@ -52,14 +52,31 @@ function buildRuntimeConfig(tenantId, defn) {
     if (!paths[key]) throw new Error(`${tenantId}: apiPaths.${key} is required`);
   }
 
-  const { trackerVersion, apiOrigin: _o, apiPaths: _p, _comment, ...rest } = defn;
+  const { trackerVersion, apiOrigin: _o, apiPaths: _p, ...rest } = defn;
+
+  // Loaders are public files on client websites. Any key starting with "_" is a
+  // note to ourselves and must not ship — strip them at every level rather than
+  // naming them individually, so a new note can never leak by being forgotten.
+  const stripInternal = (value) => {
+    if (Array.isArray(value)) return value.map(stripInternal);
+    if (value && typeof value === "object") {
+      return Object.fromEntries(
+        Object.entries(value)
+          .filter(([key]) => !key.startsWith("_"))
+          .map(([key, v]) => [key, stripInternal(v)])
+      );
+    }
+    return value;
+  };
+
+  const clean = stripInternal(rest);
 
   return {
-    ...rest,
+    ...clean,
     tenantId,
     collectUrl: `${apiOrigin}${paths.collect}`,
     virtualNumbers: {
-      ...rest.virtualNumbers,
+      ...clean.virtualNumbers,
       assignUrl: `${apiOrigin}${paths.assign}`,
       heartbeatUrl: `${apiOrigin}${paths.heartbeat}`,
     },

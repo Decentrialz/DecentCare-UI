@@ -232,16 +232,44 @@ That loader is generated from this repo. It carries the tenant's configuration
 config change or a version roll reaches the tenant on the next publish, with no
 deploy on their side. Deliberately, no tenant ever hand-copies a config blob.
 
-To onboard a tenant:
+### Onboarding
 
-1. Add `tenants/<tenantId>.json` with only what differs from
-   `tenants/_defaults.json` (usually `site` plus a feature toggle or two).
-2. `./scripts/publish-tenant-loaders.sh`
-3. Give them the one-line snippet above.
+```bash
+./scripts/new-tenant.sh vaidya-clinic "Vaidya Clinic"   # scaffolds tenants/vaidya-clinic.json
+./scripts/publish-tenant-loaders.sh                     # builds + uploads + invalidates
+./scripts/healthcheck/run-local.sh                      # confirms it is live
+```
 
-To change a tenant's config, or move them to a new tracker version: edit their
-JSON (or `_defaults.json` for everyone), publish, done. Loaders revalidate about
-once a minute, so changes — and rollbacks — land quickly.
+Then give the client their one line. The `tenantId` becomes a public URL path, so
+the script enforces lowercase-and-hyphens and refuses to clobber an existing
+tenant.
+
+The snippet is plain HTML, so it works wherever the client can add a tag —
+Next.js, WordPress, Wix, Google Tag Manager, a hand-written `<head>`. Nothing
+about it is framework specific.
+
+**Both DOM-mutating features start off** for a new tenant, deliberately. Before
+turning them on:
+
+| Feature | Prerequisite |
+| --- | --- |
+| `virtualNumbers.enabled` | A number pool must be provisioned for this `tenantId` on the tracking backend — enabling it here does nothing on its own. Also confirm `phoneTextSelector` / `telLinkSelector` match the client's actual markup. |
+| `whatsapp.enabled` | Confirm `selector` matches their WhatsApp links, since the tracker rewrites those `href`s in place. |
+
+### Changing or offboarding
+
+Change a tenant's config, or move them to a new tracker version: edit their JSON
+(or `_defaults.json` for everyone), publish. Loaders revalidate about once a
+minute, so changes and rollbacks land quickly, and no tenant redeploys.
+
+Offboarding is symmetric — delete `tenants/<tenantId>.json` and publish. The sync
+is `--delete`, so the loader is removed from the CDN and the client's snippet
+becomes inert. Verified: the path returns 403 afterwards and the health check
+stops expecting that tenant.
+
+> Keys beginning with `_` in the tenant JSON are notes to ourselves and are
+> stripped at every level before publishing. Loaders are public files on client
+> websites — do not put anything in them you would not want a client to read.
 
 ### Infrastructure
 
