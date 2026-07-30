@@ -206,7 +206,9 @@ Configure it with these env vars (all optional — the defaults work as-is):
 | `NEXT_PUBLIC_OMNILENS_ENABLED` | `true` | Set to `false` to remove the tracker from the page entirely |
 | `NEXT_PUBLIC_OMNILENS_TENANT_ID` | `decentcare` | Tenant the events are attributed to |
 | `NEXT_PUBLIC_OMNILENS_SITE` | `DecentCare` | Site label sent with each event |
-| `NEXT_PUBLIC_OMNILENS_TRACKER_VERSION` | `77` | Cache-buster, matched to what other consumers pin — bump when `public/omnilens-tracker.js` changes |
+| `NEXT_PUBLIC_OMNILENS_TRACKER_VERSION` | `77` | Cache-buster for this app's own copy — bump when `public/omnilens-tracker.js` changes |
+| `NEXT_PUBLIC_OMNILENS_SCRIPT_URL` | `/omnilens-tracker.js?v=<version>` | Full override for where the script is fetched from, e.g. the CDN URL |
+| `NEXT_PUBLIC_OMNILENS_API_ORIGIN` | _(empty)_ | Origin for the collect / virtual-number endpoints. Empty keeps them same-origin, which is what this app wants |
 | `NEXT_PUBLIC_OMNILENS_DEBUG` | `false` | Verbose tracker logging in the console |
 | `NEXT_PUBLIC_OMNILENS_FINGERPRINT` | `true` | Load FingerprintJS for device identity |
 | `NEXT_PUBLIC_OMNILENS_VIRTUAL_NUMBERS` | `false` | Swap phone numbers in the live DOM — **off by default** |
@@ -216,6 +218,36 @@ Configure it with these env vars (all optional — the defaults work as-is):
 The two DOM-mutating features default to off so the site renders and behaves
 exactly as it did before the tracker was added. Enable them per deployment once
 the virtual-number pool is provisioned for the tenant.
+
+### CDN distribution for tenant sites
+
+Tenant sites (Dr. Gowds, etc.) do **not** load the script from this app. They
+load it from CloudFront, on an immutable version-pinned path:
+
+```
+https://d2pze1lwft60rl.cloudfront.net/tracker/v77/omnilens-tracker.js
+```
+
+| Resource | Value |
+| --- | --- |
+| S3 bucket | `decentcare-dev-omnilens-tracker` (`ap-south-1`, private) |
+| CloudFront distribution | `E6V72KSXVI57V` |
+| Origin access | OAC `E2F6ECJGXKR3F0` — the bucket is not publicly readable |
+| AWS profile | `decentcare-dev` (account `401838845163`) |
+
+`public/omnilens-tracker.js` remains the source of truth. To ship a change,
+edit it, then publish a **new** version:
+
+```bash
+./scripts/publish-tracker.sh 78
+```
+
+Versions are immutable and cached for a year, so publishing can never alter a
+version a tenant already runs — the script refuses to overwrite an existing one.
+Rolling a tenant forward is a deliberate one-line edit of its script URL, never
+a side effect of a deploy. This app keeps serving its own copy from `public/` by
+default, so it always runs the latest; point it at the CDN with
+`NEXT_PUBLIC_OMNILENS_SCRIPT_URL` if you'd rather it pinned a version too.
 
 ### Shared hosting note
 
@@ -229,6 +261,22 @@ whichever `Origin` calls it and self-tracking needs no configuration. If you do
 set an allowlist later, it must name **both** this app's own origin and every
 consuming site's origin — browsers send `Origin` even on same-origin `POST`s, so
 omitting this app's own origin makes it reject its own events with a 403.
+
+**The `/api/*` proxy routes are load-bearing — do not "simplify" them away.**
+They look like pure pass-throughs (`virtual-numbers/assign` and `heartbeat` add
+no auth and no transformation at all), but the backend's own CORS allowlist
+trusts *this app's* origin and rejects tenant origins outright:
+
+| Backend preflight | `Origin: <this app>` | `Origin: <tenant site>` |
+| --- | --- | --- |
+| `/api/v1/collect` | 200 | 400 |
+| `/api/v1/virtual-numbers/assign` | 200 | 400 |
+
+So these routes are the CORS bridge that makes tenant tracking work at all.
+Pointing a tenant straight at `omnilens.dev.decentcare.ai` requires adding that
+tenant's origin to the **backend's** allowlist first. `/api/collect`
+additionally injects `Authorization: Bearer $BACKEND_COGNITO_TOKEN`, so it also
+needs the backend to accept a public write credential before it can be bypassed.
 
 ## 🔧 API Endpoints
 

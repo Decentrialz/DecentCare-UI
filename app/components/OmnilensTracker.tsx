@@ -11,16 +11,23 @@ import Script from "next/script";
  * different deployment, without a code change.
  */
 
-// Empty string keeps every URL relative (same-origin). Set only when the
-// tracker/collect endpoints should be loaded from another deployment.
-const ORIGIN = (process.env.NEXT_PUBLIC_OMNILENS_ORIGIN || "").replace(/\/$/, "");
-
 const ENABLED = process.env.NEXT_PUBLIC_OMNILENS_ENABLED !== "false";
 const TENANT_ID = process.env.NEXT_PUBLIC_OMNILENS_TENANT_ID || "decentcare";
 const SITE = process.env.NEXT_PUBLIC_OMNILENS_SITE || "DecentCare";
-// Matches the ?v= that other consumers (e.g. Dr. Gowds) pin, so every site
-// references the same version of the same file. Bump on tracker changes.
+
+// Where the collect / virtual-number endpoints live. Empty keeps them relative
+// (same-origin), which is what this app wants — the routes are its own.
+const API_ORIGIN = (process.env.NEXT_PUBLIC_OMNILENS_API_ORIGIN || "").replace(/\/$/, "");
+
+// Version of public/omnilens-tracker.js this app serves to itself. Bump on
+// tracker changes. Unused when SCRIPT_URL is set explicitly.
 const VERSION = process.env.NEXT_PUBLIC_OMNILENS_TRACKER_VERSION || "77";
+
+// Where the tracker script is loaded from — deliberately independent of
+// API_ORIGIN so the script can come from the CDN while events still post to
+// this app's own routes. Defaults to this app's own copy in public/.
+const SCRIPT_URL =
+  process.env.NEXT_PUBLIC_OMNILENS_SCRIPT_URL || `/omnilens-tracker.js?v=${VERSION}`;
 
 const DEBUG = process.env.NEXT_PUBLIC_OMNILENS_DEBUG === "true";
 // Fingerprinting is read-only; on by default.
@@ -33,7 +40,7 @@ const WHATSAPP = process.env.NEXT_PUBLIC_OMNILENS_WHATSAPP === "true";
 const omnilensConfig = {
   tenantId: TENANT_ID,
   site: SITE,
-  collectUrl: `${ORIGIN}/api/collect`,
+  collectUrl: `${API_ORIGIN}/api/collect`,
   autoPageView: true,
   autoClicks: true,
   trackAllClicks: true,
@@ -45,8 +52,8 @@ const omnilensConfig = {
     : "",
   virtualNumbers: {
     enabled: VIRTUAL_NUMBERS,
-    assignUrl: `${ORIGIN}/api/virtual-numbers/assign`,
-    heartbeatUrl: `${ORIGIN}/api/virtual-numbers/heartbeat`,
+    assignUrl: `${API_ORIGIN}/api/virtual-numbers/assign`,
+    heartbeatUrl: `${API_ORIGIN}/api/virtual-numbers/heartbeat`,
     phoneTextSelector: ".phone-number,[data-phone]",
     telLinkSelector: "a[href^='tel:'],[data-call-link]",
     heartbeatSec: 30,
@@ -77,7 +84,7 @@ export const OmnilensTracker = () => {
       />
       <Script
         id="omnilens-tracker"
-        src={`${ORIGIN}/omnilens-tracker.js?v=${VERSION}`}
+        src={SCRIPT_URL}
         strategy="beforeInteractive"
       />
     </>
