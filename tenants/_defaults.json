@@ -1,0 +1,31 @@
+{
+  "_comment": "Shared defaults for every tenant loader. Individual tenants override these in tenants/<tenantId>.json. Change a value here and it reaches every tenant on the next publish — no tenant deploy.",
+
+  "trackerVersion": "77",
+  "apiOrigin": "https://dev.d33jpv0fb06po0.amplifyapp.com",
+
+  "autoPageView": true,
+  "autoClicks": true,
+  "trackAllClicks": true,
+  "replaceEventWithDerived": true,
+  "debug": false,
+
+  "enableFingerprint": true,
+  "fingerprintJsUrl": "https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js",
+
+  "virtualNumbers": {
+    "enabled": false,
+    "phoneTextSelector": ".phone-number,[data-phone]",
+    "telLinkSelector": "a[href^='tel:'],[data-call-link]",
+    "heartbeatSec": 30,
+    "geolocationTimeoutMs": 5000,
+    "hashAnonymousId": true
+  },
+
+  "whatsapp": {
+    "enabled": false,
+    "selector": "a[href*='wa.me'],a[href*='api.whatsapp.com/send']",
+    "message": "Hi, I need help booking an appointment.",
+    "trackClicks": true
+  }
+}

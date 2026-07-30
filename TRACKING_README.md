@@ -219,35 +219,68 @@ The two DOM-mutating features default to off so the site renders and behaves
 exactly as it did before the tracker was added. Enable them per deployment once
 the virtual-number pool is provisioned for the tenant.
 
-### CDN distribution for tenant sites
+## 🏢 Onboarding a tenant site
 
-Tenant sites (Dr. Gowds, etc.) do **not** load the script from this app. They
-load it from CloudFront, on an immutable version-pinned path:
+A tenant site embeds exactly one line, and never needs to touch it again:
 
+```html
+<script async src="https://cdn.dev.decentcare.ai/t/<tenantId>.js"></script>
 ```
-https://d2pze1lwft60rl.cloudfront.net/tracker/v77/omnilens-tracker.js
-```
+
+That loader is generated from this repo. It carries the tenant's configuration
+**and** the tracker version they run, which means both are controlled here — a
+config change or a version roll reaches the tenant on the next publish, with no
+deploy on their side. Deliberately, no tenant ever hand-copies a config blob.
+
+To onboard a tenant:
+
+1. Add `tenants/<tenantId>.json` with only what differs from
+   `tenants/_defaults.json` (usually `site` plus a feature toggle or two).
+2. `./scripts/publish-tenant-loaders.sh`
+3. Give them the one-line snippet above.
+
+To change a tenant's config, or move them to a new tracker version: edit their
+JSON (or `_defaults.json` for everyone), publish, done. Loaders revalidate about
+once a minute, so changes — and rollbacks — land quickly.
+
+### Infrastructure
 
 | Resource | Value |
 | --- | --- |
+| CDN | `https://cdn.dev.decentcare.ai` |
 | S3 bucket | `decentcare-dev-omnilens-tracker` (`ap-south-1`, private) |
-| CloudFront distribution | `E6V72KSXVI57V` |
+| CloudFront distribution | `E6V72KSXVI57V` (`d2pze1lwft60rl.cloudfront.net`) |
 | Origin access | OAC `E2F6ECJGXKR3F0` — the bucket is not publicly readable |
+| TLS certificate | ACM `us-east-1`, `cdn.dev.decentcare.ai`, DNS-validated |
+| Route53 zone | `Z01662272HN14OCWQL3N7` (`dev.decentcare.ai`) |
 | AWS profile | `decentcare-dev` (account `401838845163`) |
 
-`public/omnilens-tracker.js` remains the source of truth. To ship a change,
-edit it, then publish a **new** version:
+Two layers, cached very differently on purpose:
+
+| Path | Cache | Why |
+| --- | --- | --- |
+| `/t/<tenantId>.js` | `max-age=60, stale-while-revalidate=300` | Control plane — config changes and rollbacks must land fast |
+| `/tracker/v<N>/omnilens-tracker.js` | `max-age=31536000, immutable` | A version a tenant runs must never change under them |
+
+### Shipping a tracker change
+
+`public/omnilens-tracker.js` is the source of truth. Publish a **new** version,
+then point tenants at it:
 
 ```bash
-./scripts/publish-tracker.sh 78
+./scripts/publish-tracker.sh 78          # publish the new build
+# bump trackerVersion in tenants/_defaults.json (or one tenant's JSON)
+./scripts/publish-tenant-loaders.sh      # roll tenants onto it
 ```
 
-Versions are immutable and cached for a year, so publishing can never alter a
-version a tenant already runs — the script refuses to overwrite an existing one.
-Rolling a tenant forward is a deliberate one-line edit of its script URL, never
-a side effect of a deploy. This app keeps serving its own copy from `public/` by
-default, so it always runs the latest; point it at the CDN with
-`NEXT_PUBLIC_OMNILENS_SCRIPT_URL` if you'd rather it pinned a version too.
+`publish-tracker.sh` refuses to overwrite an existing version, so a publish can
+never alter what a tenant is already running. Rolling forward is always a
+deliberate act — and because the version lives in the loader, it needs no tenant
+deploy. To canary, bump one tenant's JSON instead of `_defaults.json`.
+
+This app itself is first-party and stays on the React component
+(`app/components/OmnilensTracker.tsx`) with same-origin URLs, so it always runs
+the copy in `public/`. The loader flow is for external sites only.
 
 ### Shared hosting note
 

@@ -1,0 +1,9 @@
+{
+  "site": "Gowds Hospital",
+  "virtualNumbers": {
+    "enabled": true
+  },
+  "whatsapp": {
+    "enabled": true
+  }
+}
