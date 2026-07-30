@@ -362,13 +362,42 @@ Without it, a broken health check looks exactly like a healthy system.
 
 These probes see the system from the outside, so they catch server-side
 breakage. They would **not** have caught the failure that motivated them — a
-tenant's virtual-number assignment silently never completing client-side, which
-looked fine from every server's point of view.
+tenant's virtual-number assignment never completing client-side, which looked
+fine from every server's point of view.
 
-Closing that needs two things: the tracker emitting an event on its own failure
-paths (it currently swallows them — `assign` failures hit a bare `catch`), and an
-alert on the ratio of `virtual_number_assigned` to failures per tenant. The
-second half needs warehouse access, so it belongs with the backend.
+The client-side signal for that already exists. The tracker reports its own
+assignment failures as a normal event, with the reason propagated from the
+failing response:
+
+```json
+{ "event_name": "virtual_number_assign_failed",
+  "properties": { "reason": "<message from the failed response>",
+                  "source": "omnilens-tracker-js" } }
+```
+
+Verified against a harness that forced assign to 503: the event is sent, and sent
+*before* `page_view`. So the data needed to detect this has been arriving in the
+warehouse the whole time — what is missing is a query and an alert on it, not
+instrumentation.
+
+The full set of events the tracker emits, for whoever builds those alerts:
+
+| Event | Meaning |
+| --- | --- |
+| `page_view` | Page viewed |
+| `phone_clicked` | A tracked phone number or `tel:` link was clicked |
+| `whatsapp_clicked` | A tracked WhatsApp link was clicked |
+| `virtual_number_assigned` | Assignment succeeded — carries `assignment_id`, `distribution_mode` |
+| `virtual_number_assign_failed` | Assignment failed — carries `reason` |
+
+Two alerts worth adding backend-side, both per tenant:
+
+1. `virtual_number_assign_failed` rate, or its ratio to `virtual_number_assigned`.
+   A tenant whose assignments are all failing is losing exactly the call
+   attribution the feature exists to capture.
+2. Event volume dropping to zero over a rolling window. This is the general
+   catch-all for a tenant whose tracking has stopped for any reason, including
+   ones nobody predicted.
 
 ### ⚠️ The tracking API is unauthenticated
 
