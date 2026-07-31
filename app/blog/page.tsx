@@ -3,11 +3,13 @@ import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import { BlogHero, LatestBlogs, AllArticlesWithFilters } from "@/app/blog/components";
 import { getAllPosts, getFeaturedPosts, getAllCategories } from "@/app/blog/lib/sanity-api";
+import { getCanonicalUrl } from "@/lib/utils/siteConfig";
 
 export const metadata = {
-  title: "Blog & Insights - DecentCare",
-  description:
-    "Discover healthcare innovation and insights. Stay informed with the latest healthcare technology trends, best practices, and insights from industry experts.",
+  robots: 'index, follow',
+  alternates: {
+    canonical: getCanonicalUrl('/blog'),
+  },
 };
 
 export default async function BlogPage() {

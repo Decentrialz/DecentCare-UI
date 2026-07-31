@@ -39,12 +39,12 @@ const Hero = () => {
     }, [heroImages.length]);
 
     // Scroll to VideoTestimonialsSection
-    const handleScrollToVideoTestimonials = () => {
-        const section = document.getElementById('video-testimonials');
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+    // const handleScrollToVideoTestimonials = () => {
+    //     const section = document.getElementById('video-testimonials');
+    //     if (section) {
+    //         section.scrollIntoView({ behavior: 'smooth' });
+    //     }
+    // };
     return (
         <section
             className="relative pt-36 lg:pt-48 overflow-hidden w-full"
@@ -145,14 +145,14 @@ const Hero = () => {
                                         </div>
                                     </div>
                                 )}
-                                <Button
+                                {/* <Button
                                     variant="outline"
                                     className="h-[45px] px-16 lg:px-6 py-[10px] rounded-lg bg-white border border-[rgba(60,131,246,0.10)] flex items-center gap-[10px] shadow-[0_4px_20px_-2px_rgba(60,131,246,0.08)] hover:bg-[#F5FAFF] transition-all"
                                     onClick={handleScrollToVideoTestimonials}
                                 >
                                     <Play className="w-5 h-5" />
                                     Watch Success Stories
-                                </Button>
+                                </Button> */}
 
                             </div>
 

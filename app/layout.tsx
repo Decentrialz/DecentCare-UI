@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
 import { GoogleTagManagerHead, GoogleTagManagerBody } from "@/app/components/GoogleTagManager";
+import { getCanonicalUrl } from "@/lib/utils/siteConfig";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -18,6 +19,10 @@ const dmSerifDisplay = DM_Serif_Display({
 export const metadata: Metadata = {
   title: "DecentCare - AI-Powered Healthcare Marketing",
   description: "AI-enabled Care Journey CRM designed to help healthcare teams streamline patient journeys, appointments, and operational coordination.",
+  robots: 'index, follow',
+  alternates: {
+    canonical: getCanonicalUrl('/'),
+  },
 };
 
 export default function RootLayout({
