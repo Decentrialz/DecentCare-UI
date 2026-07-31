@@ -1,11 +1,5 @@
 {
-  "_note": "Slug is frozen: decentcaregowds embeds /t/gowd-dental.js. Only tenantId changed.",
+  "_note": "Slug is frozen: decentcaregowds embeds /t/gowd-dental.js.",
   "tenantId": "06a4270a-0a06-7883-8000-730589af4382",
-  "site": "Gowd's Dental Hospitals",
-  "virtualNumbers": {
-    "enabled": true
-  },
-  "whatsapp": {
-    "enabled": true
-  }
+  "site": "Gowd's Dental Hospitals"
 }

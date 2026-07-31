@@ -21,8 +21,10 @@
   "enableFingerprint": true,
   "fingerprintJsUrl": "https://cdn.dev.decentcare.ai/vendor/fingerprintjs/3.4.2/fp.min.js",
 
+  "_domMutationComment": "virtualNumbers and whatsapp both rewrite content on a client's live page, and are on by default. A tenant whose hostname is unregistered or whose number pool is empty will call assign and get a 4xx/5xx on every page view; the tracker reports that as virtual_number_assign_failed rather than failing silently, and nothing on the page is altered. Set enabled:false per tenant to opt out.",
+
   "virtualNumbers": {
-    "enabled": false,
+    "enabled": true,
     "phoneTextSelector": ".phone-number,[data-phone]",
     "telLinkSelector": "a[href^='tel:'],[data-call-link]",
     "heartbeatSec": 30,
@@ -31,7 +33,7 @@
   },
 
   "whatsapp": {
-    "enabled": false,
+    "enabled": true,
     "selector": "a[href*='wa.me'],a[href*='api.whatsapp.com/send']",
     "message": "Hi, I need help booking an appointment.",
     "trackClicks": true
