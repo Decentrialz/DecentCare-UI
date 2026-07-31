@@ -10,6 +10,15 @@ import FoundersStory from "./FoundersStory";
 import OurTeam from "./OurTeam";
 import CTASection from "./CTASection";
 import Hero from "../assets/Hero.svg";
+import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: 'index, follow',
+  alternates: {
+    canonical: getCanonicalUrl('/about'),
+  },
+};
 
 const About = () => {
   console.log("Hero import:", Hero); // Debug log

@@ -2,11 +2,13 @@ import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import { BlogHero, LatestBlogs, AllArticles } from "@/app/blog/components";
+import { getCanonicalUrl } from "@/lib/utils/siteConfig";
 
 export const metadata = {
-  title: "Blog & Insights - DecentCare",
-  description:
-    "Discover healthcare innovation and insights. Stay informed with the latest healthcare technology trends, best practices, and insights from industry experts.",
+  robots: 'index, follow',
+  alternates: {
+    canonical: getCanonicalUrl('/blog'),
+  },
 };
 
 export default function BlogPage() {
