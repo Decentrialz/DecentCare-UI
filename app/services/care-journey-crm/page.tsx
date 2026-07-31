@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/utils/siteConfig";
 import Navbar from "@/app/components/navbar";
+
+export const metadata: Metadata = {
+  robots: 'index, follow',
+  alternates: {
+    canonical: getCanonicalUrl('/services/care-journey-crm'),
+  },
+};
 import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import Breadcrumb from "@/app/components/Breadcrumb";
