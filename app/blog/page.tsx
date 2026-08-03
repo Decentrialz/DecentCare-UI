@@ -5,8 +5,13 @@ import { BlogHero, LatestBlogs, AllArticlesWithFilters } from "@/app/blog/compon
 import { getAllPosts, getFeaturedPosts, getAllCategories } from "@/app/blog/lib/sanity-api";
 import { getCanonicalUrl } from "@/lib/utils/siteConfig";
 
+const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
+
 export const metadata = {
-  robots: 'index, follow',
+  robots: {
+    index: isProduction,
+    follow: isProduction,
+  },
   alternates: {
     canonical: getCanonicalUrl('/blog'),
   },

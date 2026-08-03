@@ -5,8 +5,13 @@ import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import HeroSuccessSection from "./HeroSuccessSection";
 
+const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
+
 export const metadata: Metadata = {
-  robots: 'index, follow',
+  robots: {
+    index: isProduction,
+    follow: isProduction,
+  },
   alternates: {
     canonical: getCanonicalUrl('/success'),
   },

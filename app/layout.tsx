@@ -16,10 +16,15 @@ const dmSerifDisplay = DM_Serif_Display({
   weight: "400",
 });
 
+const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
+
 export const metadata: Metadata = {
   title: "DecentCare - AI-Powered Healthcare Marketing",
   description: "AI-enabled Care Journey CRM designed to help healthcare teams streamline patient journeys, appointments, and operational coordination.",
-  robots: 'index, follow',
+  robots: {
+    index: isProduction,
+    follow: isProduction,
+  },
   alternates: {
     canonical: getCanonicalUrl('/'),
   },
