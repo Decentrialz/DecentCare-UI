@@ -13,8 +13,13 @@ import Hero from "../assets/Hero.svg";
 import { getCanonicalUrl } from "@/lib/utils/siteConfig";
 import type { Metadata } from "next";
 
+const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
+
 export const metadata: Metadata = {
-  robots: 'index, follow',
+  robots: {
+    index: isProduction,
+    follow: isProduction,
+  },
   alternates: {
     canonical: getCanonicalUrl('/about'),
   },
