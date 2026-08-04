@@ -25,7 +25,8 @@
 
   "virtualNumbers": {
     "enabled": true,
-    "phoneTextSelector": ".phone-number,[data-phone]",
+    "_phoneTextSelectorComment": "Matched elements have their entire textContent replaced with the number, so only add selectors for elements that contain nothing but the phone number. A broad selector like .phone would wipe out any icon or label sitting beside it. Numbers inside tel: anchors are handled separately by telLinkSelector and do not need to be listed here.",
+    "phoneTextSelector": ".phone-number,.phone_number,[data-phone],[data-omnilens-phone-text]",
     "telLinkSelector": "a[href^='tel:'],[data-call-link]",
     "heartbeatSec": 30,
     "geolocationTimeoutMs": 5000,
