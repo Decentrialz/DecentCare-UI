@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+import { paidMarketingPageSchema } from "@/lib/schemas/paidMarketingSchema";
 import Navbar from "@/app/components/navbar";
 
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
@@ -55,7 +56,15 @@ const paidMarketingFaqs = [
 
 const PaidMarketingPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <script
+        id="paid-marketing-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(paidMarketingPageSchema),
+        }}
+      />
+      <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
       <DecentCareWaySection />
@@ -68,7 +77,8 @@ const PaidMarketingPage = () => {
       <FAQSection faqs={paidMarketingFaqs} />
       <MobileStickyButtons />
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

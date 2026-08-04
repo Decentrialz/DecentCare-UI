@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+import { seoPageSchema } from "@/lib/schemas/seoSchema";
 import Navbar from "@/app/components/navbar";
 
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
@@ -61,7 +62,15 @@ const benefits = [
 
 const SEOAISearchPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <script
+        id="seo-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(seoPageSchema),
+        }}
+      />
+      <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
       <ProvenResultsSection />
@@ -82,7 +91,8 @@ const SEOAISearchPage = () => {
 
       <MobileStickyButtons />
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

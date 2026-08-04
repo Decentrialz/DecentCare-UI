@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+import { smmPageSchema } from "@/lib/schemas/smmSchema";
 import Navbar from "@/app/components/navbar";
 
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
@@ -40,7 +41,15 @@ const smmFaqs = [
 
 const SocialMediaMarketing = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <script
+        id="smm-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(smmPageSchema),
+        }}
+      />
+      <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
       <GrowthStatsSection />
@@ -66,7 +75,8 @@ const SocialMediaMarketing = () => {
       />
       <MobileStickyButtons />
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 
