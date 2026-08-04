@@ -34,9 +34,15 @@
   var virtualGeolocationTimeoutMs = Number(virtualNumbersConfig.geolocationTimeoutMs || 5000);
   var virtualHashAnonymousId = virtualNumbersConfig.hashAnonymousId !== false;
   var virtualPersistKey = virtualNumbersConfig.persistKey || 'omnilens_virtual_assignment';
+  // Request a fresh assignment on each client-side route change. Assignment is
+  // not sticky, so this can show a visitor a different number per page; set it
+  // to false to assign once per document load instead.
+  var assignOnRouteChange = virtualNumbersConfig.assignOnRouteChange !== false;
   var virtualMutationObserver = null;
   var virtualRoutePatched = false;
   var virtualDebounceTimer = null;
+  var virtualRouteAssignTimer = null;
+  var lastAssignedPageUrl = '';
   var trackingReady = !enableVirtualNumbers;
   var queuedEventPayloads = [];
   var compiledRules = compileRules(config.eventRules || []);
@@ -572,6 +578,38 @@
     persistVirtualAssignment(assignment);
   }
 
+  /**
+   * Handles a client-side route change for virtual numbers.
+   *
+   * Always re-applies the current assignment to whatever markup the framework
+   * just rendered. When assignOnRouteChange is on, it also requests a fresh
+   * assignment for the new page, deduped on the resolved URL so the repeated
+   * replaceState calls frameworks make for one route do not each trigger a
+   * request. Note that assignment is not sticky: a new request can return a
+   * different number than the visitor saw on the previous page.
+   */
+  function handleVirtualRouteChange() {
+    scheduleVirtualDomApply();
+
+    if (!enableVirtualNumbers || !assignOnRouteChange) return;
+
+    if (virtualRouteAssignTimer) {
+      clearTimeout(virtualRouteAssignTimer);
+      virtualRouteAssignTimer = null;
+    }
+
+    virtualRouteAssignTimer = setTimeout(function () {
+      virtualRouteAssignTimer = null;
+
+      var currentUrl = getAbsolutePageUrl();
+      if (currentUrl === lastAssignedPageUrl) return;
+      lastAssignedPageUrl = currentUrl;
+
+      log('route change, requesting assignment for', currentUrl);
+      assignVirtualNumber();
+    }, 60);
+  }
+
   function installVirtualDomObservers() {
     if (!enableVirtualNumbers) return;
 
@@ -599,19 +637,19 @@
       var originalPushState = history.pushState;
       history.pushState = function () {
         var result = originalPushState.apply(this, arguments);
-        scheduleVirtualDomApply();
+        handleVirtualRouteChange();
         return result;
       };
 
       var originalReplaceState = history.replaceState;
       history.replaceState = function () {
         var result = originalReplaceState.apply(this, arguments);
-        scheduleVirtualDomApply();
+        handleVirtualRouteChange();
         return result;
       };
     }
 
-    window.addEventListener('popstate', scheduleVirtualDomApply);
+    window.addEventListener('popstate', handleVirtualRouteChange);
     window.addEventListener('hashchange', scheduleVirtualDomApply);
     window.addEventListener('pageshow', scheduleVirtualDomApply);
   }
@@ -656,10 +694,14 @@
     var anonymousIdForAssign = virtualHashAnonymousId ? anonToShort(ids.anonymousId) : ids.anonymousId;
 
     return getGeoData().then(function (geo) {
+      // Record what we assigned for, so a route change back to this URL — or the
+      // first route change after load — does not request the same page twice.
+      lastAssignedPageUrl = getAbsolutePageUrl();
+
       var payload = {
         anonymous_id: anonymousIdForAssign,
         session_id: ids.sessionId,
-        page_url: getAbsolutePageUrl(),
+        page_url: lastAssignedPageUrl,
         referrer: document.referrer || undefined,
         utm_source: searchParams.get('utm_source') || undefined,
         utm_medium: searchParams.get('utm_medium') || undefined,

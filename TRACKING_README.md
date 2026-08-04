@@ -258,6 +258,35 @@ virtual number never being assigned. The generator now rejects a non-UUID
   the page hostname. Fewer moving parts, but it only works on hostnames that are
   registered, and it silently attributes nothing anywhere else.
 
+#### Assignment on client-side navigation
+
+Every client is a single-page app, so navigation does not reload the document.
+Two independent behaviours follow from that:
+
+- **Page views** are reported on each route change (tracker v78+), deduped on the
+  resolved URL. Before that, a visitor reading five pages reported one view.
+- **Assignment** is re-requested on each route change (tracker v79+), controlled
+  by `virtualNumbers.assignOnRouteChange`, default `true`.
+
+Assignment is **not sticky**. A repeat request can return a different number, so
+with `assignOnRouteChange` on, a visitor sees a different number per page —
+measured on Lux: `…3375` on load, `…3372` after one navigation, `…3376` after
+two. Whether that is correct depends on how the backend attributes a call placed
+to a number the visitor saw earlier in the visit; the assign response carries
+`expires_at` and `grace_end_at`, which is what governs how long an older number
+stays attributable.
+
+To assign once per document load instead, set it per tenant or in
+`_defaults.json` — no tracker change needed:
+
+```json
+"virtualNumbers": { "assignOnRouteChange": false }
+```
+
+Re-applying the current assignment to newly rendered markup is separate and
+always happens, via the MutationObserver and the same history hooks. That part
+never required a new assignment.
+
 #### Virtual numbers additionally need the hostname registered
 
 `/virtual-numbers/assign` takes **no tenant parameter at all**. It resolves the

@@ -1,7 +1,7 @@
 {
   "_comment": "Shared defaults for every tenant loader. Individual tenants override these in tenants/<tenantId>.json. Change a value here and it reaches every tenant on the next publish — no tenant deploy.",
 
-  "trackerVersion": "78",
+  "trackerVersion": "79",
 
   "_apiComment": "Tenants reach the tracking API through our own CDN, which forwards to the backend directly. The marketing app is deliberately not in the data path — a deploy there must not be able to stop ingest across every tenant.",
   "apiOrigin": "https://cdn.dev.decentcare.ai",
