@@ -21,7 +21,7 @@ const API_ORIGIN = (process.env.NEXT_PUBLIC_OMNILENS_API_ORIGIN || "").replace(/
 
 // Version of public/omnilens-tracker.js this app serves to itself. Bump on
 // tracker changes. Unused when SCRIPT_URL is set explicitly.
-const VERSION = process.env.NEXT_PUBLIC_OMNILENS_TRACKER_VERSION || "77";
+const VERSION = process.env.NEXT_PUBLIC_OMNILENS_TRACKER_VERSION || "79";
 
 // Where the tracker script is loaded from — deliberately independent of
 // API_ORIGIN so the script can come from the CDN while events still post to
