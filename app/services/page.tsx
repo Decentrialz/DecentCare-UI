@@ -5,12 +5,21 @@ import HeroBanner from "../about/HeroBanner";
 import CTASection from "../about/CTASection";
 import HeroServices from "../assets/HeroServices.svg";
 import Service from "./service";
+import { servicesPageSchema } from "@/lib/schemas/servicesSchema";
 
 const Services = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-       <HeroBanner 
+    <>
+      <script
+        id="services-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(servicesPageSchema),
+        }}
+      />
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <HeroBanner 
         heroImage={HeroServices}
         breadcrumbItems={[
           { label: "Home", href: "/" },
@@ -21,11 +30,12 @@ const Services = () => {
         subtitle="Strategic capabilities designed for modern healthcare organizations."
         variant="centered"
       />
-      <Service />
-      <CTASection heading="Learn More About DecentCare" description="If you are exploring ways to improve patient acquisition, care journey management, or the operational effectiveness of your healthcare practice, we would welcome the opportunity to connect." subDescription="Designed for clinics, hospitals, and healthcare teams managing real-world care workflows."/>
-      <MobileStickyButtons />
-      <Footer />
-    </div>
+        <Service />
+        <CTASection heading="Learn More About DecentCare" description="If you are exploring ways to improve patient acquisition, care journey management, or the operational effectiveness of your healthcare practice, we would welcome the opportunity to connect." subDescription="Designed for clinics, hospitals, and healthcare teams managing real-world care workflows."/>
+        <MobileStickyButtons />
+        <Footer />
+      </div>
+    </>
   );
 };
 

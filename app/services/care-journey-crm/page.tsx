@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+import { crmPageSchema } from "@/lib/schemas/crmSchema";
 import Navbar from "@/app/components/navbar";
 
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
@@ -33,7 +34,15 @@ const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
 
 export default function CareJourneyCRMPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <script
+        id="crm-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(crmPageSchema),
+        }}
+      />
+      <div className="min-h-screen bg-background">
       <Navbar />
 
       <section
@@ -72,7 +81,8 @@ export default function CareJourneyCRMPage() {
       />
       <MobileStickyButtons />
       <Footer />
-    </div>
+      </div>
+    </>
   );
 }
 
