@@ -46,9 +46,9 @@ if [[ -e "$TENANT_FILE" ]]; then
   exit 1
 fi
 
-# Both DOM-mutating features start off. They rewrite content on a client's live
-# site, and virtual numbers additionally need a number pool provisioned for this
-# tenant on the backend, so neither should switch on by default.
+# Keep the file to what actually differs from _defaults.json. virtualNumbers and
+# whatsapp are on by default, so writing them here would only restate the default
+# and, worse, silently pin this tenant if the default ever changes.
 if [[ -n "$TENANT_UUID" ]]; then
   TENANT_LINE="  \"tenantId\": \"$TENANT_UUID\","
 else
@@ -58,13 +58,7 @@ fi
 cat > "$TENANT_FILE" <<JSON
 {
 $TENANT_LINE
-  "site": "$SITE_NAME",
-  "virtualNumbers": {
-    "enabled": false
-  },
-  "whatsapp": {
-    "enabled": false
-  }
+  "site": "$SITE_NAME"
 }
 JSON
 
@@ -78,9 +72,16 @@ echo "       <script async src=\"$CDN_ORIGIN/t/$SLUG.js\"></script>"
 echo
 echo "  3. Confirm it is live:  ./scripts/healthcheck/run-local.sh"
 echo
-echo "Before enabling virtualNumbers for this tenant:"
-echo "  - a number pool must exist for the tenant UUID on the tracking backend"
-echo "  - every hostname the client serves from must be registered:"
+echo "Virtual numbers and WhatsApp tracking are ON by default. Number swapping"
+echo "needs two more things backend-side, and until both exist this tenant will"
+echo "call assign and get a 4xx/5xx on every page view — the page is left"
+echo "untouched and the tracker reports virtual_number_assign_failed, so it fails"
+echo "visibly rather than silently:"
+echo
+echo "  - a number pool provisioned for the tenant UUID"
+echo "  - every hostname the client serves from registered:"
 echo "      POST /api/v1/tenant-hostnames   (assign resolves tenant by hostname,"
 echo "      not by tenantId, so this is required even when tenantId is set)"
-echo "  - check phoneTextSelector / telLinkSelector match their markup"
+echo
+echo "Also check phoneTextSelector / telLinkSelector match their markup."
+echo "To opt this tenant out, add \"virtualNumbers\": { \"enabled\": false }."
