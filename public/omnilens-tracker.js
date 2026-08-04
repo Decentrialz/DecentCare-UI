@@ -1199,9 +1199,52 @@
 
   function installAutoPageView() {
     if (!autoPageView) return;
+
     track('page_view', {
       source: 'omnilens-tracker-js'
     });
+
+    // Single page apps swap content without a document load, so without these
+    // hooks the view above is the only one a visitor ever reports no matter how
+    // many pages they read. Dedupe on the resolved URL, which excludes the hash:
+    // frameworks call replaceState repeatedly for the same route, and an in-page
+    // anchor jump is not a page view.
+    var lastPageViewUrl = getAbsolutePageUrl();
+    var pageViewTimer = null;
+
+    function reportRouteChange() {
+      if (pageViewTimer) {
+        clearTimeout(pageViewTimer);
+        pageViewTimer = null;
+      }
+      // Let the framework finish committing the route before reading the URL.
+      pageViewTimer = setTimeout(function () {
+        pageViewTimer = null;
+        var currentUrl = getAbsolutePageUrl();
+        if (currentUrl === lastPageViewUrl) return;
+        lastPageViewUrl = currentUrl;
+        track('page_view', {
+          source: 'omnilens-tracker-js',
+          navigation_type: 'spa'
+        });
+      }, 60);
+    }
+
+    var originalPushState = history.pushState;
+    history.pushState = function () {
+      var result = originalPushState.apply(this, arguments);
+      reportRouteChange();
+      return result;
+    };
+
+    var originalReplaceState = history.replaceState;
+    history.replaceState = function () {
+      var result = originalReplaceState.apply(this, arguments);
+      reportRouteChange();
+      return result;
+    };
+
+    window.addEventListener('popstate', reportRouteChange);
   }
 
   function collectDataTrackProps(element) {
