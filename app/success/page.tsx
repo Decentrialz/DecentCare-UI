@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+import { successPageSchema } from "@/lib/schemas/successSchema";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
@@ -117,7 +118,15 @@ const stats = [
 
 const SuccessStories = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <script
+        id="success-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(successPageSchema),
+        }}
+      />
+      <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSuccessSection />
       {/* <VideoTestimonialsSection videoTestimonials={videoTestimonials} /> */}
@@ -126,6 +135,7 @@ const SuccessStories = () => {
       <WhyTrustUsSection />
       <SuccessCTASection />      <MobileStickyButtons />      <Footer />
     </div>
+    </>
   );
 };
 

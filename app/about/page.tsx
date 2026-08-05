@@ -11,6 +11,7 @@ import OurTeam from "./OurTeam";
 import CTASection from "./CTASection";
 import Hero from "../assets/Hero.svg";
 import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+import { aboutPageSchema } from "@/lib/schemas/aboutSchema";
 import type { Metadata } from "next";
 
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
@@ -29,7 +30,15 @@ const About = () => {
   console.log("Hero import:", Hero); // Debug log
   
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <script
+        id="about-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(aboutPageSchema),
+        }}
+      />
+      <div className="min-h-screen bg-background">
       <Navbar />
       <HeroBanner 
         heroImage={Hero}
@@ -54,6 +63,7 @@ const About = () => {
       <MobileStickyButtons />
       <Footer />
     </div>
+    </>
   );
 };
 
