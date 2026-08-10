@@ -1,4 +1,3 @@
-"use client";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
@@ -6,10 +5,19 @@ import HeroBanner from "../about/HeroBanner";
 import HeroContact from "../assets/HeroContact.svg";
 import HelpOptions from "./HelpOptions";
 import ContactForm from "./ContactForm";
+import { contactPageSchema } from "@/lib/schemas/contactSchema";
 
 const ContactPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <script
+        id="contact-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(contactPageSchema),
+        }}
+      />
+      <div className="min-h-screen bg-background">
       <Navbar />
        <HeroBanner 
         heroImage={HeroContact}
@@ -26,7 +34,8 @@ const ContactPage = () => {
       <ContactForm />
       <MobileStickyButtons />
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

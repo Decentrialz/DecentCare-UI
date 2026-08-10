@@ -1,15 +1,10 @@
 import { MetadataRoute } from 'next'
-import { headers } from 'next/headers'
  
-export default async function robots(): Promise<MetadataRoute.Robots> {
-  // Get the actual hostname from the request
-  const headersList = await headers()
-  const hostname = headersList.get('host') || 'localhost'
+export default function robots(): MetadataRoute.Robots {
+  // Check if it's the production environment
+  const isProduction = process.env.NEXT_PUBLIC_ENV === 'production'
   
-  // Check if it's the production domain
-  const isProduction = hostname === 'decentcare.ai' || hostname === 'www.decentcare.ai'
-  
-  const baseUrl = isProduction ? `https://${hostname}` : process.env.NEXT_PUBLIC_SITE_URL || 'https://decentcare.ai'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://decentcare.ai'
   
   // Only allow crawling in production
   if (!isProduction) {
@@ -75,31 +70,6 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
           '/tracking',
           '/api/',
         ],
-      },
-      // Block AI scraping bots
-      {
-        userAgent: 'GPTBot',
-        disallow: ['/'],
-      },
-      {
-        userAgent: 'ChatGPT-User',
-        disallow: ['/'],
-      },
-      {
-        userAgent: 'CCBot',
-        disallow: ['/'],
-      },
-      {
-        userAgent: 'anthropic-ai',
-        disallow: ['/'],
-      },
-      {
-        userAgent: 'Claude-Web',
-        disallow: ['/'],
-      },
-      {
-        userAgent: 'cohere-ai',
-        disallow: ['/'],
       },
     ],
     host: baseUrl,

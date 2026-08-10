@@ -27,7 +27,7 @@ export async function GET() {
     { url: `${baseUrl}/about`, lastmod: new Date('2026-07-09').toISOString() },
     { url: `${baseUrl}/success`, lastmod: new Date('2026-07-09').toISOString() },
     { url: `${baseUrl}/contact`, lastmod: new Date('2026-07-09').toISOString() },
-    { url: `${baseUrl}/luxHospital`, lastmod: new Date('2026-07-09').toISOString() },
+    // { url: `${baseUrl}/luxHospital`, lastmod: new Date('2026-07-09').toISOString() },
     // { url: `${baseUrl}/blog`, lastmod: latestBlogDate },
     { url: `${baseUrl}/services`, lastmod: new Date('2026-07-09').toISOString() },
   ]

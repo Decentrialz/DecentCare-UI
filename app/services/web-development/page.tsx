@@ -1,4 +1,19 @@
+import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+import { webDevelopmentPageSchema } from "@/lib/schemas/webDevelopmentSchema";
 import Navbar from "@/app/components/navbar";
+
+const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
+
+export const metadata: Metadata = {
+  robots: {
+    index: isProduction,
+    follow: isProduction,
+  },
+  alternates: {
+    canonical: getCanonicalUrl('/services/web-development'),
+  },
+};
 import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import HeroSection from "./HeroSection";
@@ -32,7 +47,15 @@ const webDevelopmentFaqs = [
 
 const WebDevelopmentPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <script
+        id="web-development-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webDevelopmentPageSchema),
+        }}
+      />
+      <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
       <SystemThinkingSection />
@@ -44,7 +67,8 @@ const WebDevelopmentPage = () => {
       <FAQSection faqs={webDevelopmentFaqs} />
       <MobileStickyButtons />
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

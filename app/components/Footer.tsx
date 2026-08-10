@@ -1,5 +1,5 @@
 "use client"
-import { Phone, Mail, MapPin, Twitter, Linkedin, Facebook, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin, Twitter, Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
 import dcLogo from "@/app/assets/dcLogo.svg";
 import Image from "next/image";
 import vector from "@/app/assets/Vector.svg";
@@ -33,29 +33,38 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex gap-4 mt-[10%]">
               <a
-                href="#"
+                href="https://x.com/DecentCare_"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-primary-foreground/10 rounded-xl flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
               >
                 <Image src={vector} alt="Twitter" width={16} height={16} />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/decentcare/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-primary-foreground/10 rounded-xl flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61586969518260"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-primary-foreground/10 rounded-xl flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
               >
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/decentcare_/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-primary-foreground/10 rounded-xl flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
               >
                 <Instagram className="w-4 h-4" />
               </a>
+           
             </div>
           </div>
 

@@ -1,59 +1,73 @@
-
+import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+import { successPageSchema } from "@/lib/schemas/successSchema";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import HeroSuccessSection from "./HeroSuccessSection";
-import VideoTestimonialsSection from "./VideoTestimonialsSection";
+
+const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
+
+export const metadata: Metadata = {
+  robots: {
+    index: isProduction,
+    follow: isProduction,
+  },
+  alternates: {
+    canonical: getCanonicalUrl('/success'),
+  },
+};
+// import VideoTestimonialsSection from "./VideoTestimonialsSection";
 import CaseStudiesSection from "./CaseStudiesSection";
 import MeasurableImpactSection from "./MeasurableImpactSection";
 import WhyTrustUsSection from "./WhyTrustUsSection";
 import SuccessCTASection from "./SuccessCTASection";
 
 
-import videoThumb1 from "@/app/assets/videoThumb1.svg";
-import videoThumb2 from "@/app/assets/videoThumb2.svg";
-import videoThumb3 from "@/app/assets/videoThumb3.svg";
-import videoThumb4 from "@/app/assets/videoThumb4.svg";
+// import videoThumb1 from "@/app/assets/videoThumb1.svg";
+// import videoThumb2 from "@/app/assets/videoThumb2.svg";
+// import videoThumb3 from "@/app/assets/videoThumb3.svg";
+// import videoThumb4 from "@/app/assets/videoThumb4.svg";
 import { Users, TrendingUp, Clock, Heart } from "lucide-react";
 
-const videoTestimonials = [
-  {
-    name: "Dr. Priya Sharma",
-    org: "Harmony Eye Care",
-    category: "Single-Doctor Clinic",
-    categoryColor: "bg-[#0D9488]",
-    duration: "3:24",
-    image: videoThumb1,
-    quote: '"Patient engagement improved by 80% in just 3 months"',
-  },
-  {
-    name: "Dr. Rajesh Kumar",
-    org: "LifeCare Hospital",
-    category: "Multi-Specialty Hospital",
-    categoryColor: "bg-[#0D9488]",
-    duration: "4:15",
-    image: videoThumb2,
-    quote: '"We eliminated missed follow-ups completely"',
-  },
-  {
-    name: "Dr. Anita Desai",
-    org: "MedFirst Surgical Center",
-    category: "Surgical Center",
-    categoryColor: "bg-[#0D9488]",
-    duration: "2:58",
-    image: videoThumb3,
-    quote: '"Post-op care coordination is now seamless"',
-  },
-  {
-    name: "Dr. Vikram Singh",
-    org: "CareConnect Clinics",
-    category: "Multi-Specialty Clinic",
-    categoryColor: "bg-[#0D9488]",
-    duration: "3:42",
-    image: videoThumb4,
-    quote: '"Our team productivity doubled with task management"',
-  },
-];
+// const videoTestimonials = [
+//   {
+//     name: "Dr. Priya Sharma",
+//     org: "Harmony Eye Care",
+//     category: "Single-Doctor Clinic",
+//     categoryColor: "bg-[#0D9488]",
+//     duration: "3:24",
+//     image: videoThumb1,
+//     quote: '"Patient engagement improved by 80% in just 3 months"',
+//   },
+//   {
+//     name: "Dr. Rajesh Kumar",
+//     org: "LifeCare Hospital",
+//     category: "Multi-Specialty Hospital",
+//     categoryColor: "bg-[#0D9488]",
+//     duration: "4:15",
+//     image: videoThumb2,
+//     quote: '"We eliminated missed follow-ups completely"',
+//   },
+//   {
+//     name: "Dr. Anita Desai",
+//     org: "MedFirst Surgical Center",
+//     category: "Surgical Center",
+//     categoryColor: "bg-[#0D9488]",
+//     duration: "2:58",
+//     image: videoThumb3,
+//     quote: '"Post-op care coordination is now seamless"',
+//   },
+//   {
+//     name: "Dr. Vikram Singh",
+//     org: "CareConnect Clinics",
+//     category: "Multi-Specialty Clinic",
+//     categoryColor: "bg-[#0D9488]",
+//     duration: "3:42",
+//     image: videoThumb4,
+//     quote: '"Our team productivity doubled with task management"',
+//   },
+// ];
 
 const caseStudies = [
   {
@@ -104,15 +118,24 @@ const stats = [
 
 const SuccessStories = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <script
+        id="success-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(successPageSchema),
+        }}
+      />
+      <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSuccessSection />
-      <VideoTestimonialsSection videoTestimonials={videoTestimonials} />
+      {/* <VideoTestimonialsSection videoTestimonials={videoTestimonials} /> */}
       <CaseStudiesSection caseStudies={caseStudies} />
       <MeasurableImpactSection stats={stats} />
       <WhyTrustUsSection />
       <SuccessCTASection />      <MobileStickyButtons />      <Footer />
     </div>
+    </>
   );
 };
 

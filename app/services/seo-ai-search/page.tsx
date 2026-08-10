@@ -1,4 +1,19 @@
+import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+import { seoPageSchema } from "@/lib/schemas/seoSchema";
 import Navbar from "@/app/components/navbar";
+
+const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
+
+export const metadata: Metadata = {
+  robots: {
+    index: isProduction,
+    follow: isProduction,
+  },
+  alternates: {
+    canonical: getCanonicalUrl('/services/seo-ai-search'),
+  },
+};
 import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import HeroSection from "./HeroSection";
@@ -47,7 +62,15 @@ const benefits = [
 
 const SEOAISearchPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <script
+        id="seo-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(seoPageSchema),
+        }}
+      />
+      <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
       <ProvenResultsSection />
@@ -68,7 +91,8 @@ const SEOAISearchPage = () => {
 
       <MobileStickyButtons />
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 
