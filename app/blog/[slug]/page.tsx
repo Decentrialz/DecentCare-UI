@@ -7,9 +7,14 @@ import RecommendedBlogsSection from "@/app/blog/components/RecommendedBlogsSecti
 import { BlogDetailHero } from "../components";
 import Breadcrumb from "@/app/components/Breadcrumb";
 import BlogBodyWithToc from "@/app/blog/components/BlogBodyWithToc";
+import { getCanonicalUrl } from "@/lib/utils/siteConfig";
 
 const SECTION_PADDING = "px-4 md:px-8 lg:px-16 xl:px-20";
 const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
+const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
+
+// ISR: Revalidate every 10 minutes (600 seconds)
+export const revalidate = 600;
 
 interface BlogDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -29,12 +34,23 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
   if (!article) {
     return {
       title: "Blog Post Not Found - DecentCare",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
   return {
     title: article.seoTitle || `${article.title} - DecentCare Blog`,
     description: article.seoDescription || article.description,
+    robots: {
+      index: isProduction,
+      follow: isProduction,
+    },
+    alternates: {
+      canonical: getCanonicalUrl(`/blog/${slug}`),
+    },
   };
 }
 

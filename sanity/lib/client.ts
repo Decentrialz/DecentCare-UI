@@ -28,9 +28,10 @@ export function createReadOnlySanityClient(): SanityClient {
     apiVersion: '2024-01-01',
 
     /**
-     * Use CDN for faster public reads
+     * Disable CDN for ISR to ensure fresh data during revalidation
+     * For production with high traffic, consider enabling CDN with a low stale-while-revalidate value
      */
-    useCdn: true,
+    useCdn: false,
 
     /**
      * Helps identify requests in Sanity logs
