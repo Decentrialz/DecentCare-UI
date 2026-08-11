@@ -7,8 +7,8 @@ import { getCanonicalUrl } from "@/lib/utils/siteConfig";
 
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
-// ISR: Revalidate every 10 minutes (600 seconds)
-export const revalidate = 600;
+// ISR: Revalidate every 5 minutes (300 seconds)
+export const revalidate = 300;
 
 export const metadata = {
   robots: {
