@@ -155,7 +155,6 @@ export default function LatestBlogs({ featuredPosts }: LatestBlogsProps) {
                     alt={current.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 42vw"
-                    className="object-cover"
                   />
 
                 </motion.div>
