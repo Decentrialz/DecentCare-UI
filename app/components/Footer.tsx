@@ -9,7 +9,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="bg-[#0F1729] text-primary-foreground pb-24 md:pb-0">
-      <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-12">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 xl:px-20 py-12 max-w-[1440px]">
         <div className="w-full mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 lg:gap-6 xl:gap-8 mb-12">
             {/* Brand */}
@@ -123,7 +123,7 @@ const Footer = () => {
                 <span>Email: support@decentcare.ai</span>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-8 h-8 mt-0.5 text-[#FBFCFD]/60" />
+                <MapPin className="w-4 h-4 mt-0.5 text-[#FBFCFD]/60 flex-shrink-0" />
                 <span>
                   India HQ:<br />
                   T-Hub Foundation, I/C, 8(A), Raimaktha, Raidurgam, Hyderabad, Telangana 500032, India
