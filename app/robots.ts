@@ -4,7 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   // Check if it's the production environment
   const isProduction = process.env.NEXT_PUBLIC_ENV === 'production'
   
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://decentcare.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://decentcare.ai'
   
   // Only allow crawling in production
   if (!isProduction) {
