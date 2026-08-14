@@ -1,5 +1,5 @@
 "use client"
-import { Phone, Mail, MapPin, Twitter, Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
+import { Phone, Mail, MapPin, Linkedin, Facebook, Instagram } from "lucide-react";
 import dcLogo from "@/app/assets/dcLogo.svg";
 import Image from "next/image";
 import vector from "@/app/assets/Vector.svg";
@@ -104,8 +104,8 @@ const Footer = () => {
                 <Link href="/success" className="hover:text-primary-foreground transition-colors">Success Stories</Link>
               </li>
               <li><a href="/blog" className="hover:text-primary-foreground transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Terms of Service</a></li>
+              <li><Link href="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms-of-service" className="hover:text-primary-foreground transition-colors">Terms of Service</Link></li>
               <li><a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a></li>
             </ul>
           </div>
@@ -143,8 +143,8 @@ const Footer = () => {
               AI-powered growth, built responsibly for healthcare.
             </p>
             <div className="flex gap-4 text-sm text-primary-foreground/50">
-              <a href="#" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
+              <Link href="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</Link>
+              <Link href="/terms-of-service" className="hover:text-primary-foreground transition-colors">Terms of Service</Link>
             </div>
           </div>
         </div>

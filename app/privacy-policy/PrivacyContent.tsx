@@ -1,8 +1,10 @@
 "use client";
 
 import TableOfContents, { type TocItem } from "./TableOfContents";
-import { Check, Phone, Menu, Info, SquarePen, Trash, MessageSquare, Coffee } from "lucide-react";
+import { Check, Menu, Info, SquarePen, Trash, MessageSquare, Coffee } from "lucide-react";
 import { useState } from "react";
+import SharedLegalContactSection from "@/app/components/SharedLegalContactSection";
+import LegalSectionHeader from "@/app/components/LegalSectionHeader";
 
 const tocItems: TocItem[] = [
   { id: "introduction", label: "Introduction" },
@@ -120,13 +122,7 @@ const PrivacyContent = () => {
             </div>
 
             <div id="what-we-collect" className="scroll-mt-24">
-              <div className="mb-8 flex items-start gap-4">
-                <span className="mt-0.5 flex items-center justify-center w-10 h-10 bg-primary-blue text-white rounded-xl text-base font-bold shadow-[0_8px_20px_rgba(13,92,148,0.28)]">1</span>
-                <div>
-                  <p className="text-[11px] font-semibold text-secondary-green tracking-[0.14em] uppercase mb-2">DATA COLLECTION</p>
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground font-['Plus_Jakarta_Sans',sans-serif]">What Information We Collect And Process</h2>
-                </div>
-              </div>
+              <LegalSectionHeader index={1} eyebrow="DATA COLLECTION" title="What Information We Collect And Process" />
 
               <div className="space-y-6 pl-4 text-base text-primary-blue leading-relaxed font-['DM_Sans',sans-serif]">
                 <div>
@@ -168,13 +164,7 @@ const PrivacyContent = () => {
             </div>
 
             <div id="how-we-use-data" className="scroll-mt-24">
-              <div className="mb-8 flex items-start gap-4">
-                <span className="mt-0.5 flex items-center justify-center w-10 h-10 bg-primary-blue text-white rounded-xl text-base font-bold shadow-[0_8px_20px_rgba(13,92,148,0.28)]">2</span>
-                <div>
-                  <p className="text-[11px] font-semibold text-secondary-green tracking-[0.14em] uppercase mb-2">DATA USAGE</p>
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground font-['Plus_Jakarta_Sans',sans-serif]">How We Use Personal Data</h2>
-                </div>
-              </div>
+              <LegalSectionHeader index={2} eyebrow="DATA USAGE" title="How We Use Personal Data" />
 
               <div className="space-y-6 text-primary-blue leading-relaxed font-['DM_Sans',sans-serif]">
                 <p>We use personal data for purposes such as:</p>
@@ -194,13 +184,7 @@ const PrivacyContent = () => {
             </div>
 
             <div id="how-we-share-data" className="scroll-mt-24">
-              <div className="mb-8 flex items-start gap-4">
-                <span className="mt-0.5 flex items-center justify-center w-10 h-10 bg-primary-blue text-white rounded-xl text-base font-bold shadow-[0_8px_20px_rgba(13,92,148,0.28)]">3</span>
-                <div>
-                  <p className="text-[11px] font-semibold text-secondary-green tracking-[0.14em] uppercase mb-2">DATA SHARING</p>
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground font-['Plus_Jakarta_Sans',sans-serif]">How We Share Personal Data</h2>
-                </div>
-              </div>
+              <LegalSectionHeader index={3} eyebrow="DATA SHARING" title="How We Share Personal Data" />
 
               <div className="space-y-6 text-primary-blue leading-relaxed font-['DM_Sans',sans-serif]">
                 <div className="rounded-2xl border border-[#CFE1F1] bg-[#EAF4FF] p-6 md:p-7">
@@ -219,13 +203,7 @@ const PrivacyContent = () => {
             </div>
 
             <div id="international-transfers" className="scroll-mt-24">
-              <div className="mb-8 flex items-start gap-4">
-                <span className="mt-0.5 flex items-center justify-center w-10 h-10 bg-primary-blue text-white rounded-xl text-base font-bold shadow-[0_8px_20px_rgba(13,92,148,0.28)]">4</span>
-                <div>
-                  <p className="text-[11px] font-semibold text-secondary-green tracking-[0.14em] uppercase mb-2">INTERNATIONAL</p>
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground font-['Plus_Jakarta_Sans',sans-serif]">How We Transfer Personal Data Internationally</h2>
-                </div>
-              </div>
+              <LegalSectionHeader index={4} eyebrow="INTERNATIONAL" title="How We Transfer Personal Data Internationally" />
               <div className="space-y-4 text-primary-blue leading-relaxed font-['DM_Sans',sans-serif]">
                 <p>Some of our service providers may process or store data outside India (for example, cloud hosting or email infrastructure). When personal data is transferred internationally, we take reasonable steps to ensure appropriate protection consistent with applicable law.</p>
               </div>
@@ -233,13 +211,7 @@ const PrivacyContent = () => {
             </div>
 
             <div id="storage-security" className="scroll-mt-24">
-              <div className="mb-8 flex items-start gap-4">
-                <span className="mt-0.5 flex items-center justify-center w-10 h-10 bg-primary-blue text-white rounded-xl text-base font-bold shadow-[0_8px_20px_rgba(13,92,148,0.28)]">5</span>
-                <div>
-                  <p className="text-[11px] font-semibold text-secondary-green tracking-[0.14em] uppercase mb-2">SECURITY &amp; RETENTION</p>
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground font-['Plus_Jakarta_Sans',sans-serif]">How We Store And Secure Personal Data</h2>
-                </div>
-              </div>
+              <LegalSectionHeader index={5} eyebrow="SECURITY & RETENTION" title="How We Store And Secure Personal Data" />
 
               <div className="space-y-7 text-primary-blue leading-relaxed font-['DM_Sans',sans-serif] ml-4">
                 <div>
@@ -255,13 +227,7 @@ const PrivacyContent = () => {
             </div>
 
             <div id="cookies" className="scroll-mt-24">
-              <div className="mb-8 flex items-start gap-4">
-                <span className="mt-0.5 flex items-center justify-center w-10 h-10 bg-primary-blue text-white rounded-xl text-base font-bold shadow-[0_8px_20px_rgba(13,92,148,0.28)]">6</span>
-                <div>
-                  <p className="text-[11px] font-semibold text-secondary-green tracking-[0.14em] uppercase mb-2">TRACKING TECHNOLOGIES</p>
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground font-['Plus_Jakarta_Sans',sans-serif]">Cookies And Similar Technologies</h2>
-                </div>
-              </div>
+              <LegalSectionHeader index={6} eyebrow="TRACKING TECHNOLOGIES" title="Cookies And Similar Technologies" />
 
               <div className="space-y-6 text-primary-blue leading-relaxed font-['DM_Sans',sans-serif]">
                 <p>We may use cookies and similar technologies (such as pixels or scripts) to:</p>
@@ -279,13 +245,7 @@ const PrivacyContent = () => {
             </div>
 
             <div id="your-rights" className="scroll-mt-24">
-              <div className="mb-8 flex items-start gap-4">
-                <span className="mt-0.5 flex items-center justify-center w-10 h-10 bg-primary-blue text-white rounded-xl text-base font-bold shadow-[0_8px_20px_rgba(13,92,148,0.28)]">7</span>
-                <div>
-                  <p className="text-[11px] font-semibold text-secondary-green tracking-[0.14em] uppercase mb-2">YOUR RIGHTS</p>
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground font-['Plus_Jakarta_Sans',sans-serif]">Your Privacy Rights And Choices</h2>
-                </div>
-              </div>
+              <LegalSectionHeader index={7} eyebrow="YOUR RIGHTS" title="Your Privacy Rights And Choices" />
               <div className="space-y-6 text-primary-blue leading-relaxed font-['DM_Sans',sans-serif]">
                 <p>Depending on applicable law (including India&apos;s Digital Personal Data Protection Act, 2023), you may have rights such as:</p>
 
@@ -336,13 +296,7 @@ const PrivacyContent = () => {
             </div>
 
             <div id="other-information" className="scroll-mt-24">
-              <div className="mb-8 flex items-start gap-4">
-                <span className="mt-0.5 flex items-center justify-center w-10 h-10 bg-primary-blue text-white rounded-xl text-base font-bold shadow-[0_8px_20px_rgba(13,92,148,0.28)]">8</span>
-                <div>
-                  <p className="text-[11px] font-semibold text-secondary-green tracking-[0.14em] uppercase mb-2">ADDITIONAL INFORMATION</p>
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground font-['Plus_Jakarta_Sans',sans-serif]">Other Important Privacy Information</h2>
-                </div>
-              </div>
+              <LegalSectionHeader index={8} eyebrow="ADDITIONAL INFORMATION" title="Other Important Privacy Information" />
 
               <div className="space-y-7 ml-4 text-primary-blue leading-relaxed font-['DM_Sans',sans-serif]">
                 <div>
@@ -361,62 +315,13 @@ const PrivacyContent = () => {
               <div className="my-12 md:my-16 h-px w-full" style={sectionDividerStyle} />
             </div>
 
-            <div id="contact-us" className="scroll-mt-24 mb-16 md:mb-24">
-              <div className="mb-8 flex items-start gap-4">
-                <span className="mt-0.5 flex items-center justify-center w-10 h-10 text-white rounded-xl text-base font-bold shadow-[0_8px_20px_rgba(13,148,136,0.32)] bg-gradient-to-r from-[#0D9488] to-[#14B8A6]">9</span>
-                <div>
-                  <p className="text-[11px] font-semibold text-secondary-green tracking-[0.14em] uppercase mb-2">GET IN TOUCH</p>
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground font-['Plus_Jakarta_Sans',sans-serif]">Contact Us</h2>
-                </div>
-              </div>
-
-              <p className="text-primary-blue leading-relaxed font-['DM_Sans',sans-serif] mb-8">
-                If you have questions or requests about this Privacy Policy or our data practices, contact:
-              </p>
-
-              <div
-                className="rounded-[22px] p-6 md:p-9"
-                style={{ background: "linear-gradient(135deg, #0E4A79 0%, #125A8A 45%, #1A6D92 100%)" }}
-              >
-                <h3 className="text-3xl font-bold text-white mb-2 font-['Plus_Jakarta_Sans',sans-serif]">DecentCare</h3>
-                <p className="text-white/85 leading-relaxed mb-7 font-['DM_Sans',sans-serif]">
-                  We&apos;re here to help with any privacy questions or data requests you may have. Reach out anytime.
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                  <div className="rounded-2xl border border-white/15 bg-white/10 p-5 min-h-[132px]">
-                    <p className="text-[11px] font-semibold text-white/60 tracking-[0.14em] uppercase mb-2">Website</p>
-                    <p className="text-white font-semibold">www.decentcare.ai</p>
-                  </div>
-                  <div className="rounded-2xl border border-white/15 bg-white/10 p-5 min-h-[132px]">
-                    <p className="text-[11px] font-semibold text-white/60 tracking-[0.14em] uppercase mb-2">Email</p>
-                    <a href="mailto:support@decentcare.ai" className="text-white font-semibold hover:underline break-all">support@decentcare.ai</a>
-                  </div>
-                  <div className="rounded-2xl border border-white/15 bg-white/10 p-5 min-h-[132px]">
-                    <p className="text-[11px] font-semibold text-white/60 tracking-[0.14em] uppercase mb-2">Address</p>
-                    <p className="text-white/90 leading-relaxed">
-                      Plot No 1/C, Sy No 83/1,<br />
-                      Raidurgam, Knowledge City Rd,<br />
-                      Panmaktha, Hyderabad,<br />
-                      Serilingampalle (M), Telangana
-                      500032, India
-                    </p>
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-white/15 bg-white/10 p-4 md:p-5 flex gap-3 md:gap-4">
-                  <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0D9488] text-white">
-                    <Phone className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-semibold text-white/60 tracking-[0.14em] uppercase mb-1">Grievance</p>
-                    <p className="text-white/90 leading-relaxed">
-                      Please email <a href="mailto:support@decentcare.ai" className="font-semibold text-white hover:underline">support@decentcare.ai</a> with the subject line <span className="font-semibold text-white">&quot;Privacy Grievance&quot;</span>. We will review and respond within a reasonable time.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <SharedLegalContactSection
+              sectionNumber={9}
+              eyebrow="GET IN TOUCH"
+              heading="Contact Us"
+              description1="If you have questions or requests about this Privacy Policy or our data practices, contact:"
+              description2="We're here to help with any privacy questions or data requests you may have. Reach out anytime."
+            />
           </div>
         </div>
       </div>

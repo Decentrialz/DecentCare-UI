@@ -6,12 +6,12 @@ const PrivacyHero = () => {
     <section className="relative pt-12 lg:pt-18">
       {/* Gradient Background */}
       <div 
-        className="relative min-h-[600px] md:min-h-[650px] overflow-hidden"
+        className="relative min-h-[460px] md:min-h-[520px] overflow-hidden"
         style={{ background: 'linear-gradient(307.84deg, #0D9488 -4.55%, #0D5C94 100.49%)' }}
       >
         {/* Decorative Background Circles */}
         <div className="hidden xl:block pointer-events-none absolute inset-0 z-0">
-          <div className="absolute -bottom-28 -left-20 h-[500px] w-[500px] rounded-full border border-white/10" />
+          <div className="absolute -bottom-60 left-10 h-[500px] w-[500px] rounded-full border border-white/10" />
           <div className="absolute left-[28%] top-[6%] h-[280px] w-[280px] rounded-full border border-white/10" />
           <div className="absolute -right-20 -top-60 h-[700px] w-[700px] rounded-full border border-white/10" />
         </div>
@@ -20,13 +20,13 @@ const PrivacyHero = () => {
         
 
         {/* Content Container */}
-        <div className="relative z-10 container mx-auto px-4 md:px-8 lg:px-16 min-h-[600px] md:min-h-[650px] pt-24 md:pt-40 pb-12 max-w-[1440px]">
-        <div className="absolute top-10 left-4 md:left-8 lg:left-16 z-20">
-          <Breadcrumb items={[
-            { label: "Home", href: "/" },
-            { label: "Privacy Policy" }
-          ]} />
-        </div>
+        <div className="relative z-10 container mx-auto px-4 md:px-8 lg:px-16 min-h-[460px] md:min-h-[520px] pt-10 md:pt-12 pb-10 md:pb-12 max-w-[1440px]">
+          <div className="mb-10 md:mb-12">
+            <Breadcrumb items={[
+              { label: "Home", href: "/" },
+              { label: "Privacy Policy" }
+            ]} />
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-4 items-start">
             
             {/* Left Content - Main Hero Text */}
