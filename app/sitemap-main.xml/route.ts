@@ -30,6 +30,8 @@ export async function GET() {
     // { url: `${baseUrl}/luxHospital`, lastmod: new Date('2026-07-09').toISOString() },
     // { url: `${baseUrl}/blog`, lastmod: latestBlogDate },
     { url: `${baseUrl}/services`, lastmod: new Date('2026-07-09').toISOString() },
+    { url: `${baseUrl}/privacy-policy`, lastmod: new Date('2026-08-14').toISOString() },
+    { url: `${baseUrl}/terms-of-service`, lastmod: new Date('2026-08-14').toISOString() },
   ]
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
