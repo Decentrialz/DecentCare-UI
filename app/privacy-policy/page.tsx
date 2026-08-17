@@ -29,7 +29,7 @@ const PrivacyPolicyPage = () => {
           __html: JSON.stringify(privacyPolicySchema),
         }}
       /> */}
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background mt-4 lg:mt-0">
         <Navbar />
         <PrivacyHero />
         <PrivacyContent />
