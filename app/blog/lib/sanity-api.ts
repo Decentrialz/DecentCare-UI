@@ -58,6 +58,8 @@ export async function getPostBySlug(slug: string): Promise<BlogArticleDetail | n
       return null
     }
 
+    console.log(`Fetched post for slug "${slug}":`, post)
+
     return transformPostToBlogArticleDetail(post)
   } catch (error) {
     console.error(`Error fetching post with slug "${slug}":`, error)

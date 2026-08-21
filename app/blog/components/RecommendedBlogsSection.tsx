@@ -60,7 +60,7 @@ export default function RecommendedBlogsSection({
       >
         {articles.map((article) => (
           <SwiperSlide key={article.id}>
-            <ArticleCard article={article} />
+            <ArticleCard article={article} categoryPlacement="content" />
           </SwiperSlide>
         ))}
       </Swiper>

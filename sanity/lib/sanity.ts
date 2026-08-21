@@ -105,6 +105,7 @@ export function transformPostToBlogArticle(post: SanityPostPreview): BlogArticle
     description: post.excerpt || '',
     author: post.author?.name || 'Unknown Author',
     authorImage: getAuthorImageUrl((post.author as any)?.image),
+    authorBio: (post.author as any)?.bio || [],
     href: `/blog/${slug}`,
   }
 }

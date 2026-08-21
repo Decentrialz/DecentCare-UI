@@ -7,6 +7,7 @@ import RecommendedBlogsSection from "@/app/blog/components/RecommendedBlogsSecti
 import { BlogDetailHero } from "../components";
 import Breadcrumb from "@/app/components/Breadcrumb";
 import BlogBodyWithToc from "@/app/blog/components/BlogBodyWithToc";
+import AuthorReviewCard from "../components/AuthorReviewCard";
 import { getCanonicalUrl } from "@/lib/utils/siteConfig";
 
 const SECTION_PADDING = "px-4 md:px-8 lg:px-16 xl:px-20";
@@ -57,6 +58,8 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { slug } = await params;
   const article = await getPostBySlug(slug);
+
+  console.log("Fetched article:", article);
   
   if (!article) {
     notFound();
@@ -82,6 +85,14 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                 body={article.body}
                 imageUrl={article.imageUrl}
                 title={article.title}
+              />
+            </div>
+
+            <div className="lg:ml-[308px]">
+              <AuthorReviewCard
+                authorName={article.author}
+                authorImage={article.authorImage}
+                authorBio={article.authorBio}
               />
             </div>
             

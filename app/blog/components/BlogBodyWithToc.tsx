@@ -1,19 +1,20 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
+import { Menu } from "lucide-react";
 import type { PortableTextBlock } from '@portabletext/react';
 import PortableTextRenderer from "./PortableTextRenderer";
+import TableOfContents, { type TocItem as SharedTocItem } from "@/app/privacy-policy/TableOfContents";
 import facebookIcon from "@/app/assets/facebook.svg";
 import instagramIcon from "@/app/assets/instagram.svg";
 import linkedinIcon from "@/app/assets/linkedin.svg";
 import twitterIcon from "@/app/assets/twitter.svg";
 import whatsappIcon from "@/app/assets/whatsapp.svg";
 
-interface TocItem {
-  id: string;
-  label: string;
+interface TocItem extends SharedTocItem {
   level: number;
+  key?: string;
 }
 
 interface BlogBodyWithTocProps {
@@ -54,91 +55,13 @@ function extractHeadings(blocks: PortableTextBlock[]): TocItem[] {
           id,
           label: text,
           level: block.style === 'h1' ? 1 : 2,
+          key: (block as any)._key,
         });
       }
     }
   });
   
   return headings;
-}
-
-function TableOfContents({
-  toc,
-  activeId,
-  setActiveId,
-}: {
-  toc: TocItem[];
-  activeId: string | null;
-  setActiveId: (id: string | null) => void;
-}) {
-  const activeIndex = toc.findIndex((t) => t.id === activeId);
-
-  const progress =
-    activeIndex === -1 ? 0 : ((activeIndex + 1) / toc.length) * 100;
-
-  const handleClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    id: string
-  ) => {
-    e.preventDefault();
-
-    const el = document.getElementById(id);
-    if (!el) return;
-
-    el.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-
-    window.history.replaceState(
-      null,
-      "",
-      window.location.pathname + window.location.search
-    );
-  };
-
-  if (toc.length === 0) {
-    return null;
-  }
-
-  return (
-    <div>
-      <h2 className="text-sm font-semibold text-foreground mb-4">
-        Table of Contents
-      </h2>
-
-      <div className="relative pl-6">
-        <div className="absolute left-0 top-0 w-[4px] h-full bg-gray-background rounded" />
-
-        <div
-          className="absolute left-0 top-0 w-[4px] bg-secondary-green rounded transition-all duration-300"
-          style={{ height: `${progress}%` }}
-        />
-
-        <ul className="space-y-3">
-          {toc.map((item) => {
-            const isActive = activeId === item.id;
-
-            return (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  onClick={(e) => handleClick(e, item.id)}
-                  className={`block text-sm transition-colors ${
-                    isActive
-                      ? "text-secondary-green font-medium"
-                      : "text-gray-icon hover:text-primary-blue"
-                  }`}
-                >
-                  {item.label}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </div>
-  );
 }
 
 function ShareSection() {
@@ -170,41 +93,73 @@ function ShareSection() {
   );
 }
 
+function MobileTableOfContents({ items }: { items: SharedTocItem[] }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const offset = 100;
+    const elementPosition = el.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+
+    setIsOpen(false);
+  };
+
+  if (!items.length) {
+    return null;
+  }
+
+  return (
+    <div className="lg:hidden mb-8">
+      <button
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="w-full flex items-center justify-between bg-white border border-gray-border rounded-lg p-4 text-foreground font-semibold"
+      >
+        <span className="flex items-center gap-2">
+          <Menu className="w-5 h-5" />
+          Table of Contents
+        </span>
+        <svg
+          className={`w-5 h-5 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div className="mt-2 bg-white border border-gray-border rounded-lg p-4">
+          <ul className="space-y-3">
+            {items.map((item) => (
+              <li key={item.id}>
+                <button
+                  onClick={() => handleClick(item.id)}
+                  className="w-full text-left text-sm text-gray-icon hover:text-primary-blue py-2"
+                >
+                  {item.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function BlogBodyWithToc({ body, imageUrl, title }: BlogBodyWithTocProps) {
   // Extract headings for TOC
   const toc = useMemo(() => extractHeadings(body), [body]);
-  
-  const [activeId, setActiveId] = useState<string | null>(
-    toc[0]?.id ?? null
-  );
-
-  useEffect(() => {
-    if (toc.length === 0) return;
-
-    const headingElements = toc
-      .map((item) => document.getElementById(item.id))
-      .filter(Boolean) as HTMLElement[];
-
-    if (!headingElements.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-15% 0px -80% 0px",
-        threshold: 0,
-      }
-    );
-
-    headingElements.forEach((element) => observer.observe(element));
-
-    return () => observer.disconnect();
-  }, [toc]);
+  const tocItems = toc.map(({ id, label }) => ({ id, label }));
 
   return (
     <div>
@@ -219,17 +174,17 @@ export default function BlogBodyWithToc({ body, imageUrl, title }: BlogBodyWithT
 
       <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 lg:gap-12">
         {/* Left Sidebar - TOC and Share */}
-        <aside className="space-y-10 lg:sticky lg:top-24 lg:self-start h-fit">
-          <TableOfContents
-            toc={toc}
-            activeId={activeId}
-            setActiveId={setActiveId}
-          />
+        <aside className="hidden lg:block space-y-10 lg:sticky lg:top-24 lg:self-start h-fit">
+          <TableOfContents items={tocItems} />
           <ShareSection />
         </aside>
 
         {/* Right Content - Article Body */}
         <div>
+          <MobileTableOfContents items={tocItems} />
+          <div className="lg:hidden mb-8">
+            <ShareSection />
+          </div>
           <PortableTextRenderer content={body} headings={toc} />
         </div>
       </div>
