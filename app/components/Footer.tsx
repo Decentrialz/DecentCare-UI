@@ -129,6 +129,12 @@ const Footer = () => {
                   T-Hub Foundation, I/C, 8(A), Raimaktha, Raidurgam, Hyderabad, Telangana 500032, India
                 </span>
               </li>
+              <li className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 mt-0.5 text-[#FBFCFD]/60 flex-shrink-0" />
+                <span>
+                  5th Floor, VMRDA - The Deck, Siripuram, Visakhapatnam, Andhra Pradesh 530003, India
+                </span>
+              </li>
             </ul>
           </div>
         </div>
