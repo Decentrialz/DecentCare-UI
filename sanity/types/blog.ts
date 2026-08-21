@@ -125,6 +125,7 @@ export interface BlogArticle {
   description: string // excerpt
   author: string // author.name
   authorImage?: string // author image URL or null
+  authorBio?: PortableTextBlock[] // author bio content
   href: string // /blog/[slug]
 }
 

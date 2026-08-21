@@ -1,4 +1,4 @@
-import { Calendar, Clock, Eye } from "lucide-react";
+import { Calendar, Clock, Eye, Grid2x2 } from "lucide-react";
 import type { BlogArticleDetail } from "@/sanity/types/blog";
 
 interface BlogDetailHeroProps {
@@ -11,23 +11,16 @@ export default function BlogDetailHero({ article }: BlogDetailHeroProps) {
 
   return (
     <header className="text-center mx-auto">
-      <div
-        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-primary-blue text-sm font-bold mb-6"
-        style={{
-          border: "1.6px solid transparent",
-          background:
-            "linear-gradient(var(--color-teal-50), var(--color-teal-50)) padding-box, var(--gradient-2) border-box",
-          backgroundOrigin: "border-box",
-          backgroundClip: "padding-box, border-box",
-        }}
-      >
-        <div className="w-2.5 h-2.5 rounded-full" style={{ background: "var(--gradient-1)" }} />
-        {tag}
-      </div>
       <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-gradient-heading-2 leading-tight mb-4">
         {article.title}
       </h1>
       <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm sm:text-base text-gray-icon mb-6">
+        {tag && (
+          <div className="inline-flex items-center gap-2">
+            <Grid2x2 className="w-4 h-4 text-secondary-green" />
+            <span className="text-sm text-gray-text font-semibold">{tag}</span>
+          </div>
+        )}
         <div className="inline-flex items-center gap-1">
           <Calendar className="w-4 h-4 text-secondary-green" />
           <span className="text-sm text-gray-text font-semibold">{article.date}</span>

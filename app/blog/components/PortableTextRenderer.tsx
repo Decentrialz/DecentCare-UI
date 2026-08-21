@@ -13,6 +13,7 @@ interface TocItem {
   id: string;
   label: string;
   level: number;
+  key?: string;
 }
 
 interface PortableTextRendererProps {
@@ -30,13 +31,14 @@ function createHeadingComponent(
   headings?: TocItem[]
 ) {
   return ({ children, value }: any) => {
-    // Extract text from children
-    const text = typeof children === 'string' 
-      ? children 
-      : (value?.children?.[0]?.text || '');
-    
-    // Find matching heading ID from TOC
-    const headingItem = headings?.find(h => h.label === text);
+    const text = (value?.children || [])
+      .map((child: any) => child?.text || "")
+      .join("")
+      .trim();
+
+    const headingItem =
+      headings?.find((h) => h.key && h.key === value?._key) ||
+      headings?.find((h) => h.label.trim() === text);
     const id = headingItem?.id;
 
     const Component = tag;

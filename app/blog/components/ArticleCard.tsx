@@ -5,9 +5,10 @@ import type { BlogArticle } from "@/sanity/types/blog";
 
 interface ArticleCardProps {
   article: BlogArticle;
+  categoryPlacement?: "image" | "content";
 }
 
-export default function ArticleCard({ article }: ArticleCardProps) {
+export default function ArticleCard({ article, categoryPlacement = "image" }: ArticleCardProps) {
   const href = `/blog/${article.slug}`;
   return (
     <Link href={href} className="block h-full">
@@ -22,20 +23,28 @@ export default function ArticleCard({ article }: ArticleCardProps) {
           className="object-cover transition-transform duration-400 ease-in ease-out group-hover:scale-115"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
-        <span
-          className="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-background"
-        >
+        {categoryPlacement === "image" && (
           <span
-            className="w-1.5 h-1.5 rounded-full shrink-0"
-            style={{
-              background: "linear-gradient(133.76deg, var(--color-secondary-green) 4.93%, var(--color-primary-blue) 98.27%)",
-            }}
-          />
-          {article.category}
-        </span>
+            className="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-background"
+          >
+            <span
+              className="w-1.5 h-1.5 rounded-full shrink-0"
+              style={{
+                background: "linear-gradient(133.76deg, var(--color-secondary-green) 4.93%, var(--color-primary-blue) 98.27%)",
+              }}
+            />
+            {article.category}
+          </span>
+        )}
       </div>
 
       <div className="p-3 md:p-4 flex flex-col flex-1">
+        {categoryPlacement === "content" && (
+          <span className="inline-flex w-fit items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-secondary-green/10 text-foreground mb-4">
+            <span className="w-2 h-2 rounded-full bg-gradient-to-r from-secondary-green to-primary-blue" />
+            {article.category}
+          </span>
+        )}
         <div className="flex items-center gap-2 mb-4">
           <div className="flex items-center gap-1 text-xs text-gray-icon font-medium">
             <Calendar className="w-2.5 h-2.5 text-secondary-green" /> {article.date}
