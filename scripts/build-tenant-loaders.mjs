@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * Generates one loader script per tenant from tenants/<tenantId>.json.
+ * Generates one loader script per tenant from <OMNILENS_TENANT_DIR>/<slug>.json.
  *
  * A tenant site embeds a single line that never changes:
  *
- *   <script async src="https://cdn.dev.decentcare.ai/t/gowd-dental.js"></script>
+ *   <script async src="https://cdn.decentcare.ai/t/gowd-dental.js"></script>
  *
  * The loader sets window.OmnilensConfig and then pulls the pinned, immutable
  * tracker build. That means tenant configuration and tracker version are both
@@ -17,7 +17,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const TENANT_DIR = join(ROOT, "tenants");
+const TENANT_DIR = join(ROOT, process.env.OMNILENS_TENANT_DIR || "tenants/dev");
 const OUT_DIR = join(ROOT, ".tenant-build");
 
 // Where tenants fetch the tracker itself from. Baked into each loader, so it can
@@ -46,14 +46,14 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
  * `slug` is the public filename only. The tenant the backend attributes data to
  * is `defn.tenantId`, and it is optional:
  *
- *   * set   — sent as x-tenant-id, so attribution does not depend on which
- *             hostname the page is served from.
- *   * unset — the header is omitted and the backend resolves the tenant from the
- *             page hostname via its tenant-hostnames registry.
+ * In practice it should always be set. /collect rejects a request without an
+ * x-tenant-id header ("x-tenant-id header is required") in BOTH environments, so
+ * omitting it loses every event. Only /virtual-numbers/assign resolves a tenant
+ * from the page hostname, and it takes no tenant parameter at all.
  *
- * Never fall back to the slug. The backend accepts any string as x-tenant-id and
- * silently returns empty results for one it does not know, so a slug sent as a
- * tenant id produces tracking that looks fine and attributes to nothing.
+ * Never fall back to the slug. Dev accepts any string as x-tenant-id and silently
+ * returns empty results for one it does not know, so a slug sent as a tenant id
+ * produces tracking that looks fine and attributes to nothing.
  */
 function buildRuntimeConfig(slug, defn) {
   const apiOrigin = String(defn.apiOrigin || "").replace(/\/$/, "");
@@ -74,7 +74,7 @@ function buildRuntimeConfig(slug, defn) {
   // shape stays a change to tenants/_defaults.json rather than a code change here.
   const paths = defn.apiPaths || {};
   for (const key of ["collect", "assign", "heartbeat"]) {
-    if (!paths[key]) throw new Error(`${tenantId}: apiPaths.${key} is required`);
+    if (!paths[key]) throw new Error(`${slug}: apiPaths.${key} is required`);
   }
 
   const { trackerVersion, apiOrigin: _o, apiPaths: _p, ...rest } = defn;
@@ -142,7 +142,7 @@ const tenantFiles = readdirSync(TENANT_DIR)
   .sort();
 
 if (tenantFiles.length === 0) {
-  console.error("No tenant definitions found in tenants/");
+  console.error(`No tenant definitions found in ${TENANT_DIR}`);
   process.exit(1);
 }
 

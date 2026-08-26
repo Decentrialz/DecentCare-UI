@@ -10,11 +10,10 @@
 #
 set -euo pipefail
 
-: "${AWS_PROFILE:=decentcare-dev}"
-export AWS_PROFILE
+source "$(cd "$(dirname "$0")" && pwd)/_env.sh"
 
-BUCKET="${OMNILENS_TRACKER_BUCKET:-decentcare-dev-omnilens-tracker}"
-DISTRIBUTION_ID="${OMNILENS_TRACKER_DISTRIBUTION_ID:-E6V72KSXVI57V}"
+BUCKET="$OMNILENS_TRACKER_BUCKET"
+DISTRIBUTION_ID="$OMNILENS_TRACKER_DISTRIBUTION_ID"
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT_DIR="$ROOT/.tenant-build"
@@ -41,5 +40,5 @@ aws cloudfront wait invalidation-completed \
 
 echo "Published:"
 for f in "$OUT_DIR"/t/*.js; do
-  echo "  https://cdn.dev.decentcare.ai/t/$(basename "$f")"
+  echo "  ${OMNILENS_CDN_ORIGIN}/t/$(basename "$f")"
 done

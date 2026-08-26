@@ -10,10 +10,9 @@
 #
 set -euo pipefail
 
-: "${AWS_PROFILE:=decentcare-dev}"
-export AWS_PROFILE
+source "$(cd "$(dirname "$0")/.." && pwd)/_env.sh"
 
-FUNCTION="${OMNILENS_HEALTHCHECK_FUNCTION:-decentcare-dev-omnilens-healthcheck}"
+FUNCTION="$OMNILENS_HEALTHCHECK_FUNCTION"
 OUT="$(mktemp)"
 trap 'rm -f "$OUT"' EXIT
 

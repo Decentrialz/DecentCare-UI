@@ -16,12 +16,11 @@ if [[ -z "$VERSION" ]]; then
   exit 1
 fi
 
-: "${AWS_PROFILE:=decentcare-dev}"
-export AWS_PROFILE
+source "$(cd "$(dirname "$0")" && pwd)/_env.sh"
 
-BUCKET="${OMNILENS_TRACKER_BUCKET:-decentcare-dev-omnilens-tracker}"
-DISTRIBUTION_ID="${OMNILENS_TRACKER_DISTRIBUTION_ID:-E6V72KSXVI57V}"
-CDN_DOMAIN="${OMNILENS_TRACKER_CDN_DOMAIN:-d2pze1lwft60rl.cloudfront.net}"
+BUCKET="$OMNILENS_TRACKER_BUCKET"
+DISTRIBUTION_ID="$OMNILENS_TRACKER_DISTRIBUTION_ID"
+CDN_DOMAIN="$OMNILENS_TRACKER_CDN_DOMAIN"
 
 SRC="$(cd "$(dirname "$0")/.." && pwd)/public/omnilens-tracker.js"
 KEY="tracker/v${VERSION}/omnilens-tracker.js"
