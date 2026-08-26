@@ -77,7 +77,16 @@ function buildRuntimeConfig(slug, defn) {
     if (!paths[key]) throw new Error(`${slug}: apiPaths.${key} is required`);
   }
 
-  const { trackerVersion, apiOrigin: _o, apiPaths: _p, ...rest } = defn;
+  const { trackerVersion, apiOrigin: _o, apiPaths: _p, fingerprintJsPath: _f, ...rest } = defn;
+
+  // Assets we host are addressed by path and resolved against this environment's
+  // CDN, so a prod loader can never ship a dev URL.
+  if (rest.enableFingerprint) {
+    if (!defn.fingerprintJsPath) throw new Error(`${slug}: fingerprintJsPath is required`);
+    rest.fingerprintJsUrl = `${CDN_ORIGIN}${defn.fingerprintJsPath}`;
+  } else {
+    rest.fingerprintJsUrl = "";
+  }
 
   // Loaders are public files on client websites. Any key starting with "_" is a
   // note to ourselves and must not ship — strip them at every level rather than

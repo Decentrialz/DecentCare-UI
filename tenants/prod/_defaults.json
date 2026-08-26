@@ -13,9 +13,8 @@
   "trackAllClicks": true,
   "replaceEventWithDerived": true,
   "debug": false,
-  "_fingerprintComment": "Served from our CDN rather than jsdelivr: this executes on every tenant's site, so a third party in that position is both an availability risk (blocked networks) and a supply-chain one. Pinned to an exact version, sha256 recorded in tenants/VENDOR.md.",
+  "_fingerprintComment": "Served from our own CDN rather than jsdelivr: this executes on every tenant's site, so a third party in that position is both an availability risk (blocked networks) and a supply-chain one. Stored as a PATH, not a URL \u2014 the generator prefixes the environment's CDN origin, so a prod loader can never be published pointing at the dev CDN. Pinned to an exact version, sha256 recorded in tenants/VENDOR.md.",
   "enableFingerprint": true,
-  "fingerprintJsUrl": "https://cdn.dev.decentcare.ai/vendor/fingerprintjs/3.4.2/fp.min.js",
   "_domMutationComment": "virtualNumbers and whatsapp both rewrite content on a client's live page, and are on by default. A tenant whose hostname is unregistered or whose number pool is empty will call assign and get a 4xx/5xx on every page view; the tracker reports that as virtual_number_assign_failed rather than failing silently, and nothing on the page is altered. Set enabled:false per tenant to opt out.",
   "virtualNumbers": {
     "enabled": true,
@@ -31,5 +30,6 @@
     "selector": "a[href*='wa.me'],a[href*='api.whatsapp.com/send']",
     "message": "Hi, I need help booking an appointment.",
     "trackClicks": true
-  }
+  },
+  "fingerprintJsPath": "/vendor/fingerprintjs/3.4.2/fp.min.js"
 }
