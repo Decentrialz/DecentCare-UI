@@ -24,7 +24,7 @@ export async function GET() {
   }
   
   const sitemaps = [
-    { loc: `${baseUrl}/sitemap-main.xml`, lastmod: new Date('2026-07-09').toISOString() },
+    { loc: `${baseUrl}/sitemap-main.xml`, lastmod: new Date('2026-08-31').toISOString() },
     { loc: `${baseUrl}/sitemap-blog.xml`, lastmod: latestBlogDate },
     { loc: `${baseUrl}/sitemap-services.xml`,  lastmod: new Date('2026-07-09').toISOString() },
   ]
