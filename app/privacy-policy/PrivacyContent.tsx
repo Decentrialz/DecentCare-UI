@@ -126,7 +126,7 @@ const PrivacyContent = () => {
 
               <div className="space-y-6 pl-4 text-base text-primary-blue leading-relaxed font-['DM_Sans',sans-serif]">
                 <div>
-                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">• 1.1 Information you provide to DecentCare</h3>
+                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">1.1 Information you provide to DecentCare</h3>
                   <p className="leading-relaxed mb-3">When you interact with us via the Website (for example by submitting a demo request, contacting us, or requesting support), we may collect personal data such as:</p>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2"><TickMarkIcon className="mt-0.5 flex-shrink-0" /><span>Name</span></li>
@@ -140,7 +140,7 @@ const PrivacyContent = () => {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">• 1.2 Information we collect automatically when you use the Website</h3>
+                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">1.2 Information we collect automatically when you use the Website</h3>
                   <p className="leading-relaxed mb-3">Like most websites, we may automatically collect:</p>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2"><TickMarkIcon className="mt-0.5 flex-shrink-0" /><span>IP address and approximate location inferred from IP</span></li>
@@ -151,7 +151,7 @@ const PrivacyContent = () => {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">• 1.3 Sensitive personal data</h3>
+                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">1.3 Sensitive personal data</h3>
                   <div className="bg-[#FFFDF7] border border-[#F3D77A] rounded-2xl p-5 md:p-6 flex gap-3">
                     <svg className="w-5 h-5 text-[#E2AF07] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -215,11 +215,11 @@ const PrivacyContent = () => {
 
               <div className="space-y-7 text-primary-blue leading-relaxed font-['DM_Sans',sans-serif] ml-4">
                 <div>
-                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">• 5.1 Security</h3>
+                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">5.1 Security</h3>
                   <p>We use reasonable administrative, technical, and organisational safeguards designed to protect personal data against unauthorised access, alteration, disclosure, or destruction.</p>
                 </div>
                 <div>
-                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">• 5.2 Retention</h3>
+                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">5.2 Retention</h3>
                   <p>We keep personal data only as long as necessary for the purposes described in this Privacy Policy, unless a longer period is required or permitted by law (for example, to comply with legal obligations or resolve disputes).</p>
                 </div>
               </div>
@@ -288,7 +288,7 @@ const PrivacyContent = () => {
                 </div>
 
                 <div className="border-l-2 border-[#D6E5F5] pl-4 mt-8">
-                  <p className="font-semibold text-primary-blue mb-2">• How to exercise your rights</p>
+                  <p className="font-semibold text-primary-blue mb-2">How to exercise your rights</p>
                   <p className="text-primary-blue text-sm leading-relaxed m-0">Email us at <a href="mailto:support@decentcare.ai" className="text-primary-blue hover:underline font-semibold">support@decentcare.ai</a> with your request. We may need to verify your identity before fulfilling requests.</p>
                 </div>
               </div>
@@ -300,15 +300,15 @@ const PrivacyContent = () => {
 
               <div className="space-y-7 ml-4 text-primary-blue leading-relaxed font-['DM_Sans',sans-serif]">
                 <div>
-                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">• 8.1 Marketing preferences</h3>
+                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">8.1 Marketing preferences</h3>
                   <p>If we send you emails related to your enquiry or requested information, you can opt out of non-essential communications by using the unsubscribe link (if included) or by emailing <a href="mailto:support@decentcare.ai" className="text-primary-blue hover:underline font-semibold">support@decentcare.ai</a>.</p>
                 </div>
                 <div>
-                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">• 8.2 Children&apos;s privacy</h3>
+                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">8.2 Children&apos;s privacy</h3>
                   <p>The Website is intended for professionals (doctors, clinics, hospitals) and not for children. We do not knowingly collect personal data from children.</p>
                 </div>
                 <div>
-                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">• 8.3 Third-party websites</h3>
+                  <h3 className="text-base font-semibold text-primary-blue mb-3 font-['Plus_Jakarta_Sans',sans-serif]">8.3 Third-party websites</h3>
                   <p>The Website may contain links to third-party sites. We are not responsible for their privacy practices.</p>
                 </div>
               </div>
