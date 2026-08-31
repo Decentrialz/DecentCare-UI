@@ -39,7 +39,7 @@ const TermsHero = () => {
             <div className="flex flex-col items-center gap-2.5 pt-2 md:pt-4 md:flex-row md:flex-wrap md:items-start md:gap-3">
               <div className="flex items-center justify-center md:justify-start gap-2 bg-white/10 md:bg-white/12 backdrop-blur-sm rounded-xl md:rounded-lg px-4 py-2.5 md:px-3.5 md:py-2 text-white border border-white/20 min-h-11 md:min-h-0 w-full max-w-[292px] md:w-auto md:max-w-none">
                 <Calendar className="w-4 h-4" />
-                <span className="text-[15px] md:text-sm">Last Modified: 22 January 2026</span>
+                <span className="text-[15px] md:text-sm">Last Modified: 31st August 2026</span>
               </div>
 
               <div className="flex items-center justify-center md:justify-start gap-2 bg-white/10 md:bg-white/12 backdrop-blur-sm rounded-xl md:rounded-lg px-4 py-2.5 md:px-3.5 md:py-2 text-white border border-white/20 min-h-11 md:min-h-0 w-full max-w-[292px] md:w-auto md:max-w-none">
