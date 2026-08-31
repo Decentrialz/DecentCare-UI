@@ -1,5 +1,5 @@
 "use client"
-import { Phone, Mail, MapPin, Twitter, Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
+import { Phone, Mail, MapPin, Linkedin, Facebook, Instagram } from "lucide-react";
 import dcLogo from "@/app/assets/dcLogo.svg";
 import Image from "next/image";
 import vector from "@/app/assets/Vector.svg";
@@ -9,7 +9,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="bg-[#0F1729] text-primary-foreground pb-24 md:pb-0">
-      <div className="px-4 md:px-8 lg:px-16 xl:px-20 py-12">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 xl:px-20 py-12 max-w-[1440px]">
         <div className="w-full mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 lg:gap-6 xl:gap-8 mb-12">
             {/* Brand */}
@@ -104,8 +104,8 @@ const Footer = () => {
                 <Link href="/success" className="hover:text-primary-foreground transition-colors">Success Stories</Link>
               </li>
               {/* <li><a href="#" className="hover:text-primary-foreground transition-colors">Blog</a></li> */}
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-primary-foreground transition-colors">Terms of Service</a></li>
+              <li><Link href="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms-of-service" className="hover:text-primary-foreground transition-colors">Terms of Service</Link></li>
               <li><a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a></li>
             </ul>
           </div>
@@ -123,10 +123,16 @@ const Footer = () => {
                 <span>Email: support@decentcare.ai</span>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-8 h-8 mt-0.5 text-[#FBFCFD]/60" />
+                <MapPin className="w-4 h-4 mt-0.5 text-[#FBFCFD]/60 flex-shrink-0" />
                 <span>
                   India HQ:<br />
                   T-Hub Foundation, I/C, 8(A), Raimaktha, Raidurgam, Hyderabad, Telangana 500032, India
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 mt-0.5 text-[#FBFCFD]/60 flex-shrink-0" />
+                <span>
+                  5th Floor, VMRDA - The Deck, Siripuram, Visakhapatnam, Andhra Pradesh 530003, India
                 </span>
               </li>
             </ul>
@@ -143,8 +149,8 @@ const Footer = () => {
               AI-powered growth, built responsibly for healthcare.
             </p>
             <div className="flex gap-4 text-sm text-primary-foreground/50">
-              <a href="#" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
+              <Link href="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</Link>
+              <Link href="/terms-of-service" className="hover:text-primary-foreground transition-colors">Terms of Service</Link>
             </div>
           </div>
         </div>
