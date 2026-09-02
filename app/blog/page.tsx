@@ -8,8 +8,8 @@ const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
 export const metadata = {
   robots: {
-    index: isProduction,
-    follow: isProduction,
+    index: false,
+    follow: false,
   },
   alternates: {
     canonical: getCanonicalUrl('/blog'),
