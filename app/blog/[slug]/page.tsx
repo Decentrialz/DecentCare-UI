@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
@@ -10,12 +11,27 @@ import BlogBody from "@/app/blog/components/BlogBody";
 import RecommendedBlogsSection from "@/app/blog/components/RecommendedBlogsSection";
 import { BlogDetailHero } from "../components";
 import Breadcrumb from "@/app/components/Breadcrumb";
+import { getCanonicalUrl } from "@/lib/utils/siteConfig";
 
 const SECTION_PADDING = "px-4 md:px-8 lg:px-16 xl:px-20";
 const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
 
 interface BlogDetailPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  return {
+    robots: {
+      index: false,
+      follow: false,
+    },
+    alternates: {
+      canonical: getCanonicalUrl(`/blog/${slug}`),
+    },
+  };
 }
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
