@@ -41,6 +41,7 @@ export default function LatestBlogs({ featuredPosts }: LatestBlogsProps) {
 
   return (
     <section
+      id="latest-blogs"
       className="py-16 md:py-20 lg:py-25"
       style={{
         background:

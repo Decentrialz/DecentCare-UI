@@ -20,7 +20,7 @@ export default function SectionTitleWithCount({
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold flex items-center gap-2">
           {title}
           <span className="text-sm md:text-base text-gray-icon font-normal">
-            ( {countLabel} )
+            ({countLabel})
           </span>
         </h2>
       </div>
