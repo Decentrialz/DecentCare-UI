@@ -3,17 +3,18 @@ import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { ContactFormFields } from "@/app/contact/ContactForm";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 
 const CTASection = ({
   heading,
   description,
+  descriptionClassName,
   subDescription,
   cards,
   buttonText,
 }: {
   heading: string;
   description: string;
+  descriptionClassName?: string;
   subDescription?: string;
   /** Optional 2x2 checklist cards (used by SMM CTA) */
   cards?: string[];
@@ -36,7 +37,7 @@ const CTASection = ({
     <section className="py-16 lg:py-20 text-white" style={{ background: 'linear-gradient(135deg, #0D5C94, #0D9488)' }}>
       <div className="container mx-auto px-4 lg:px-8 text-center max-w-7xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
-        <p className="text-[#FFFFFF] mb-8">{description}</p>
+        <p className={`mb-8 text-[#FFFFFF] ${descriptionClassName ?? ""}`}>{description}</p>
 
         {cards?.length ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto mb-6">
@@ -56,19 +57,6 @@ const CTASection = ({
           </div>
         ) : null}
 
-        {subDescription && (
-          <div className="flex flex-wrap items-center justify-center gap-6 mb-6 text-white/90 text-sm md:text-base">
-            {subDescription.split('|').map((item, index, array) => (
-              <span key={index} className="flex items-center gap-6">
-                {item.trim()}
-                {index < array.length - 1 && (
-                  <span className="text-white/50">|</span>
-                )}
-              </span>
-            ))}
-          </div>
-        )}
-
         <div className="flex flex-wrap gap-4 justify-center">
           <Button
             variant="outline"
@@ -79,6 +67,19 @@ const CTASection = ({
             {buttonText ?? "Request a Demo"} <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
+
+        {subDescription && (
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm text-white/90 md:text-base">
+            {subDescription.split('|').map((item, index, array) => (
+              <span key={index} className="flex items-center gap-6">
+                {item.trim()}
+                {index < array.length - 1 && (
+                  <span className="text-white/50">|</span>
+                )}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
       {/* Modal for ContactFormFields */}
       {showModal && (
