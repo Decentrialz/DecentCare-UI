@@ -6,121 +6,159 @@ const nodes = [
   {
     key: "see",
     label: "See",
-    caption: "Every signal captured",
+    product: "OmniLens",
+    caption: "Behavioral signals captured",
     icon: Eye,
-    color: "text-home-heading",
-    position: "left-1/2 top-0 -translate-x-1/2 -translate-y-1/2",
+    ring: "#17B8C5",
+    chip: "border-[#17B8C5] bg-white",
+    textColor: "text-[#17B8C5]",
+    position: "left-1/2 top-0 -translate-x-1/2",
+    cardClass: "w-[170px]",
   },
   {
     key: "understand",
     label: "Understand",
-    caption: "Intent and stage scored",
+    product: "OmniJourney",
+    caption: "Intent and readiness scored",
     icon: Brain,
-    color: "text-home-success",
-    position: "right-0 top-1/2 translate-x-1/2 -translate-y-1/2",
+    ring: "#7C3AED",
+    chip: "border-[#7C3AED] bg-white",
+    textColor: "text-[#7C3AED]",
+    position: "-right-1/4 top-9/17 -translate-y-1/2",
+    cardClass: "w-[180px]",
+    layout: "right",
   },
   {
     key: "act",
     label: "Act",
+    product: "Omnicare",
     caption: "Right action, right moment",
     icon: Zap,
-    color: "text-home-amber",
-    position: "left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2",
+    ring: "#1756D1",
+    chip: "border-[#1756D1] bg-white",
+    textColor: "text-[#1756D1]",
+    position: "left-1/2 -bottom-1/6 -translate-x-1/2",
+    cardClass: "w-[180px]",
   },
   {
     key: "learn",
     label: "Learn",
-    caption: "Outcomes feed back in",
+    product: "Outcomes",
+    caption: "Feeds back into OmniLens",
     icon: RefreshCw,
-    color: "text-home-heading",
-    position: "left-0 top-1/2 -translate-x-1/2 -translate-y-1/2",
+    ring: "#D97706",
+    chip: "border-[#D97706] bg-white",
+    textColor: "text-[#D97706]",
+    position: "-left-1/4 top-9/17 -translate-y-1/2",
+    cardClass: "w-[170px]",
+    layout: "left",
   },
 ];
 
 const ClosedLoopSection = () => {
   return (
-    <section className="bg-white py-16 md:py-20 lg:py-24">
+    <section className="bg-white py-10 md:py-14 lg:pt-16 lg:pb-30">
       <Container>
         <SectionHeading
           eyebrow="The Closed Loop"
           title="A hospital that understands patients, not just diagnoses."
-          description="Every module feeds the next: nothing about a patient's journey is lost between discovery and care."
+          description="Every module feeds the next nothing about a patient’s journey is lost between discovery and care."
+          className="mb-10"
         />
 
-        <div className="mt-12 grid grid-cols-1 items-center gap-12 lg:mt-16 lg:grid-cols-2 lg:gap-16">
-          {/* Loop diagram */}
-          <div className="mx-auto w-full max-w-[380px] px-10 sm:max-w-[440px]">
-            <div className="relative aspect-square">
-              {/* Ring */}
+        <div className="grid grid-cols-1 items-center gap-24 xl:grid-cols-2 md:gap-32 xl:gap-40 xl:pl-24">
+          <div className="mx-auto w-full max-w-[460px]">
+            <div className="relative mx-auto aspect-square w-full max-w-[460px]">
               <svg
                 viewBox="0 0 100 100"
-                className="h-full w-full -rotate-90"
+                className="absolute inset-0 h-full w-full"
                 aria-hidden="true"
               >
-                <defs>
-                  <linearGradient id="closed-loop-ring" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="hsl(var(--home-heading))" />
-                    <stop offset="50%" stopColor="hsl(var(--home-success))" />
-                    <stop offset="100%" stopColor="hsl(var(--home-amber))" />
-                  </linearGradient>
-                </defs>
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="48"
+                <path
+                  d="M 50 7 A 43 43 0 0 1 93 50"
                   fill="none"
-                  stroke="url(#closed-loop-ring)"
-                  strokeWidth="1.5"
-                  strokeDasharray="6 3"
-                  strokeLinecap="round"
+                  stroke="#17B8C5"
+                  strokeWidth="0.75"
+                />
+                <path
+                  d="M 93 50 A 43 43 0 0 1 50 93"
+                  fill="none"
+                  stroke="#7C3AED"
+                  strokeWidth="0.75"
+                />
+                <path
+                  d="M 50 93 A 43 43 0 0 1 7 50"
+                  fill="none"
+                  stroke="#1756D1"
+                  strokeWidth="0.75"
+                />
+                <path
+                  d="M 7 50 A 43 43 0 0 1 50 7"
+                  fill="none"
+                  stroke="#D97706"
+                  strokeWidth="0.75"
                 />
               </svg>
 
-              {/* Centre badge */}
-              <div className="absolute top-1/2 left-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-primary-blue text-center text-white shadow-[0_18px_40px_-18px_hsl(var(--home-heading)/0.9)] sm:h-28 sm:w-28">
-                <RefreshCw className="h-5 w-5" />
-                <span className="mt-1.5 text-[11px] leading-tight font-semibold">
-                  Closed
-                  <br />
-                  Loop
+              <div className="absolute left-1/2 top-1/2 flex h-[112px] w-[112px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-[linear-gradient(135deg,#1756D1_0%,#0F3FA0_100%)] text-center text-white shadow-[0_12px_40px_0_#1756D159] md:h-[112px] md:w-[112px]">
+                <RefreshCw className="h-6 w-8 md:h-7 md:w-7" />
+                <span className="mt-2 text-xs font-semibold leading-[1.1]">
+                  Closed Loop
                 </span>
               </div>
 
-              {/* Nodes */}
-              {nodes.map(({ key, label, caption, icon: Icon, color, position }) => (
+              {nodes.map(({ key, label, product, caption, icon: Icon, ring, chip, textColor, position, cardClass, layout }) => (
                 <div
                   key={key}
-                  className={`absolute flex w-28 flex-col items-center text-center sm:w-32 ${position}`}
+                  className={`absolute flex flex-col items-center text-center ${cardClass} ${position}`}
                 >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-home-border bg-white shadow-[0_10px_24px_-14px_hsl(var(--home-heading)/0.8)]">
-                    <Icon className={`h-5 w-5 ${color}`} />
-                  </span>
-                  <span className="mt-2 text-xs font-semibold text-home-ink">{label}</span>
-                  <span className="mt-0.5 text-[10px] leading-snug text-home-muted">
-                    {caption}
-                  </span>
+                  <div className={`flex items-center gap-3 ${layout === "left" ? "flex-row-reverse" : layout === "right" ? "flex-row" : "flex-col"}`}>
+                    <span
+                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px] border-2 bg-white shadow-[0_10px_20px_-12px_rgba(13,92,148,0.9)] md:h-14 md:w-14 ${chip}`}
+                    >
+                      <Icon className="h-5 w-5 md:h-6 md:w-6" style={{ color: ring }} />
+                    </span>
+
+                    <div className={`${layout ? "flex-1" : "mt-1"} flex flex-col items-center`}>
+                      <span className="text-sm font-bold leading-none text-[#101828]">
+                        {label}
+                      </span>
+                      <span className={`mt-1 text-xs font-semibold leading-none ${textColor}`}>
+                        {product}
+                      </span>
+                      <span className="mt-1.5 text-xs leading-[1.2] text-home-muted">
+                        {caption}
+                      </span>
+                    </div>
+                  </div>
+
+                  <span
+                    className={`mt-2 inline-block h-2.5 w-2.5 rounded-full`}
+                    aria-hidden="true"
+                  />
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Explanation */}
-          <div className="max-w-lg">
-            <h3 className="text-lg font-bold text-home-ink md:text-xl">
+          <div className="mx-auto max-w-[640px] xl:w-full text-center md:text-left">
+            <h3 className="text-2xl font-bold text-home-ink">
               Clinical systems capture medical history. DecentCare captures decision
               history.
             </h3>
 
-            <p className="mt-4 text-sm leading-relaxed text-home-body md:text-base">
-              Four interconnected modules forming an unbroken loop — each one making the
-              next smarter about every patient, every time.
+            <p className="mt-5 text-baseleading-[1.75] text-home-body">
+             Four interconnected modules forming an unbroken loop each one making the next smarter about every patient, every time.
             </p>
 
-            <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-              {nodes.map(({ key, label, color }) => (
+            <ul className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+              {nodes.map(({ key, label, ring, textColor }) => (
                 <li key={key} className="flex items-center gap-2">
-                  <span className={`text-xs ${color}`}>●</span>
-                  <span className="text-xs font-medium text-home-body">{label}</span>
+                  <span
+                    className="inline-block h-2 w-2 rounded-full"
+                    style={{ backgroundColor: ring }}
+                  />
+                  <span className={`text-sm font-semibold ${textColor}`}>{label}</span>
                 </li>
               ))}
             </ul>
