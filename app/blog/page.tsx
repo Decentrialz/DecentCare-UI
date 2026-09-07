@@ -12,8 +12,8 @@ export const revalidate = 300;
 
 export const metadata = {
   robots: {
-    index: isProduction,
-    follow: isProduction,
+    index: false,
+    follow: false,
   },
   alternates: {
     canonical: getCanonicalUrl('/blog'),
