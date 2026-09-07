@@ -37,7 +37,15 @@ export async function getAllPosts(): Promise<BlogArticle[]> {
 export async function getFeaturedPosts(): Promise<BlogArticle[]> {
   try {
     const posts = await client.fetch<SanityPostPreview[]>(FEATURED_POSTS_QUERY)
-    return posts.map(transformPostToBlogArticle)
+    const featuredArticles = posts.map(transformPostToBlogArticle)
+
+    if (featuredArticles.length >= 3) {
+      return featuredArticles
+    }
+
+    const featuredIds = new Set(featuredArticles.map((article) => article.id))
+    const latestArticles = await getAllPosts()
+    return [...featuredArticles, ...latestArticles.filter((article) => !featuredIds.has(article.id))].slice(0, 3)
   } catch (error) {
     console.error('Error fetching featured posts:', error)
     // Fallback to latest 3 posts if no featured posts

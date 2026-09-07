@@ -4,7 +4,6 @@ import { useState, useMemo } from "react";
 import type { BlogArticle } from "@/sanity/types/blog";
 import type { SanityCategory } from "@/sanity/types/blog";
 import AllArticles from "./AllArticles";
-import ArticlesSectionHeader from "./ArticlesSectionHeader";
 
 interface AllArticlesWithFiltersProps {
   articles: BlogArticle[];

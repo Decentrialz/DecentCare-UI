@@ -1,12 +1,10 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState, useMemo, useEffect } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { Suspense, useState, useEffect } from "react";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
-import { Button } from "@/app/components/ui/button";
 import { PaginationControl } from "@/app/components/ui/pagination";
 import { ArticlesSectionHeader, BlogHero, NoArticlesFound } from "@/app/blog/components";
 import ArticleCard from "@/app/blog/components/ArticleCard";
@@ -15,8 +13,7 @@ import type { BlogArticle } from "@/sanity/types/blog";
 
 const SECTION_PADDING = "px-4 md:px-8 lg:px-16 xl:px-20";
 const CONTENT_MAX = "w-full mx-auto lg:max-w-7xl";
-const ITEMS_PER_PAGE = 12;
-const INITIAL_VISIBLE_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 6;
 
 export default function BlogSearchPage() {
   return (
@@ -47,7 +44,6 @@ function BlogSearchContent() {
   const q = searchParams.get("q") ?? searchParams.get("query") ?? "";
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [expandedOnCurrentPage, setExpandedOnCurrentPage] = useState(false);
   const [filteredArticles, setFilteredArticles] = useState<BlogArticle[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -55,6 +51,7 @@ function BlogSearchContent() {
   useEffect(() => {
     async function fetchResults() {
       setLoading(true);
+      setCurrentPage(1);
       const results = await searchPosts(q);
       setFilteredArticles(results);
       setLoading(false);
@@ -64,16 +61,10 @@ function BlogSearchContent() {
 
   const totalResults = filteredArticles.length;
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const pageArticles = filteredArticles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-  const visibleCount = expandedOnCurrentPage ? ITEMS_PER_PAGE : INITIAL_VISIBLE_PER_PAGE;
-  const displayedArticles = pageArticles.slice(0, visibleCount);
-
-  const canLoadMore = !expandedOnCurrentPage && pageArticles.length > INITIAL_VISIBLE_PER_PAGE;
-  const canShowFewer = expandedOnCurrentPage;
+  const displayedArticles = filteredArticles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    setExpandedOnCurrentPage(false);
   };
 
   if (loading) {
@@ -91,7 +82,7 @@ function BlogSearchContent() {
       <BlogHero defaultQuery={q} showFilterButton breadcrumbItems={[
         { label: "Home", href: "/" },
         { label: "Search Blogs" }
-      ]}/>
+      ]} variant="search"/>
 
       {/* Search Results */}
       <section className="py-16 md:py-20 lg:py-25">
@@ -114,20 +105,6 @@ function BlogSearchContent() {
                   <ArticleCard key={article.id} article={article} />
                 ))}
               </div>
-
-            {totalResults > 0 && (canLoadMore || canShowFewer) && (
-              <div className="flex flex-col items-center gap-6 mt-10 md:mt-12">
-                <Button
-                  type="button"
-                  onClick={canLoadMore ? () => setExpandedOnCurrentPage(true) : () => setExpandedOnCurrentPage(false)}
-                  className="font-medium flex items-center gap-2"
-                  size="sm"
-                >
-                  {canLoadMore ? "Load more Results" : "Show fewer"}
-                  {canLoadMore ? <ChevronDown className="w-4 h-4" /> : <ChevronUp className="w-4 h-4" />}
-                </Button>
-              </div>
-            )}
 
             {totalResults > 0 && (
               <div className="mt-10 md:mt-14">
