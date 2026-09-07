@@ -1,7 +1,7 @@
 "use client"
 import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
-import { ContactFormFields } from "@/app/contact/ContactForm";
+import DemoModal from "@/app/components/DemoModal";
 import { useState, useEffect } from "react";
 
 const CTASection = ({
@@ -81,24 +81,7 @@ const CTASection = ({
           </div>
         )}
       </div>
-      {/* Modal for ContactFormFields */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
-          <div className="bg-white rounded-2xl shadow-xl p-6 max-w-lg w-full relative text-[#1F2020]">
-            <button
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-xl font-bold"
-              onClick={() => setShowModal(false)}
-              aria-label="Close"
-            >
-              ×
-            </button>
-            <ContactFormFields
-              heading="Book a Free Demo"
-              subheading="Submit your details and a member of the DecentCare team will be in touch."
-            />
-          </div>
-        </div>
-      )}
+      {showModal && <DemoModal onClose={() => setShowModal(false)} />}
     </section>
   );
 };
