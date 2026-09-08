@@ -17,7 +17,7 @@ const logos = [
 
 const TrustBar = () => {
   return (
-    <section className="relative z-10 scroll-mt-24 -mt-2 md:-mt-3 lg:-mt-2">
+    <section className="relative z-10 hidden scroll-mt-24 -mt-2 md:-mt-3 lg:-mt-2 lg:block">
       <Container className="py-5 md:py-6">
         <div
           className="flex flex-col items-center rounded-3xl border border-white/40 bg-white/25 px-6 py-6 shadow-[0_20px_60px_rgba(15,63,160,0.12)] lg:flex-row lg:justify-between lg:gap-40 lg:px-10"

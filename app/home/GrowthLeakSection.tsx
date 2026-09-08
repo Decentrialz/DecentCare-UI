@@ -163,7 +163,7 @@ const GrowthLeakSection = () => {
             })}
           </ol>
 
-          <div className="flex lg:items-center pr-8">
+          <div className="flex lg:items-center lg:pr-8">
             <div className="w-full overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_-30px_hsl(var(--home-heading)/0.5)]">
               <div className="h-1 w-full bg-gradient-to-r from-home-danger via-home-heading to-home-success" />
               <div className="p-7 md:p-8">

@@ -33,17 +33,17 @@ const ProblemSection = () => {
           {problems.map((problem, index) => (
             <li
               key={problem.title}
-              className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 border-t border-home-border py-6 last:border-b md:grid-cols-[auto_1fr_1fr] md:gap-x-16 md:py-8"
+              className="grid grid-cols-1 gap-y-5 border-t border-home-border py-8 last:border-b md:grid-cols-[auto_1fr_1fr] md:gap-x-16 md:gap-y-2 md:py-8"
             >
-              <span className="pt-1 text-xs font-semibold text-home-eyebrow tabular-nums mt-1">
+              <span className="font-mono text-lg font-normal text-home-eyebrow tabular-nums md:mt-1 md:pt-1 md:text-xs md:font-semibold">
                 {String(index + 1).padStart(2, "0")}
               </span>
 
-              <h3 className="text-base font-bold text-home-ink md:text-lg lg:text-2xl">
+              <h3 className="text-xl leading-[1.25] font-bold text-home-ink  lg:text-2xl">
                 {problem.title}
               </h3>
 
-              <p className="col-start-2 text-sm leading-relaxed text-home-body md:col-start-3 md:row-start-1 lg:pr-16">
+              <p className="text-base leading-[1.6] text-home-body md:col-start-3 md:row-start-1 md:text-sm md:leading-relaxed lg:pr-16">
                 {problem.description}
               </p>
             </li>

@@ -13,7 +13,7 @@ const nodes = [
     chip: "border-[#17B8C5] bg-white",
     textColor: "text-[#17B8C5]",
     position: "left-1/2 top-0 -translate-x-1/2",
-    cardClass: "w-[170px]",
+    cardClass: "w-[130px] md:w-[170px]",
   },
   {
     key: "understand",
@@ -24,8 +24,8 @@ const nodes = [
     ring: "#7C3AED",
     chip: "border-[#7C3AED] bg-white",
     textColor: "text-[#7C3AED]",
-    position: "-right-1/4 top-9/17 -translate-y-1/2",
-    cardClass: "w-[180px]",
+    position: "-right-1 top-9/17 -translate-y-1/2 md:left-auto md:-right-1/4",
+    cardClass: "w-[140px] md:w-[180px]",
     layout: "right",
   },
   {
@@ -38,7 +38,7 @@ const nodes = [
     chip: "border-[#1756D1] bg-white",
     textColor: "text-[#1756D1]",
     position: "left-1/2 -bottom-1/6 -translate-x-1/2",
-    cardClass: "w-[180px]",
+    cardClass: "w-[140px] md:w-[180px]",
   },
   {
     key: "learn",
@@ -49,8 +49,8 @@ const nodes = [
     ring: "#D97706",
     chip: "border-[#D97706] bg-white",
     textColor: "text-[#D97706]",
-    position: "-left-1/4 top-9/17 -translate-y-1/2",
-    cardClass: "w-[170px]",
+    position: "-left-1 top-9/17 -translate-y-1/2  md:-left-1/4",
+    cardClass: "w-[130px] md:w-[170px]",
     layout: "left",
   },
 ];
@@ -67,8 +67,8 @@ const ClosedLoopSection = () => {
         />
 
         <div className="grid grid-cols-1 items-center gap-24 xl:grid-cols-2 md:gap-32 xl:gap-40 xl:pl-24">
-          <div className="mx-auto w-full max-w-[460px]">
-            <div className="relative mx-auto aspect-square w-full max-w-[460px]">
+          <div className="mx-auto w-full max-w-[360px] md:max-w-[460px]">
+            <div className="relative mx-auto aspect-square w-full max-w-[360px] md:max-w-[460px]">
               <svg
                 viewBox="0 0 100 100"
                 className="absolute inset-0 h-full w-full"
@@ -100,9 +100,9 @@ const ClosedLoopSection = () => {
                 />
               </svg>
 
-              <div className="absolute left-1/2 top-1/2 flex h-[112px] w-[112px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-[linear-gradient(135deg,#1756D1_0%,#0F3FA0_100%)] text-center text-white shadow-[0_12px_40px_0_#1756D159] md:h-[112px] md:w-[112px]">
-                <RefreshCw className="h-6 w-8 md:h-7 md:w-7" />
-                <span className="mt-2 text-xs font-semibold leading-[1.1]">
+              <div className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-[linear-gradient(135deg,#1756D1_0%,#0F3FA0_100%)] text-center text-white shadow-[0_12px_40px_0_#1756D159] md:h-[112px] md:w-[112px]">
+                <RefreshCw className="h-4 w-4 md:h-7 md:w-7" />
+                <span className="mt-2 text-[0.6rem] md:text-xs font-semibold leading-[1.1]">
                   Closed Loop
                 </span>
               </div>
@@ -112,21 +112,21 @@ const ClosedLoopSection = () => {
                   key={key}
                   className={`absolute flex flex-col items-center text-center ${cardClass} ${position}`}
                 >
-                  <div className={`flex items-center gap-3 ${layout === "left" ? "flex-row-reverse" : layout === "right" ? "flex-row" : "flex-col"}`}>
+                  <div className={`flex items-center gap-1.5 md:gap-3 ${layout === "left" ? "flex-row md:flex-row-reverse" : layout === "right" ? "flex-row-reverse md:flex-row" : "flex-col"}`}>
                     <span
-                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px] border-2 bg-white shadow-[0_10px_20px_-12px_rgba(13,92,148,0.9)] md:h-14 md:w-14 ${chip}`}
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] border-2 bg-white shadow-[0_10px_20px_-12px_rgba(13,92,148,0.9)] md:h-14 md:w-14 ${chip}`}
                     >
                       <Icon className="h-5 w-5 md:h-6 md:w-6" style={{ color: ring }} />
                     </span>
 
-                    <div className={`${layout ? "flex-1" : "mt-1"} flex flex-col items-center`}>
-                      <span className="text-sm font-bold leading-none text-[#101828]">
+                    <div className={`${layout ? "flex-1" : "mt-0 md:mt-1"} flex flex-col items-center `}>
+                      <span className="text-[10px] md:text-sm font-bold leading-none text-[#101828]">
                         {label}
                       </span>
-                      <span className={`mt-1 text-xs font-semibold leading-none ${textColor}`}>
+                      <span className={`mt-0.5 md:mt-1 text-[8px] md:text-xs font-semibold leading-none ${textColor}`}>
                         {product}
                       </span>
-                      <span className="mt-1.5 text-xs leading-[1.2] text-home-muted">
+                      <span className="mt-0.5 md:mt-1.5 text-[8px] md:text-xs leading-[1.2] text-home-muted">
                         {caption}
                       </span>
                     </div>
@@ -141,13 +141,13 @@ const ClosedLoopSection = () => {
             </div>
           </div>
 
-          <div className="mx-auto max-w-[640px] xl:w-full text-center md:text-left">
+          <div className="mx-auto w-full xl:w-full text-left">
             <h3 className="text-2xl font-bold text-home-ink">
               Clinical systems capture medical history. DecentCare captures decision
               history.
             </h3>
 
-            <p className="mt-5 text-baseleading-[1.75] text-home-body">
+            <p className="mt-5 text-base leading-[1.75] text-home-body">
              Four interconnected modules forming an unbroken loop each one making the next smarter about every patient, every time.
             </p>
 

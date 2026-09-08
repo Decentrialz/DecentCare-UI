@@ -48,11 +48,11 @@ const AttributionSection = () => {
                 <card.icon className="h-5 w-5" />
               </span>
 
-              <h3 className="mt-5 text-sm font-bold text-home-ink md:text-base">
+              <h3 className="mt-5 font-bold text-home-ink text-base">
                 {card.title}
               </h3>
 
-              <p className="mt-2 text-xs leading-relaxed text-home-body md:text-[13px]">
+              <p className="mt-2 leading-relaxed text-home-body text-[13px]">
                 {card.description}
               </p>
             </article>
