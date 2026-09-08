@@ -41,15 +41,15 @@ const SecuritySection = () => {
               key={item.title}
               className="flex h-full items-start gap-4 rounded-xl border border-[#E6E2DA] bg-white px-5 py-6"
             >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-home-heading/10 text-home-heading">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[linear-gradient(135deg,#0D5C94_0%,#0D9488_100%)] text-white">
                 <item.icon className="h-5 w-5" />
               </span>
 
               <div className="min-w-0">
-                <h3 className="text-sm font-bold text-home-ink md:text-base">
+                <h3 className=" font-bold text-home-ink text-base">
                   {item.title}
                 </h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-home-body md:text-[13px]">
+                <p className="mt-1.5 leading-relaxed text-home-body md:text-[13px]">
                   {item.description}
                 </p>
               </div>
