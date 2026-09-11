@@ -6,6 +6,14 @@ import Navbar from "@/app/components/navbar";
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
 export const metadata: Metadata = {
+  title: "Google & Meta Ads for Hospitals and Doctors | DecentCare",
+  description: "Google, Meta and YouTube campaigns optimised on booked patients, not clicks. Spend follows revenue and cost per patient keeps falling.",
+  keywords: [
+    "google ads for doctors",
+    "healthcare ppc",
+    "digital marketing for hospitals",
+    "patient acquisition",
+  ],
   robots: {
     index: isProduction,
     follow: isProduction,
@@ -66,6 +74,7 @@ const PaidMarketingPage = () => {
       />
       <div className="min-h-screen bg-background">
       <Navbar />
+      <h1 className="sr-only">Paid ads optimised on booked patients</h1>
       <HeroSection />
       <DecentCareWaySection />
       <WhoThisServiceIsForSection />

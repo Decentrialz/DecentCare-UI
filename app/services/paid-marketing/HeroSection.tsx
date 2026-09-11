@@ -53,15 +53,15 @@ const HeroSection = () => {
           <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center mt-8">
             {/* Left Content */}
             <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-center lg:text-left" style={{
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-center lg:text-left" style={{
                 background: "linear-gradient(135deg, #0D5C94, #0D9488)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
                 AI-Powered Paid Marketing For Healthcare
-              </h1>
-
+              </h2>
+              
               <p className="text-sm md:text-base text-[#818584] mb-8 leading-relaxed max-w-xl text-center lg:text-left mx-auto lg:mx-0">
                 Scale your patient volume with AI-powered precision. We manage your strategy, campaigns, and reporting to drive predictable growth.
               </p>

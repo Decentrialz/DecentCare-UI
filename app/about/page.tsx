@@ -17,6 +17,13 @@ import type { Metadata } from "next";
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
 export const metadata: Metadata = {
+  title: "About DecentCare | Healthcare AI Platform, Hyderabad",
+  description: "DecentCare is a behavioral intelligence platform for Indian healthcare, built at T-Hub Hyderabad by founders with 14+ years in health tech.",
+  keywords: [
+    "decentcare",
+    "healthcare ai platform india",
+    "healthcare technology company",
+  ],
   robots: {
     index: isProduction,
     follow: isProduction,

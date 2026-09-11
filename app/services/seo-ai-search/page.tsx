@@ -6,6 +6,16 @@ import Navbar from "@/app/components/navbar";
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
 export const metadata: Metadata = {
+  title: "Healthcare SEO & AI Search (AEO/GEO) Services | DecentCare",
+  description: "Rank on Google for treatments in your city and appear in ChatGPT, Gemini and Perplexity answers. Get a free healthcare SEO audit.",
+  keywords: [
+    "seo for doctors",
+    "healthcare seo",
+    "medical seo",
+    "AEO",
+    "GEO",
+    "LLMO",
+  ],
   robots: {
     index: isProduction,
     follow: isProduction,
@@ -72,6 +82,7 @@ const SEOAISearchPage = () => {
       />
       <div className="min-h-screen bg-background">
       <Navbar />
+      <h1 className="sr-only">Healthcare SEO for Google and AI search</h1>
       <HeroSection />
       <ProvenResultsSection />
       <OurClientsSection />
