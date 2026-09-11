@@ -55,7 +55,7 @@ const HeroBanner = ({
 
         {/* Content Overlay */}
         <div className={`relative z-10 container mx-auto px-4 lg:px-8 max-w-5xl text-center flex flex-col ${contentPosition} items-center min-h-[600px] md:min-h-[650px] pb-8`}>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{title}</h1>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ background: 'linear-gradient(135deg, #0D9488, #0D5C94)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{title}</h2>
           <p className={`${descriptionColor} text-base ${isCentered ? 'mb-3' : 'mb-8'} max-w-5xl`}>
             {description}
           </p>

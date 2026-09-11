@@ -6,6 +6,15 @@ import Navbar from "@/app/components/navbar";
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
 export const metadata: Metadata = {
+  title: "Healthcare CRM Software for Hospitals in India | DecentCare",
+  description: "OmniCare tracks every patient across 7 journey stages and 5 care roles, from enquiry to post-op follow-up. Cut no-shows and missed follow-ups.",
+  keywords: [
+    "healthcare crm",
+    "clinic management software",
+    "patient management software",
+    "hospital crm software",
+    "patient engagement software",
+  ],
   robots: {
     index: isProduction,
     follow: isProduction,
@@ -44,6 +53,7 @@ export default function CareJourneyCRMPage() {
       />
       <div className="min-h-screen bg-background">
       <Navbar />
+      <h1 className="sr-only">OmniCare - the patient journey CRM</h1>
 
       <section
         className={`${SECTION_PADDING} mt-16 sm:mt-18 pt-10 pb-[60px] md:pb-[120px]`}
