@@ -35,7 +35,7 @@ const HeroSection = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Left Content */}
             <div className="space-y-6 w-full max-w-full">
-              <h1 className="text-[28px] md:text-3xl lg:text-4xl font-extrabold leading-tight text-center lg:text-left break-words overflow-wrap-anywhere" style={{
+              <h2 className="text-[28px] md:text-3xl lg:text-4xl font-extrabold leading-tight text-center lg:text-left break-words overflow-wrap-anywhere" style={{
                 background: "linear-gradient(135deg, #0D5C94, #0D9488)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -46,8 +46,8 @@ const HeroSection = () => {
                 overflowWrap: "break-word",
               }}>
                 Future-Proof Healthcare SEO: Dominate Google & AI Search
-              </h1>
-
+              </h2>
+              
               {/* Mobile Image - Show only on mobile */}
               <div className="lg:hidden flex justify-center items-start w-full max-w-full">
                 <Image

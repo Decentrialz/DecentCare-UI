@@ -13,7 +13,7 @@ export default function CareJourneyHero() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
       <div className="flex flex-col justify-center">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6 text-gradient-heading-1 text-center lg:text-left" style={{
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6 text-gradient-heading-1 text-center lg:text-left" style={{
                   background: "linear-gradient(135deg, #0D5C94, #0D9488)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
@@ -22,7 +22,7 @@ export default function CareJourneyHero() {
                   lineHeight: 1.15,
                 }}>
           Every patient.<br /> Every stage.<br /> Connected.
-        </h1>
+        </h2>
 
         {/* Mobile PatientOverviewCard - Show only on mobile */}
         <div className="lg:hidden mb-8">

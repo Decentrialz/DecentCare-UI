@@ -6,6 +6,13 @@ import Navbar from "@/app/components/navbar";
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
 export const metadata: Metadata = {
+  title: "Hospital & Clinic Website Design Services India | DecentCare",
+  description: "Conversion-focused hospital websites and treatment landing pages with booking built in, mobile and SEO ready. Available as an add-on.",
+  keywords: [
+    "hospital website design",
+    "website for doctors",
+    "medical website design",
+  ],
   robots: {
     index: isProduction,
     follow: isProduction,

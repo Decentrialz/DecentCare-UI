@@ -102,7 +102,7 @@ const Hero = () => {
 
                             {/* Headline */}
                             <div className="space-y-4 text-center lg:text-left">
-                                <h1 className="text-2xl md:text-3xl lg:text-[42px] font-bold leading-tight" style={{
+                                <h2 className="text-2xl md:text-3xl lg:text-[42px] font-bold leading-tight" style={{
                                     background: "linear-gradient(135deg, #0D5C94, #0D9488)",
                                     WebkitBackgroundClip: "text",
                                     WebkitTextFillColor: "transparent",
@@ -111,7 +111,7 @@ const Hero = () => {
                                     lineHeight: 1.15,
                                 }}>
                                     Success Stories from Modern Healthcare Teams
-                                </h1>
+                                </h2>
                                 <p className="text-md text-[#818584] max-w-xl">
                                     Discover how clinics and hospitals transformed their patient care journey with DecentCare's integrated healthcare management system.
                                 </p>

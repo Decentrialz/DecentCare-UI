@@ -6,6 +6,13 @@ import Navbar from "@/app/components/navbar";
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
 export const metadata: Metadata = {
+  title: "Hospital Consulting Services in India | DecentCare Strategy",
+  description: "Market entry, revenue growth and hospital operations consulting for Indian providers, grounded in real patient behaviour data. Free strategy call.",
+  keywords: [
+    "hospital consulting services",
+    "healthcare consulting firms",
+    "hospital management software",
+  ],
   robots: {
     index: isProduction,
     follow: isProduction,
