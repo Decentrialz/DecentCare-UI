@@ -1,7 +1,7 @@
 'use client';
 import { Button } from "@/app/components/ui/button";
 import { Menu, X, Send, Phone } from "lucide-react";
-import dcLogo from "@/app/assets/dcLogo.svg";
+import headerLogo from "@/app/assets/logo_header.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <>
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border w-full" style={{ maxWidth: '100vw' }}>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-border w-full" style={{ maxWidth: '100vw' }}>
       <div className="container mx-auto px-4 md:px-8 lg:px-16 py-2 max-w-[1440px]">
         <div className="w-full mx-auto">
         
@@ -28,9 +28,9 @@ const Navbar = () => {
               }}
             >
               <div className="flex items-center">
-                <Image src={dcLogo} alt="DecentCare Logo" width={60} height={40} />
+                <Image src={headerLogo} alt="DecentCare Logo" width={50} height={40} />
               </div>
-              <span className="text-xs font-semibold text-primary">DecentCare</span>
+              {/* <span className="text-xs font-semibold text-primary">DecentCare</span> */}
             </Link>
           </div>
 
@@ -84,7 +84,7 @@ const Navbar = () => {
               }}
             >
               <div className="flex items-center">
-                <Image src={dcLogo} alt="DecentCare Logo" width={50} height={33} />
+                <Image src={headerLogo} alt="DecentCare Logo" width={50} height={33} />
               </div>
               <span className="text-[10px] font-semibold text-primary whitespace-nowrap">DecentCare</span>
             </Link>
@@ -146,7 +146,7 @@ const Navbar = () => {
           {/* Sidebar Footer */}
           <div className="p-6 border-t">
             <div className="flex items-center justify-center">
-              <Image src={dcLogo} alt="DecentCare Logo" width={80} height={53} />
+              <Image src={headerLogo} alt="DecentCare Logo" width={80} height={53} />
             </div>
             <p className="text-center text-sm font-semibold text-primary mt-2">DecentCare</p>
           </div>
