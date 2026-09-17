@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, Search } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { cn } from "@/app/components/lib/utils";
 import SectionTitleWithCount from "./SectionTitleWithCount";
 import type { SanityCategory } from "@/sanity/types/blog";
@@ -16,8 +15,10 @@ interface ArticlesSectionHeaderProps {
   categories?: SanityCategory[];
   selectedCategory?: string;
   selectedSort?: string;
+  searchQuery?: string;
   onCategoryChange?: (category: string) => void;
   onSortChange?: (sort: string) => void;
+  onSearchChange?: (query: string) => void;
 }
 
 const SORT_OPTIONS = ["Latest", "Most Relevant", "Most Read", "Oldest"];
@@ -40,17 +41,17 @@ export default function ArticlesSectionHeader({
   categories = [],
   selectedCategory = "",
   selectedSort = "",
+  searchQuery = "",
   onCategoryChange,
   onSortChange,
+  onSearchChange,
 }: ArticlesSectionHeaderProps) {
-  const router = useRouter();
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [categoryOpenUpward, setCategoryOpenUpward] = useState(false);
   const [categoryMaxHeight, setCategoryMaxHeight] = useState<number>();
   const [sortOpen, setSortOpen] = useState(false);
   const categoryRef = useRef<HTMLDivElement>(null);
   const sortRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -75,9 +76,14 @@ export default function ArticlesSectionHeader({
     setSortOpen(false);
   };
 
+  const [localQuery, setLocalQuery] = useState(searchQuery);
+
+  useEffect(() => {
+    setLocalQuery(searchQuery);
+  }, [searchQuery]);
+
   const handleSearchSubmit = () => {
-    const query = searchInputRef.current?.value.trim() ?? "";
-    router.push(`/blog/search${query ? `?q=${encodeURIComponent(query)}` : ""}`);
+    onSearchChange?.(localQuery.trim());
   };
 
   const toggleCategoryDropdown = () => {
@@ -104,9 +110,15 @@ export default function ArticlesSectionHeader({
             <div className="flex items-center h-[52px] rounded-xl border border-[#9cc6ff] bg-white pr-1.5">
               <Search className="ml-4 w-5 h-5 text-gray-400 shrink-0" />
             <input
-              ref={searchInputRef}
               type="search"
               placeholder="Search Articles, topics, or keywords..."
+              value={localQuery}
+              onChange={(e) => {
+                const value = e.target.value;
+                setLocalQuery(value);
+                if (!value) onSearchChange?.("");
+              }}
+              onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), handleSearchSubmit())}
               className="w-full h-full bg-transparent pl-3 pr-3 text-base text-foreground placeholder:text-gray-400 focus:outline-none"
               aria-label="Search articles"
             />

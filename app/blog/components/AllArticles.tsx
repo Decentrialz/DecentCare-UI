@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PaginationControl } from "@/app/components/ui/pagination";
 import type { BlogArticle, SanityCategory } from "@/sanity/types/blog";
 import ArticleCard from "./ArticleCard";
@@ -16,8 +16,10 @@ interface AllArticlesProps {
   categories?: SanityCategory[];
   selectedCategory?: string;
   selectedSort?: string;
+  searchQuery?: string;
   onCategoryChange?: (category: string) => void;
   onSortChange?: (sort: string) => void;
+  onSearchChange?: (query: string) => void;
 }
 
 export default function AllArticles({ 
@@ -25,13 +27,20 @@ export default function AllArticles({
   categories,
   selectedCategory,
   selectedSort,
+  searchQuery,
   onCategoryChange,
   onSortChange,
+  onSearchChange,
 }: AllArticlesProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const totalBlogs = articles.length;
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const displayedArticles = articles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  // Reset to first page whenever the filtered result set changes.
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [articles]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -51,8 +60,10 @@ export default function AllArticles({
             categories={categories}
             selectedCategory={selectedCategory}
             selectedSort={selectedSort}
+            searchQuery={searchQuery}
             onCategoryChange={onCategoryChange}
             onSortChange={onSortChange}
+            onSearchChange={onSearchChange}
           />
 
           {/* Blog grid */}

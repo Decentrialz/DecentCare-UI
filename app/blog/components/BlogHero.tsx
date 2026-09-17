@@ -57,7 +57,7 @@ export default function BlogHero({ defaultQuery = "", showFilterButton = false, 
     const query = searchQuery.trim();
     const params = new URLSearchParams();
     if (query) params.set("q", query);
-    router.push(`/blog/search${params.toString() ? `?${params.toString()}` : ""}`);
+    router.push(`/blog${params.toString() ? `?${params.toString()}` : ""}`);
   };
 
   const handleExploreLatestBlogs = () => {
@@ -131,7 +131,7 @@ export default function BlogHero({ defaultQuery = "", showFilterButton = false, 
               </div>
             )}
 
-            {/* Search bar - redirects via Next.js router to /blog/search?q=... */}
+                {/* Search bar - redirects via Next.js router to /blog?q=... */}
             {variant === "search" && (
             <div className="pt-4 sm:pt-6 w-full mx-auto relative">
               <div
@@ -152,7 +152,7 @@ export default function BlogHero({ defaultQuery = "", showFilterButton = false, 
                       const query = event.target.value;
                       setSearchQuery(query);
                       if (!query && variant === "search") {
-                        router.push("/blog/search");
+                        router.push("/blog");
                       }
                     }}
                     onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), handleSearch())}
