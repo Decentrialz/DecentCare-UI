@@ -5,6 +5,7 @@ import { PaginationControl } from "@/app/components/ui/pagination";
 import type { BlogArticle, SanityCategory } from "@/sanity/types/blog";
 import ArticleCard from "./ArticleCard";
 import ArticlesSectionHeader from "./ArticlesSectionHeader";
+import NoArticlesFound from "./NoArticlesFound";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -67,11 +68,22 @@ export default function AllArticles({
           />
 
           {/* Blog grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-14">
-            {displayedArticles.map((article) => (
-              <ArticleCard key={article.id} article={article} />
-            ))}
-          </div>
+          {displayedArticles.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-14">
+              {displayedArticles.map((article) => (
+                <ArticleCard key={article.id} article={article} />
+              ))}
+            </div>
+          ) : (
+            <div className="mt-14">
+              <NoArticlesFound
+                onClearSearch={() => {
+                  onSearchChange?.("");
+                  onCategoryChange?.("");
+                }}
+              />
+            </div>
+          )}
 
           {/* Pagination */}
           <div className="mt-10 md:mt-14">
