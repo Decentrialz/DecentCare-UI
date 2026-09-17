@@ -2,7 +2,7 @@ import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/Footer";
 import MobileStickyButtons from "@/app/components/MobileStickyButtons";
 import { BlogHero, LatestBlogs, AllArticlesWithFilters } from "@/app/blog/components";
-import { getAllPosts, getAllCategories } from "@/app/blog/lib/sanity-api";
+import { getAllPosts, getAllCategories, searchPosts } from "@/app/blog/lib/sanity-api";
 import { getCanonicalUrl } from "@/lib/utils/siteConfig";
 import type { Metadata } from "next";
 
@@ -28,13 +28,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function BlogPage() {
+interface BlogPageProps {
+  searchParams: Promise<{ q?: string; query?: string }>;
+}
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const params = await searchParams;
+  const initialQuery = (params.q ?? params.query ?? "").trim();
+
   // Fetch blog data from Sanity
   const [allPosts, categories] = await Promise.all([
     getAllPosts(),
     getAllCategories(),
   ]);
   const carouselPosts = allPosts.slice(0, 3);
+
+  // Use the Sanity search query for the initial render when the URL already has a query.
+  const initialSearchResults = initialQuery ? await searchPosts(initialQuery) : undefined;
 
   return (
     <div className="min-h-screen bg-background">
@@ -48,7 +58,12 @@ export default async function BlogPage() {
         ]}
       />
       <LatestBlogs featuredPosts={carouselPosts} />
-      <AllArticlesWithFilters articles={allPosts} categories={categories} />
+      <AllArticlesWithFilters
+        articles={allPosts}
+        categories={categories}
+        initialQuery={initialQuery}
+        initialSearchResults={initialSearchResults}
+      />
       <MobileStickyButtons />
       <Footer />
     </div>
