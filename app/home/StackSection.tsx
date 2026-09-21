@@ -24,7 +24,7 @@ const modules = [
     step: "Act",
     name: "OmniCare",
     description:
-      "Puts it in your team's hands, so the right action happens every time - leads, appointments, follow-ups, retention.",
+      "Puts it in your team's hands, so the right action happens every time leads, appointments, follow-ups, retention.",
     chips: ["Leads", "Appointments", "Follow-ups", "Retention"],
     icon: Zap,
   },
@@ -37,7 +37,7 @@ const StackSection = () => {
         <SectionHeading
           eyebrow="The DecentCare Stack"
           title="One intelligence stack. See, understand, act."
-          description="Not a CRM. Not an agency. DecentCare sits between your HIMS and your front-line teams three modules, one closed loop."
+          description="Not a CRM. Not an agency. DecentCare sits between your HIMS and your frontline teams three modules, one closed loop."
         />
 
         <div className="mt-10 grid grid-cols-1 gap-5 md:mt-14 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">

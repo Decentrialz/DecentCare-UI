@@ -20,7 +20,7 @@ const safeguards = [
   },
   {
     title: "Role-based access + MFA",
-    description: "Granular, scoped access with 6 configurable roles.",
+    description: "Cognito-backed MFA with 9 configurable roles.",
     icon: KeyRound,
   },
 ];
