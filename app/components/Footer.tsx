@@ -1,6 +1,6 @@
 "use client"
 import { Phone, Mail, MapPin, Linkedin, Facebook, Instagram } from "lucide-react";
-import dcLogo from "@/app/assets/dcLogo.svg";
+import footerLogo from "@/app/assets/logo_footer.png";
 import Image from "next/image";
 import vector from "@/app/assets/Vector.svg";
 import Link from "next/link";
@@ -23,10 +23,9 @@ const Footer = () => {
               }}
             >
               <div className="flex items-center">
-                <Image src={dcLogo} alt="DecentCare Logo" width={60} height={40} />
+                <Image src={footerLogo} alt="DecentCare Logo" width={60} height={40} />
               </div>
-              <span className="text-xs font-semibold text-[#FFFFFF]">Decent<span className="text-accent">Care</span></span>
-            </Link>
+             </Link>
             <p className="text-sm text-[#FBFCFD]/60 ">
              DecentCare is the behavioral intelligence layer for Indian healthcare. We help clinics hospitals, and doctors see every patient, understand who's ready, and act - so they grow smarter.
             </p>
