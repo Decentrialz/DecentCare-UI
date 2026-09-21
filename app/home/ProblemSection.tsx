@@ -5,12 +5,12 @@ const problems = [
   {
     title: "Patients are treated like leads",
     description:
-      "Patients become paperwork, not people — a booking form can't capture the weight of a healthcare decision, or why someone hesitated before calling.",
+      "Patients become paperwork, not people a booking form can't capture the weight of a healthcare decision, or why someone hesitated before calling.",
   },
   {
     title: "Journeys get squeezed into linear funnels",
     description:
-      "Real care doesn't move in a straight line — patients pause, seek second opinions, and come back weeks later. Linear tracking misses all of it.",
+      "Real care doesn't move in a straight line patients pause, seek second opinions, and come back weeks later. Linear tracking misses all of it.",
   },
   {
     title: "Care fractures across disconnected systems",
@@ -25,8 +25,8 @@ const ProblemSection = () => {
       <Container>
         <SectionHeading
           eyebrow="The Problem"
-          title="Healthcare is personal. Growth systems are not."
-          description="What healthcare needs isn't louder marketing. It's intelligence with empathy and a single source of truth between discovery and care."
+          title="Healthcare is personal. Growth systems aren't."
+          description="What healthcare needs isn't louder marketing. It's a single source of truth between the moment a patient is discovered and the moment they're cared for."
         />
 
         <ul className="mx-auto mt-10 md:mt-14">
