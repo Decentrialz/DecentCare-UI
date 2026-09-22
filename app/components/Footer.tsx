@@ -1,6 +1,6 @@
 "use client"
 import { Phone, Mail, MapPin, Linkedin, Facebook, Instagram } from "lucide-react";
-import dcLogo from "@/app/assets/dcLogo.svg";
+import footerLogo from "@/app/assets/logo_footer.png";
 import Image from "next/image";
 import vector from "@/app/assets/Vector.svg";
 import Link from "next/link";
@@ -23,12 +23,11 @@ const Footer = () => {
               }}
             >
               <div className="flex items-center">
-                <Image src={dcLogo} alt="DecentCare Logo" width={60} height={40} />
+                <Image src={footerLogo} alt="DecentCare Logo" width={60} height={40} />
               </div>
-              <span className="text-xs font-semibold text-[#FFFFFF]">Decent<span className="text-accent">Care</span></span>
-            </Link>
+             </Link>
             <p className="text-sm text-[#FBFCFD]/60 ">
-             DecentCare is an AI-powered healthcare growth company. We combine our Care Journey CRM with full-stack digital services, helping clinics, hospitals, and doctors grow smarter, together.
+             DecentCare is the behavioral intelligence layer for Indian healthcare. We help clinics, hospitals, and doctors see every patient, understand who's ready, and act - so they grow smarter.
             </p>
             {/* Social Links */}
             <div className="flex gap-4 mt-[10%]">
@@ -72,11 +71,11 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Explore</h4>
             <ul className="space-y-3 text-sm text-[#FBFCFD]/60">
-              <li><Link href="/#empathy-bot" className="hover:text-primary-foreground transition-colors">Empathy Bot</Link></li>
-              <li><Link href="/#healthcare-marketing" className="hover:text-primary-foreground transition-colors">Healthcare Marketing</Link></li>
-              <li><Link href="/#digital-twin" className="hover:text-primary-foreground transition-colors">Digital Twin</Link></li>
-              <li><Link href="/#who-we-serve" className="hover:text-primary-foreground transition-colors">Who We Serve</Link></li>
-              <li><Link href="/#technology-stack" className="hover:text-primary-foreground transition-colors">Technology Stack</Link></li>
+              <li><Link href="/#empathy-bot" className="hover:text-primary-foreground transition-colors">The Growth</Link></li>
+              <li><Link href="/#healthcare-marketing" className="hover:text-primary-foreground transition-colors">The Stack</Link></li>
+              <li><Link href="/#digital-twin" className="hover:text-primary-foreground transition-colors">OmniLens</Link></li>
+              <li><Link href="/#who-we-serve" className="hover:text-primary-foreground transition-colors">The Closed Loop</Link></li>
+              <li><Link href="/#technology-stack" className="hover:text-primary-foreground transition-colors">Who It's For</Link></li>
             </ul>
           </div>
 

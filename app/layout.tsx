@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
 import { GoogleTagManagerHead, GoogleTagManagerBody } from "@/app/components/GoogleTagManager";
 import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+import favicon from "@/app/assets/DC_favicon.png";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -21,6 +22,9 @@ const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 export const metadata: Metadata = {
   title: "DecentCare - AI-Powered Healthcare Marketing",
   description: "AI-enabled Care Journey CRM designed to help healthcare teams streamline patient journeys, appointments, and operational coordination.",
+  icons: {
+    icon: favicon.src,
+  },
   robots: {
     index: isProduction,
     follow: isProduction,

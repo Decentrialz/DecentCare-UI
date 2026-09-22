@@ -65,6 +65,23 @@
   --color-soft-blue: hsl(var(--soft-blue));
 
   --color-destructive-foreground: hsl(210 40% 98%);
+
+  /* ---------------------------------------------------------------
+   * Home page (revamp) palette
+   * --------------------------------------------------------------- */
+  --color-home-ink: hsl(var(--home-ink));
+  --color-home-heading: hsl(var(--home-heading));
+  --color-home-body: hsl(var(--home-body));
+  --color-home-muted: hsl(var(--home-muted));
+  --color-home-eyebrow: hsl(var(--home-eyebrow));
+  --color-home-surface: hsl(var(--home-surface));
+  --color-home-surface-alt: hsl(var(--home-surface-alt));
+  --color-home-card: hsl(0 0% 100%);
+  --color-home-border: hsl(var(--home-border));
+  --color-home-chip: hsl(var(--home-chip));
+  --color-home-danger: hsl(var(--home-danger));
+  --color-home-success: hsl(var(--home-success));
+  --color-home-amber: hsl(var(--home-amber));
 }
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
@@ -198,6 +215,31 @@ All colors MUST be HSL.
     --coral-500: 0 70% 60%;
     
     --hero-gradient: linear-gradient(135deg, #F0F6FF 0%, #FBFCFD 50%, #F5F9FF 100%);
+
+    /* ---------------------------------------------------------------
+     * Home page (revamp) palette — HSL triplets for opacity modifiers
+     * --------------------------------------------------------------- */
+    --home-ink: 200 24% 16%;
+    --home-heading: 205 84% 32%;
+    --home-body: 180 2% 24%;
+    --home-muted: 205 14% 55%;
+    --home-eyebrow: 205 30% 62%;
+    --home-surface: 208 60% 98%;
+    --home-surface-alt: 210 33% 96%;
+    --home-border: 207 38% 92%;
+    --home-chip: 206 50% 97%;
+    --home-danger: 8 72% 57%;
+    --home-success: 173 58% 39%;
+    --home-amber: 35 92% 55%;
+
+    /* Home hero — soft clinical wash used behind the hero photograph */
+    --gradient-home-hero: linear-gradient(135deg, #0D5C94 0%, #12809A 45%, #0D9488 100%);
+
+    /* Home CTA band — deep teal to blue */
+    --gradient-home-cta: linear-gradient(115deg, #0D9488 0%, #0E6E92 55%, #0D5C94 100%);
+
+    /* Home section wash — subtle vertical tint for alternating sections */
+    --gradient-home-section: linear-gradient(180deg, hsl(var(--home-surface)) 0%, #FFFFFF 100%);
     --card-shadow: 0 4px 24px -4px hsl(191 78% 20% / 0.08);
     --card-shadow-hover: 0 8px 32px -4px hsl(191 78% 20% / 0.12);
     
@@ -302,6 +344,25 @@ All colors MUST be HSL.
   
   .hero-gradient {
     background: var(--hero-gradient);
+  }
+
+  .home-hero-gradient {
+    background: var(--gradient-home-hero);
+  }
+
+  .home-cta-gradient {
+    background: var(--gradient-home-cta);
+  }
+
+  .home-section-gradient {
+    background: var(--gradient-home-section);
+  }
+
+  /* Ghosted wordmark sitting behind the home hero photograph */
+  .home-hero-wordmark {
+    color: transparent;
+    -webkit-text-stroke: 1px hsl(0 0% 100% / 0.35);
+    text-shadow: 0 0 60px hsl(0 0% 100% / 0.12);
   }
 
   /* Avoid `bg-gradient-*` prefix — Tailwind v4 may treat it as a theme gradient utility */
