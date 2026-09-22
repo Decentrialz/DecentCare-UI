@@ -22,7 +22,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative isolate overflow-hidden bg-[#edf5fa] pt-24 lg:pt-28">
-      <Image src={heroBackground} alt="" fill priority sizes="100vw" className="absolute inset-0 -z-30 object-cover object-center" />
+      <Image src={heroBackground} alt="Doctor reviewing patient analytics on a tablet." fill priority sizes="100vw" className="absolute inset-0 -z-30 object-cover object-center" />
       <div
         className="absolute inset-0 -z-20"
         style={{
@@ -53,7 +53,7 @@ const HeroSection = () => {
         <div className="pointer-events-none absolute inset-0 z-0 hidden lg:block">
           <div className="relative h-full w-full">
             <div className="absolute left-1/2 top-0 z-5 h-[700px] w-[40%] max-w-[460px] -translate-x-1/2 overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_88%,transparent_100%)]">
-              <Image src={heroMiddle} alt="Doctor using a tablet" priority sizes="40vw" className="h-auto w-full object-contain object-top" />
+              <Image src={heroMiddle} alt="Doctor reviewing patient analytics on a tablet." priority sizes="40vw" className="h-auto w-full object-contain object-top" />
             </div>
 
             <div className="absolute left-[27%] top-[18%] min-[1330px]:left-[29%] min-[1380px]:top-[19%] min-[1440px]:left-[30%] min-[1440px]:top-[19%] z-0 h-[145px] w-[210px] rounded-[23px] bg-white/90 px-5 py-4 shadow-[0_10px_24px_rgba(15,63,160,0.14)] backdrop-blur">
@@ -126,7 +126,7 @@ const HeroSection = () => {
             </div>
 
             <div className="absolute inset-x-1/2 -top-[20px] z-20 h-[550px] w-[132vw] max-w-[520px] -translate-x-1/2 overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_76%,rgba(0,0,0,0.45)_88%,transparent_100%)]">
-              <Image src={heroMiddle} alt="Doctor using a tablet" priority sizes="132vw" className="h-[690px] w-full object-contain object-top" />
+              <Image src={heroMiddle} alt="Doctor reviewing patient analytics on a tablet." priority sizes="132vw" className="h-[690px] w-full object-contain object-top" />
             </div>
 
             <div className="pointer-events-none absolute inset-x-[-32px] bottom-[-68px] z-[25] h-[210px] bg-gradient-to-b from-white/0 via-white/80 to-white blur-[101px]" aria-hidden="true" />
@@ -168,31 +168,31 @@ const HeroSection = () => {
             <div className="mt-6 space-y-4 md:-mt-2 md:grid md:grid-cols-5 md:items-center md:gap-0 md:space-y-0">
               <div className="w-full border-b border-[#dfeaf0] pb-4 md:border-b-0 md:border-r md:px-3 md:pb-0">
                 <div className="flex items-center justify-center text-[#6e3d8f]">
-                  <Image src={luxHospital} alt="LUX Hospitals" className="h-8 w-auto object-contain" />
+                  <Image src={luxHospital} alt="LUX Hospitals logo" className="h-8 w-auto object-contain" />
                 </div>
               </div>
 
               <div className="w-full border-b border-[#dfeaf0] pb-4 md:border-b-0 md:border-r md:px-3 md:pb-0">
                 <div className="flex items-center justify-center text-[#2d4a63]">
-                  <Image src={pranaVaidya} alt="Prana Vaidya" className="h-9 w-auto object-contain" />
+                  <Image src={pranaVaidya} alt="Praana Vaidya logo" className="h-9 w-auto object-contain" />
                 </div>
               </div>
 
               <div className="w-full border-b border-[#dfeaf0] pb-4 md:border-b-0 md:border-r md:px-3 md:pb-0">
                 <div className="flex items-center justify-center text-[#0a7a75]">
-                  <Image src={gutCare} alt="Gut Care" className="h-9 w-auto object-contain" />
+                  <Image src={gutCare} alt="GutCare logo" className="h-9 w-auto object-contain" />
                 </div>
               </div>
 
               <div className="w-full border-b border-[#dfeaf0] pb-4 md:border-b-0 md:border-r md:px-3 md:pb-0">
                 <div className="flex items-center justify-center text-[#0f3d5d]">
-                  <Image src={gowdsHospital} alt="Dr. Gows Dental Hospitals" className="h-9 w-auto object-contain" />
+                  <Image src={gowdsHospital} alt="Dr. Gowds Dental Hospitals logo" className="h-9 w-auto object-contain" />
                 </div>
               </div>
 
               <div className="w-full md:px-3">
                 <div className="flex items-center justify-center text-[#124d7d]">
-                  <Image src={chiragHospital} alt="CHIRAG" className="h-9 w-auto object-contain" />
+                  <Image src={chiragHospital} alt="Chirag Global Hospitals logo" className="h-9 w-auto object-contain" />
                 </div>
               </div>
             </div>
