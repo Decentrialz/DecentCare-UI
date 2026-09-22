@@ -86,7 +86,7 @@ const Navbar = () => {
               <div className="flex items-center">
                 <Image src={headerLogo} alt="DecentCare Logo" width={50} height={33} />
               </div>
-              <span className="text-[10px] font-semibold text-primary whitespace-nowrap">DecentCare</span>
+              {/* <span className="text-[10px] font-semibold text-primary whitespace-nowrap">DecentCare</span> */}
             </Link>
           </div>
 
