@@ -27,7 +27,7 @@ const Footer = () => {
               </div>
              </Link>
             <p className="text-sm text-[#FBFCFD]/60 ">
-             DecentCare is the behavioral intelligence layer for Indian healthcare. We help clinics hospitals, and doctors see every patient, understand who's ready, and act - so they grow smarter.
+             DecentCare is the behavioral intelligence layer for Indian healthcare. We help clinics, hospitals, and doctors see every patient, understand who's ready, and act - so they grow smarter.
             </p>
             {/* Social Links */}
             <div className="flex gap-4 mt-[10%]">
