@@ -6,7 +6,7 @@ const cards = [
   {
     title: "Source attribution",
     description:
-      "Know which channel actually brought each patientGoogle, Meta, referral.",
+      "Know which channel actually brought each patient: Google, Practo,Meta, or referral.",
     icon: Search,
   },
   {
