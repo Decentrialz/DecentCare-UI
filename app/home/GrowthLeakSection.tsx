@@ -173,7 +173,7 @@ const GrowthLeakSection = () => {
               </p>
 
               <p className="mt-3 max-w-sm text-sm leading-relaxed text-home-body">
-                patients never reach the procedure table most before anyone in the hospital notices.
+                patients never reach the procedure table. DecentCare shows you exactly where they go and why.
               </p>
 
               <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-[#e7eff3]">

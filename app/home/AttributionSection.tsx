@@ -6,7 +6,7 @@ const cards = [
   {
     title: "Source attribution",
     description:
-      "Know which channel actually brought each patient — Google, Meta, referral or walk-in.",
+      "Know which channel actually brought each patientGoogle, Meta, referral.",
     icon: Search,
   },
   {
@@ -17,13 +17,13 @@ const cards = [
   },
   {
     title: "Revenue per channel",
-    description: "See what each source earned, in rupees — not cost-per-click.",
+    description: "See what each source earned, in rupees not cost per click.",
     icon: IndianRupee,
   },
   {
     title: "True cost per patient",
     description:
-      "Cost per booked patient — so you know what the the OT and cath lab actually saw.",
+      "Cost per booked patient so you fund what fills the OT and cut what doesn't.",
     icon: Receipt,
   },
 ];

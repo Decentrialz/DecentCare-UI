@@ -6,7 +6,7 @@ const segments = [
   {
     audience: "Individual practitioners",
     description:
-     "Be found, convert more enquiries, and keep patients coming back — without hiring a marketing team.",
+     "Be found, convert more enquiries, and keep patients coming back without hiring a marketing team.",
      icon: User,
   },
   {

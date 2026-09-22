@@ -76,7 +76,7 @@ const JourneySection = () => {
         </ol>
 
         <p className="mt-10 text-center text-sm lg:text-base italic text-home-muted">
-          Same staff. Same ads. No bookings, and no comes back.{" "}
+          Same staff. Same ad. He books, and he comes back.{" "}
           <span className="font-semibold text-home-heading">
             Leads don&apos;t pay bills patients do.
           </span>
