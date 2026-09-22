@@ -118,7 +118,7 @@ const HowWeBuildSection = () => {
             <div className="relative -mt-8">
               <Image
                 src={performance_dashboard}
-                alt="Performance Dashboard"
+                alt="Paid marketing performance dashboard showing search, social media, YouTube campaigns, retargeting, and lead generation metrics"
                 className="w-full h-auto rounded-2xl"
               />
             </div>

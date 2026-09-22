@@ -48,12 +48,12 @@ const WhyTrustUsSection = () => (
           <h3 className="text-center font-semibold text-[#737B8C] mb-8 mt-4">Trusted by Healthcare Leaders</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-items-center">
             {[
-              { name: "LUX HOSPITALS", image: lux },
-              { name: "Praana Vaidya", image: vaidya },
-              { name: "GutCare", image: gutCare },
-              { name: "Dr. Gowda", image: gowda },
-              { name: "Decentraliz", image: decentrializ },
-              { name: "Dr. Chirag", image: chirag },
+              { name: "LUX Hospitals logo", image: lux },
+              { name: "Praana Vaidya logo", image: vaidya },
+              { name: "GutCare logo", image: gutCare },
+              { name: "Dr. Gowds Dental Hospitals logo", image: gowda },
+              { name: "DecenTrialz logo", image: decentrializ },
+              { name: "Chirag Global Hospitals logo", image: chirag },
             ].map((item, i) => (
               <div key={i} className="flex items-center justify-center">
                 <Image
