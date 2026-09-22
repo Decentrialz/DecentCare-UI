@@ -46,7 +46,7 @@ const HeroSection = () => {
             </div>
           </div>
           <div className="self-end lg:pl-[48%] lg:pb-9">
-            <p className="max-w-[360px] text-base font-semibold leading-[1.8] text-[#4b5563]">DecentCare shows what every patient is doing, Knows who's ready to proceed, and helps your team act connecting your hospital records with your front desk and call team, so no patient slips away.</p>
+            <p className="max-w-[360px] text-base font-semibold leading-[1.8] text-[#4b5563]">DecentCare sees what every patient is doing, Knows who's ready to proceed, and helps your team act connecting your hospital records with your front desk and call team, so no patient slips away.</p>
           </div>
         </div>
 
@@ -74,7 +74,7 @@ const HeroSection = () => {
             </div>
             <div className="absolute left-[54%] top-[72%] z-10 flex px-4 py-3 flex-col items-start justify-between rounded-[20px] bg-white/80 px-5 py-4 shadow-[0_10px_24px_rgba(15,63,160,0.1)]">
               <div>
-                <p className="text-xs font-semibold leading-tight text-[#12649c]">Shoe-up Rate</p>
+                <p className="text-xs font-semibold leading-tight text-[#12649c]">Show-up Rate</p>
                 <p className="mt-3 text-3xl font-extrabold leading-none tracking-tight text-[#062742]">36%</p>
               </div>
               <div className="mt-2 flex h-8 w-full items-end justify-between px-3">
@@ -151,7 +151,7 @@ const HeroSection = () => {
               See the Platform
             </button>
           </div>
-          <p className="mt-6 text-[15px] leading-[1.75] text-[#4b5563]">DecentCare shows what every patient is doing, Knows who's ready to proceed, and helps your team act connecting your hospital records with your front desk and call team, so no patient slips away.</p>
+          <p className="mt-6 text-[15px] leading-[1.75] text-[#4b5563]">DecentCare sees what every patient is doing, Knows who's ready to proceed, and helps your team act connecting your hospital records with your front desk and call team, so no patient slips away.</p>
         </div>
 
         <div className="relative z-10 -mx-4 mt-0 block overflow-hidden bg-gradient-to-b from-white from-[0%] via-white via-[62%] to-transparent px-4 pb-32 pt-8 md:-mx-8 md:px-8 md:pb-28 lg:hidden">

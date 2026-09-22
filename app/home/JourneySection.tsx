@@ -37,8 +37,8 @@ const JourneySection = () => {
         <SectionHeading
           eyebrow="With OmniCare"
           title="Same call. Now your telecaller sees everything."
-          className="mx-auto max-w-[460px] [&>p]:hidden md:[&>p]:inline-flex"
-          titleClassName="text-[28px] leading-[1.18] md:text-[32px] lg:text-[36px]"
+          className="mx-auto max-w-[460px] md:max-w-3xl lg:max-w-4xl [&>p]:hidden md:[&>p]:inline-flex"
+          titleClassName="text-[28px] leading-[1.18] md:text-[32px] lg:text-[36px] md:whitespace-nowrap"
         />
 
         <ol className="relative mx-auto mt-12 max-w-4xl space-y-6 md:mt-14 md:space-y-4">
