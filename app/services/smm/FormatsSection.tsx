@@ -63,7 +63,7 @@ const FormatsSection = () => {
             <div className="lg:hidden flex justify-center mb-10">
               <Image
                 src={smmSocialIcons}
-                alt="Social media platforms"
+                alt="Healthcare social media content formats across multiple platforms including videos, posts, and awareness campaigns "
                 className="rounded-2xl object-cover"
                 style={{ maxHeight: 300 }}
                 priority
@@ -146,7 +146,7 @@ const FormatsSection = () => {
           <div className="hidden lg:flex justify-center">
             <Image
               src={smmSocialIcons}
-              alt="Social media platforms"
+              alt="Healthcare social media content formats across multiple platforms including videos, posts, and awareness campaigns "
               className="rounded-2xl object-cover"
               style={{ maxHeight: 350 }}
               priority

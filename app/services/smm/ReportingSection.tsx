@@ -48,7 +48,7 @@ const ReportingSection = () => (
         <div className="flex justify-center">
           <Image
             src={PerfOvw}
-            alt="Performance Overview"
+            alt="Social media performance dashboard showing reach, followers, engagement, leads, and patient acquisition cost"
             className="rounded-2xl w-full"
             style={{ maxWidth: "100%", height: "auto" }}
             priority

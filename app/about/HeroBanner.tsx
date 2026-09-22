@@ -4,6 +4,7 @@ import HeroTest from "@/app/assets/Hero.svg";
 
 interface HeroBannerProps {
   heroImage: any;
+  heroImageAltText?: string;
   breadcrumbItems: { label: string; href?: string }[];
   title: string;
   description: string;
@@ -13,7 +14,8 @@ interface HeroBannerProps {
 }
 
 const HeroBanner = ({ 
-  heroImage, 
+  heroImage,
+  heroImageAltText =  "DecentCare hero image",
   breadcrumbItems, 
   title, 
   description, 
@@ -40,7 +42,7 @@ const HeroBanner = ({
       <div className="relative min-h-[600px] md:min-h-[650px] overflow-hidden">
         <Image 
           src={imageToUse} 
-          alt="DecentCare" 
+          alt={heroImageAltText} 
           fill
           className="object-cover object-center"
           priority

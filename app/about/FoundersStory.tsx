@@ -34,7 +34,7 @@ const FoundersStory = () => {
             <div className="-mx-4 md:mx-0">
               <Image
                 src={swaroop}
-                alt="Swaroop ESD"
+                alt="Swaroop ESD, Founder and CEO of DecentCare"
                 className="w-full h-72 object-cover object-top rounded-2xl shadow-md"
               />
             </div>
@@ -56,7 +56,7 @@ const FoundersStory = () => {
             <div className="order-1 lg:order-2 -mx-4 md:mx-0">
               <Image
                 src={karthik}
-                alt="Karthik Reddy K"
+                alt="Karthik Reddy K, Founder and COO of DecentCare"
                 className="w-full h-72 object-cover object-top rounded-2xl shadow-md"
               />
             </div>

@@ -44,6 +44,7 @@ const Services = () => {
         <h1 className="sr-only">One stack. See, understand, act.</h1>
         <HeroBanner 
         heroImage={HeroServices}
+        heroImageAltText="Bright modern healthcare office reception with a professional walking past a desk."
         breadcrumbItems={[
           { label: "Home", href: "/" },
           { label: "Services" }

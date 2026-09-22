@@ -8,7 +8,7 @@ const OurStory = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
           {/* Our Story Image */}
           <div className="flex justify-center">
-            <Image src={ourSrtory} alt="Our Story" className="w-70 h-70 md:w-124 md:h-124 object-contain" />
+            <Image src={ourSrtory} alt="Decentcare logo" className="w-70 h-70 md:w-124 md:h-124 object-contain" />
           </div>
 
           {/* Story text */}
