@@ -6,7 +6,7 @@ export default function PatientOverviewCard() {
     <div className="w-full flex justify-center lg:justify-end">
       <Image
         src={patientOverviewWhole}
-        alt="Patient overview dashboard"
+        alt="Care Journey CRM patient dashboard showing active patients, visits, treatment status, and healthcare workflow management"
         className="w-full h-auto"
         sizes="(max-width: 1024px) 100vw, 680px"
         priority

@@ -49,6 +49,7 @@ const About = () => {
       <Navbar />
       <HeroBanner 
         heroImage={Hero}
+        heroImageAltText="Modern workspace representing DecentCare's AI-powered healthcare technology platform"
         breadcrumbItems={[
           { label: "Home", href: "/" },
           { label: "About" }
