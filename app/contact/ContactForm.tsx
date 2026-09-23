@@ -106,7 +106,7 @@ const ContactForm = () => (
         </div>
         {/* Contact Info */}
         <div className="space-y-6">
-          <h3 className="text-base font-bold text-[#0F172B]">Reach us Directly</h3>
+          <h2 className="text-base font-bold text-[#0F172B]">Reach us Directly</h2>
           <div className="bg-card rounded-xl p-5 card-elevated flex items-start gap-4" style={{
                 border: '1px solid #EEF1F1',
                 boxShadow: '0 4px 20px 0 rgba(13,92,148,0.1)'
@@ -117,7 +117,7 @@ const ContactForm = () => (
               <Mail className="w-6 h-6 text-[#0D5C94]" />
             </div>
             <div>
-              <p className="font-bold text-[#0F172B] text-sm">Email</p>
+              <h3 className="font-bold text-[#0F172B] text-sm">Email</h3>
               <p className="text-sm text-[#818584]">contact@decentcare.com</p>
             </div>
           </div>
@@ -129,7 +129,7 @@ const ContactForm = () => (
               <Phone className="w-6 h-6 text-[#0D5C94]" />
             </div>
             <div>
-              <p className="font-bold text-[#0F172B] text-sm">Phone</p>
+              <h3 className="font-bold text-[#0F172B] text-sm">Phone</h3>
               <p className="text-sm text-[#818584]">+91 XXXXX XXXXX</p>
               <p className="text-xs text-[#818584] flex items-center gap-1 mt-1">
                 <Clock className="w-3 h-3" /> Monday to Friday, 9:00 AM – 6:00 PM IST
