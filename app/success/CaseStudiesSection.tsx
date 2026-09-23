@@ -79,7 +79,7 @@ const CaseStudiesSection = ({ caseStudies }: Props) => (
                     <p className="text-xs text-[#737B8C]">{cs.challenge}</p>
                   </div>
                   <div>
-                    <div className="flex items-center gap-2 mb-3">
+                   <div className="flex items-center gap-2 mb-3">
                       <Lightbulb className="w-4 h-4 text-[#1F938A]" />
                       <h4 className="font-semibold text-[#1F938A] text-sm">Solution</h4>
                     </div>

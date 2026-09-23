@@ -52,7 +52,7 @@ const HeroSection = () => {
               <div className="lg:hidden flex justify-center items-start w-full max-w-full">
                 <Image
                   src={seoHeroImage}
-                  alt="SEO Performance Overview"
+                  alt="SEO performance dashboard showing organic impressions, patient-intent sessions, appointment actions, and optimized pages"
                   className="rounded-2xl w-full h-auto max-w-full"
                   priority
                 />
@@ -92,7 +92,7 @@ const HeroSection = () => {
             <div className="hidden lg:flex justify-center items-start lg:-mt-12 w-full max-w-full">
               <Image
                 src={seoHeroImage}
-                alt="SEO Performance Overview"
+                alt="SEO performance dashboard showing organic impressions, patient-intent sessions, appointment actions, and optimized pages"
                 className="rounded-2xl w-full h-auto max-w-full"
                 priority
               />

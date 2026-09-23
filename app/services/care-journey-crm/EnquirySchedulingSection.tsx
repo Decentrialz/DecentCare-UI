@@ -66,7 +66,7 @@ export default function EnquirySchedulingSection() {
           <div className="w-full flex justify-center">
             <Image
               src={crmFirstContact}
-              alt="Enquiry and scheduling UI"
+              alt="Appointment status dashboard showing scheduled, confirmed, checked-in, rescheduled, and no-show patient appointments"
               className="w-full max-w-[760px] h-auto"
               sizes="(max-width: 1024px) 100vw, 760px"
             />
