@@ -10,7 +10,7 @@ const whatYouGet = [
 const WhatYouGetSection = () => (
   <section className="py-14 lg:py-28 bg-[#FFFFFF]">
     <div className="container mx-auto px-4 lg:px-8">
-      <h2 className="text-2xl font-bold text-primary text-center mb-14" style={{
+      <h4 className="text-2xl font-bold text-primary text-center mb-14" style={{
                 background: "linear-gradient(135deg, #0D9488, #0D5C94)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -19,7 +19,7 @@ const WhatYouGetSection = () => (
                 lineHeight: 1.15,
               }}>
         What You Get
-      </h2>
+      </h4>
       <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
         {whatYouGet.map((item, i) => (
           <div key={i} className="bg-[#FFFFFF] rounded-2xl p-8 card-elevated space-y-4" style={{border:'1px solid', borderColor:"#F1F5F9"}}>

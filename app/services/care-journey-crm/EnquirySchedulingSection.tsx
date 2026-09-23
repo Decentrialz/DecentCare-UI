@@ -50,9 +50,9 @@ export default function EnquirySchedulingSection() {
                       <Icon className="w-5 h-5 text-primary-blue" />
                     </div>
                     <div>
-                      <p className="text-sm sm:text-base font-semibold text-foreground">
+                      <h3 className="text-sm sm:text-base font-semibold text-foreground">
                         {f.title}
-                      </p>
+                      </h3>
                       <p className="mt-1 text-xs sm:text-sm text-gray-icon leading-relaxed">
                         {f.description}
                       </p>
