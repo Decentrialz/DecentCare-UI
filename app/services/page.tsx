@@ -48,7 +48,7 @@ const Services = () => {
           { label: "Home", href: "/" },
           { label: "Services" }
         ]}
-        title="One Services"
+        title="Our Services"
         description="Integrated Services for Smarter Healthcare Growth."
         subtitle="Strategic capabilities designed for modern healthcare organizations."
         variant="centered"
