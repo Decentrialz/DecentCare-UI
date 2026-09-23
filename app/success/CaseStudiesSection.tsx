@@ -55,7 +55,7 @@ const CaseStudiesSection = ({ caseStudies }: Props) => (
                     className="w-12 h-12 rounded-full object-cover"
                   /> */}
                   <div>
-                    <h4 className="font-semibold">{cs.name}</h4>
+                    <h3 className="font-semibold">{cs.name}</h3>
                     <p className="text-xs text-[#FFFFFF]/80">{cs.role}</p>
                   </div>
                 </div>
@@ -74,21 +74,21 @@ const CaseStudiesSection = ({ caseStudies }: Props) => (
                   <div>
                     <div className="flex items-center gap-2 mb-3">
                       <Target className="w-4 h-4 text-[#EF4444]" />
-                      <h5 className="font-semibold text-[#EF4444] text-sm">Challenge</h5>
+                      <h4 className="font-semibold text-[#EF4444] text-sm">Challenge</h4>
                     </div>
                     <p className="text-xs text-[#737B8C]">{cs.challenge}</p>
                   </div>
                   <div>
                    <div className="flex items-center gap-2 mb-3">
                       <Lightbulb className="w-4 h-4 text-[#1F938A]" />
-                      <h5 className="font-semibold text-[#1F938A] text-sm">Solution</h5>
+                      <h4 className="font-semibold text-[#1F938A] text-sm">Solution</h4>
                     </div>
                     <p className="text-xs text-[#737B8C]">{cs.solution}</p>
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-3">
                       <TrendingUp className="w-4 h-4 text-[#2EB873]" />
-                      <h5 className="font-semibold text-[#2EB873] text-sm">Outcome</h5>
+                      <h4 className="font-semibold text-[#2EB873] text-sm">Outcome</h4>
                     </div>
                     <p className="text-xs text-[#737B8C]">{cs.outcome}</p>
                   </div>

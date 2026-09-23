@@ -9,7 +9,7 @@ const MobileStickyButtons = () => {
         {/* Let's Connect Button */}
         <Button className="h-[48px] rounded-[40px] bg-[#0D5C94] text-white flex items-center justify-center gap-2 shadow-[0_4px_20px_-2px_rgba(13,92,148,0.08)] hover:bg-[#0B4F7F] transition-colors">
           <Send className="w-5 h-5" />
-          <span className="font-medium">Let's Connect</span>
+          <h2 className="font-medium">Let's Connect</h2>
         </Button>
 
         {/* Call Now Button */}

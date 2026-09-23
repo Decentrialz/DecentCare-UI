@@ -41,7 +41,6 @@ const Services = () => {
       />
       <div className="min-h-screen bg-background">
         <Navbar />
-        <h1 className="sr-only">One stack. See, understand, act.</h1>
         <HeroBanner 
         heroImage={HeroServices}
         heroImageAltText="Bright modern healthcare office reception with a professional walking past a desk."
@@ -49,7 +48,7 @@ const Services = () => {
           { label: "Home", href: "/" },
           { label: "Services" }
         ]}
-        title="One Services"
+        title="Our Services"
         description="Integrated Services for Smarter Healthcare Growth."
         subtitle="Strategic capabilities designed for modern healthcare organizations."
         variant="centered"
