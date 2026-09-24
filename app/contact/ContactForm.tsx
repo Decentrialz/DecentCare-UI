@@ -130,7 +130,7 @@ const ContactForm = () => (
             </div>
             <div>
               <h3 className="font-bold text-[#0F172B] text-sm">Phone</h3>
-              <p className="text-sm text-[#818584]">+91 XXXXX XXXXX</p>
+              <p className="text-sm text-[#818584]">+91 08065916085</p>
               <p className="text-xs text-[#818584] flex items-center gap-1 mt-1">
                 <Clock className="w-3 h-3" /> Monday to Friday, 9:00 AM – 6:00 PM IST
               </p>
