@@ -28,7 +28,7 @@ const HowWeWorkSection = () => (
               <div className="absolute -top-4 left-[-16] md:left-[-20] w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold text-white" style={{ background: "linear-gradient(135deg, #0D9488, #0D5C94)" }}>
                 {step.step}
               </div>
-              <h4 className="font-bold text-[#0D5C94] text-base mb-3">{step.title}</h4>
+              <h3 className="font-bold text-[#0D5C94] text-base mb-3">{step.title}</h3>
               <ul className="space-y-0 text-sm text-[#1F2020]">
                 {step.items.map((item, j) => (
                   <li key={j}>{item}</li>
