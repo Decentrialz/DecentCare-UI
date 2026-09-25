@@ -158,9 +158,9 @@ const TermsContent = () => {
                 </p>
 
                 <div className="rounded-2xl border border-[#CFE1F1] bg-[#EAF4FF] p-6">
-                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-blue">
+                  <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-blue">
                     Data We Collect
-                  </p>
+                  </h3>
                   <p className="m-0 text-sm text-primary-blue">
                     We collect only limited personal data when you choose to submit it (for example your name,
                     email, clinic name, and message in a contact request form). We use this information solely
@@ -228,9 +228,9 @@ const TermsContent = () => {
                   and other intellectual property laws.
                 </p>
                 <div className="rounded-2xl border border-[#B6E5E0] bg-[#EAFBF9] p-5">
-                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-secondary-green">
+                  <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-secondary-green">
                     Limited License
-                  </p>
+                  </h3>
                   <p className="m-0 text-sm text-primary-blue">
                     You are granted a limited license to view and use this content for your personal or
                     professional information only.
@@ -282,9 +282,9 @@ const TermsContent = () => {
                   punitive damages.
                 </p>
                 <div className="rounded-2xl border border-[#F4C7CC] bg-[#FFF5F6] p-5">
-                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#C84A57]">
+                  <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#C84A57]">
                     Important Notice
-                  </p>
+                  </h3>
                   <p className="m-0 text-sm text-[#A83B47]">You use this website and rely on its content at your own risk.</p>
                 </div>
               </div>
@@ -324,9 +324,9 @@ const TermsContent = () => {
                   example, changes may be made to reflect updates in our services or legal requirements.
                 </p>
                 <div className="rounded-2xl border border-[#CFE1F1] bg-[#EAF4FF] p-5">
-                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-blue">
+                  <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-blue">
                     Your Responsibility
-                  </p>
+                  </h3>
                   <p className="m-0 text-sm text-primary-blue">
                     It is your responsibility to review these terms periodically. Continued use of this site
                     after any update is treated as acceptance of the revised terms.

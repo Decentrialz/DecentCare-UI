@@ -19,7 +19,6 @@ const ContactPage = () => {
       />
       <div className="min-h-screen bg-background">
       <Navbar />
-      <h1 className="sr-only">Book a demo</h1>
        <HeroBanner 
         heroImage={HeroContact}
         heroImageAltText="Modern healthcare workspace with communication setup representing DecentCare contact services"
