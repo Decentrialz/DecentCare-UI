@@ -34,7 +34,7 @@ const AttributionSection = () => {
       <Container>
         <SectionHeading
           eyebrow="Attribution Intelligence"
-          title="Every rupee traced to a real patient not a click."
+          title="Every rupee traced to a real patient, not a click."
           description="DecentCare ties every patient to the exact channel that brought them, and closes the loop from the first ad click to the procedure billed."
         />
 

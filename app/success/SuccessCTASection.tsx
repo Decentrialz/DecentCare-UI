@@ -24,9 +24,9 @@ const SuccessCTASection = () => {
           <div className="grid md:grid-cols-2 gap-0">
             {/* Left Card - Ready to Transform */}
             <div className="bg-white p-10">
-              <h2 className="text-2xl md:text-4xl font-bold text-[#0D5C94] mb-6 text-center md:text-left">
+              <h3 className="text-2xl md:text-4xl font-bold text-[#0D5C94] mb-6 text-center md:text-left">
                 Ready to Transform Your Patient Care Journey?
-              </h2>
+              </h3>
               <p className="text-[#737B8C] text-base leading-relaxed">
                 Join 50+ healthcare providers who have revolutionized their operations with DecentCare. See how we can help your clinic or hospital achieve similar results.
               </p>
@@ -39,7 +39,7 @@ const SuccessCTASection = () => {
             >
               <div className="w-full max-w-md flex flex-col items-center">
                 <div className="flex items-start justify-between mb-4 mt-10 w-full">
-                  <h2 className="font-semibold text-[#1B2232] text-lg">Have Questions?</h2>
+                  <h4 className="font-semibold text-[#1B2232] text-lg">Have Questions?</h4>
                 </div>
                 <p className="text-sm text-[#737B8C] w-full">
                   Our team is ready to show you how DecentCare can work for your specific needs.
