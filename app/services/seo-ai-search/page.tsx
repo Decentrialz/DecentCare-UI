@@ -82,7 +82,6 @@ const SEOAISearchPage = () => {
       />
       <div className="min-h-screen bg-background">
       <Navbar />
-      <h1 className="sr-only">Healthcare SEO for Google and AI search</h1>
       <HeroSection />
       <ProvenResultsSection />
       <OurClientsSection />

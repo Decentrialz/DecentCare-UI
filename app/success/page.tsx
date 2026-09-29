@@ -135,7 +135,6 @@ const SuccessStories = () => {
       />
       <div className="min-h-screen bg-background">
       <Navbar />
-      <h1 className="sr-only">Real hospitals. Real growth.</h1>
       <HeroSuccessSection />
       {/* <VideoTestimonialsSection videoTestimonials={videoTestimonials} /> */}
       <CaseStudiesSection caseStudies={caseStudies} />

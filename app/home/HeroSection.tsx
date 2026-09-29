@@ -138,10 +138,10 @@ const HeroSection = () => {
           <p className="relative flex w-full max-w-[360px] items-center justify-center rounded-full bg-home-success/10 px-4 py-2 text-left md:text-center text-xs font-bold tracking-[0.18em] text-home-success uppercase">
             Behavioral intelligence<br className="hidden md:block" />for Indian healthcare
           </p>
-          <h1 className="mt-5 text-[34px] md:text-[42px] font-extrabold leading-[1.1] tracking-[-0.03em] text-home-heading">
+          <p className="mt-5 text-[34px] md:text-[42px] font-extrabold leading-[1.1] tracking-[-0.03em] text-home-heading">
             Understand your<br />patients.<br />
             <span className="block text-home-success">Grow your revenue.</span>
-          </h1>
+          </p>
           <div className="mt-6 grid grid-cols-2 gap-3">
             <button type="button" onClick={() => setShowModal(true)} className="inline-flex h-[52px] items-center justify-center gap-2 rounded-[12px] bg-[#12649c] px-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f568a]">
               <span>Request a demo</span>
