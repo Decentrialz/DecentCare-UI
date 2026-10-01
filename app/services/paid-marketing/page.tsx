@@ -74,7 +74,6 @@ const PaidMarketingPage = () => {
       />
       <div className="min-h-screen bg-background">
       <Navbar />
-      <h1 className="sr-only">Paid ads optimised on booked patients</h1>
       <HeroSection />
       <DecentCareWaySection />
       <WhoThisServiceIsForSection />
