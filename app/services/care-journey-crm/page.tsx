@@ -53,7 +53,6 @@ export default function CareJourneyCRMPage() {
       />
       <div className="min-h-screen bg-background">
       <Navbar />
-      <h1 className="sr-only">OmniCare - the patient journey CRM</h1>
 
       <section
         className={`${SECTION_PADDING} mt-16 sm:mt-18 pt-10 pb-[60px] md:pb-[120px]`}
