@@ -20,6 +20,8 @@ interface TocItem extends SharedTocItem {
 interface BlogBodyWithTocProps {
   body: PortableTextBlock[];
   imageUrl: string;
+  imageAlt?: string;
+  imageCaption?: string;
   title: string;
 }
 
@@ -156,7 +158,7 @@ function MobileTableOfContents({ items }: { items: SharedTocItem[] }) {
   );
 }
 
-export default function BlogBodyWithToc({ body, imageUrl, title }: BlogBodyWithTocProps) {
+export default function BlogBodyWithToc({ body, imageUrl, imageAlt, imageCaption, title }: BlogBodyWithTocProps) {
   // Extract headings for TOC
   const toc = useMemo(() => extractHeadings(body), [body]);
   const tocItems = toc.map(({ id, label }) => ({ id, label }));
@@ -167,11 +169,16 @@ export default function BlogBodyWithToc({ body, imageUrl, title }: BlogBodyWithT
       <div className="relative aspect-[2/1] sm:aspect-[16/9] rounded-xl overflow-hidden bg-muted mb-18">
         <img
           src={imageUrl}
-          alt={title}
+          alt={imageAlt || title}
           className="w-full h-full object-cover"
         />
       </div>
 
+      {imageCaption && (
+        <p className="text-sm text-gray-icon -mt-14 mb-14 text-center italic">
+          {imageCaption}
+        </p>
+      )}
       <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 lg:gap-12">
         {/* Left Sidebar - TOC and Share */}
         <aside className="hidden lg:block space-y-10 lg:sticky lg:top-24 lg:self-start h-fit">

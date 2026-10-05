@@ -19,6 +19,8 @@ export interface SanityAuthor {
     }
   }
   bio?: PortableTextBlock[]
+  experiance?: string
+  designation?: string
 }
 
 /**
@@ -45,6 +47,25 @@ export interface SanityTag {
 }
 
 /**
+ * Table Row Type (from @sanity/table plugin)
+ */
+export interface SanityTableRow {
+  _key?: string
+  _type?: 'row'
+  cells?: string[]
+}
+
+/**
+ * Table Type (from @sanity/table plugin)
+ * Used as a block type within `body` (Portable Text)
+ */
+export interface SanityTable {
+  _key?: string
+  _type: 'table'
+  rows?: SanityTableRow[]
+}
+
+/**
  * Post Type (Full)
  */
 export interface SanityPost {
@@ -61,6 +82,9 @@ export interface SanityPost {
       _type: 'reference'
     }
     alt?: string
+    caption?: string
+    width?: number
+    height?: number
   }
   body?: PortableTextBlock[]
   author?: SanityAuthor
@@ -89,9 +113,14 @@ export interface SanityPostPreview {
       _type: 'reference'
     }
     alt?: string
+    caption?: string
+    width?: number
+    height?: number
   }
   author?: {
     name: string
+    experiance?: string
+    designation?: string
   }
   categories?: Array<{
     name: string
@@ -118,6 +147,10 @@ export interface BlogArticle {
   id: string // Sanity _id
   slug: string // slug.current
   imageUrl: string // Transformed from mainImage
+  imageAlt?: string // mainImage.alt
+  imageCaption?: string // mainImage.caption
+  imageWidth?: number // mainImage.width
+  imageHeight?: number // mainImage.height
   category: string // First category name or "Uncategorized"
   date: string // Formatted publishedAt
   readTime: string // e.g., "7 min read"
@@ -126,6 +159,8 @@ export interface BlogArticle {
   author: string // author.name
   authorImage?: string // author image URL or null
   authorBio?: PortableTextBlock[] // author bio content
+  authorExperiance?: string // author.experiance
+  authorDesignation?: string // author.designation
   href: string // /blog/[slug]
 }
 

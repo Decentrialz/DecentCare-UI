@@ -85,6 +85,8 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
               <BlogBodyWithToc 
                 body={article.body}
                 imageUrl={article.imageUrl}
+                imageAlt={article.imageAlt}
+                imageCaption={article.imageCaption}
                 title={article.title}
               />
             </div>
@@ -94,6 +96,8 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                 authorName={article.author}
                 authorImage={article.authorImage}
                 authorBio={article.authorBio}
+                authorExperiance={article.authorExperiance}
+                authorDesignation={article.authorDesignation}
               />
             </div>
             

@@ -44,11 +44,16 @@ export function formatReadTime(readTime?: string | null, bodyLength?: number): s
 /**
  * Get image URL from Sanity image asset
  */
-export function getImageUrl(image?: { asset?: { _ref?: string; url?: string } } | null): string {
+export function getImageUrl(
+  image?: { asset?: { _ref?: string; url?: string }; width?: number; height?: number } | null
+): string {
   if (!image?.asset) {
     // Return placeholder image
     return '/placeholder-blog.jpg'
   }
+
+  const width = image.width || 1200
+  const height = image.height || 630
 
   // If URL is already available
   if ('url' in image.asset && image.asset.url) {
@@ -57,7 +62,7 @@ export function getImageUrl(image?: { asset?: { _ref?: string; url?: string } } 
 
   // Build URL using image builder
   try {
-    return urlFor(image).width(1200).height(630).url()
+    return urlFor(image).width(width).height(height).url()
   } catch (error) {
     console.error('Error building image URL:', error)
     return '/placeholder-blog.jpg'
@@ -98,6 +103,10 @@ export function transformPostToBlogArticle(post: SanityPostPreview): BlogArticle
     id: post._id,
     slug,
     imageUrl: getImageUrl(post.mainImage),
+    imageAlt: post.mainImage?.alt,
+    imageCaption: (post.mainImage as { caption?: string } | undefined)?.caption,
+    imageWidth: (post.mainImage as { width?: number } | undefined)?.width,
+    imageHeight: (post.mainImage as { height?: number } | undefined)?.height,
     category,
     date: formatDate(post.publishedAt),
     readTime: formatReadTime(post.readTime),
@@ -106,6 +115,8 @@ export function transformPostToBlogArticle(post: SanityPostPreview): BlogArticle
     author: post.author?.name || 'Unknown Author',
     authorImage: getAuthorImageUrl((post.author as any)?.image),
     authorBio: (post.author as any)?.bio || [],
+    authorExperiance: post.author?.experiance,
+    authorDesignation: post.author?.designation,
     href: `/blog/${slug}`,
   }
 }
