@@ -33,6 +33,7 @@ export default function robots(): MetadataRoute.Robots {
           '/api/link-patient',
           '/api/tokens',
           '/api/virtual-numbers/',
+          '/api/zapier'
         ],
       },
       // Googlebot - Allow public content, block sensitive endpoints
