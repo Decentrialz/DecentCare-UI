@@ -19,11 +19,16 @@ export const ALL_POSTS_QUERY = `
         _id,
         url
       },
-      alt
+      alt,
+      caption,
+      width,
+      height
     },
     author->{
       name,
       slug,
+      experiance,
+      designation,
       image {
         asset->{
           _id,
@@ -62,11 +67,16 @@ export const FEATURED_POSTS_QUERY = `
         _id,
         url
       },
-      alt
+      alt,
+      caption,
+      width,
+      height
     },
     author->{
       name,
       slug,
+      experiance,
+      designation,
       image {
         asset->{
           _id,
@@ -100,13 +110,18 @@ export const POST_BY_SLUG_QUERY = `
         _id,
         url
       },
-      alt
+      alt,
+      caption,
+      width,
+      height
     },
     body,
     author->{
       _id,
       name,
       slug,
+      experiance,
+      designation,
       image {
         asset->{
           _id,
@@ -155,11 +170,16 @@ export const RECOMMENDED_POSTS_QUERY = `
         _id,
         url
       },
-      alt
+      alt,
+      caption,
+      width,
+      height
     },
     author->{
       name,
-      slug
+      slug,
+      experiance,
+      designation
     },
     categories[]->{
       name,
@@ -188,11 +208,16 @@ export const SEARCH_POSTS_QUERY = `
         _id,
         url
       },
-      alt
+      alt,
+      caption,
+      width,
+      height
     },
     author->{
       name,
-      slug
+      slug,
+      experiance,
+      designation
     },
     categories[]->{
       name,
@@ -217,11 +242,16 @@ export const POSTS_BY_CATEGORY_QUERY = `
         _id,
         url
       },
-      alt
+      alt,
+      caption,
+      width,
+      height
     },
     author->{
       name,
-      slug
+      slug,
+      experiance,
+      designation
     },
     categories[]->{
       name,

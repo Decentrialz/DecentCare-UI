@@ -5,18 +5,27 @@ import type { PortableTextBlock } from "@portabletext/react";
 interface AuthorReviewCardProps {
   authorName: string;
   authorImage?: string;
-  authorBio?: PortableTextBlock[];
+  authorBio?: PortableTextBlock[] | string;
+  authorExperiance?: string;
+  authorDesignation?: string;
 }
 
 const DEFAULT_BIO =
   "Creates reader-focused content that simplifies complex topics and delivers valuable insights across healthcare, publishing, and content development.";
 
-function getPlainBio(authorBio?: PortableTextBlock[]): string {
-  if (!authorBio?.length) return DEFAULT_BIO;
+function getPlainBio(authorBio?: PortableTextBlock[] | string): string {
+  if (!authorBio) return DEFAULT_BIO;
+
+  if (typeof authorBio === "string") {
+    const trimmed = authorBio.replace(/\s+/g, " ").trim();
+    return trimmed || DEFAULT_BIO;
+  }
+
+  if (!Array.isArray(authorBio) || authorBio.length === 0) return DEFAULT_BIO;
 
   const firstText = authorBio
-    .filter((block): block is PortableTextBlock & { _type: "block"; children?: Array<{ text?: string }> } => block._type === "block")
-    .flatMap((block) => block.children || [])
+    .filter((block) => block?._type === "block")
+    .flatMap((block) => (block as { children?: Array<{ text?: string }> }).children || [])
     .map((child) => child.text || "")
     .join(" ")
     .replace(/\s+/g, " ")
@@ -25,7 +34,7 @@ function getPlainBio(authorBio?: PortableTextBlock[]): string {
   return firstText || DEFAULT_BIO;
 }
 
-export default function AuthorReviewCard({ authorName, authorImage, authorBio }: AuthorReviewCardProps) {
+export default function AuthorReviewCard({ authorName, authorImage, authorBio, authorExperiance, authorDesignation }: AuthorReviewCardProps) {
   const bio = getPlainBio(authorBio);
 
   return (
@@ -59,15 +68,19 @@ export default function AuthorReviewCard({ authorName, authorImage, authorBio }:
 
           <div className="flex flex-wrap items-center gap-2.5 mb-1.5">
             <h3 className="text-xl sm:text-2xl leading-tight font-bold text-gray-900">{authorName || "Editorial Team"}</h3>
-            <span className="rounded-lg bg-[#EDF5FF] px-3 py-1.5 text-base sm:text-lg leading-none font-semibold text-[#2E79BF]">Exp: 04 Yrs</span>
+            {authorExperiance && (
+              <span className="rounded-lg bg-[#EDF5FF] px-3 py-1.5 text-base sm:text-lg leading-none font-semibold text-[#2E79BF]">Exp: {authorExperiance}</span>
+            )}
           </div>
 
-          <div className="inline-flex items-center gap-2 text-base sm:text-lg leading-none font-semibold text-[#0D9488] mb-1.5">
-            <BriefcaseBusiness className="w-4 h-4 sm:w-5 sm:h-5" />
-            Editorial Contributor
-          </div>
+          {authorDesignation && (
+            <div className="inline-flex items-center gap-2 text-base sm:text-lg leading-none font-semibold text-[#0D9488] mb-1.5">
+              <BriefcaseBusiness className="w-4 h-4 sm:w-5 sm:h-5" />
+              {authorDesignation}
+            </div>
+          )}
 
-          <p className="text-sm leading-relaxed text-gray-600 max-w-[92ch]">{bio}</p>
+          {bio && <p className="text-sm leading-relaxed text-gray-600 max-w-[92ch]">{bio}</p>}
         </div>
       </div>
     </section>

@@ -4,7 +4,7 @@
 "use client";
 
 import { PortableText, PortableTextComponents } from '@portabletext/react'
-import type { PortableTextBlock } from '@portabletext/react'
+import type { PortableTextBlock, PortableTextBlockComponent } from '@portabletext/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/sanity/lib/image'
@@ -29,10 +29,14 @@ function createHeadingComponent(
   tag: 'h1' | 'h2' | 'h3' | 'h4',
   className: string,
   headings?: TocItem[]
-) {
-  return ({ children, value }: any) => {
+): PortableTextBlockComponent {
+  const HeadingComponent: PortableTextBlockComponent = ({ children, value }) => {
     const text = (value?.children || [])
-      .map((child: any) => child?.text || "")
+      .map((child) =>
+        typeof (child as { text?: unknown })?.text === 'string'
+          ? (child as { text: string }).text
+          : ""
+      )
       .join("")
       .trim();
 
@@ -49,6 +53,10 @@ function createHeadingComponent(
       </Component>
     );
   };
+
+  HeadingComponent.displayName = `HeadingComponent(${tag})`;
+
+  return HeadingComponent;
 }
 
 /**
@@ -175,28 +183,95 @@ export default function PortableTextRenderer({
       image: ({ value }) => {
         if (!value?.asset) return null
 
+        // Dimensions set in Studio represent the intended DISPLAY size
+        // (logical CSS pixels), not the pixel density to fetch.
+        // Requesting the image at that exact size and then stretching it
+        // via CSS (w-full) causes blur/pixelation on larger screens and
+        // retina displays. So we fetch at a higher resolution (capped)
+        // while keeping the display size/aspect ratio as configured.
+        const displayWidth = value.width || 1200
+        const displayHeight = value.height || 675
+        const aspectRatio = displayHeight / displayWidth
+
+        const MIN_FETCH_WIDTH = 800
+        const MAX_FETCH_WIDTH = 2000
+        const RETINA_MULTIPLIER = 2
+
+        const fetchWidth = Math.min(
+          Math.max(displayWidth * RETINA_MULTIPLIER, MIN_FETCH_WIDTH),
+          MAX_FETCH_WIDTH
+        )
+        const fetchHeight = Math.round(fetchWidth * aspectRatio)
+
         const imageUrl = urlFor(value)
-          .width(1200)
-          .height(630)
-          .fit('max')
+          .width(fetchWidth)
+          .height(fetchHeight)
+          .fit('crop')
+          .crop('focalpoint')
           .auto('format')
           .url()
 
         return (
-          <div className="my-8 rounded-lg overflow-hidden">
+          <div
+            className="my-8 rounded-lg overflow-hidden mx-auto"
+            style={{ maxWidth: `${displayWidth}px` }}
+          >
             <Image
               src={imageUrl}
               alt={value.alt || 'Blog image'}
-              width={1200}
-              height={630}
+              width={displayWidth}
+              height={displayHeight}
               className="w-full h-auto"
-              sizes="(max-width: 1024px) 100vw, 800px"
+              sizes={`(max-width: 1024px) 100vw, ${displayWidth}px`}
             />
             {value.caption && (
               <p className="text-sm text-gray-icon mt-2 text-center italic">
                 {value.caption}
               </p>
             )}
+          </div>
+        )
+      },
+
+      // Table blocks (from @sanity/table plugin)
+      table: ({ value }) => {
+        const rows = value?.rows || []
+        if (!rows.length) return null
+
+        const [headerRow, ...bodyRows] = rows
+
+        return (
+          <div className="my-8 overflow-x-auto">
+            <table className="w-full border-collapse text-sm md:text-base">
+              {headerRow && (
+                <thead>
+                  <tr>
+                    {(headerRow.cells || []).map((cell: string, cellIndex: number) => (
+                      <th
+                        key={cellIndex}
+                        className="border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 px-4 py-2 text-left font-semibold text-foreground"
+                      >
+                        {cell}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+              )}
+              <tbody>
+                {bodyRows.map((row: { _key?: string; cells?: string[] }, rowIndex: number) => (
+                  <tr key={row._key || rowIndex}>
+                    {(row.cells || []).map((cell: string, cellIndex: number) => (
+                      <td
+                        key={cellIndex}
+                        className="border border-gray-300 dark:border-gray-700 px-4 py-2 text-gray-text align-top"
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )
       },

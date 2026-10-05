@@ -24,7 +24,6 @@ const SHARE_LINKS = [
 function TableOfContents({
   toc,
   activeId,
-  setActiveId,
 }: {
   toc: TocItem[];
   activeId: string | null;
@@ -163,13 +162,19 @@ export default function BlogBody({ article }: BlogBodyProps) {
       <div className="relative aspect-[2/1] sm:aspect-[16/9] rounded-xl overflow-hidden bg-muted mb-18">
         <Image
           src={article.imageUrl}
-          alt=""
+          alt={article.imageAlt || article.title}
           fill
           className="object-cover"
           sizes="(max-width: 1024px) 100vw, min(calc(100vw - 2rem), 800px)"
           priority
         />
       </div>
+
+      {article.imageCaption && (
+        <p className="text-sm text-gray-icon -mt-14 mb-14 text-center italic">
+          {article.imageCaption}
+        </p>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 lg:gap-12">
         <aside className="space-y-10 lg:sticky lg:top-24 lg:self-start h-fit">

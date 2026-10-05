@@ -15,6 +15,10 @@ import blog12 from "@/app/assets/blog12.png";
 export interface BlogArticle {
   id: string;
   imageUrl: string | StaticImageData;
+  imageAlt?: string;
+  imageCaption?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   category: string;
   date: string;
   readTime: string;
