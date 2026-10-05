@@ -1,7 +1,7 @@
 'use client';
 import { Button } from "@/app/components/ui/button";
 import { Menu, X, Send, Phone } from "lucide-react";
-import headerLogo from "@/app/assets/logo_header.png";
+import headerLogo from "@/app/assets/logo_header.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
