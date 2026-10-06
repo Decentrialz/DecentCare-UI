@@ -78,7 +78,7 @@ const HeroSection = () => {
             <div className="relative">
               <Image
                 src={service5hero}
-                alt="Business Strategy Consultation"
+                alt="Healthcare performance metrics showing hospitals served, revenue uplift, and cities covered nationwide"
                 className="w-full h-auto rounded-2xl"
                 priority
               />

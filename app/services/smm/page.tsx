@@ -6,6 +6,13 @@ import Navbar from "@/app/components/navbar";
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
 export const metadata: Metadata = {
+  title: "Healthcare Social Media Marketing for Doctors | DecentCare",
+  description: "Reels, patient education and brand storytelling that turn followers into booked consultations, tracked to real patients rather than likes.",
+  keywords: [
+    "healthcare social media marketing",
+    "social media marketing for doctors",
+    "healthcare marketing agency",
+  ],
   robots: {
     index: isProduction,
     follow: isProduction,

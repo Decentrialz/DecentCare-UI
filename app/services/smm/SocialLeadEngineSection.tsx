@@ -19,7 +19,7 @@ const SocialLeadEngineSection = () => (
       <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
         <Image
           src={smmLeadEngine}
-          alt="Social Lead Engine dashboard"
+          alt="Social Lead Engine dashboard showing patient enquiry management and appointment booking workflow"
         //   className="rounded-2xl shadow-lg w-full"
           style={{ width: "100%", height: "auto" }}
           priority

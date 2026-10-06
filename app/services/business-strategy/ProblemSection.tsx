@@ -37,9 +37,9 @@ const ProblemSection = () => {
           >
             {/* Header */}
             <div className="mb-10">
-              <h3 className="text-2xl font-bold text-[#0D9488] mb-3 text-center lg:text-left">
+              <h2 className="text-2xl font-bold text-[#0D9488] mb-3 text-center lg:text-left">
                 The Problem We Solve
-              </h3>
+              </h2>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight text-center lg:text-left">
                 Three critical gaps holding healthcare organisations back
               </h2>
