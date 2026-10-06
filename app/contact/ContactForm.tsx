@@ -118,7 +118,7 @@ const ContactForm = () => (
             </div>
             <div>
               <p className="font-bold text-[#0F172B] text-sm">Email</p>
-              <p className="text-sm text-[#818584]">contact@decentcare.com</p>
+              <p className="text-sm text-[#818584]">support@decentcare.ai</p>
             </div>
           </div>
           <div className="bg-card rounded-xl p-5 card-elevated flex items-start gap-4" style={{
