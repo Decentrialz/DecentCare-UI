@@ -20,7 +20,7 @@ const GrowthStatsSection = () => (
     <div className="absolute inset-0 w-full h-full">
       <Image
         src={phoneBg}
-        alt="Background pattern"
+        alt="Social media growth dashboard showing healthcare marketing performance metrics and audience engagement"
         fill
         className="object-cover"
         style={{ objectPosition: "center" }}
@@ -54,7 +54,7 @@ const GrowthStatsSection = () => (
         <div className="hidden lg:flex justify-center">
           <Image
             src={smmPhoneMockup}
-            alt="Healthcare social media marketing on phone"
+            alt="Social media growth dashboard showing healthcare marketing performance metrics and audience engagement"
             style={{ maxHeight: 420 }}
             priority
           />

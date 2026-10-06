@@ -6,6 +6,15 @@ import Navbar from "@/app/components/navbar";
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
 export const metadata: Metadata = {
+  title: "Healthcare CRM Software for Hospitals in India | DecentCare",
+  description: "OmniCare tracks every patient across 7 journey stages and 5 care roles, from enquiry to post-op follow-up. Cut no-shows and missed follow-ups.",
+  keywords: [
+    "healthcare crm",
+    "clinic management software",
+    "patient management software",
+    "hospital crm software",
+    "patient engagement software",
+  ],
   robots: {
     index: isProduction,
     follow: isProduction,

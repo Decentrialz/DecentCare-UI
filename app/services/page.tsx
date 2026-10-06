@@ -6,6 +6,28 @@ import CTASection from "../about/CTASection";
 import HeroServices from "../assets/HeroServices.svg";
 import Service from "./service";
 import { servicesPageSchema } from "@/lib/schemas/servicesSchema";
+import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/utils/siteConfig";
+
+const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
+
+export const metadata: Metadata = {
+  title: "Hospital Growth Platform & Marketing Services | DecentCare",
+  description: "One flat fee: OmniLens, OmniJourney and OmniCare plus SEO, AI search, paid ads and social, run by a dedicated team. Live in 48 hours.",
+  keywords: [
+    "digital marketing for hospitals",
+    "healthcare digital marketing",
+    "healthcare marketing agency",
+    "hospital management software",
+  ],
+  robots: {
+    index: isProduction,
+    follow: isProduction,
+  },
+  alternates: {
+    canonical: getCanonicalUrl('/services'),
+  },
+};
 
 const Services = () => {
   return (
@@ -21,6 +43,7 @@ const Services = () => {
         <Navbar />
         <HeroBanner 
         heroImage={HeroServices}
+        heroImageAltText="Bright modern healthcare office reception with a professional walking past a desk."
         breadcrumbItems={[
           { label: "Home", href: "/" },
           { label: "Services" }

@@ -6,12 +6,12 @@ import CHirag from "@/app/assets/CHirag.png";
 import Drgowds from "@/app/assets/Dr.Gowds.png";
 
 const logos = [
-  { img: lux, name: "LUX Hospitals" },
-  { img: vaidya, name: "Praana Vaidya" },
-  { img: gutCare, name: "GutCare" },
-  { img: Drgowds, name: "Dr. Gowds Dental" },
-  { img: dt, name: "DecentTrialz" },
-  { img: CHirag, name: "CHIRAD" },
+  { img: lux, name: "LUX Hospitals logo" },
+  { img: vaidya, name: "Praana Vaidya logo" },
+  { img: gutCare, name: "GutCare logo" },
+  { img: Drgowds, name: "Dr. Gowds Dental Hospitals logo" },
+  { img: dt, name: "DecenTrialz logo" },
+  { img: CHirag, name: "Chirag Global Hospitals logo" },
 ];
 
 const OurClientsSection = () => {

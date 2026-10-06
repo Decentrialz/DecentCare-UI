@@ -50,9 +50,9 @@ export default function EnquirySchedulingSection() {
                       <Icon className="w-5 h-5 text-primary-blue" />
                     </div>
                     <div>
-                      <p className="text-sm sm:text-base font-semibold text-foreground">
+                      <h3 className="text-sm sm:text-base font-semibold text-foreground">
                         {f.title}
-                      </p>
+                      </h3>
                       <p className="mt-1 text-xs sm:text-sm text-gray-icon leading-relaxed">
                         {f.description}
                       </p>
@@ -66,7 +66,7 @@ export default function EnquirySchedulingSection() {
           <div className="w-full flex justify-center">
             <Image
               src={crmFirstContact}
-              alt="Enquiry and scheduling UI"
+              alt="Appointment status dashboard showing scheduled, confirmed, checked-in, rescheduled, and no-show patient appointments"
               className="w-full max-w-[760px] h-auto"
               sizes="(max-width: 1024px) 100vw, 760px"
             />

@@ -75,9 +75,9 @@ const PrivacyHero = () => {
                 
                 {/* Content - Left Aligned */}
                 <div className="space-y-3">
-                  <p className="text-white/60 text-[13px] md:text-xs font-semibold md:font-medium tracking-[0.14em] md:tracking-[0.1em] uppercase">
+                  <h2 className="text-white/60 text-[13px] md:text-xs font-semibold md:font-medium tracking-[0.14em] md:tracking-[0.1em] uppercase">
                     Your Data Rights
-                  </p>
+                  </h2>
                   
                   <h3 className="text-2xl font-bold text-white leading-tight">
                     Protected under DPDP Act

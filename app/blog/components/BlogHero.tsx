@@ -90,9 +90,9 @@ export default function BlogHero({ defaultQuery = "", showFilterButton = false, 
       <div className={`relative z-10 ${SECTION_PADDING} pt-[14rem] sm:pt-[16rem] md:pt-[22rem] pb-12 md:pb-16 lg:pb-20`}>
         <div className={CONTENT_MAX}>
           <div className="max-w-5xl mx-auto text-center">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl leading-normal font-bold text-gradient-heading mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl leading-normal font-bold text-gradient-heading mb-4">
               Blog & Insights
-            </h1>
+            </h2>
             <p className="text-sm sm:text-base md:text-lg font-bold text-foreground">
               Discover Healthcare Innovation & Insights
             </p>

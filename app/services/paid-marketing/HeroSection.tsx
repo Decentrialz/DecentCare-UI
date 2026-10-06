@@ -61,7 +61,7 @@ const HeroSection = () => {
               }}>
                 AI-Powered Paid Marketing For Healthcare
               </h1>
-
+              
               <p className="text-sm md:text-base text-[#818584] mb-8 leading-relaxed max-w-xl text-center lg:text-left mx-auto lg:mx-0">
                 Scale your patient volume with AI-powered precision. We manage your strategy, campaigns, and reporting to drive predictable growth.
               </p>
@@ -70,7 +70,7 @@ const HeroSection = () => {
               <div className="lg:hidden mb-8">
                 <Image
                   src={servicesHero3}
-                  alt="AI-Powered Paid Marketing Dashboard"
+                  alt="Healthcare paid marketing performance dashboard showing patient enquiries from Google Ads, Meta Ads, YouTube, and WhatsApp campaigns"
                   className="w-full h-auto"
                   priority
                 />
@@ -94,7 +94,7 @@ const HeroSection = () => {
             <div className="relative -mr-8 lg:-mr-16 hidden lg:block">
               <Image
                 src={servicesHero3}
-                alt="AI-Powered Paid Marketing Dashboard"
+                alt="Healthcare paid marketing performance dashboard showing patient enquiries from Google Ads, Meta Ads, YouTube, and WhatsApp campaigns"
                 className="w-[120%] h-auto"
                 priority
               />

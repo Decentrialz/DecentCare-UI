@@ -1,4 +1,5 @@
 "use client";
+import { useState, type FormEvent } from "react";
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import { Textarea } from "@/app/components/ui/textarea";
@@ -6,7 +7,6 @@ import { Button } from "@/app/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/components/ui/select";
 import { Checkbox } from "@/app/components/ui/checkbox";
 import { Mail, Phone, MapPin, Send, Clock } from "lucide-react";
-import { useState } from "react";
 import { useZapierSubmit } from "@/lib/zapier/hooks";
 
 interface ContactFormFieldsProps {
@@ -224,7 +224,7 @@ const ContactForm = () => (
       <h2 className="text-3xl md:text-4xl font-bold text-primary text-center mb-12" style={{background: 'linear-gradient(135deg, #0D5C94, #076C63)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
         Get in Touch
       </h2>
-      <div className="grid lg:grid-cols-[11fr_9fr] gap-14 max-w-5xl mx-auto">
+      <div className="grid lg:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] gap-8 lg:gap-14 max-w-5xl mx-auto">
         {/* Form */}
         <div
           className="bg-card rounded-2xl p-8 card-elevated"
@@ -237,7 +237,7 @@ const ContactForm = () => (
         </div>
         {/* Contact Info */}
         <div className="space-y-6">
-          <h3 className="text-base font-bold text-[#0F172B]">Reach us Directly</h3>
+          <h2 className="text-base font-bold text-[#0F172B]">Reach us Directly</h2>
           <div className="bg-card rounded-xl p-5 card-elevated flex items-start gap-4" style={{
                 border: '1px solid #EEF1F1',
                 boxShadow: '0 4px 20px 0 rgba(13,92,148,0.1)'
@@ -248,8 +248,8 @@ const ContactForm = () => (
               <Mail className="w-6 h-6 text-[#0D5C94]" />
             </div>
             <div>
-              <p className="font-bold text-[#0F172B] text-sm">Email</p>
-              <p className="text-sm text-[#818584]">contact@decentcare.com</p>
+              <h3 className="font-bold text-[#0F172B] text-sm">Email</h3>
+              <p className="text-sm text-[#818584]">support@decentcare.ai</p>
             </div>
           </div>
           <div className="bg-card rounded-xl p-5 card-elevated flex items-start gap-4" style={{
@@ -260,8 +260,8 @@ const ContactForm = () => (
               <Phone className="w-6 h-6 text-[#0D5C94]" />
             </div>
             <div>
-              <p className="font-bold text-[#0F172B] text-sm">Phone</p>
-              <p className="text-sm text-[#818584]">+91 XXXXX XXXXX</p>
+              <h3 className="font-bold text-[#0F172B] text-sm">Phone</h3>
+              <p className="text-sm text-[#818584]">08065916085 </p>
               <p className="text-xs text-[#818584] flex items-center gap-1 mt-1">
                 <Clock className="w-3 h-3" /> Monday to Friday, 9:00 AM – 6:00 PM IST
               </p>

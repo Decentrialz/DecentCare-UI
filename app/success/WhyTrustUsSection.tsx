@@ -36,7 +36,7 @@ const WhyTrustUsSection = () => (
                   <Icon className="w-5 h-5 text-[#0D5C94]" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-[#1B2232]">{item.title}</h4>
+                  <h3 className="font-semibold text-[#1B2232]">{item.title}</h3>
                   <p className="text-sm text-[#737B8C]">{item.desc}</p>
                 </div>
               </div>
@@ -45,15 +45,15 @@ const WhyTrustUsSection = () => (
           </div>
         </div>
         <div className="bg-[#EDF0F2]/50 rounded-2xl p-8">
-          <h3 className="text-center font-semibold text-[#737B8C] mb-8 mt-4">Trusted by Healthcare Leaders</h3>
+          <h2 className="text-center font-semibold text-[#737B8C] mb-8 mt-4">Trusted by Healthcare Leaders</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-items-center">
             {[
-              { name: "LUX HOSPITALS", image: lux },
-              { name: "Praana Vaidya", image: vaidya },
-              { name: "GutCare", image: gutCare },
-              { name: "Dr. Gowda", image: gowda },
-              { name: "Decentraliz", image: decentrializ },
-              { name: "Dr. Chirag", image: chirag },
+              { name: "LUX Hospitals logo", image: lux },
+              { name: "Praana Vaidya logo", image: vaidya },
+              { name: "GutCare logo", image: gutCare },
+              { name: "Dr. Gowds Dental Hospitals logo", image: gowda },
+              { name: "DecenTrialz logo", image: decentrializ },
+              { name: "Chirag Global Hospitals logo", image: chirag },
             ].map((item, i) => (
               <div key={i} className="flex items-center justify-center">
                 <Image

@@ -9,6 +9,13 @@ import HeroSuccessSection from "./HeroSuccessSection";
 const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
 export const metadata: Metadata = {
+  title: "Hospital Growth Case Studies & Results | DecentCare",
+  description: "10x revenue at Lux Hospitals, 20x organic reach at Gowds Dental, 3x at Pranavaidya. See how Indian hospitals grew with DecentCare.",
+  keywords: [
+    "healthcare case studies",
+    "hospital marketing case study",
+    "healthcare crm case study",
+  ],
   robots: {
     index: isProduction,
     follow: isProduction,

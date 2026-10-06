@@ -80,7 +80,7 @@ const Hero = () => {
                                 <div className="relative max-w-xl mx-auto">
                                     <Image
                                         src={herosuccess}
-                                        alt="Healthcare professional"
+                                        alt="Healthcare provider representing modern healthcare teams using DecentCare solutions"
                                         width={550}
                                         height={350}
                                         className="rounded-2xl w-full object-cover"
@@ -162,7 +162,7 @@ const Hero = () => {
                         <div className="relative hidden md:block">
                             <Image
                                 src={herosuccess}
-                                alt="Healthcare professional"
+                                alt="Healthcare provider representing modern healthcare teams using DecentCare solutions"
                                 width={550}
                                 height={350}
                                 className="rounded-2xl w-full object-cover"

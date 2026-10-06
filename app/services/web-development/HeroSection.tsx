@@ -9,7 +9,20 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
-const images = [service6praana, service6lux, service6dt];
+const images = [
+  {
+    src: service6praana,
+    alt: "Healthcare website design showcasing a hospital homepage",
+  },
+  {
+    src: service6lux,
+    alt: "Hospital website development example featuring online appointments",
+  },
+  {
+    src: service6dt,
+    alt: "DecenTrialz clinical research platform showing medical studies, trial listings",
+  },
+];
 
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -84,8 +97,8 @@ const HeroSection = () => {
                 className="absolute inset-0"
               >
                 <Image
-                  src={images[currentIndex]}
-                  alt={`Healthcare website preview ${currentIndex + 1}`}
+                  src={images[currentIndex].src}
+                  alt={images[currentIndex].alt}
                   fill
                   className="object-contain rounded-2xl"
                   priority={currentIndex === 0}
