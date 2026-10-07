@@ -876,12 +876,13 @@
     if (fingerprintInitPromise) return;
 
     fingerprintInitPromise = (function () {
+      // Anything stored is real: the placeholder is never written any more,
+      // so there is nothing to distinguish from a resolved value. Re-entry
+      // within a page load is already guarded by fingerprintInitPromise above.
       var current = localStorage.getItem('fingerprint');
-      if (current && current !== 'fp_loading') {
+      if (current) {
         return Promise.resolve(current);
       }
-
-      setFingerprint('fp_loading');
 
       return loadFingerprintJsLibrary()
         .then(function () {
@@ -1118,11 +1119,10 @@
     var fingerprint = null;
 
     if (enableFingerprint) {
-      fingerprint = localStorage.getItem('fingerprint');
-      if (!fingerprint) {
-        setFingerprint('fp_loading');
-        fingerprint = 'fp_loading';
-      }
+      // null until FingerprintJS resolves. "Not yet known" is the honest
+      // answer and the one the server can act on correctly; a placeholder is
+      // a value every browser reports, which is worse than silence.
+      fingerprint = localStorage.getItem('fingerprint') || null;
       initializeFingerprint();
     }
 
@@ -1217,9 +1217,20 @@
   }
 
   function buildContext(identity) {
+    // Left undefined until a real fingerprint exists, so it is omitted from
+    // the payload entirely rather than sent as a placeholder.
+    //
+    // `fp_loading` used to be sent here during the window before FingerprintJS
+    // resolves — which every browser passes through on its first visit. The
+    // server matches identities on fingerprint, so the first identity to store
+    // it became a magnet that silently adopted later visitors: one production
+    // tenant absorbed 87 distinct sessions into a single identity in under
+    // three hours. The server now refuses the placeholder, but not sending a
+    // known-meaningless value is the fix that does not depend on every
+    // consumer remembering to filter it.
     var contextFingerprint = undefined;
     if (enableFingerprint) {
-      contextFingerprint = (identity && identity.fingerprint) || getStoredFingerprint() || 'fp_loading';
+      contextFingerprint = (identity && identity.fingerprint) || getStoredFingerprint() || undefined;
     }
 
     return {
