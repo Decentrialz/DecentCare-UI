@@ -30,6 +30,7 @@ const DemoModal = ({ onClose }: { onClose: () => void }) => {
         <ContactFormFields
           heading="Book a Free Demo"
           subheading="Submit your details and a member of the DecentCare team will be in touch."
+          clickType="request-demo"
         />
       </div>
     </div>,
