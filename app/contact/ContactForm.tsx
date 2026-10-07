@@ -7,91 +7,82 @@ import { Button } from "@/app/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/components/ui/select";
 import { Checkbox } from "@/app/components/ui/checkbox";
 import { Mail, Phone, MapPin, Send, Clock } from "lucide-react";
+import { useZapierSubmit } from "@/lib/zapier/hooks";
 
-const ORG_TYPES = [
-  { value: "hospital", label: "Hospital" },
-  { value: "clinic", label: "Clinic" },
-  { value: "doctor", label: "Doctor" },
-];
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.com$/i;
-
-type FormValues = {
-  name: string;
-  email: string;
-  phone: string;
-  organisation: string;
-  role: string;
-  orgType: string;
-  message: string;
-  consent: boolean;
-};
-
-type Errors = Partial<Record<"name" | "email" | "phone" | "organisation" | "orgType", string>>;
-
-const initialValues: FormValues = {
-  name: "",
-  email: "",
-  phone: "",
-  organisation: "",
-  role: "",
-  orgType: "",
-  message: "",
-  consent: false,
-};
-
-const FieldError = ({ message }: { message?: string }) =>
-  message ? (
-    <p className="text-xs text-red-500" role="alert">
-      {message}
-    </p>
-  ) : null;
-
-const errorBorder = (msg?: string) => (msg ? "border-red-500 focus-visible:ring-red-500" : "");
+interface ContactFormFieldsProps {
+  heading?: string;
+  subheading?: string;
+  clickType?: 'request-demo' | 'contact-form';
+  onSuccess?: () => void;
+}
 
 // Reusable form fields component
-export const ContactFormFields = ({ heading, subheading }: { heading?: string; subheading?: string }) => {
-  const [values, setValues] = useState<FormValues>(initialValues);
-  const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "error" | "success">("idle");
-
-  const setField = <K extends keyof FormValues>(key: K, value: FormValues[K]) => {
-    setValues((prev) => ({ ...prev, [key]: value }));
-    setErrors((prev) => {
-      const next = { ...prev };
-      delete next[key as keyof Errors];
-      return next;
-    });
-    if (status !== "idle") setStatus("idle");
+export const ContactFormFields = ({ 
+  heading, 
+  subheading, 
+  clickType = 'contact-form',
+  onSuccess 
+}: ContactFormFieldsProps) => {
+  const emptyFormData = {
+    full_name: '',
+    email: '',
+    phone_number: '',
+    organization: '',
+    role: '',
+    organization_type: '',
+    message: '',
   };
 
-  const validate = (): Errors => {
-    const e: Errors = {};
-    if (!values.name.trim()) e.name = "Full name is required";
-    if (!values.email.trim()) e.email = "Email is required";
-    else if (!EMAIL_REGEX.test(values.email.trim())) e.email = "Enter a valid email address ending in .com";
-    if (!values.phone) e.phone = "Phone number is required";
-    else if (values.phone.length !== 10) e.phone = "Phone number must be exactly 10 digits";
-    if (!values.organisation.trim()) e.organisation = "Organisation is required";
-    if (!values.orgType) e.orgType = "Please select an organisation type";
-    return e;
+  const [formData, setFormData] = useState(emptyFormData);
+  const [consent, setConsent] = useState(false);
+  const { isLoading, submit, reset } = useZapierSubmit();
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSelectChange = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      organization_type: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const found = validate();
-    setErrors(found);
-    if (Object.keys(found).length > 0) {
-      setStatus("error");
+
+    if (!consent) {
+      alert('Please agree to the terms and conditions');
       return;
     }
-    // TODO: send `values` to your API here (the original form didn't submit anywhere)
-    setStatus("success");
-    setValues(initialValues);
+
+    const success = await submit({
+      ...formData,
+      click_type: clickType,
+    });
+
+    if (success) {
+      setFormData(emptyFormData);
+      setConsent(false);
+
+      if (onSuccess) {
+        onSuccess();
+      }
+
+      setTimeout(() => {
+        reset();
+      }, 5000);
+    }
   };
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit} noValidate>
+    <form className="space-y-5" onSubmit={handleSubmit}>
       {(heading || subheading) && (
         <div className="mb-4 text-center">
           {heading && <h2 className="text-lg font-bold text-[#168191] mb-1">{heading}</h2>}
@@ -102,29 +93,28 @@ export const ContactFormFields = ({ heading, subheading }: { heading?: string; s
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label className="text-xs text-[#141516]">Full name<span className="text-red-500">*</span></Label>
-          <Input
-            placeholder="Enter your first name"
-            value={values.name}
-            onChange={(e) => setField("name", e.target.value)}
-            aria-invalid={!!errors.name}
-            className={errorBorder(errors.name)}
+          <Input 
+            name="full_name"
+            placeholder="Enter your full name" 
+            required 
+            value={formData.full_name}
+            onChange={handleInputChange}
+            disabled={isLoading}
           />
-          <FieldError message={errors.name} />
         </div>
         <div className="space-y-2">
           <Label className="text-xs text-[#141516]">Email<span className="text-red-500">*</span></Label>
-          <Input
-            type="email"
-            placeholder="your@test.com"
-            value={values.email}
-            onChange={(e) => setField("email", e.target.value)}
-            aria-invalid={!!errors.email}
-            className={errorBorder(errors.email)}
+          <Input 
+            type="email" 
+            name="email"
+            placeholder="your@test.com" 
+            required 
+            value={formData.email}
+            onChange={handleInputChange}
+            disabled={isLoading}
           />
-          <FieldError message={errors.email} />
         </div>
       </div>
-
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label className="text-xs text-[#141516]">Phone<span className="text-red-500">*</span></Label>
@@ -139,96 +129,87 @@ export const ContactFormFields = ({ heading, subheading }: { heading?: string; s
               </svg>
               <span className="text-sm text-[#141516]">+91</span>
             </div>
-            <Input
-              type="tel"
-              inputMode="numeric"
-              maxLength={10}
-              placeholder="000 000 0000"
-              value={values.phone}
-              onChange={(e) => setField("phone", e.target.value.replace(/\D/g, "").slice(0, 10))}
-              aria-invalid={!!errors.phone}
-              className={`pl-20 ${errorBorder(errors.phone)}`}
+            <Input 
+              type="tel" 
+              name="phone_number"
+              placeholder="000 000 0000" 
+              required 
+              className="pl-20" 
+              value={formData.phone_number}
+              onChange={handleInputChange}
+              disabled={isLoading}
             />
           </div>
-          <FieldError message={errors.phone} />
         </div>
         <div className="space-y-2">
           <Label className="text-xs text-[#141516]">Organisation<span className="text-red-500">*</span></Label>
-          <Input
-            placeholder="Your organisation"
-            value={values.organisation}
-            onChange={(e) => setField("organisation", e.target.value)}
-            aria-invalid={!!errors.organisation}
-            className={errorBorder(errors.organisation)}
+          <Input 
+            name="organization"
+            placeholder="Your organisation" 
+            required
+            value={formData.organization}
+            onChange={handleInputChange}
+            disabled={isLoading}
           />
-          <FieldError message={errors.organisation} />
         </div>
       </div>
-
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label className="text-xs text-[#141516]">Your role</Label>
-          <Input
-            placeholder="Enter your role/designation"
-            value={values.role}
-            onChange={(e) => setField("role", e.target.value)}
+          <Input 
+            name="role"
+            placeholder="Enter your role/designation" 
+            value={formData.role}
+            onChange={handleInputChange}
+            disabled={isLoading}
           />
         </div>
         <div className="space-y-2">
-          <Label className="text-xs text-[#141516]">Organisation Type<span className="text-red-500">*</span></Label>
-          <Select value={values.orgType} onValueChange={(v) => setField("orgType", v)}>
-            <SelectTrigger
-            aria-invalid={!!errors.orgType}
-              className={`${errorBorder(errors.orgType)} [&>svg]:h-4 [&>svg]:w-4 sm:[&>svg]:h-5 sm:[&>svg]:w-5 [&>svg]:shrink-0 [&>svg]:transition-transform [&>svg]:duration-200 data-[state=open]:[&>svg]:rotate-180`}
-              >
+          <Label className="text-xs text-[#141516]">Organisation Type</Label>
+          <Select value={formData.organization_type} onValueChange={handleSelectChange} disabled={isLoading}>
+            <SelectTrigger>
               <SelectValue placeholder="Select" />
             </SelectTrigger>
-            <SelectContent position="popper" sideOffset={4} className="z-[200] bg-white">
-  {ORG_TYPES.map((o) => (
-    <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
-  ))}
-</SelectContent>
+            <SelectContent>
+              <SelectItem value="hospital">Hospital</SelectItem>
+              <SelectItem value="clinic">Clinic</SelectItem>
+              <SelectItem value="doctor">Doctor</SelectItem>
+            </SelectContent>
           </Select>
-          <FieldError message={errors.orgType} />
         </div>
       </div>
-
       <div className="space-y-2">
-        <Label className="text-xs">Anything you'd like us to know?</Label>
-        <Textarea
-          placeholder="Tell us more..."
+        <Label className="text-xs text-[#141516]">Anything you'd like us to know?</Label>
+        <Textarea 
+          name="message"
+          placeholder="Tell us more..." 
           rows={4}
-          value={values.message}
-          onChange={(e) => setField("message", e.target.value)}
+          value={formData.message}
+          onChange={handleInputChange}
+          disabled={isLoading}
         />
       </div>
-
       <div className="flex items-start gap-2">
-        <Checkbox
-          id="consent"
+        <Checkbox 
+          id="consent" 
           className="mt-1"
-          checked={values.consent}
-          onCheckedChange={(c) => setField("consent", c === true)}
+          checked={consent}
+          onCheckedChange={(checked) => setConsent(checked as boolean)}
+          disabled={isLoading}
         />
         <label htmlFor="consent" className="text-xs text-[#141516] leading-relaxed">
           I agree to receive SMS messages from DecentCare related to sales inquiries, demo scheduling, follow-ups, and product information. Message frequency may vary. Message and data rates may apply. Reply STOP to Cancel or HELP for assistance. I also agree to the <span className="text-[#0D9488] cursor-pointer">Terms of Service</span> and <span className="text-[#0D9488] cursor-pointer">Privacy Policy</span>.
         </label>
       </div>
-
-      {status === "error" && (
-        <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-600" role="alert">
-          Please fill in the required fields highlighted above.
-        </div>
-      )}
-      {status === "success" && (
-        <div className="rounded-lg border border-green-200 bg-green-50 px-3 py-2 text-xs text-green-700" role="status">
-          Thank you! Your details have been submitted. Our team will be in touch soon.
-        </div>
-      )}
-
-      <Button type="submit" className="w-full gap-2 bg-[#0D5C94]" size="lg" style={{ boxShadow: '0 4px 20px -2px rgba(13,92,148,0.08)' }}>
+      <Button 
+        type="submit"
+        className="w-full gap-2 bg-[#0D5C94]" 
+        size="lg" 
+        style={{ boxShadow: '0 4px 20px -2px rgba(13,92,148,0.08)' }}
+        disabled={isLoading}
+      >
         <Send className="w-4 h-4" />
-        Send Message
+        {isLoading ? 'Sending...' : 'Send Message'}
       </Button>
       <p className="text-xs text-[#989BA0] text-center">
         We typically respond within 1-2 business days.
