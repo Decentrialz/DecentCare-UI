@@ -177,10 +177,7 @@
     return headers;
   }
 
-  function markTrackingReady() {
-    if (trackingReady) return;
-    trackingReady = true;
-
+  function flushQueuedEvents() {
     if (queuedEventPayloads.length === 0) return;
 
     var pending = queuedEventPayloads.slice();
@@ -188,6 +185,25 @@
     for (var i = 0; i < pending.length; i++) {
       sendNow(pending[i]);
     }
+  }
+
+  function markTrackingReady() {
+    if (trackingReady) return;
+    trackingReady = true;
+    flushQueuedEvents();
+  }
+
+  /**
+   * Send whatever is still waiting on /assign before the page goes away.
+   *
+   * Without this the queue is simply dropped: the existing beforeunload handler
+   * sends the virtual-number heartbeat and nothing else, so anything the site
+   * tracked during the assign window died with the page. pagehide is the one
+   * that fires on mobile Safari, where beforeunload often does not.
+   */
+  function installUnloadFlush() {
+    window.addEventListener('pagehide', flushQueuedEvents);
+    window.addEventListener('beforeunload', flushQueuedEvents);
   }
 
   function safeParseJson(text) {
@@ -1118,7 +1134,9 @@
     };
   }
 
-  function getCampaign() {
+  var campaignPersistKey = 'omnilens_landing_campaign';
+
+  function readLiveCampaign() {
     var params = new URLSearchParams(window.location.search);
     var source = params.get('utm_source') || undefined;
     var medium = params.get('utm_medium') || undefined;
@@ -1137,6 +1155,54 @@
       content: content,
       term: term
     };
+  }
+
+  /**
+   * Remember the campaign that started this visit.
+   *
+   * Scoped to sessionStorage deliberately, because that is exactly where
+   * session_id lives: the two expire together when the tab closes. localStorage
+   * would outlive the session and make a return visit days later look like a
+   * fresh arrival from the original campaign, inventing a touchpoint that never
+   * happened and double-counting the campaign that earned the first one.
+   */
+  function persistLandingCampaign(campaign) {
+    if (!campaign) return;
+    try {
+      sessionStorage.setItem(campaignPersistKey, JSON.stringify(campaign));
+    } catch (e) {
+      // Private windows throw on write. The live URL still carries the
+      // campaign, so this visit is attributed; only the carry-forward is lost.
+      log('failed to persist landing campaign', e);
+    }
+  }
+
+  function readStoredCampaign() {
+    try {
+      var raw = sessionStorage.getItem(campaignPersistKey);
+      return raw ? JSON.parse(raw) : undefined;
+    } catch (e) {
+      return undefined;
+    }
+  }
+
+  /**
+   * The campaign to report for this event.
+   *
+   * The URL wins when it has one — arriving from a second ad mid-session is a
+   * real new source and must replace what we remembered. Otherwise fall back to
+   * the stored one, which is what keeps a second page view, or an SPA route
+   * change, from reporting the visit as `direct`: `location.search` is empty by
+   * then, and without this the campaign that actually brought them is lost on
+   * every page after the first.
+   */
+  function getCampaign() {
+    var live = readLiveCampaign();
+    if (live) {
+      persistLandingCampaign(live);
+      return live;
+    }
+    return readStoredCampaign();
   }
 
   function getDeviceType() {
@@ -1209,8 +1275,17 @@
     });
   }
 
-  function send(eventPayload) {
-    if (!trackingReady) {
+  /**
+   * ``immediate`` skips the queue that holds events until /assign answers.
+   *
+   * The queue exists so an event can be matched to the virtual number this
+   * visitor was given. An arrival has no such need — nothing on a page view
+   * carries the assignment — and waiting costs far more than it buys: a
+   * visitor who leaves before /assign resolves is never recorded at all, and
+   * because they are invisible nobody can count what was missed.
+   */
+  function send(eventPayload, immediate) {
+    if (!trackingReady && !immediate) {
       queuedEventPayloads.push(eventPayload);
       return;
     }
@@ -1218,7 +1293,7 @@
     sendNow(eventPayload);
   }
 
-  function track(eventName, properties) {
+  function track(eventName, properties, options) {
     var ids = getOrCreateIdentity();
     var now = new Date().toISOString();
 
@@ -1236,7 +1311,7 @@
     };
 
     log('track', eventName, payload);
-    send(payload);
+    send(payload, options && options.immediate);
   }
 
   function installAutoPageView() {
@@ -1244,7 +1319,7 @@
 
     track('page_view', {
       source: 'omnilens-tracker-js'
-    });
+    }, { immediate: true });
 
     // Single page apps swap content without a document load, so without these
     // hooks the view above is the only one a visitor ever reports no matter how
@@ -1268,7 +1343,7 @@
         track('page_view', {
           source: 'omnilens-tracker-js',
           navigation_type: 'spa'
-        });
+        }, { immediate: true });
       }, 60);
     }
 
@@ -1403,10 +1478,31 @@
 
   initializeFingerprint();
   installWhatsAppIntegration();
+  installUnloadFlush();
+  // Capture the campaign before anything can navigate away from the landing
+  // URL — a client-side redirect rewrites location.search, and after that the
+  // parameters the ad carried are unrecoverable.
+  persistLandingCampaign(readLiveCampaign());
+  installLandingPageView();
 
   function installEngagementTracking() {
     installAutoClicks();
+  }
 
+  /**
+   * The arrival, reported as soon as there is a page to report.
+   *
+   * Deliberately NOT gated on /assign. It used to be, via
+   * installEngagementTracking, which meant the landing page view did not exist
+   * until the assignment came back — so a visitor who left first produced no
+   * event, no touchpoint and no attribution, and the whole visit was invisible.
+   * It also stamped originalTimestamp at that later moment rather than on
+   * arrival.
+   *
+   * Nothing on a page view needs the assignment, so there is nothing to wait
+   * for. The clicks that DO care still start after assign, as before.
+   */
+  function installLandingPageView() {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', installAutoPageView);
     } else {
