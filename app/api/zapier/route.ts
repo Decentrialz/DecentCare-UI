@@ -33,13 +33,15 @@ export async function POST(request: NextRequest): Promise<NextResponse<ZapierRes
     const zapierPayload = buildZapierPayload(formData, pageUrl);
 
     if (!ZAPIER_WEBHOOK_URL) {
+      console.error('Zapier webhook URL is not configured');
       return NextResponse.json(
         {
-          success: true,
-          message: 'Form submitted successfully',
+          success: false,
+          message: 'Zapier integration is not configured',
+          error: 'ZAPIER_WEBHOOK_URL environment variable is missing',
           timestamp,
         },
-        { status: 200 }
+        { status: 500 }
       );
     }
 
@@ -51,8 +53,38 @@ export async function POST(request: NextRequest): Promise<NextResponse<ZapierRes
       body: JSON.stringify(zapierPayload),
     });
 
+    const zapierBody = await zapierResponse.text();
+
+    console.log('Environment:', process.env.NODE_ENV);
+    console.log('Payload:', JSON.stringify(zapierPayload));
+    console.log('Zapier status:', zapierResponse.status);
+    console.log('Zapier response:', zapierBody);
+
+    console.log('Zapier webhook configured:', Boolean(ZAPIER_WEBHOOK_URL));
+
+    if (ZAPIER_WEBHOOK_URL) {
+      console.log(
+        'Zapier webhook host:',
+        new URL(ZAPIER_WEBHOOK_URL).host
+      );
+
+      console.log(
+        'Zapier webhook path:',
+        new URL(ZAPIER_WEBHOOK_URL).pathname
+      );
+    }
+
     if (!zapierResponse.ok) {
       console.error('Zapier webhook error:', zapierResponse.status);
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Failed to submit to Zapier',
+          error: `Zapier returned status ${zapierResponse.status}`,
+          timestamp,
+        },
+        { status: 502 }
+      );
     }
 
     return NextResponse.json(
