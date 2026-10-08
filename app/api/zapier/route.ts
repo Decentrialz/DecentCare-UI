@@ -7,11 +7,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { FormSubmissionData, ZapierResponse } from '@/lib/zapier/types';
 import { buildZapierPayload } from '@/lib/zapier/payload-builder';
 
-const ZAPIER_WEBHOOK_URL = process.env.ZAPIER_WEBHOOK_URL;
 
 export async function POST(request: NextRequest): Promise<NextResponse<ZapierResponse>> {
   const timestamp = new Date().toISOString();
-
+  const ZAPIER_WEBHOOK_URL = process.env.ZAPIER_WEBHOOK_URL;
+  
   try {
     let data: Partial<FormSubmissionData>;
     try {
