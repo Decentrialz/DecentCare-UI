@@ -16,7 +16,7 @@ type NavEntry =
   | { id: string; label: string; href: string }
   | { id: string; label: string; variant: "mega" | "list"; items: Item[] };
 
-const NAV: NavEntry[] = [
+export const NAV: NavEntry[] = [
   {
     id: "solutions",
     label: "Solutions",
