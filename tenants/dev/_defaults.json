@@ -26,6 +26,9 @@
     "hashAnonymousId": true
   },
   "whatsapp": {
+    "_comment": "Rewrites WhatsApp links on the tenant's page so the message carries a (Ref: <hashed anonymous id>), which is what ties the resulting conversation back to the visit. `message` replaces the page's own text outright; the page text is only used as a fallback when no message is set here.",
+    "_phoneComment": "Optional. Digits only, country code included, e.g. \"918065295050\". When set, every WhatsApp link is pointed at this number — handled for both link shapes, wa.me/<number> and api.whatsapp.com/send?phone=. Leave it out to keep whatever number the page's own links already carry, which is what every tenant did before this option existed.",
+    "_apiComment": "A site that intercepts the click, fetches a WhatsApp link from its own backend and then assigns window.location never puts that URL in the DOM, so the rewriting here cannot reach it. Those sites call window.OmnilensTracker.decorateWhatsAppUrl(url) and navigate to what it returns. It is opt-in: a tenant that never calls it is unaffected.",
     "enabled": true,
     "selector": "a[href*='wa.me'],a[href*='api.whatsapp.com/send']",
     "message": "Hi, I need help booking an appointment.",
