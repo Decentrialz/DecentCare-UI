@@ -1,4 +1,5 @@
 'use client';
+import HeaderNav from "@/app/components/HeaderNav";
 import { Button } from "@/app/components/ui/button";
 import { Menu, X, Send, Phone } from "lucide-react";
 import headerLogo from "@/app/assets/logo_header.svg";
@@ -35,23 +36,7 @@ const Navbar = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex items-center gap-8">
-            <Link href="/services" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-              Services
-            </Link>
-            <Link href="/about" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-              About Us
-            </Link>
-            <Link href="/success" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-              Success Stories
-            </Link>
-            {/* <Link href="/blog" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-              Blogs
-            </Link> */}
-            <Link href="/contact" className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
-              Contact Us
-            </Link>
-          </div>
+          <HeaderNav headerHeight={73} />
 
           {/* CTA Button */}
           <a href="tel:08065916085">
