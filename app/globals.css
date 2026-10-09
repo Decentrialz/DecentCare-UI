@@ -452,3 +452,8 @@ All colors MUST be HSL.
 .recommended-blogs-bullet-active {
   background: hsl(var(--primary-blue))
 }
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}

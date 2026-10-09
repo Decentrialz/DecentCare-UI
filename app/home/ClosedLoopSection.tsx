@@ -57,7 +57,7 @@ const nodes = [
 
 const ClosedLoopSection = () => {
   return (
-    <section className="bg-white py-10 md:py-14 lg:pt-16 lg:pb-30">
+    <section id="the-closed-loop" className="scroll-mt-24 ...existing">
       <Container>
         <SectionHeading
           eyebrow="The Closed Loop"

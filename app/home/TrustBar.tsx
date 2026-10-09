@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { ShieldPlus } from "lucide-react";
-import luxHospital from "@/app/assets/luxHospital.png";
-import pranaVaidya from "@/app/assets/pranaVaidya.png";
-import gutCare from "@/app/assets/gutCare.png";
-import gowdsHospital from "@/app/assets/gowdsHospital.png";
-import chiragHospital from "@/app/assets/chiragHospital.png";
+import luxHospital from "@/app/assets/luxLogo.svg";
+import pranaVaidya from "@/app/assets/vaidya.svg";
+import gutCare from "@/app/assets/gutCareLogo.svg";
+import gowdsHospital from "@/app/assets/gowdsLogoHD.svg";
+import chiragHospital from "@/app/assets/chiragLogoHD.svg";
 import Container from "./Container";
 
 const logos = [
@@ -38,8 +38,9 @@ const TrustBar = () => {
                 <Image
                   src={src}
                   alt={alt}
-                  className="h-6 w-auto object-contain  transition duration-300 hover:opacity-100 hover:grayscale-0 md:h-8"
-                />
+                  quality={100}
+                  className="h-8 w-auto object-contain transition duration-300 hover:opacity-100 hover:grayscale-0 lg:h-10"
+                  />
               </div>
             ))}
           </div>

@@ -44,7 +44,7 @@ const HeroSection = () => {
               <Image src={heroMiddle} alt="Doctor reviewing patient analytics on a tablet." priority sizes="40vw" className="h-auto w-full object-contain object-top" />
             </div>
 
-            <div className="absolute left-[27%] top-[18%] min-[1330px]:left-[29%] min-[1380px]:top-[19%] min-[1440px]:left-[30%] min-[1440px]:top-[19%] z-0 h-[145px] w-[210px] rounded-[23px] bg-white/90 px-5 py-4 shadow-[0_10px_24px_rgba(15,63,160,0.14)] backdrop-blur">
+            <div className="absolute left-[27%] top-[18%] min-[1330px]:left-[29%] min-[1380px]:top-[19%] min-[1440px]:left-[30%] min-[1440px]:top-[19%] z-0 h-[145px] w-[210px] rounded-[23px] bg-white px-5 py-4 shadow-[0_10px_24px_rgba(15,63,160,0.14)]">
                 <p className="text-xs font-semibold leading-tight text-home-heading">New Enquiries Today</p>
                 <p className="mt-4 text-3xl font-extrabold leading-none tracking-tight text-[#062742]">128</p>
               <svg viewBox="0 0 210 52" className="absolute bottom-4 left-2 h-9 w-[200px] overflow-visible" aria-hidden="true">
@@ -52,15 +52,15 @@ const HeroSection = () => {
                 <circle cx="4" cy="44" r="3.5" fill="#0d9da4" /><circle cx="32" cy="41" r="3.5" fill="#0d9da4" /><circle cx="50" cy="25" r="3.5" fill="#0d9da4" /><circle cx="72" cy="34" r="3.5" fill="#0d9da4" /><circle cx="94" cy="25" r="3.5" fill="#0d9da4" /><circle cx="114" cy="29" r="3.5" fill="#0d9da4" /><circle cx="135" cy="7" r="3.5" fill="#0d9da4" /><circle cx="156" cy="25" r="3.5" fill="#0d9da4" /><circle cx="178" cy="16" r="3.5" fill="#0d9da4" /><circle cx="202" cy="2" r="3.5" fill="#0d9da4" />
               </svg>
             </div>
-            <div className="absolute right-[32%] top-[37%] z-10 rounded-xl bg-white/80 pl-4 pr-12 py-3 shadow-[0_10px_24px_rgba(15,63,160,0.14)]"><p className="text-xs font-semibold text-home-heading">Patients Ready To Book</p><p className="mt-1 text-3xl font-extrabold leading-none text-[#102238]">248</p><div className="mt-3 flex items-center pl-1"><Image src={highIntent1} alt="" width={28} height={28} className="relative z-40 h-7 w-7 rounded-full border-2 border-white object-cover" /><Image src={highIntent2} alt="" width={28} height={28} className="relative z-30 -ml-2 h-7 w-7 rounded-full border-2 border-white object-cover" /><Image src={highIntent3} alt="" width={28} height={28} className="relative z-20 -ml-2 h-7 w-7 rounded-full border-2 border-white object-cover" /><Image src={highIntent4} alt="" width={28} height={28} className="relative z-10 -ml-2 h-7 w-7 rounded-full border-2 border-white object-cover" /><span className="relative z-0 -ml-2 flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-[#f5f7fa] text-sm font-medium text-[#6b7280]">+12</span></div></div>
-            <div className="absolute left-[30%] top-[70%] z-10 flex gap-4 px-4 py-3 items-center justify-between rounded-[20px] bg-white/50 px-5 shadow-[0_10px_24px_rgba(15,63,160,0.1)]">
+            <div className="absolute right-[32%] top-[37%] z-10 rounded-[20px] bg-white px-5 py-3 shadow-[0_10px_24px_rgba(15,63,160,0.14)]"><p className="text-xs font-semibold text-home-heading">Patients Ready To Book</p><p className="mt-1 text-3xl font-extrabold leading-none text-[#102238]">248</p><div className="mt-3 flex items-center pl-1"><Image src={highIntent1} alt="" width={28} height={28} className="relative z-40 h-7 w-7 rounded-full border-2 border-white object-cover" /><Image src={highIntent2} alt="" width={28} height={28} className="relative z-30 -ml-2 h-7 w-7 rounded-full border-2 border-white object-cover" /><Image src={highIntent3} alt="" width={28} height={28} className="relative z-20 -ml-2 h-7 w-7 rounded-full border-2 border-white object-cover" /><Image src={highIntent4} alt="" width={28} height={28} className="relative z-10 -ml-2 h-7 w-7 rounded-full border-2 border-white object-cover" /><span className="relative z-0 -ml-2 flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-[#f5f7fa] text-sm font-medium text-[#6b7280]">+12</span></div></div>
+            <div className="absolute left-[30%] top-[70%] z-10 flex gap-4 px-4 py-3 items-center justify-between rounded-[20px] bg-white px-5 shadow-[0_10px_24px_rgba(15,63,160,0.1)]">
               <div>
                 <p className="text-xs font-semibold leading-tight text-home-heading">Booking Rate</p>
                 <p className="mt-3 text-3xl font-extrabold leading-none tracking-tight text-[#062742]">24.6%</p>
               </div>
               <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-[conic-gradient(#12649c_0deg_246deg,#0d9da4_246deg_360deg)]"><div className="h-[32px] w-[32px] rounded-full bg-[#f7f9fc]" /></div>
             </div>
-            <div className="absolute left-[54%] top-[72%] z-10 flex px-4 py-3 flex-col items-start justify-between rounded-[20px] bg-white/80 px-5 py-4 shadow-[0_10px_24px_rgba(15,63,160,0.1)]">
+            <div className="absolute left-[54%] top-[72%] z-10 flex px-4 py-3 flex-col items-start justify-between rounded-[20px] bg-white px-5 py-4 shadow-[0_10px_24px_rgba(15,63,160,0.1)]">
               <div>
                 <p className="text-xs font-semibold leading-tight text-[#12649c]">Show-up Rate</p>
                 <p className="mt-3 text-3xl font-extrabold leading-none tracking-tight text-[#062742]">36%</p>
@@ -74,7 +74,7 @@ const HeroSection = () => {
 
         <div className="relative z-10 mt-0 block lg:hidden">
           <div className="relative mx-auto h-[420px] w-full max-w-[390px]">
-            <div className="absolute left-0 top-[36px] z-10 w-[148px] rounded-[10px] bg-white/90 p-2.5 shadow-[0_12px_28px_rgba(15,63,160,0.1)] backdrop-blur-sm">
+            <div className="absolute left-0 top-[36px] z-10 w-[148px] rounded-[10px] bg-white p-2.5 shadow-[0_12px_28px_rgba(15,63,160,0.1)]">
               <p className="text-[9px] font-semibold leading-tight text-home-heading">New Enquiries Today</p>
               <p className="mt-2 text-[22px] font-extrabold leading-none tracking-[-0.05em] text-[#062742]">128</p>
               <svg viewBox="0 0 138 30" className="mt-2 h-6 w-full" aria-hidden="true">
@@ -83,7 +83,7 @@ const HeroSection = () => {
               </svg>
             </div>
 
-            <div className="absolute right-[8px] top-[70px] z-30 w-[118px] rounded-[10px] bg-white/85 p-2.5 shadow-[0_12px_28px_rgba(15,63,160,0.1)] backdrop-blur-sm">
+            <div className="absolute right-[8px] top-[70px] z-30 w-[118px] rounded-[10px] bg-white p-2.5 shadow-[0_12px_28px_rgba(15,63,160,0.1)]">
               <p className="text-[9px] font-semibold text-home-heading">Patients Ready To Book</p>
               <p className="mt-1 text-[20px] font-extrabold leading-none text-[#102238]">248</p>
               <div className="mt-2 flex items-center">
@@ -95,7 +95,7 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div className="absolute left-[16px] top-[260px] z-30 flex w-[138px] items-center justify-between rounded-[8px] bg-white/85 px-2.5 py-2 shadow-[0_12px_28px_rgba(15,63,160,0.08)] backdrop-blur-sm">
+            <div className="absolute left-[16px] top-[260px] z-30 flex w-[138px] items-center justify-between rounded-[8px] bg-white px-2.5 py-2 shadow-[0_12px_28px_rgba(15,63,160,0.08)]">
               <div>
               <p className="text-[9px] font-semibold leading-tight text-home-heading">Booking Rate</p>
               <p className="mt-2 text-[18px] font-extrabold leading-none text-[#062742]">24.6%</p>
@@ -105,7 +105,7 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div className="absolute right-[10px] top-[240px] z-30 w-[138px] rounded-[8px] bg-white/85 p-2.5 shadow-[0_12px_28px_rgba(15,63,160,0.08)] backdrop-blur-sm">
+            <div className="absolute right-[10px] top-[240px] z-30 w-[138px] rounded-[8px] bg-white p-2.5 shadow-[0_12px_28px_rgba(15,63,160,0.08)]">
               <p className="text-[9px] font-semibold leading-tight text-[#12649c]">Show-up Rate</p>
               <p className="mt-2 text-[20px] font-extrabold leading-none text-[#062742]">36%</p>
               <div className="mt-2 flex h-6 w-full items-end justify-between px-2">

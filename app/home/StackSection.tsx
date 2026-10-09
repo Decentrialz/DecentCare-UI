@@ -32,7 +32,7 @@ const modules = [
 
 const StackSection = () => {
   return (
-    <section className="bg-[#F7FBFD] py-16 md:py-20 lg:py-24">
+    <section id="the-stack" className="scroll-mt-24 ...existing">
       <Container className="max-w-[1160px]">
         <SectionHeading
           eyebrow="The DecentCare Stack"

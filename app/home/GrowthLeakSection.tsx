@@ -46,7 +46,7 @@ const stages = [
 
 const GrowthLeakSection = () => {
   return (
-    <section className="relative overflow-hidden bg-[#F3F7FB] py-16 md:py-20 lg:py-24">
+    <section id="the-growth" className="scroll-mt-24 ...existing">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-25 -right-25 size-[420px]"

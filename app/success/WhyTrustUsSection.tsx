@@ -1,12 +1,11 @@
 import { Shield, Settings, Target, Users, CircleCheck, Badge, Award } from "lucide-react";
 import Image from "next/image";
-import lux from "@/app/assets/lux.svg";
+import lux from "@/app/assets/luxLogo.svg";
 import vaidya from "@/app/assets/vaidya.svg";
-import gutCare from "@/app/assets/gut  care.svg";
-import gowda from "@/app/assets/Dr.Gowds.png";
+import gutCare from "@/app/assets/gutCareLogo.svg";
+import gowda from "@/app/assets/gowdsLogoHD.svg";
 import decentrializ from "@/app/assets/DT.png";
-import chirag from "@/app/assets/CHirag.png";
-
+import chirag from "@/app/assets/chiragLogo.png";
 const WhyTrustUsSection = () => (
   <section className="py-20 bg-background">
     <div className="container mx-auto px-4 lg:px-8">
@@ -31,16 +30,16 @@ const WhyTrustUsSection = () => (
             ].map((item, i) => {
               const Icon = item.icon;
               return (
-              <div key={i} className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-[#0D5C94]/10" >
-                  <Icon className="w-5 h-5 text-[#0D5C94]" />
+                <div key={i} className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-[#0D5C94]/10" >
+                    <Icon className="w-5 h-5 text-[#0D5C94]" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[#1B2232]">{item.title}</h3>
+                    <p className="text-sm text-[#737B8C]">{item.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-[#1B2232]">{item.title}</h3>
-                  <p className="text-sm text-[#737B8C]">{item.desc}</p>
-                </div>
-              </div>
-            );
+              );
             })}
           </div>
         </div>
@@ -67,10 +66,10 @@ const WhyTrustUsSection = () => (
             ))}
           </div>
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-8 pt-8" style={{ borderTop: '1px solid rgba(0, 0, 0, 0.08)' }}>
-            <div className="flex items-center gap-2 text-sm px-4 py-2 rounded-full font-semibold" style={{ background: '#F9FAFB', color: '#1B2232', border: '1px solid', borderColor:'#DAE0E7' }}>
+            <div className="flex items-center gap-2 text-sm px-4 py-2 rounded-full font-semibold" style={{ background: '#F9FAFB', color: '#1B2232', border: '1px solid', borderColor: '#DAE0E7' }}>
               <Shield className="w-4 h-4 text-[#1F938A]" /> Data Secure
             </div>
-            <div className="flex items-center gap-2 text-sm px-4 py-2 rounded-full font-semibold" style={{ background: '#F9FAFB', color: '#1B2232', border: '1px solid', borderColor:'#DAE0E7' }}>
+            <div className="flex items-center gap-2 text-sm px-4 py-2 rounded-full font-semibold" style={{ background: '#F9FAFB', color: '#1B2232', border: '1px solid', borderColor: '#DAE0E7' }}>
               <Users className="w-4 h-4 text-[#1F938A]" /> Healthcare Focused
             </div>
           </div>
