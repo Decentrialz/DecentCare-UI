@@ -25,7 +25,7 @@ const segments = [
 
 const WhoItsForSection = () => {
   return (
-    <section className="bg-[#F3F7FB] py-16 md:py-20 lg:py-24">
+    <section id="who-its-for" className="scroll-mt-24 ...existing">
       <Container>
         <SectionHeading
           eyebrow="Who It's For"

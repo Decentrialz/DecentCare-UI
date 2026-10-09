@@ -5,7 +5,21 @@ import Image from "next/image";
 import vector from "@/app/assets/Vector.svg";
 import Link from "next/link";
 
+const exploreLinks = [
+  { label: "The Growth", id: "the-growth" },
+  { label: "The Stack", id: "the-stack" },
+  { label: "OmniLens", id: "omnilens" },
+  { label: "The Closed Loop", id: "the-closed-loop" },
+  { label: "Who It's For", id: "who-its-for" },
+];
 
+const handleExploreClick = (e: React.MouseEvent, id: string) => {
+  if (window.location.pathname === "/") {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.pushState(null, "", `#${id}`);
+  }
+};
 const Footer = () => {
   return (
     <footer className="bg-[#0F1729] text-primary-foreground pb-24 md:pb-0">
@@ -68,16 +82,19 @@ const Footer = () => {
           </div>
 
           {/* Explore */}
-          <div>
-            <h4 className="font-semibold mb-4">Explore</h4>
-            <ul className="space-y-3 text-sm text-[#FBFCFD]/60">
-              <li><Link href="/#empathy-bot" className="hover:text-primary-foreground transition-colors">The Growth</Link></li>
-              <li><Link href="/#healthcare-marketing" className="hover:text-primary-foreground transition-colors">The Stack</Link></li>
-              <li><Link href="/#digital-twin" className="hover:text-primary-foreground transition-colors">OmniLens</Link></li>
-              <li><Link href="/#who-we-serve" className="hover:text-primary-foreground transition-colors">The Closed Loop</Link></li>
-              <li><Link href="/#technology-stack" className="hover:text-primary-foreground transition-colors">Who It's For</Link></li>
-            </ul>
-          </div>
+          <ul className="space-y-3 text-sm text-[#FBFCFD]/60">
+          {exploreLinks.map(({ label, id }) => (
+           <li key={id}>
+           <Link
+            href={`/#${id}`}
+            onClick={(e) => handleExploreClick(e, id)}
+            className="hover:text-primary-foreground transition-colors"
+            >
+            {label}
+            </Link>
+           </li>
+           ))}
+          </ul>
 
           {/* Solutions */}
           <div>
