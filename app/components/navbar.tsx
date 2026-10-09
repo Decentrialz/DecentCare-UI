@@ -1,14 +1,23 @@
 'use client';
-import HeaderNav from "@/app/components/HeaderNav";
 import { Button } from "@/app/components/ui/button";
-import { Menu, X, Send, Phone } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import headerLogo from "@/app/assets/logo_header.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import HeaderNav from "@/app/components/HeaderNav";
+import MobileNavLinks from "@/app/components/MobileNavLinks";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // lock page scroll while the mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = isSidebarOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isSidebarOpen]);
 
   return (
     <>
@@ -31,11 +40,10 @@ const Navbar = () => {
               <div className="flex items-center">
                 <Image src={headerLogo} alt="DecentCare Logo" width={50} height={40} />
               </div>
-              {/* <span className="text-xs font-semibold text-primary">DecentCare</span> */}
             </Link>
           </div>
 
-          {/* Navigation Links */}
+          {/* Navigation Links (Solutions, Success Stories, Resources, Who We Are) */}
           <HeaderNav headerHeight={73} />
 
           {/* CTA Button */}
@@ -71,7 +79,6 @@ const Navbar = () => {
               <div className="flex items-center">
                 <Image src={headerLogo} alt="DecentCare Logo" width={50} height={33} />
               </div>
-              {/* <span className="text-[10px] font-semibold text-primary whitespace-nowrap">DecentCare</span> */}
             </Link>
           </div>
 
@@ -88,53 +95,27 @@ const Navbar = () => {
       </div>
     </nav>
 
-    {/* Mobile Sidebar */}
-    <div 
-      className={`fixed inset-0 z-[60] md:hidden transition-opacity duration-300 ${isSidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-      onClick={() => setIsSidebarOpen(false)}
+    {/* Mobile menu: full-screen, matches the "DC UI - Mobile" Figma frames */}
+    <div
+      className={`fixed inset-0 z-[60] bg-white md:hidden transition-opacity duration-300 ${isSidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+      aria-hidden={!isSidebarOpen}
     >
-      <div className="absolute inset-0 bg-black/50" />
-      <div 
-        className={`absolute top-0 right-0 bottom-0 w-[85%] max-w-sm bg-white shadow-2xl transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex flex-col h-full">
-          {/* Sidebar Header */}
-          <div className="flex items-center justify-end p-4 border-b">
-            <button onClick={() => setIsSidebarOpen(false)} className="p-2" aria-label="Close menu">
-              <X className="w-6 h-6 text-primary" />
-            </button>
-          </div>
+      <div className="flex h-full flex-col">
+        {/* Close button */}
+        <div className="flex items-center justify-end px-5 py-4">
+          <button onClick={() => setIsSidebarOpen(false)} className="p-2" aria-label="Close menu">
+            <X className="w-6 h-6 text-foreground" />
+          </button>
+        </div>
 
-          {/* Sidebar Links */}
-          <div className="flex-1 p-6">
-            <a href="#home" className="block px-4 py-3 mb-2 text-sm font-medium text-primary bg-[#0D5C94]/10 rounded-lg" onClick={() => setIsSidebarOpen(false)}>
-              Home
-            </a>
-            <Link href="/services" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
-              Services
-            </Link>
-            <Link href="/about" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
-              About Us
-            </Link>
-            <Link href="/success" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
-              Success Stories
-            </Link>
-               <Link href="/blog" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
-              Blogs
-            </Link>
-            <Link href="/contact" className="block px-4 py-3 mb-2 text-sm font-medium text-foreground/80 hover:bg-muted rounded-lg transition-colors" onClick={() => setIsSidebarOpen(false)}>
-              Contact Us
-            </Link>
-          </div>
+        {/* Links (same menu as desktop) */}
+        <div className="flex-1 overflow-y-auto px-5 pb-6">
+          <MobileNavLinks onNavigate={() => setIsSidebarOpen(false)} />
+        </div>
 
-          {/* Sidebar Footer */}
-          <div className="p-6 border-t">
-            <div className="flex items-center justify-center">
-              <Image src={headerLogo} alt="DecentCare Logo" width={80} height={53} />
-            </div>
-            <p className="text-center text-sm font-semibold text-primary mt-2">DecentCare</p>
-          </div>
+        {/* Logo */}
+        <div className="flex items-center justify-center border-t border-[#EEF2F4] py-6">
+          <Image src={headerLogo} alt="DecentCare Logo" width={96} height={64} />
         </div>
       </div>
     </div>
