@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
-import drGowds from "@/app/assets/Dr.Gowds.png";
-import lux from "@/app/assets/lux.svg";
+import drGowds from "@/app/assets/gowdsLogoHD.svg";
+import lux from "@/app/assets/luxLogo.svg";
 import vaidya from "@/app/assets/vaidya.svg";
 import Container from "./Container";
 import SectionHeading from "./SectionHeading";
@@ -21,7 +21,7 @@ const reviews = [
     name: "Lux Hospitals",
     role: "Multi-speciality hospital, Hyderabad",
     logo: lux,
-    initials:"LH"
+    initials: "LH"
   },
   {
     quote:
@@ -66,7 +66,7 @@ const TestimonialsSection = () => {
               </span>
 
               <span aria-hidden="true" className="mt-4 block font-extrabold text-5xl leading-none text-white/50">
-               "
+                "
               </span>
 
               <p className="mt-4 text-base leading-relaxed font-medium md:text-lg">
@@ -75,7 +75,7 @@ const TestimonialsSection = () => {
             </div>
 
             <div className="mt-5 flex items-center gap-3 border-t border-white/20 pt-6">
-             <div className="rounded-full h-11 w-11 bg-white/15 text-white text-base font-bold flex items-center justify-center leading-none">
+              <div className="rounded-full h-11 w-11 bg-white/15 text-white text-base font-bold flex items-center justify-center leading-none">
                 {featured.initials}
               </div>
               <div className="min-w-0">
@@ -108,7 +108,7 @@ const TestimonialsSection = () => {
 
                   <div className="mt-4 flex items-center gap-3 border-t border-home-border pt-4">
                     <div className="rounded-full h-11 w-11 bg-home-heading/10 text-home-heading text-base font-bold flex items-center justify-center leading-none">
-                        {review.initials}
+                      {review.initials}
                     </div>
                     <div className="min-w-0">
                       <p className="text-sm font-bold text-home-ink">{review.name}</p>

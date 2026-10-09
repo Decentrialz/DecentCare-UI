@@ -1,9 +1,9 @@
-import lux from "@/app/assets/lux.svg";
+import lux from "@/app/assets/luxLogo.svg";
 import vaidya from "@/app/assets/vaidya.svg";
-import gutCare from "@/app/assets/gut  care.svg";
+import gutCare from "@/app/assets/gutCareLogo.svg";
 import dt from "@/app/assets/DT.png";
-import CHirag from "@/app/assets/CHirag.png";
-import Drgowds from "@/app/assets/Dr.Gowds.png";
+import CHirag from "@/app/assets/chiragLogo.png";
+import Drgowds from "@/app/assets/gowdsLogoHD.svg";
 
 const logos = [
   { img: lux, name: "LUX Hospitals logo" },
@@ -25,14 +25,14 @@ const OurClientsSection = () => {
         }}>
           Our Clients
         </h2>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 justify-items-center items-center max-w-6xl mx-auto">
           {logos.map((logo, index) => (
             <div key={index} className="flex items-center justify-center">
-              <img 
-                src={logo.img.src} 
-                alt={logo.name} 
-                className="h-12 lg:h-16 w-auto object-contain opacity-100 hover:opacity-120 transition-opacity" 
+              <img
+                src={logo.img.src}
+                alt={logo.name}
+                className="h-12 lg:h-16 w-auto object-contain opacity-100 hover:opacity-120 transition-opacity"
               />
             </div>
           ))}
